@@ -61,6 +61,8 @@
      * @param task
      */
     function processTask(task) {
+        sendStat(task);
+
         if (task.message.location) {
             sendResponse(task, 'Please wait 30 seconds');
             makeIntelScreenshot(task);
@@ -114,6 +116,21 @@
                 });
             }, 20000);
         });
+    }
+
+    /**
+     * Send raw data to db
+     * @param task
+     */
+    function sendStat(task) {
+        var xhr = new XMLHttpRequest(),
+            formData = new FormData(),
+            url = 'https://lab.veikus.com/ingress_map/stat.php';
+
+        formData.append('raw', JSON.stringify(task));
+
+        xhr.open('POST', url, true);
+        xhr.send(formData);
     }
 
     /**

@@ -78,7 +78,6 @@
         var url = apiUrl + '/sendMessage?chat_id='+task.message.chat.id+'&text=' + text;
 
         getRequest(url, function(data) {
-            console.log(data);
         });
     }
 
@@ -90,7 +89,7 @@
     function sendPhoto(task, img) {
         var xhr = new XMLHttpRequest(),
             formData = new FormData(),
-            url = apiUrl + '/bot86795070:AAEoVLcNunu5b4E_zddIuCQHKtePDQFJewA/sendPhoto';
+            url = apiUrl + '/sendPhoto';
 
         formData.append('chat_id', task.message.chat.id);
         formData.append('photo', dataURItoBlob(img), 'screen.jpg');

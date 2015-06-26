@@ -1,6 +1,7 @@
 (function() {
     var apiUrl = 'https://api.telegram.org/bot86795070:AAEoVLcNunu5b4E_zddIuCQHKtePDQFJewA',
-        updateId = localStorage.getItem('offset') || 0;
+        updateId = localStorage.getItem('offset') || 0,
+        inProgress = 0;
 
     function getRequest(url, callback) {
         var xmlhttp = new XMLHttpRequest();
@@ -64,8 +65,12 @@
         sendStat(task);
 
         if (task.message.location) {
-            sendResponse(task, 'Please wait 30 seconds');
-            makeIntelScreenshot(task);
+            if (inProgress >= 5) {
+                sendResponse(task, 'I`t too busy. Please try again in few minutes');
+            } else {
+                sendResponse(task, 'Please wait 30 seconds');
+                makeIntelScreenshot(task);
+            }
         } else {
             sendResponse(task, 'Location required');
         }
@@ -108,11 +113,14 @@
         var latitude = task.message.location.latitude,
             longitude = task.message.location.longitude;
 
+        ++inProgress;
+
         chrome.tabs.create({ url: 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=16' }, function(tab) {
             setTimeout(function() {
                 chrome.tabs.captureVisibleTab(tab.windowId, function(img) {
                     sendPhoto(task, img);
                     chrome.tabs.remove(tab.id);
+                    --inProgress;
                 });
             }, 20000);
         });

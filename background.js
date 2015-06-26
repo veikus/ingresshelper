@@ -1,13 +1,30 @@
 (function() {
-    var updateId = localStorage.getItem('offset');
+    var apiUrl = 'https://api.telegram.org/bot86795070:AAEoVLcNunu5b4E_zddIuCQHKtePDQFJewA',
+        updateId = localStorage.getItem('offset') || 0;
 
     function getRequest(url, callback) {
         var xmlhttp = new XMLHttpRequest();
 
         xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var result = JSON.parse(xmlhttp.responseText);
-                callback(result);
+            var result;
+
+            if (xmlhttp.readyState !== 4) {
+                return;
+            }
+
+            if (xmlhttp.status == 200) {
+                try {
+                    result = JSON.parse(xmlhttp.responseText);
+                    callback(result);
+                } catch (e) {
+                    console.error('JSON parse error: ' + e);
+
+                    setTimeout(function() {
+                        getRequest(url, callback);
+                    }, 1000);
+                }
+            } else {
+                console.error('GET Request incorrect status: ' + xmlhttp.status + ' ' + xmlhttp.statusText);
             }
         };
 
@@ -15,25 +32,23 @@
         xmlhttp.send();
     }
 
+    /**
+     * Receive new messages and process them
+     */
     function getUpdates() {
-        var url = 'https://api.telegram.org/bot86795070:AAEoVLcNunu5b4E_zddIuCQHKtePDQFJewA/getUpdates?timeout=7';
+        var url = apiUrl + '/getUpdates?timeout=7';
 
         if (updateId) {
             url += '&offset='+updateId;
-            localStorage.setItem('offset', updateId)
         }
 
         getRequest(url, function(data) {
             if (data.ok) {
                 data.result.forEach(function(task) {
                     updateId = task.update_id + 1;
+                    localStorage.setItem('offset', updateId);
 
-                    if (task.message.location) {
-                        sendResponse(task, 'Please wait 30 seconds');
-                        openTab(task);
-                    } else {
-                        sendResponse(task, 'Location required');
-                    }
+                    processTask(task);
                 });
             }
 
@@ -41,18 +56,41 @@
         })
     }
 
+    /**
+     * Process single message
+     * @param task
+     */
+    function processTask(task) {
+        if (task.message.location) {
+            sendResponse(task, 'Please wait 30 seconds');
+            makeIntelScreenshot(task);
+        } else {
+            sendResponse(task, 'Location required');
+        }
+    }
+
+    /**
+     * Send specified text for selected task
+     * @param task
+     * @param text
+     */
     function sendResponse(task, text) {
-        var url = 'https://api.telegram.org/bot86795070:AAEoVLcNunu5b4E_zddIuCQHKtePDQFJewA/sendMessage?chat_id='+task.message.chat.id+'&text=' + text;
+        var url = apiUrl + '/sendMessage?chat_id='+task.message.chat.id+'&text=' + text;
 
         getRequest(url, function(data) {
             console.log(data);
         });
     }
 
-    function sendResult(task, img) {
+    /**
+     * Send photo for selected task
+     * @param task
+     * @param img
+     */
+    function sendPhoto(task, img) {
         var xhr = new XMLHttpRequest(),
             formData = new FormData(),
-            url = 'https://api.telegram.org/bot86795070:AAEoVLcNunu5b4E_zddIuCQHKtePDQFJewA/sendPhoto';
+            url = apiUrl + '/bot86795070:AAEoVLcNunu5b4E_zddIuCQHKtePDQFJewA/sendPhoto';
 
         formData.append('chat_id', task.message.chat.id);
         formData.append('photo', dataURItoBlob(img), 'screen.jpg');
@@ -61,21 +99,27 @@
         xhr.send(formData);
     }
 
-    function openTab(task) {
+    /**
+     * Makes screenshot and sends result
+     * @param task
+     */
+    function makeIntelScreenshot(task) {
         var latitude = task.message.location.latitude,
             longitude = task.message.location.longitude;
 
         chrome.tabs.create({ url: 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=16' }, function(tab) {
             setTimeout(function() {
-                chrome.tabs.captureVisibleTab(tab.windowId, function(screenshotUrl) {
-                    sendResult(task, screenshotUrl);
+                chrome.tabs.captureVisibleTab(tab.windowId, function(img) {
+                    sendPhoto(task, img);
                     chrome.tabs.remove(tab.id);
                 });
             }, 20000);
         });
     }
 
-    // convert base64 to raw binary data held in a string
+    /**
+     * Convert base64 to raw binary data held in a string
+     */
     function dataURItoBlob(dataURI) {
         var mimeString, ab, ia, i,
             byteString = atob(dataURI.split(',')[1]);

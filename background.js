@@ -1,7 +1,33 @@
 (function() {
-    var apiUrl = 'https://api.telegram.org/bot86795070:AAEoVLcNunu5b4E_zddIuCQHKtePDQFJewA',
+	var token = 'YOUR_TOKEN_HERE'; //Token received from BotFather
+    var apiUrl = 'https://api.telegram.org/bot'+token,
         updateId = localStorage.getItem('offset') || 0,
         inProgress = 0;
+	var sentLocation = null;
+	var z = 14;
+	var timeout = 35000; //Time for intel view to load. Depends on connection speed
+	var helpResponse = 'Send your location to the bot, then select portal level to zoom (L4 recommended). Lower level = closer zoom. Happy Ingressing!';
+	//Custom keyboard markup:
+	var levelMarkup = {
+		"keyboard": [
+			[
+				"L1",
+				"L2",
+				"L3",
+				"L4"
+			],
+			[
+				"L5",
+				"L6",
+				"L7",
+				"L8"
+			],
+			[
+				"Unclaimed portals",
+			]
+		],
+		"one_time_keyboard": true
+	}
 
     function getRequest(url, callback) {
         var xmlhttp = new XMLHttpRequest();
@@ -62,17 +88,31 @@
      * @param task
      */
     function processTask(task) {
-        sendStat(task);
-
+        //sendStat(task); //veikus stats
         if (task.message.location) {
             if (inProgress >= 5) {
                 sendResponse(task, 'I`t too busy. Please try again in few minutes');
             } else {
-                sendResponse(task, 'Please wait 30 seconds');
-                makeIntelScreenshot(task);
+	            //Ask for zoom and cache location request
+                sendResponse(task, 'Select zoom level', JSON.stringify(levelMarkup));
+                sentLocation = task;
             }
         } else {
-            sendResponse(task, 'Location required');
+	        //Help and Start commands message:
+	        if(task.message.text === "/help" || task.message.text === "/start"){
+		        sendResponse(task, helpResponse.toString())
+	        }
+	        else {
+		        if(sentLocation == null) {
+			        //Bad request:
+			        sendResponse(task, 'Location required');
+		        }
+		        else {
+			        //Intel screenshot request:
+			        //sendResponse(task, 'Please wait ~30 seconds');
+			        makeIntelScreenshot(sentLocation, task);
+		        }
+	        }
         }
     }
 
@@ -81,8 +121,11 @@
      * @param task
      * @param text
      */
-    function sendResponse(task, text) {
-        var url = apiUrl + '/sendMessage?chat_id='+task.message.chat.id+'&text=' + text;
+    function sendResponse(task, text, markup) {
+	    var ForceReply = {
+		    force_reply: true
+	    }
+        var url = apiUrl + '/sendMessage?chat_id='+task.message.chat.id+'&text='+text+'&reply_markup='+markup;
 
         getRequest(url, function(data) {
         });
@@ -109,20 +152,64 @@
      * Makes screenshot and sends result
      * @param task
      */
-    function makeIntelScreenshot(task) {
-        var latitude = task.message.location.latitude,
-            longitude = task.message.location.longitude;
+    function makeIntelScreenshot(task, zoom) {
+	    var latitude = task.message.location.latitude,
+		    longitude = task.message.location.longitude;
 
-        ++inProgress;
+	    switch (zoom.message.text) {
+		    case "Unclaimed portals":
+			    z = 17;
+			    break;
+		    case "L1":
+			    z = 15;
+			    break;
+		    case "L2":
+			    z = 13;
+			    break;
+		    case "L3":
+			    z = 12;
+			    break;
+		    case "L4":
+			    z = 11;
+			    break;
+		    case "L5":
+			    z = 9;
+			    break;
+		    case "L6":
+			    z = 8;
+			    break;
+		    case "L7":
+			    z = 6;
+			    break;
+		    case "L8":
+			    z = 3;
+			    break;
+		    default:
+			    z = 14;
+	    }
 
-        chrome.tabs.create({ url: 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=16' }, function(tab) {
+	    //Set higher timeout for L7+ portals
+	    if(z <= 7){
+		    timeout = 50000;
+		    sendResponse(task, 'Please wait ~45-60 seconds');
+	    }
+	    
+	    else{
+		   sendResponse(task, 'Please wait ~30-40 seconds');
+	    }
+	    
+
+	    ++inProgress;
+
+        chrome.tabs.create({ url: 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=' + z }, function(tab) {
+            sentLocation = null
             setTimeout(function() {
                 chrome.tabs.captureVisibleTab(tab.windowId, function(img) {
                     sendPhoto(task, img);
                     chrome.tabs.remove(tab.id);
                     --inProgress;
                 });
-            }, 20000);
+            }, timeout);
         });
     }
 
@@ -144,6 +231,7 @@
     /**
      * Convert base64 to raw binary data held in a string
      */
+
     function dataURItoBlob(dataURI) {
         var mimeString, ab, ia, i,
             byteString = atob(dataURI.split(',')[1]);

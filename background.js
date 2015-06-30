@@ -32,8 +32,12 @@
     function getRequest(url, callback) {
         var xmlhttp = new XMLHttpRequest();
 
+        if (typeof callback !== 'function') {
+            callback = undefined;
+        }
+
         xmlhttp.onreadystatechange = function() {
-            var result;
+            var result = null;
 
             if (xmlhttp.readyState !== 4) {
                 return;
@@ -42,16 +46,15 @@
             if (xmlhttp.status == 200) {
                 try {
                     result = JSON.parse(xmlhttp.responseText);
-                    callback(result);
                 } catch (e) {
                     console.error('JSON parse error: ' + e);
-
-                    setTimeout(function() {
-                        getRequest(url, callback);
-                    }, 1000);
                 }
             } else {
                 console.error('GET Request incorrect status: ' + xmlhttp.status + ' ' + xmlhttp.statusText);
+            }
+
+            if (callback) {
+                callback(result);
             }
         };
 
@@ -70,7 +73,7 @@
         }
 
         getRequest(url, function(data) {
-            if (data.ok) {
+            if (data && data.ok) {
                 data.result.forEach(function(task) {
                     updateId = task.update_id + 1;
                     localStorage.setItem('offset', updateId);
@@ -127,8 +130,7 @@
 	    }
         var url = apiUrl + '/sendMessage?chat_id='+task.message.chat.id+'&text='+text+'&reply_markup='+markup;
 
-        getRequest(url, function(data) {
-        });
+        getRequest(url);
     }
 
     /**
@@ -231,7 +233,6 @@
     /**
      * Convert base64 to raw binary data held in a string
      */
-
     function dataURItoBlob(dataURI) {
         var mimeString, ab, ia, i,
             byteString = atob(dataURI.split(',')[1]);

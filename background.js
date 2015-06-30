@@ -1,33 +1,36 @@
 (function() {
-	var token = 'YOUR_TOKEN_HERE'; //Token received from BotFather
-    var apiUrl = 'https://api.telegram.org/bot'+token,
+    var token = 'YOUR_TOKEN_HERE', //Token received from BotFather
+        apiUrl = 'https://api.telegram.org/bot'+token,
         updateId = localStorage.getItem('offset') || 0,
-        inProgress = 0;
-	var sentLocation = null;
-	var z = 14;
-	var timeout = 35000; //Time for intel view to load. Depends on connection speed
-	var helpResponse = 'Send your location to the bot, then select portal level to zoom (L4 recommended). Lower level = closer zoom. Happy Ingressing!';
-	//Custom keyboard markup:
-	var levelMarkup = {
-		"keyboard": [
+        inProgress = 0,
+        sentLocation = null,
+	    z = 14,
+	    timeout = 35000, //Time for intel view to load. Depends on connection speed
+	    helpResponse = 'Send your location to the bot, then select portal level to zoom (L4 recommended). Lower level = closer zoom. Happy Ingressing!',
+	    //Custom keyboard markup:
+	    levelMarkup = {
+		keyboard: [
 			[
-				"L1",
-				"L2",
-				"L3",
-				"L4"
+				'L1',
+				'L2',
+				'L3',
+				'L4'
 			],
 			[
-				"L5",
-				"L6",
-				"L7",
-				"L8"
+				'L5',
+				'L6',
+				'L7',
+				'L8'
 			],
 			[
-				"Unclaimed portals",
+				'Unclaimed portals'
 			]
 		],
-		"one_time_keyboard": true
-	}
+		one_time_keyboard: true
+	};
+
+    getUpdates();
+
 
     function getRequest(url, callback) {
         var xmlhttp = new XMLHttpRequest();
@@ -249,6 +252,4 @@
 
         return new Blob([ab], {type: mimeString});
     }
-
-    getUpdates();
 }());

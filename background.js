@@ -1,5 +1,5 @@
 (function() {
-    var token = 'YOUR_TOKEN_HERE', //Token received from BotFather
+    var token = 'YOUR_TOKEN_HERE', // Token received from BotFather
         apiUrl = 'https://api.telegram.org/bot'+token,
         updateId = localStorage.getItem('offset') || 0,
         inProgress = false,
@@ -9,26 +9,26 @@
             'Authors: @veikus and @fivepointseven',
             'Source code: http://github.com/veikus/ingresshelper'
         ],
-	    //Custom keyboard markup:
+	    // Custom keyboard markup:
 	    levelMarkup = {
-		keyboard: [
-			[
-				'L1',
-				'L2',
-				'L3',
-				'L4'
-			],
-			[
-				'L5',
-				'L6',
-				'L7',
-				'L8'
-			],
-			[
-				'Unclaimed portals'
-			]
-		],
-		one_time_keyboard: true
+            keyboard: [
+                [
+                    'L1',
+                    'L2',
+                    'L3',
+                    'L4'
+                ],
+                [
+                    'L5',
+                    'L6',
+                    'L7',
+                    'L8'
+                ],
+                [
+                    'Unclaimed portals'
+                ]
+            ],
+            one_time_keyboard: true
 	};
 
     getUpdates();

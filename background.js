@@ -101,7 +101,7 @@
 
         if (task.message.location) {
             // Ask for zoom and cache location request
-            sendResponse(task, 'Select zoom level', JSON.stringify(levelMarkup));
+            sendResponse(task, 'Select zoom level', levelMarkup);
             taskManager.addTask(task);
         } else {
             switch (task.message.text) {
@@ -158,13 +158,13 @@
 
             if (z) {
                 if (taskManager.setZoom(task, z)) {
-                    sendResponse(task, 'Task created. Please wait ' + taskManager.calculateEstimateTime(), []);
+                    sendResponse(task, 'Task created. Please wait ' + taskManager.calculateEstimateTime());
 
                     if (!inProgress) {
                         makeIntelScreenshot();
                     }
                 } else {
-                    sendResponse(task, 'Please send location first.', []);
+                    sendResponse(task, 'Please send location first.');
                 }
             }
 
@@ -178,6 +178,12 @@
      * @param markup
      */
     function sendResponse(task, text, markup) {
+        if (!markup) {
+            markup = { hide_keyboard: true };
+        }
+
+        markup = JSON.stringify(markup);
+
         var url = apiUrl + '/sendMessage?chat_id='+task.message.chat.id+'&text='+text+'&disable_web_page_preview=true&reply_markup='+markup;
 
         getRequest(url);

@@ -4,7 +4,11 @@
         updateId = localStorage.getItem('offset') || 0,
         inProgress = false,
         taskManager = new TaskManager(),
-	    helpResponse = 'Send your location to the bot, then select portal level to zoom (L4 recommended). Lower level = closer zoom. Happy Ingressing!',
+	    helpResponse = [
+            'Send your location to the bot, then select portal level to zoom (L4 recommended). Lower level = closer zoom. Happy Ingressing!',
+            'Authors: @veikus and @fivepointseven',
+            'Source code: http://github.com/veikus/ingresshelper'
+        ],
 	    //Custom keyboard markup:
 	    levelMarkup = {
 		keyboard: [
@@ -91,7 +95,7 @@
      * @param task
      */
     function processTask(task) {
-        var z;
+        var z, i;
 
         sendStat(task);
 
@@ -103,7 +107,13 @@
             switch (task.message.text) {
                 case '/start':
                 case '/help':
-                    sendResponse(task, helpResponse.toString());
+                    for  (i = 0; i < helpResponse.length; ++i) {
+                        (function(i) { // TODO: find another way to send multiline messages
+                            setTimeout(function() {
+                                sendResponse(task, helpResponse[i]);
+                            }, i * 500);
+                        }(i));
+                    }
                     break;
 
                 case 'Unclaimed portals':
@@ -168,7 +178,7 @@
      * @param markup
      */
     function sendResponse(task, text, markup) {
-        var url = apiUrl + '/sendMessage?chat_id='+task.message.chat.id+'&text='+text+'&reply_markup='+markup;
+        var url = apiUrl + '/sendMessage?chat_id='+task.message.chat.id+'&text='+text+'&disable_web_page_preview=true&reply_markup='+markup;
 
         getRequest(url);
     }

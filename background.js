@@ -213,12 +213,11 @@
 	    var latitude, longitude, timeout,
             task = taskManager.getTask();
 
-        inProgress = true;
-
         if (!task) {
             return;
         }
 
+        inProgress = true;
         latitude = task.message.location.latitude;
         longitude = task.message.location.longitude;
 
@@ -231,10 +230,11 @@
 
         chrome.tabs.create({ url: 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=' + task.zoom }, function(tab) {
             setTimeout(function() {
+                inProgress = false;
+
                 chrome.tabs.captureVisibleTab(tab.windowId, function(img) {
                     sendPhoto(task, img);
                     chrome.tabs.remove(tab.id);
-                    inProgress = false;
 
                     // getNextTask
                     makeIntelScreenshot();

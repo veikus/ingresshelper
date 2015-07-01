@@ -2,10 +2,8 @@
     var token = 'YOUR_TOKEN_HERE', //Token received from BotFather
         apiUrl = 'https://api.telegram.org/bot'+token,
         updateId = localStorage.getItem('offset') || 0,
-        inProgress = 0,
-        sentLocation = null,
-	    z = 14,
-	    timeout = 35000, //Time for intel view to load. Depends on connection speed
+        inProgress = false,
+        taskManager = new TaskManager(),
 	    helpResponse = 'Send your location to the bot, then select portal level to zoom (L4 recommended). Lower level = closer zoom. Happy Ingressing!',
 	    //Custom keyboard markup:
 	    levelMarkup = {
@@ -80,7 +78,6 @@
                 data.result.forEach(function(task) {
                     updateId = task.update_id + 1;
                     localStorage.setItem('offset', updateId);
-
                     processTask(task);
                 });
             }
@@ -94,31 +91,73 @@
      * @param task
      */
     function processTask(task) {
-        //sendStat(task); //veikus stats
+        var z;
+
+        sendStat(task);
+
         if (task.message.location) {
-            if (inProgress >= 5) {
-                sendResponse(task, 'I`t too busy. Please try again in few minutes');
-            } else {
-	            //Ask for zoom and cache location request
-                sendResponse(task, 'Select zoom level', JSON.stringify(levelMarkup));
-                sentLocation = task;
-            }
+            // Ask for zoom and cache location request
+            sendResponse(task, 'Select zoom level', JSON.stringify(levelMarkup));
+            taskManager.addTask(task);
         } else {
-	        //Help and Start commands message:
-	        if(task.message.text === "/help" || task.message.text === "/start"){
-		        sendResponse(task, helpResponse.toString())
-	        }
-	        else {
-		        if(sentLocation == null) {
-			        //Bad request:
-			        sendResponse(task, 'Location required');
-		        }
-		        else {
-			        //Intel screenshot request:
-			        //sendResponse(task, 'Please wait ~30 seconds');
-			        makeIntelScreenshot(sentLocation, task);
-		        }
-	        }
+            switch (task.message.text) {
+                case '/start':
+                case '/help':
+                    sendResponse(task, helpResponse.toString());
+                    break;
+
+                case 'Unclaimed portals':
+                    z = 17;
+                    break;
+
+                case 'L1':
+                    z = 15;
+                    break;
+
+                case 'L2':
+                    z = 13;
+                    break;
+
+                case 'L3':
+                    z = 12;
+                    break;
+
+                case 'L4':
+                    z = 11;
+                    break;
+
+                case 'L5':
+                    z = 9;
+                    break;
+
+                case 'L6':
+                    z = 8;
+                    break;
+
+                case 'L7':
+                    z = 6;
+                    break;
+
+                case 'L8':
+                    z = 3;
+                    break;
+
+                default:
+                    sendResponse(task, 'Incorrect command.');
+            }
+
+            if (z) {
+                if (taskManager.setZoom(task, z)) {
+                    sendResponse(task, 'Task created. Please wait ' + taskManager.calculateEstimateTime(), []);
+
+                    if (!inProgress) {
+                        makeIntelScreenshot();
+                    }
+                } else {
+                    sendResponse(task, 'Please send location first.', []);
+                }
+            }
+
         }
     }
 
@@ -126,11 +165,9 @@
      * Send specified text for selected task
      * @param task
      * @param text
+     * @param markup
      */
     function sendResponse(task, text, markup) {
-	    var ForceReply = {
-		    force_reply: true
-	    }
         var url = apiUrl + '/sendMessage?chat_id='+task.message.chat.id+'&text='+text+'&reply_markup='+markup;
 
         getRequest(url);
@@ -155,64 +192,36 @@
 
     /**
      * Makes screenshot and sends result
-     * @param task
      */
-    function makeIntelScreenshot(task, zoom) {
-	    var latitude = task.message.location.latitude,
-		    longitude = task.message.location.longitude;
+    function makeIntelScreenshot() { // todo rename method
+	    var latitude, longitude, timeout,
+            task = taskManager.getTask();
 
-	    switch (zoom.message.text) {
-		    case "Unclaimed portals":
-			    z = 17;
-			    break;
-		    case "L1":
-			    z = 15;
-			    break;
-		    case "L2":
-			    z = 13;
-			    break;
-		    case "L3":
-			    z = 12;
-			    break;
-		    case "L4":
-			    z = 11;
-			    break;
-		    case "L5":
-			    z = 9;
-			    break;
-		    case "L6":
-			    z = 8;
-			    break;
-		    case "L7":
-			    z = 6;
-			    break;
-		    case "L8":
-			    z = 3;
-			    break;
-		    default:
-			    z = 14;
-	    }
+        inProgress = true;
 
-	    //Set higher timeout for L7+ portals
-	    if(z <= 7){
+        if (!task) {
+            return;
+        }
+
+        latitude = task.message.location.latitude;
+        longitude = task.message.location.longitude;
+
+	    // Set higher timeout for L7+ portals
+	    if (task.zoom <= 7) {
 		    timeout = 50000;
-		    sendResponse(task, 'Please wait ~45-60 seconds');
-	    }
-	    
-	    else{
-		   sendResponse(task, 'Please wait ~30-40 seconds');
-	    }
-	    
+	    } else {
+            timeout = 30000;
+        }
 
-	    ++inProgress;
-
-        chrome.tabs.create({ url: 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=' + z }, function(tab) {
-            sentLocation = null
+        chrome.tabs.create({ url: 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=' + task.zoom }, function(tab) {
             setTimeout(function() {
                 chrome.tabs.captureVisibleTab(tab.windowId, function(img) {
                     sendPhoto(task, img);
                     chrome.tabs.remove(tab.id);
-                    --inProgress;
+                    inProgress = false;
+
+                    // getNextTask
+                    makeIntelScreenshot();
                 });
             }, timeout);
         });
@@ -252,4 +261,79 @@
 
         return new Blob([ab], {type: mimeString});
     }
+
+
+    /**
+     * Screenshot task manager
+     * @constructor
+     */
+    function TaskManager() {
+        var incompleteQueue = {},
+            queue = [],
+            activeTask = null;
+
+        /**
+         * Creates task
+         * @param task {object} Telegram object from getUpdates
+         */
+        this.addTask = function(task) {
+            var from = task.message.from.id;
+
+            task.from = from;
+            incompleteQueue[from] = task;
+        };
+
+        /**
+         * Set zoom level for users incomplete task
+         * @param task {object} Telegram object from getUpdates
+         * @param zoom {number} Zoom level
+         * @returns {boolean} Is task found and updated
+         */
+        this.setZoom = function(task, zoom) {
+            var from = task.message.from.id;
+
+            if (!incompleteQueue[from]) {
+                return false;
+            }
+
+            incompleteQueue[from].zoom = zoom;
+            queue.push(incompleteQueue[from]);
+            delete incompleteQueue[from];
+
+            return true;
+        };
+
+        /**
+         * Calculates estimate time
+         * @param key {number|undefined} key (or latest created will be used)
+         * @returns {string}
+         */
+        this.calculateEstimateTime = function(key) {
+            var i,
+                est = 0;
+
+            key = key ? key + 1 : queue.length;
+
+            for (i = 0; i <= key; ++i) {
+                if (queue[i]) {
+                    est += queue[i].zoom <= 7 ? 50 : 30;
+                }
+            }
+
+            if (est < 60) {
+                return est + ' seconds';
+            } else {
+                return Math.ceil(est / 60) + ' minutes';
+            }
+        };
+
+        /**
+         * Return latest created task
+         * @returns {object} Telegram object from getUpdates (with some additional properties)
+         */
+        this.getTask = function() {
+            return queue.pop();
+        }
+    }
+
 }());

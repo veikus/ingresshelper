@@ -2,7 +2,7 @@
 Русский перевод ниже
 
 ## Demo
-(https://telegram.me/ingressmap_bot)
+https://telegram.me/ingressmap_bot
 
 ## How to start your own bot
 1. Download and unpack archive

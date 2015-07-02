@@ -2,6 +2,7 @@
     var token = 'YOUR_TOKEN_HERE', // Token received from BotFather
         apiUrl = 'https://api.telegram.org/bot'+token,
         updateId = localStorage.getItem('offset') || 0,
+        chatSettings = localStorage.getItem('chatSettings') || '{}',
         inProgress = false,
         taskManager = new TaskManager(),
 	    helpResponse = [
@@ -31,6 +32,7 @@
             one_time_keyboard: true
 	};
 
+    chatSettings = JSON.parse(chatSettings);
     getUpdates();
 
 
@@ -95,7 +97,8 @@
      * @param task
      */
     function processTask(task) {
-        var z, i;
+        var z, i,
+            chatId = task.message.chat.id;
 
         sendStat(task);
 
@@ -114,6 +117,26 @@
                             }, i * 500);
                         }(i));
                     }
+                    break;
+
+                case '/compression_on':
+                    if (!chatSettings[chatId]) {
+                        chatSettings[chatId] = {};
+                    }
+                    chatSettings[chatId].noCompression = false;
+                    localStorage.setItem('chatSettings', JSON.stringify(chatSettings));
+
+                    sendResponse(task, 'Compression enabled');
+                    break;
+
+                case '/compression_off':
+                    if (!chatSettings[chatId]) {
+                        chatSettings[chatId] = {};
+                    }
+                    chatSettings[chatId].noCompression = true;
+                    localStorage.setItem('chatSettings', JSON.stringify(chatSettings));
+
+                    sendResponse(task, 'Compression disabled');
                     break;
 
                 case 'Unclaimed portals':
@@ -197,10 +220,12 @@
     function sendPhoto(task, img) {
         var xhr = new XMLHttpRequest(),
             formData = new FormData(),
-            url = apiUrl + '/sendPhoto';
+            chatId = task.message.chat.id,
+            noCompression = chatSettings[chatId] && chatSettings[chatId].noCompression,
+            url = apiUrl + (noCompression ? '/sendDocument' : '/sendPhoto');
 
-        formData.append('chat_id', task.message.chat.id);
-        formData.append('photo', dataURItoBlob(img), 'screen.jpg');
+        formData.append('chat_id', chatId);
+        formData.append(noCompression ? 'document' : 'photo', dataURItoBlob(img), 'screen.jpg');
 
         xhr.open('POST', url, true);
         xhr.send(formData);

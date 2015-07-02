@@ -1,6 +1,9 @@
 # Ingress Helper Bot
 Русский перевод ниже
 
+## Demo
+(https://telegram.me/ingressmap_bot)
+
 ## How to start your own bot
 1. Download and unpack archive
 2. Send message to [@BotFather](http://telegram.me/botfather) and create new bot. You will get token.
@@ -9,7 +12,7 @@
 5. Check "Developer mode" checkbox, click "Load unpacked extension" and choose folder you got on step 1.
 6. Do not close chrome.
 
-## Как сделать своего интел бота с блекджеком и блекджеком:
+## Как запустить своего бота
 1. Скачиваем и распаковываем архив
 2. Отправляем сообщение [@BotFather](http://telegram.me/botfather) и создаем нового бота. В конце процесса ботфазер выдаст токен.
 4. В файле background.js вместо YOUR_TOKEN_HERE пишем токен от ботфазера

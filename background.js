@@ -229,6 +229,11 @@
         }
 
         chrome.tabs.create({ url: 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=' + task.zoom }, function(tab) {
+            // Clear navigation and other panels
+            setTimeout(function() {
+                chrome.tabs.insertCSS(tab.id, { file: 'hide_all.css' });
+            }, 1000);
+
             setTimeout(function() {
                 inProgress = false;
 

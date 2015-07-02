@@ -1,0 +1,10 @@
+#sidebar,
+#sidebartoggle,
+#chat,
+#chatinput,
+#chatcontrols,
+.leaflet-control-layers-toggle,
+.leaflet-control-zoom
+{
+    display: none !important;
+}

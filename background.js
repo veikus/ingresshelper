@@ -225,7 +225,7 @@
             url = apiUrl + (noCompression ? '/sendDocument' : '/sendPhoto');
 
         formData.append('chat_id', chatId);
-        formData.append(noCompression ? 'document' : 'photo', dataURItoBlob(img), 'screen.jpg');
+        formData.append(noCompression ? 'document' : 'photo', dataURItoBlob(img), 'screen.png');
 
         xhr.open('POST', url, true);
         xhr.send(formData);
@@ -262,7 +262,7 @@
             setTimeout(function() {
                 inProgress = false;
 
-                chrome.tabs.captureVisibleTab(tab.windowId, function(img) {
+                chrome.tabs.captureVisibleTab(tab.windowId, { format: 'png' }, function(img) {
                     sendPhoto(task, img);
                     chrome.tabs.remove(tab.id);
 

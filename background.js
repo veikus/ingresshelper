@@ -13,21 +13,10 @@
 	    // Custom keyboard markup:
 	    levelMarkup = {
             keyboard: [
-                [
-                    'L1',
-                    'L2',
-                    'L3',
-                    'L4'
-                ],
-                [
-                    'L5',
-                    'L6',
-                    'L7',
-                    'L8'
-                ],
-                [
-                    'Unclaimed portals'
-                ]
+                ['17 - All portals'],
+                ['16', '15', '14', '13'],
+                ['12', '10', '8', '6'],
+                ['3 - World']
             ],
             one_time_keyboard: true
 	};
@@ -139,40 +128,17 @@
                     sendResponse(task, 'Compression disabled');
                     break;
 
-                case 'Unclaimed portals':
-                    z = 17;
-                    break;
-
-                case 'L1':
-                    z = 15;
-                    break;
-
-                case 'L2':
-                    z = 13;
-                    break;
-
-                case 'L3':
-                    z = 12;
-                    break;
-
-                case 'L4':
-                    z = 11;
-                    break;
-
-                case 'L5':
-                    z = 9;
-                    break;
-
-                case 'L6':
-                    z = 8;
-                    break;
-
-                case 'L7':
-                    z = 6;
-                    break;
-
-                case 'L8':
-                    z = 3;
+                case '17 - All portals':
+                case '16':
+                case '15':
+                case '14':
+                case '13':
+                case '12':
+                case '10':
+                case '8':
+                case '6':
+                case '3 - World':
+                    z = parseInt(task.message.text);
                     break;
 
                 default:

@@ -344,7 +344,7 @@
          * @returns {object} Telegram object from getUpdates (with some additional properties)
          */
         this.getTask = function() {
-            return queue.pop();
+            return queue.shift();
         }
     }
 

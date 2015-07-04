@@ -1,10 +1,25 @@
 #sidebar,
 #sidebartoggle,
 #chat,
-#chatinput,
+#chatinput > *,
 #chatcontrols,
 .leaflet-control-layers-toggle,
 .leaflet-control-zoom
 {
     display: none !important;
+}
+
+#chatinput
+{
+    width: 245px !important;
+}
+
+#chatinput:after
+{
+    display: block;
+    position: absolute;
+    top: 2px;
+    left: 8px;
+    color: #ffce00;
+    content: 'http://telegram.me/ingressmap_bot';
 }

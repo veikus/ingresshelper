@@ -87,9 +87,12 @@
      */
     function processTask(task) {
         var z, i,
-            chatId = task.message.chat.id;
+            chatId = task.message.chat.id,
+            isGroup = chatId < 0;
 
-        sendStat(task);
+        if (!isGroup) {
+            sendStat(task);
+        }
 
         if (task.message.location) {
             // Ask for zoom and cache location request
@@ -142,7 +145,9 @@
                     break;
 
                 default:
-                    sendResponse(task, 'Incorrect command.');
+                    if (!isGroup) {
+                        sendResponse(task, 'Incorrect command.');
+                    }
             }
 
             if (z) {

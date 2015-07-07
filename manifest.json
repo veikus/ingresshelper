@@ -8,6 +8,13 @@
             "background.js"
         ]
     },
+    "content_scripts": [
+        {
+            "matches": ["https://www.ingress.com/intel*"],
+            "css": ["hide_all.css"],
+            "js": ["content.js"]
+        }
+    ],
     "browser_action": {
         "default_icon": "camera.png",
         "default_title": "do nothing :)"

@@ -28,6 +28,9 @@
     chatSettings = JSON.parse(chatSettings);
     getUpdates();
 
+    chrome.runtime.onMessage.addListener(function(request, sender) {
+        makeScreenshot();
+    });
 
     function getRequest(url, callback) {
         var xmlhttp = new XMLHttpRequest();
@@ -141,10 +144,10 @@
 
             if (z) {
                 if (taskManager.setZoom(task, z)) {
-                    sendResponse(task, 'Task created. Please wait ' + taskManager.calculateEstimateTime());
+                    sendResponse(task, 'Task created. Please wait less than ' + taskManager.calculateEstimateTime());
 
                     if (!inProgress) {
-                        makeIntelScreenshot();
+                        startNextTask();
                     }
                 } else {
                     sendResponse(task, 'Please send location first');
@@ -192,9 +195,9 @@
     }
 
     /**
-     * Makes screenshot and sends result
+     * Creates intel tab
      */
-    function makeIntelScreenshot() { // todo rename method
+    function startNextTask() {
 	    var latitude, longitude, timeout,
             task = taskManager.getTask();
 
@@ -202,34 +205,49 @@
             return;
         }
 
-        inProgress = true;
+        inProgress = task;
         latitude = task.message.location.latitude;
         longitude = task.message.location.longitude;
 
 	    // Set higher timeout for L7+ portals
 	    if (task.zoom <= 7) {
-		    timeout = 50000;
+		    timeout = 120000;
 	    } else {
-            timeout = 30000;
+            timeout = 60000;
         }
 
         chrome.tabs.create({ url: 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=' + task.zoom }, function(tab) {
-            // Clear navigation and other panels
-            setTimeout(function() {
-                chrome.tabs.insertCSS(tab.id, { file: 'hide_all.css' });
-            }, 1000);
+            task.tab = tab;
+            task.timeout = setTimeout(makeScreenshot, timeout);
+        });
+    }
 
-            setTimeout(function() {
-                inProgress = false;
+    /**
+     * Makes screenshot and finishes task
+     */
+    function makeScreenshot() {
+        var tab,
+            task = inProgress;
 
-                chrome.tabs.captureVisibleTab(tab.windowId, { format: 'png' }, function(img) {
-                    sendPhoto(task, img);
-                    chrome.tabs.remove(tab.id);
+        // If timeout and message both triggered
+        if (!task) {
+            return;
+        }
 
-                    // getNextTask
-                    makeIntelScreenshot();
-                });
-            }, timeout);
+        inProgress = false;
+        tab = task.tab;
+
+        clearTimeout(task.timeout);
+
+        chrome.tabs.captureVisibleTab(tab.windowId, { format: 'png' }, function(img) {
+            if (!img) {
+                sendResponse(task, 'I`m sorry. Looks like something comes really wrong. Please try again in few minutes');
+            } else {
+                sendPhoto(task, img);
+            }
+
+            chrome.tabs.remove(tab.id);
+            startNextTask();
         });
     }
 
@@ -300,21 +318,22 @@
          * @returns {string}
          */
         this.calculateEstimateTime = function(key) {
-            var i,
+            var i, left,
                 est = 0;
 
             key = key ? key + 1 : queue.length;
 
             for (i = 0; i <= key; ++i) {
                 if (queue[i]) {
-                    est += queue[i].zoom <= 7 ? 50 : 30;
+                    est += queue[i].zoom <= 7 ? 120 : 60;
                 }
             }
 
             if (est < 60) {
                 return est + ' seconds';
             } else {
-                return Math.ceil(est / 60) + ' minutes';
+                left = Math.ceil(est / 60);
+                return left + ' minute' + (left > 1 ? 's' : '');
             }
         };
 

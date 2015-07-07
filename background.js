@@ -94,10 +94,6 @@
             chatId = task.message.chat.id,
             isGroup = chatId < 0;
 
-        if (!isGroup) {
-            sendStat(task);
-        }
-
         if (task.message.location) {
             // Ask for zoom and cache location request
             sendResponse(task, 'Select zoom level', levelMarkup);
@@ -235,21 +231,6 @@
                 });
             }, timeout);
         });
-    }
-
-    /**
-     * Send raw data to db
-     * @param task
-     */
-    function sendStat(task) {
-        var xhr = new XMLHttpRequest(),
-            formData = new FormData(),
-            url = 'https://lab.veikus.com/ingress_map/stat.php';
-
-        formData.append('raw', JSON.stringify(task));
-
-        xhr.open('POST', url, true);
-        xhr.send(formData);
     }
 
     /**

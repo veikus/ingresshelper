@@ -6,7 +6,7 @@
         inProgress = false,
         taskManager = new TaskManager(),
 	    helpResponse = [
-            'Send your location to the bot, then select portal level to zoom (L4 recommended). Lower level = closer zoom. Happy Ingressing!',
+            'Send your location to the bot, then select map zoom (3 - 17). Happy Ingressing!',
             'Authors: @veikus and @fivepointseven',
             'Source code: http://github.com/veikus/ingresshelper'
         ],
@@ -19,7 +19,11 @@
                 ['3 - World']
             ],
             one_time_keyboard: true
-	};
+        },
+        allowedLevelOptions = [
+            '17 - All portals', '17', '16', '15', '14', '13', '12', '11', '10',
+            '9', '8', '7', '6', '5', '4', '3', '3 - World'
+        ];
 
     chatSettings = JSON.parse(chatSettings);
     getUpdates();
@@ -131,21 +135,10 @@
                     sendResponse(task, 'Compression disabled');
                     break;
 
-                case '17 - All portals':
-                case '16':
-                case '15':
-                case '14':
-                case '13':
-                case '12':
-                case '10':
-                case '8':
-                case '6':
-                case '3 - World':
-                    z = parseInt(task.message.text);
-                    break;
-
                 default:
-                    if (!isGroup) {
+                    if (allowedLevelOptions.indexOf(task.message.text) > -1) {
+                        z = parseInt(task.message.text);
+                    } else if (!isGroup) {
                         sendResponse(task, 'Incorrect command.');
                     }
             }
@@ -158,7 +151,7 @@
                         makeIntelScreenshot();
                     }
                 } else {
-                    sendResponse(task, 'Please send location first.');
+                    sendResponse(task, 'Please send location first');
                 }
             }
 

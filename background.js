@@ -216,8 +216,8 @@
             timeout = 60000;
         }
 
-        chrome.tabs.create({ url: 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=' + task.zoom }, function(tab) {
-            task.tab = tab;
+        chrome.windows.create({ url: 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=' + task.zoom, type: "popup"}, function(window) {
+            task.window = window;
             task.timeout = setTimeout(makeScreenshot, timeout);
         });
     }
@@ -226,7 +226,7 @@
      * Makes screenshot and finishes task
      */
     function makeScreenshot() {
-        var tab,
+        var window,
             task = inProgress;
 
         // If timeout and message both triggered
@@ -235,18 +235,18 @@
         }
 
         inProgress = false;
-        tab = task.tab;
+        window = task.window;
 
         clearTimeout(task.timeout);
 
-        chrome.tabs.captureVisibleTab(tab.windowId, { format: 'png' }, function(img) {
+        chrome.tabs.captureVisibleTab(window.id, { format: 'png' }, function(img) {
             if (!img) {
                 sendResponse(task, 'I`m sorry. Looks like something comes really wrong. Please try again in few minutes');
             } else {
                 sendPhoto(task, img);
             }
 
-            chrome.tabs.remove(tab.id);
+            chrome.windows.remove(window.id);
             startNextTask();
         });
     }

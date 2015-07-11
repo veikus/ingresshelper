@@ -241,7 +241,7 @@
      * Creates intel tab
      */
     function startNextTask() {
-	    var latitude, longitude, timeout,
+	    var latitude, longitude, timeout, url,
             task = taskManager.getTask();
 
         if (!task) {
@@ -251,6 +251,7 @@
         inProgress = task;
         latitude = task.message.location.latitude;
         longitude = task.message.location.longitude;
+        url = 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=' + task.zoom;
 
 	    // Set higher timeout for L7+ portals
 	    if (task.zoom <= 7) {
@@ -259,7 +260,7 @@
             timeout = 60000;
         }
 
-        chrome.windows.create({ url: 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=' + task.zoom, type: "popup"}, function(window) {
+        chrome.windows.create({ url: url, type: 'popup' }, function(window) {
             task.window = window;
             task.timeout = setTimeout(makeScreenshot, timeout);
         });

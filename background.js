@@ -9,7 +9,7 @@
             'Send your location to the bot, then select map zoom (3 - 17). Happy Ingressing!',
             'Authors: @veikus and @fivepointseven',
             'Source code: http://github.com/veikus/ingresshelper'
-        ],
+        ].join('\n\r'),
 	    // Custom keyboard markup:
 	    levelMarkup = {
             keyboard: [
@@ -65,6 +65,49 @@
         xmlhttp.send();
     }
 
+    function postRequest(url, data, callback) {
+        var i,
+            xmlhttp = new XMLHttpRequest(),
+            formData = new FormData();
+
+        data = data || {};
+
+        if (typeof callback !== 'function') {
+            callback = undefined;
+        }
+
+        for (i in data) {
+            if (data.hasOwnProperty(i)) {
+                formData.append(i, data[i]);
+            }
+        }
+
+        xmlhttp.onreadystatechange = function() {
+            var result = null;
+
+            if (xmlhttp.readyState !== 4) {
+                return;
+            }
+
+            if (xmlhttp.status == 200) {
+                try {
+                    result = JSON.parse(xmlhttp.responseText);
+                } catch (e) {
+                    console.error('JSON parse error: ' + e);
+                }
+            } else {
+                console.error('GET Request incorrect status: ' + xmlhttp.status + ' ' + xmlhttp.statusText);
+            }
+
+            if (callback) {
+                callback(result);
+            }
+        };
+
+        xmlhttp.open('POST', url, true);
+        xmlhttp.send(formData);
+    }
+
     /**
      * Receive new messages and process them
      */
@@ -93,7 +136,7 @@
      * @param task
      */
     function processTask(task) {
-        var z, i,
+        var z,
             chatId = task.message.chat.id,
             isGroup = chatId < 0;
 
@@ -105,13 +148,7 @@
             switch (task.message.text) {
                 case '/start':
                 case '/help':
-                    for  (i = 0; i < helpResponse.length; ++i) {
-                        (function(i) { // TODO: find another way to send multiline messages
-                            setTimeout(function() {
-                                sendResponse(task, helpResponse[i]);
-                            }, i * 500);
-                        }(i));
-                    }
+                    sendResponse(task, helpResponse);
                     break;
 
                 case '/compression_on':
@@ -164,15 +201,21 @@
      * @param markup
      */
     function sendResponse(task, text, markup) {
+        var url;
+
         if (!markup) {
             markup = { hide_keyboard: true };
         }
 
         markup = JSON.stringify(markup);
+        url = apiUrl + '/sendMessage';
 
-        var url = apiUrl + '/sendMessage?chat_id='+task.message.chat.id+'&text='+text+'&disable_web_page_preview=true&reply_markup='+markup;
-
-        getRequest(url);
+        postRequest(url, {
+            chat_id: task.message.chat.id,
+            text: text,
+            disable_web_page_preview: true,
+            reply_markup: markup
+        });
     }
 
     /**

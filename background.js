@@ -120,10 +120,10 @@
 
         getRequest(url, function(data) {
             if (data && data.ok) {
-                data.result.forEach(function(task) {
-                    updateId = task.update_id + 1;
+                data.result.forEach(function(val) {
+                    updateId = val.update_id + 1;
                     localStorage.setItem('offset', updateId);
-                    processTask(task);
+                    processMessage(val.message);
                 });
 
                 getUpdates();
@@ -135,23 +135,23 @@
 
     /**
      * Process single message
-     * @param task
+     * @param message {object} Message from getUpdates
      */
-    function processTask(task) {
+    function processMessage(message) {
         var z,
-            chatId = task.message.chat.id,
+            chatId = message.chat.id,
             isGroup = chatId < 0;
 
-        if (task.message.location) {
+        if (message.location) {
             // Ask for zoom and cache location request
             sendResponse(chatId, 'Select zoom level', levelMarkup);
             taskManager.addTask({
-                chat: task.message.chat,
-                location: task.message.location,
+                chat: message.chat,
+                location: message.location,
                 isInterval: false
             });
         } else {
-            switch (task.message.text) {
+            switch (message.text) {
                 case '/start':
                 case '/help':
                     sendResponse(chatId, helpResponse);
@@ -178,8 +178,8 @@
                     break;
 
                 default:
-                    if (allowedLevelOptions.indexOf(task.message.text) > -1) {
-                        z = parseInt(task.message.text);
+                    if (allowedLevelOptions.indexOf(message.text) > -1) {
+                        z = parseInt(message.text);
                     } else if (!isGroup) {
                         sendResponse(chatId, 'Incorrect command.');
                     }

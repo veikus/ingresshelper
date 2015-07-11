@@ -125,9 +125,11 @@
                     localStorage.setItem('offset', updateId);
                     processTask(task);
                 });
-            }
 
-            getUpdates();
+                getUpdates();
+            } else {
+                setTimeout(getUpdates, 3000);
+            }
         })
     }
 

@@ -144,13 +144,17 @@
 
         if (task.message.location) {
             // Ask for zoom and cache location request
-            sendResponse(task, 'Select zoom level', levelMarkup);
-            taskManager.addTask(task);
+            sendResponse(chatId, 'Select zoom level', levelMarkup);
+            taskManager.addTask({
+                chat: task.message.chat,
+                location: task.message.location,
+                isInterval: false
+            });
         } else {
             switch (task.message.text) {
                 case '/start':
                 case '/help':
-                    sendResponse(task, helpResponse);
+                    sendResponse(chatId, helpResponse);
                     break;
 
                 case '/compression_on':
@@ -160,7 +164,7 @@
                     chatSettings[chatId].noCompression = false;
                     localStorage.setItem('chatSettings', JSON.stringify(chatSettings));
 
-                    sendResponse(task, 'Compression enabled');
+                    sendResponse(chatId, 'Compression enabled');
                     break;
 
                 case '/compression_off':
@@ -170,26 +174,26 @@
                     chatSettings[chatId].noCompression = true;
                     localStorage.setItem('chatSettings', JSON.stringify(chatSettings));
 
-                    sendResponse(task, 'Compression disabled');
+                    sendResponse(chatId, 'Compression disabled');
                     break;
 
                 default:
                     if (allowedLevelOptions.indexOf(task.message.text) > -1) {
                         z = parseInt(task.message.text);
                     } else if (!isGroup) {
-                        sendResponse(task, 'Incorrect command.');
+                        sendResponse(chatId, 'Incorrect command.');
                     }
             }
 
             if (z) {
-                if (taskManager.setZoom(task, z)) {
-                    sendResponse(task, 'Task created. Please wait less than ' + taskManager.calculateEstimateTime());
+                if (taskManager.setZoom(chatId, z)) {
+                    sendResponse(chatId, 'Task created. Please wait less than ' + taskManager.calculateEstimateTime());
 
                     if (!inProgress) {
                         startNextTask();
                     }
                 } else {
-                    sendResponse(task, 'Please send location first');
+                    sendResponse(chatId, 'Please send location first');
                 }
             }
 
@@ -198,11 +202,11 @@
 
     /**
      * Send specified text for selected task
-     * @param task
+     * @param chatId
      * @param text
      * @param markup
      */
-    function sendResponse(task, text, markup) {
+    function sendResponse(chatId, text, markup) {
         var url;
 
         if (!markup) {
@@ -213,7 +217,7 @@
         url = apiUrl + '/sendMessage';
 
         postRequest(url, {
-            chat_id: task.message.chat.id,
+            chat_id: chatId,
             text: text,
             disable_web_page_preview: true,
             reply_markup: markup
@@ -228,7 +232,7 @@
     function sendPhoto(task, img) {
         var xhr = new XMLHttpRequest(),
             formData = new FormData(),
-            chatId = task.message.chat.id,
+            chatId = task.chat.id,
             noCompression = chatSettings[chatId] && chatSettings[chatId].noCompression,
             url = apiUrl + (noCompression ? '/sendDocument' : '/sendPhoto');
 
@@ -251,8 +255,8 @@
         }
 
         inProgress = task;
-        latitude = task.message.location.latitude;
-        longitude = task.message.location.longitude;
+        latitude = task.location.latitude;
+        longitude = task.location.longitude;
         url = 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=' + task.zoom;
 
 	    // Set higher timeout for L7+ portals
@@ -287,7 +291,7 @@
 
         chrome.tabs.captureVisibleTab(window.id, { format: 'png' }, function(img) {
             if (!img) {
-                sendResponse(task, 'I`m sorry. Looks like something comes really wrong. Please try again in few minutes');
+                sendResponse(task.chat.id, 'I`m sorry. Looks like something comes really wrong. Please try again in few minutes');
             } else {
                 sendPhoto(task, img);
             }
@@ -324,36 +328,58 @@
      */
     function TaskManager() {
         var incompleteQueue = {},
-            queue = [],
-            activeTask = null;
+            queue = [];
 
         /**
          * Creates task
-         * @param task {object} Telegram object from getUpdates
+         * @param params {object}
+         * @param params.chat {object} Chat details from getUpdates
+         * @param params.isInterval {boolean} Is interval task
+         * @param params.location {object} longitude and latitude (optional)
          */
-        this.addTask = function(task) {
-            var from = task.message.from.id;
+        this.addTask = function(params) {
+            var chatId = params.chat.id;
 
-            task.from = from;
-            incompleteQueue[from] = task;
+            incompleteQueue[chatId] = {
+                chat: params.chat,
+                isInterval: params.isInterval,
+                location: params.location
+            };
+
+            return true;
+        };
+
+        /**
+         *
+         * @param chatId {number}
+         * @param location {object} longitude and latitude
+         */
+        this.setLocation = function(chatId, location) {
+            var task = incompleteQueue[chatId];
+
+            if (!task) {
+                return false;
+            }
+
+            task.location = location;
+
+            return true;
         };
 
         /**
          * Set zoom level for users incomplete task
-         * @param task {object} Telegram object from getUpdates
+         * @param chatId {number} Telegram chat id
          * @param zoom {number} Zoom level
          * @returns {boolean} Is task found and updated
          */
-        this.setZoom = function(task, zoom) {
-            var from = task.message.from.id;
-
-            if (!incompleteQueue[from]) {
+        this.setZoom = function(chatId, zoom) {
+            if (!incompleteQueue[chatId]) {
                 return false;
             }
 
-            incompleteQueue[from].zoom = zoom;
-            queue.push(incompleteQueue[from]);
-            delete incompleteQueue[from];
+            incompleteQueue[chatId].zoom = zoom;
+            queue.push(incompleteQueue[chatId]);
+            delete incompleteQueue[chatId];
 
             return true;
         };

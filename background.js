@@ -76,7 +76,7 @@
     getUpdates();
 
     chrome.runtime.onMessage.addListener(function(request, sender) {
-        makeScreenshot();
+        setTimeout(makeScreenshot, 1000); // Give time for iitc modules to finish their actions
     });
 
     // TODO: Make single method for GET and POST requests

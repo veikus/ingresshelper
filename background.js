@@ -26,7 +26,7 @@
                 ['6 hours', '12 hours', '24 hours'],
                 ['2 days', '3 days', '4 days'],
                 ['1 week', '2 weeks', '3 weeks'],
-                ['forever']
+                ['1 year']
             ],
             one_time_keyboard: true
         },

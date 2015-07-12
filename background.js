@@ -20,10 +20,57 @@
             ],
             one_time_keyboard: true
         },
+        intervalTimeoutMarkup = {
+            keyboard: [
+                ['1 hour', '2 hours', '3 hours'],
+                ['6 hours', '12 hours', '24 hours'],
+                ['2 days', '3 days', '4 days'],
+                ['1 week', '2 weeks', '3 weeks'],
+                ['forever']
+            ],
+            one_time_keyboard: true
+        },
+        intervalPauseMarkup = {
+            keyboard: [
+                ['3 minutes', '5 minutes', '10 minutes'],
+                ['15 minutes', '30 minutes', '60 minutes'],
+                ['2 hours', '4 hours', '6 hours'],
+                ['12 hours', '24 hours']
+            ],
+            one_time_keyboard: true
+        },
         allowedLevelOptions = [
             '17 - All portals', '17', '16', '15', '14', '13', '12', '11', '10',
             '9', '8', '7', '6', '5', '4', '3', '3 - World'
-        ];
+        ],
+        allowedIntervalTimeouts = {
+            '1 hour': 3600 * 1000,
+            '2 hours': 2 * 3600 * 1000,
+            '3 hours': 3 * 3600 * 1000,
+            '6 hours': 6 * 3600 * 1000,
+            '12 hours': 12 * 3600 * 1000,
+            '24 hours': 86400 * 1000,
+            '2 days': 2 * 86400 * 1000,
+            '3 days': 3 * 86400 * 1000,
+            '4 days': 4 * 86400 * 1000,
+            '1 week': 7 * 86400 * 1000,
+            '2 weeks': 14 * 86400 * 1000,
+            '3 weeks': 21 * 86400 * 1000,
+            '1 year': 365 * 86400 * 1000
+        },
+        allowedIntervalPauses = {
+            '3 minutes': 3 * 60 * 1000,
+            '5 minutes': 5 * 60 * 1000,
+            '10 minutes': 10 * 60 * 1000,
+            '15 minutes': 15 * 60 * 1000,
+            '30 minutes': 30 * 60 * 1000,
+            '60 minutes': 3600 * 1000,
+            '2 hours': 2 * 3600 * 1000,
+            '4 hours': 4 * 3600 * 1000,
+            '6 hours': 6 * 3600 * 1000,
+            '12 hours': 12 * 3600 * 1000,
+            '24 hours': 24 * 3600 * 1000
+        };
 
     chatSettings = JSON.parse(chatSettings);
     getUpdates();
@@ -32,6 +79,7 @@
         makeScreenshot();
     });
 
+    // TODO: Make single method for GET and POST requests
     function getRequest(url, callback) {
         var xmlhttp = new XMLHttpRequest();
 
@@ -138,23 +186,37 @@
      * @param message {object} Message from getUpdates
      */
     function processMessage(message) {
-        var z,
+        var zoom, intervalTimeout, intervalPause,
             chatId = message.chat.id,
             isGroup = chatId < 0;
 
         if (message.location) {
             // Ask for zoom and cache location request
             sendResponse(chatId, 'Select zoom level', levelMarkup);
-            taskManager.addTask({
-                chat: message.chat,
-                location: message.location,
-                isInterval: false
-            });
+
+            if (taskManager.hasIncompleteInterval(chatId)) {
+                taskManager.setLocation(chatId, message.location);
+            } else {
+                taskManager.addTask({
+                    chat: message.chat,
+                    location: message.location,
+                    isInterval: false
+                });
+            }
         } else {
             switch (message.text) {
                 case '/start':
                 case '/help':
                     sendResponse(chatId, helpResponse);
+                    break;
+
+                case '/interval':
+                    taskManager.addTask({
+                        chat: message.chat,
+                        isInterval: true
+                    });
+
+                    sendResponse(chatId, 'How long you need it?', intervalTimeoutMarkup);
                     break;
 
                 case '/compression_on':
@@ -178,15 +240,35 @@
                     break;
 
                 default:
-                    if (allowedLevelOptions.indexOf(message.text) > -1) {
-                        z = parseInt(message.text);
+                    if (allowedIntervalTimeouts[message.text]) {
+                        intervalTimeout = allowedIntervalTimeouts[message.text];
+                    } else if (allowedIntervalPauses[message.text]) {
+                        intervalPause = allowedIntervalPauses[message.text];
+                    } else if (allowedLevelOptions.indexOf(message.text) > -1) {
+                        zoom = parseInt(message.text);
                     } else if (!isGroup) {
                         sendResponse(chatId, 'Incorrect command.');
                     }
             }
 
-            if (z) {
-                if (taskManager.setZoom(chatId, z)) {
+            if (intervalTimeout) {
+                if (taskManager.setTimeout(chatId, intervalTimeout)) {
+                    sendResponse(chatId, 'How often you do need screenshots?', intervalPauseMarkup);
+                } else {
+                    sendResponse(chatId, 'Please enter /interval first');
+                }
+            }
+
+            if (intervalPause) {
+                if (taskManager.setPause(chatId, intervalPause)) {
+                    sendResponse(chatId, 'Send geolocation now');
+                } else {
+                    sendResponse(chatId, 'Please enter /interval first');
+                }
+            }
+
+            if (zoom) {
+                if (taskManager.setZoom(chatId, zoom)) {
                     sendResponse(chatId, 'Task created. Please wait less than ' + taskManager.calculateEstimateTime());
 
                     if (!inProgress) {
@@ -267,7 +349,7 @@
         }
 
         chrome.windows.create({ url: url, type: 'popup' }, function(window) {
-            task.window = window;
+            task.windowId = window.id;
             task.timeout = setTimeout(makeScreenshot, timeout);
         });
     }
@@ -285,18 +367,18 @@
         }
 
         inProgress = false;
-        window = task.window;
+        window = task.windowId;
 
         clearTimeout(task.timeout);
 
-        chrome.tabs.captureVisibleTab(window.id, { format: 'png' }, function(img) {
+        chrome.tabs.captureVisibleTab(window, { format: 'png' }, function(img) {
             if (!img) {
                 sendResponse(task.chat.id, 'I`m sorry. Looks like something comes really wrong. Please try again in few minutes');
             } else {
                 sendPhoto(task, img);
             }
 
-            chrome.windows.remove(window.id);
+            chrome.windows.remove(window);
             startNextTask();
         });
     }
@@ -327,8 +409,49 @@
      * @constructor
      */
     function TaskManager() {
-        var incompleteQueue = {},
+        var intervals,
+            incompleteQueue = {},
             queue = [];
+
+        // Restore intervals
+        intervals = localStorage.getItem('intervals');
+        intervals = intervals ? JSON.parse(intervals) : [];
+
+        setInterval(function() {
+            var ts = new Date().getTime();
+
+            intervals.forEach(function(task, k) {
+                if (!task) {
+                    return;
+                }
+
+                if (task.nextPhotoAt <= ts) {
+                    queue.push(task);
+                    task.nextPhotoAt = ts + task.pause;
+
+                    if (!inProgress) {
+                        startNextTask();
+                    }
+                }
+
+                if (task.shutdownTime <= ts) {
+                    sendResponse(task.chat.id, 'Interval finished');
+                    delete(intervals[k]);
+                    return;
+                }
+            });
+
+            localStorage.setItem('intervals', JSON.stringify(intervals));
+        }, 30000);
+
+        /**
+         * Is user already have incomplete interval task
+         * @param chatId
+         * @returns {boolean}
+         */
+        this.hasIncompleteInterval = function(chatId) {
+            return incompleteQueue[chatId] && incompleteQueue[chatId].isInterval;
+        };
 
         /**
          * Creates task
@@ -373,13 +496,62 @@
          * @returns {boolean} Is task found and updated
          */
         this.setZoom = function(chatId, zoom) {
-            if (!incompleteQueue[chatId]) {
+            var task = incompleteQueue[chatId];
+
+            if (!task) {
                 return false;
             }
 
-            incompleteQueue[chatId].zoom = zoom;
-            queue.push(incompleteQueue[chatId]);
+            task.zoom = zoom;
+            queue.push(task);
+
+            // Intervals setup
+            if (task.isInterval) {
+                task.shutdownTime = new Date().getTime() + task.timeout;
+                task.nextPhotoAt = new Date().getTime() + task.pause;
+                intervals.push(task);
+
+                localStorage.setItem('intervals', JSON.stringify(intervals));
+            }
+
             delete incompleteQueue[chatId];
+
+            return true;
+        };
+
+
+        /**
+         * Set timeout for interval
+         * @param chatId {number} Telegram chat id
+         * @param timeout {number} Timeout in ms
+         * @returns {boolean} Is task found and updated
+         */
+        this.setTimeout = function(chatId, timeout) {
+            var task = incompleteQueue[chatId];
+
+            if (!task || !task.isInterval) {
+                return false;
+            }
+
+            task.timeout = timeout;
+
+            return true;
+        };
+
+        /**
+         * Set pause for interval
+         * @param chatId {number} Telegram chat id
+         * @param pause {number} Pause in ms
+         * @returns {boolean} Is task found and updated
+         */
+        this.setPause = function(chatId, pause) {
+            var task = incompleteQueue[chatId];
+
+            if (!task || !task.isInterval || !task.timeout) {
+                return false;
+            }
+
+            task.pause = pause;
 
             return true;
         };

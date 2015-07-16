@@ -1,0 +1,64 @@
+(function() {
+    var languages, welcomeText, incorrectLanguage, saved,
+        markup = {};
+
+    app.modules = app.modules || [];
+    app.modules.push(Lang);
+
+    Lang.initMessage = '/language';
+
+    function Lang(message) {
+        var resp;
+
+        this.chat = message.chat.id;
+        this.lang = app.settings.lang(this.chat);
+
+        resp = welcomeText[this.lang] || welcomeText.en;
+        app.telegram.sendMessage(this.chat, resp, markup);
+    }
+
+    Lang.prototype.onMessage = function (message) {
+        var resp,
+            lang = this.lang,
+            text = message.text;
+
+        if (languages[text]) {
+            lang = languages[text];
+            resp = saved[lang] || saved.en;
+
+            app.settings.lang(this.chat, lang);
+
+            this.complete = true;
+            app.telegram.sendMessage(this.chat, resp);
+        } else {
+            resp = incorrectLanguage[lang] || incorrectLanguage.en;
+            app.telegram.sendMessage(this.chat, resp);
+        }
+    };
+
+    // Markup generator
+    languages = {
+        'English': 'en',
+        'Русский': 'ru'
+    };
+
+    markup.one_time_keyboard = true;
+    markup.keyboard = [];
+
+    Object.keys(languages).forEach(function(lang) {
+        markup.keyboard.push([lang]);
+    });
+
+    // Translations
+    welcomeText = {};
+    welcomeText.en = 'Please choose your language';
+    welcomeText.ru = 'Пожалуйста выберите язык, который вам удобней использовать';
+
+    incorrectLanguage = {};
+    incorrectLanguage.en = 'Incorrect input. Please try again';
+    incorrectLanguage.ru = 'Неправильный вввод. Выберите из предложенных вариантов';
+
+    saved = {};
+    saved.en = 'Changes saved';
+    saved.ru = 'Изменения сохранены';
+}());

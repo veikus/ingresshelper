@@ -5,7 +5,11 @@
     "background": {
         "persistent": true,
         "scripts": [
-            "background.js"
+            "core/main.js",
+            "core/settings.js",
+            "core/telegram.js",
+            "core/help.module.js",
+            "core/lang.module.js"
         ]
     },
     "content_scripts": [

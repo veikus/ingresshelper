@@ -190,7 +190,7 @@
             chatId = message.chat.id,
             isGroup = chatId < 0;
 
-        if (message.location) {
+        if (message.location && message.location.latitude && message.location.longitude) {
             // Ask for zoom and cache location request
             sendResponse(chatId, 'Select zoom level', levelMarkup);
 

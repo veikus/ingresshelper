@@ -8,8 +8,9 @@ var app = {};
     window.onload = init;
 
     function init() {
-        Object.keys(app.modules).forEach(function(name, module) {
-            var magicWord = module.initMessage;
+        Object.keys(app.modules).forEach(function(name) {
+            var module = app.modules[name],
+                magicWord = module.initMessage;
 
             if (magicWord) {
                 modules[magicWord] = module;

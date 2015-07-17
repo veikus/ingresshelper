@@ -43,6 +43,7 @@
     };
 
     markup.one_time_keyboard = true;
+    markup.resize_keyboard = true;
     markup.keyboard = [];
 
     Object.keys(languages).forEach(function(lang) {
@@ -56,7 +57,7 @@
 
     incorrectLanguage = {};
     incorrectLanguage.en = 'Incorrect input. Please try again';
-    incorrectLanguage.ru = 'Неправильный вввод. Выберите из предложенных вариантов';
+    incorrectLanguage.ru = 'Неправильный выбор. Выберите из предложенных вариантов';
 
     saved = {};
     saved.en = 'Changes saved';

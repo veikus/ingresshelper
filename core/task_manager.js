@@ -20,8 +20,26 @@
         tasks = [];
     }
 
-    chrome.runtime.onMessage.addListener(function() {
-        setTimeout(makeScreenshot, 5000); // Give time for iitc modules to finish their actions
+    chrome.runtime.onMessage.addListener(function(params, sender, callback) {
+        var plugins,
+            action = params && params.action;
+
+        switch (action) {
+            case 'complete':
+                setTimeout(makeScreenshot, 5000); // Give time for iitc modules to finish their actions
+                break;
+
+            case 'getExtScripts':
+                if (inProgress) {
+                    plugins = app.settings.plugins(inProgress.chat);
+                    plugins.forEach(function(val, k) {
+                        plugins[k] = location.origin + '/' + val;
+                    });
+
+                    callback(plugins);
+                }
+                break;
+        }
     });
 
     startNextTask();

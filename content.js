@@ -2,6 +2,10 @@
 
     check();
 
+    chrome.runtime.sendMessage({ action: 'getExtScripts' }, function(val) {
+        val.forEach(loadExternal);
+    });
+
     function check() {
         var elem = document.querySelector('#innerstatus .map .help');
 
@@ -13,6 +17,13 @@
     }
 
     function sendCompleteMessage() {
-        chrome.runtime.sendMessage({ complete: true });
+        chrome.runtime.sendMessage({ action: 'complete' });
+    }
+
+    function loadExternal(url) {
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.src = url;
+        document.getElementsByTagName('head')[0].appendChild(s);
     }
 }());

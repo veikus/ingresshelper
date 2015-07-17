@@ -12,7 +12,8 @@
             "core/help.module.js",
             "core/lang.module.js",
             "core/screenshot.module.js",
-            "core/compression.module.js"
+            "core/compression.module.js",
+            "core/iitc.module.js"
         ]
     },
     "content_scripts": [
@@ -31,5 +32,6 @@
         "activeTab",
         "<all_urls>"
     ],
+    "web_accessible_resources": ["iitc/*"],
     "manifest_version": 2
 }

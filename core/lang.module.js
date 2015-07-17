@@ -2,8 +2,8 @@
     var languages, welcomeText, incorrectLanguage, saved,
         markup = {};
 
-    app.modules = app.modules || [];
-    app.modules.push(Lang);
+    app.modules = app.modules || {};
+    app.modules.lang = Lang;
 
     Lang.initMessage = '/language';
 

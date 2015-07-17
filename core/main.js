@@ -8,7 +8,7 @@ var app = {};
     window.onload = init;
 
     function init() {
-        app.modules.forEach(function(module) {
+        Object.keys(app.modules).forEach(function(name, module) {
             var magicWord = module.initMessage;
 
             if (magicWord) {

@@ -2,8 +2,8 @@
     var helpResponse = {},
         help = {};
 
-    app.modules = app.modules || [];
-    app.modules.push(Help);
+    app.modules = app.modules || {};
+    app.modules.help = Help;
 
     Help.initMessage = '/help';
 

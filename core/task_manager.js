@@ -83,7 +83,7 @@
             if (!img) {
                 lang = app.settings.lang(task.chat);
                 resp = somethingWentWrong[lang] || somethingWentWrong.en;
-                app.telegram.sendMessage(task.chat, resp);
+                app.telegram.sendMessage(task.chat, resp, null);
             } else {
                 app.telegram.sendPhoto(task.chat, img);
             }

@@ -45,7 +45,7 @@
             });
 
             resp = taskSaved[lang] || taskSaved.en ;
-            app.telegram.sendMessage(this.chat, resp);
+            app.telegram.sendMessage(this.chat, resp, null);
         } else {
             resp = incorrectInput[lang] || incorrectInput.en;
             app.telegram.sendMessage(this.chat, resp, markup);

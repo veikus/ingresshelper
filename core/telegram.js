@@ -10,7 +10,7 @@
     app.telegram.sendMessage = function(chatId, message, markup) {
         var url;
 
-        if (!markup) {
+        if (markup === null) {
             markup = { hide_keyboard: true };
         }
 

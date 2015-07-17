@@ -17,7 +17,7 @@
             resp = helpResponse[lang] || helpResponse.en;
 
         this.complete = true;
-        app.telegram.sendMessage(chat, resp);
+        app.telegram.sendMessage(chat, resp, null);
     };
 
     // Translations

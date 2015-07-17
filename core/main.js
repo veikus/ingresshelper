@@ -1,9 +1,9 @@
 var app = {};
 
 (function() {
-    var modules = {},
-        activeModule = {},
-        unknownCommand = {};
+    var commandCancelled, unknownCommand,
+        modules = {},
+        activeModule = {};
 
     window.onload = init;
 
@@ -51,14 +51,17 @@ var app = {};
             activeModule[chat] = new modules[text](message);
         }
 
-        // If user has another active module
-        else if (activeModule[chat]) {
-            activeModule[chat].onMessage(message);
-        }
-
         // If user asked to cancel current action - just remove a module
         else if (text === '/cancel') {
             delete activeModule[chat];
+
+            lang = app.settings.lang(chat);
+            app.telegram.sendMessage(chat, commandCancelled[lang] || commandCancelled.en, null);
+        }
+
+        // If user has another active module
+        else if (activeModule[chat]) {
+            activeModule[chat].onMessage(message);
         }
 
         // In other case check is it location
@@ -80,6 +83,11 @@ var app = {};
     }
 
     // Translation
+    unknownCommand = {};
     unknownCommand.en = 'Unknown command';
     unknownCommand.ru = 'Неизвестная команда';
+
+    commandCancelled = {};
+    commandCancelled.en = 'Ok, i cancelled previous command';
+    commandCancelled.ru = 'Окей, команда отменена'
 }());

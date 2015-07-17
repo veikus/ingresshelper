@@ -29,7 +29,7 @@
             app.settings.lang(this.chat, lang);
 
             this.complete = true;
-            app.telegram.sendMessage(this.chat, resp);
+            app.telegram.sendMessage(this.chat, resp, null);
         } else {
             resp = incorrectLanguage[lang] || incorrectLanguage.en;
             app.telegram.sendMessage(this.chat, resp);

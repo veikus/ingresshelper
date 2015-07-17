@@ -8,8 +8,10 @@
             "core/main.js",
             "core/settings.js",
             "core/telegram.js",
+            "core/task_manager.js",
             "core/help.module.js",
-            "core/lang.module.js"
+            "core/lang.module.js",
+            "core/screenshot.module.js"
         ]
     },
     "content_scripts": [

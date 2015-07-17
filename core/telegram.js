@@ -25,6 +25,16 @@
         });
     };
 
+    app.telegram.sendPhoto = function(chatId, photo, noCompression) {
+        var url = API_URL + (noCompression ? '/sendDocument' : '/sendPhoto'),
+            params = {};
+
+        params.chat_id = chatId;
+        params[noCompression ? 'document' : 'photo'] = photo;
+
+        request('post', url, params);
+    };
+
     app.telegram.getUpdates = function(callback) {
         var result = [],
             url = API_URL + '/getUpdates';

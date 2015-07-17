@@ -65,7 +65,7 @@
      * Makes screenshot and finishes task
      */
     function makeScreenshot() {
-        var window, resp, lang,
+        var window,
             task = inProgress;
 
         // If timeout and message both triggered
@@ -80,12 +80,15 @@
         saveTasks();
 
         chrome.tabs.captureVisibleTab(window, { format: 'png' }, function(img) {
+            var compression, lang, resp;
+
             if (!img) {
                 lang = app.settings.lang(task.chat);
                 resp = somethingWentWrong[lang] || somethingWentWrong.en;
                 app.telegram.sendMessage(task.chat, resp, null);
             } else {
-                app.telegram.sendPhoto(task.chat, img);
+                compression = app.settings.compression(task.chat);
+                app.telegram.sendPhoto(task.chat, img, compression);
             }
 
             chrome.windows.remove(window);

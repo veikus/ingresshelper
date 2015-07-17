@@ -11,7 +11,8 @@
             "core/task_manager.js",
             "core/help.module.js",
             "core/lang.module.js",
-            "core/screenshot.module.js"
+            "core/screenshot.module.js",
+            "core/compression.module.js"
         ]
     },
     "content_scripts": [

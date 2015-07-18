@@ -69,8 +69,8 @@ var app = {};
             activeModule[chat] = new app.modules.screenshot(message);
         }
 
-        // Or maybe user made a mistake
-        else {
+        // Or maybe user made a mistake (do not reply in groups)
+        else if (chat > -1) {
             lang = app.settings.lang(chat);
             app.telegram.sendMessage(chat, unknownCommand[lang] || unknownCommand.en);
         }

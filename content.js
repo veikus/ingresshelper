@@ -10,10 +10,6 @@
         var elemIITC = document.querySelector('#innerstatus .map .help'),
             elemIntel = document.getElementById('loading_msg');
 
-        if (elemIntel) {
-
-        }
-
         if (elemIITC && elemIITC.innerHTML === 'done') {
             sendCompleteMessage();
         } else if (elemIntel && elemIntel.style.display === 'none') {

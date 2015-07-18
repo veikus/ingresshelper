@@ -78,7 +78,7 @@ var app = {};
         // Or maybe user made a mistake (do not reply in groups)
         else if (chat > -1) {
             lang = app.settings.lang(chat);
-            app.telegram.sendMessage(chat, unknownCommand[lang] || unknownCommand.en);
+            app.telegram.sendMessage(chat, unknownCommand[lang] || unknownCommand.en, null);
         }
 
 

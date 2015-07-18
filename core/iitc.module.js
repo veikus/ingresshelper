@@ -58,7 +58,7 @@
                     enabled.splice(index, 1);
                 }
             } else {
-                if (enabled.length === 0) {
+                if (enabled.length === 0 && url !== plugins.IITC) {
                     enabled.push(plugins.IITC);
                 }
 

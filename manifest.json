@@ -13,7 +13,8 @@
             "core/lang.module.js",
             "core/screenshot.module.js",
             "core/compression.module.js",
-            "core/iitc.module.js"
+            "core/iitc.module.js",
+            "core/interval.module.js"
         ]
     },
     "content_scripts": [

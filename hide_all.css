@@ -1,3 +1,4 @@
+/* IITC */
 #sidebar,
 #sidebartoggle,
 #chat,
@@ -23,3 +24,23 @@
     color: #ffce00;
     content: 'http://telegram.me/ingressmap_bot';
 }
+
+/* Intel */
+#header > *,
+#geotools,
+#player_stats,
+#comm,
+#filters_container,
+#portal_filter_header,
+#tm_button,
+#snapcontrol
+{
+    display: none !important;
+}
+
+#header:before
+{
+    margin-left: 20px;
+    content: 'http://telegram.me/ingressmap_bot';
+}
+

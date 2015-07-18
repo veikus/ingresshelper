@@ -7,9 +7,16 @@
     });
 
     function check() {
-        var elem = document.querySelector('#innerstatus .map .help');
+        var elemIITC = document.querySelector('#innerstatus .map .help'),
+            elemIntel = document.getElementById('loading_msg');
 
-        if (elem && elem.innerHTML === 'done') {
+        if (elemIntel) {
+
+        }
+
+        if (elemIITC && elemIITC.innerHTML === 'done') {
+            sendCompleteMessage();
+        } else if (elemIntel && elemIntel.style.display === 'none') {
             sendCompleteMessage();
         } else {
             setTimeout(check, 100);

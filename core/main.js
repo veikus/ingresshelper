@@ -46,6 +46,12 @@ var app = {};
             chat = message.chat.id,
             text = message.text;
 
+        // Hack for a new users
+        if (text === '/start') {
+            app.telegram.sendMessage(chat, 'Thank you for installing me');
+            text = '/language';
+        }
+
         // If user asked for another module
         if (modules[text]) {
             activeModule[chat] = new modules[text](message);

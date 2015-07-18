@@ -32,4 +32,11 @@
         'Идея: @veikus',
         'Исходный код: http://github.com/veikus/ingresshelper'
     ].join('\n\r');
+
+    helpResponse.ua = [
+        'Надішліть боту свої координати, далі вкажіть рівень наближення, і за декілька хвилин Ви отримаєте знімок інтелу',
+        'Ідея: @veikus',
+        'Автор українскього перекладу: @Ukrrooter',
+        'Оригінал коду: http://github.com/veikus/ingresshelper'
+    ].join('\n\r');
 }());

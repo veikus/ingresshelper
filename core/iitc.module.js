@@ -122,24 +122,30 @@
     helpText = {};
     helpText.en = 'You can setup IITC plugins from this menus';
     helpText.ru = 'Вы можете настроить плагины IITC из этого меню';
+    helpText.ua = 'Ви можете налаштувати плагіни IITC із цього меню';
 
     statusText = {};
     statusText.en = 'Current status:';
     statusText.ru = 'Текущее состояние:';
+    statusText.ua = 'Поточний стан:';
 
     enabledText = {};
     enabledText.en = 'Plugin enabled';
     enabledText.ru = 'Плагин включен';
+    enabledText.ua = 'Плагін увімкнено';
 
     disabledText = {};
     disabledText.en = 'Plugin disabled';
     disabledText.ru = 'Плагин отключен';
+    disabledText.ua = 'Плагін вимкнено';
 
     pluginNotFoundText = {};
     pluginNotFoundText.en = 'Plugin not found';
     pluginNotFoundText.ru = 'Плагин не найден';
+    pluginNotFoundText.ua = 'Плагін не знайдено';
 
     completeText = {};
     completeText.en = 'Complete setup';
     completeText.ru = 'Завершить настройку';
+    completeText.ua = 'Завершити налаштування';
 }());

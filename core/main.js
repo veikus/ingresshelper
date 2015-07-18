@@ -92,8 +92,10 @@ var app = {};
     unknownCommand = {};
     unknownCommand.en = 'Unknown command';
     unknownCommand.ru = 'Неизвестная команда';
+    unknownCommand.ua = 'Невідома команда';
 
     commandCancelled = {};
     commandCancelled.en = 'Ok, i cancelled previous command';
-    commandCancelled.ru = 'Окей, команда отменена'
+    commandCancelled.ru = 'Окей, команда отменена';
+    commandCancelled.ua = 'Гаразд, команду скасовано';
 }());

@@ -56,14 +56,17 @@
     selectZoomLevel = {};
     selectZoomLevel.en = 'Select zoom level';
     selectZoomLevel.ru = 'Выберите масштаб карты';
+    selectZoomLevel.ua = 'Оберіть масштаб мапи';
 
     incorrectInput = {};
     incorrectInput.en = 'Incorrect input';
     incorrectInput.ru = 'Неверный ввод. Выберите из предложенных вариантов';
+    incorrectInput.ua = 'Неправильне значення. Оберіть із запропонованих варіантів';
 
     taskSaved = {};
     taskSaved.en = 'Task saved. Please wait for a few minutes';
     taskSaved.ru = 'Задача сохранена. Через несколько минут вы получите скриншот';
+    taskSaved.ua = 'Завдання збережено. За декілька хвилин Ви отримаєте знімок';
 
     levelsMarkup = {};
     levelsMarkup.en = [
@@ -77,5 +80,11 @@
         ['16', '15', '14', '13'],
         ['12', '10', '8', '6'],
         ['3 - Весь мир']
+    ];
+    levelsMarkup.ua = [
+        ['17 - Усі портали'],
+        ['16', '15', '14', '13'],
+        ['12', '10', '8', '6'],
+        ['3 - Весь світ']
     ];
 }());

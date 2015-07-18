@@ -118,4 +118,5 @@
     somethingWentWrong = {};
     somethingWentWrong.en = 'I`m sorry. Looks like something comes really wrong. Please try again in few minutes';
     somethingWentWrong.ru = 'Ой. Что-то пошло не так. Пожалуйста, попробуйте еще раз через пару минут';
+    somethingWentWrong.ua = 'Вибачте, але щось пішло не так. Будь ласка, спробуйте знову за декілька хвилин';
 }());

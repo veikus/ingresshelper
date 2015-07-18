@@ -75,7 +75,7 @@
 
         chrome.windows.create({ url: url, type: 'popup' }, function(window) {
             task.windowId = window.id;
-            task.timeout = setTimeout(makeScreenshot, timeout);
+            task.timeoutId = setTimeout(makeScreenshot, timeout);
         });
     }
 
@@ -94,7 +94,7 @@
         inProgress = false;
         window = task.windowId;
 
-        clearTimeout(task.timeout);
+        clearTimeout(task.timeoutId);
         saveTasks();
 
         chrome.tabs.captureVisibleTab(window, { format: 'png' }, function(img) {

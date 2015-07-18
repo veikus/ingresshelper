@@ -199,7 +199,7 @@
             chat = this.chat;
 
         intervals.forEach(function(interval, i) {
-            if (interval.chat === chat) {
+            if (interval && interval.chat === chat) {
                 result = i;
             }
         });

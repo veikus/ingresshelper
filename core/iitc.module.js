@@ -3,7 +3,7 @@
         plugins, markup;
 
     app.modules = app.modules || {};
-    app.modules.compression = IITC;
+    app.modules.iitc = IITC;
 
     IITC.initMessage = '/iitc';
 

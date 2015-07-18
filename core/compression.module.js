@@ -26,7 +26,7 @@
     }
 
     Compression.prototype.onMessage = function (message) {
-        var resp, offOption, onOption, ok,
+        var resp, offOption, onOption,
             text = message.text;
 
         offOption = offText[this.lang] || offText.en;

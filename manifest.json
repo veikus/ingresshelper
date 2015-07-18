@@ -14,7 +14,8 @@
             "core/screenshot.module.js",
             "core/compression.module.js",
             "core/iitc.module.js",
-            "core/interval.module.js"
+            "core/interval.module.js",
+            "core/compression.module.js"
         ]
     },
     "content_scripts": [

@@ -48,7 +48,7 @@ var app = {};
 
         // Hack for a new users
         if (text === '/start') {
-            app.telegram.sendMessage(chat, 'Thank you for installing me');
+            app.telegram.sendMessage(chat, 'Thank you for installing me. Send me location to get intel screenshot');
             text = '/language';
         }
 

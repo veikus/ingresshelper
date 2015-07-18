@@ -26,7 +26,16 @@
             }
 
             if (task.nextPhotoAt <= ts) {
-                app.taskManager.add(task);
+                (function(k) {
+                    app.taskManager.add(task, function(result, error) {
+                        // Remove interval after bot lost access to group
+                        if (error === 'Error: Bad Request: Not in chat') {
+                            delete(intervals[k]);
+                            saveIntervals();
+                        }
+                    });
+                }(k));
+
                 task.nextPhotoAt = ts + task.pause;
             }
 

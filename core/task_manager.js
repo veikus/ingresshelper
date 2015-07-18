@@ -2,7 +2,9 @@
     var somethingWentWrongText, inProgress, tasks;
 
     app.taskManager = {};
-    app.taskManager.add = function(options) {
+    app.taskManager.add = function(options, callback) {
+        options = JSON.parse(JSON.stringify(options)); // TODO: Find better way to clone objects
+        options.callback = callback;
         tasks.push(options);
         saveTasks();
 
@@ -83,7 +85,7 @@
      * Makes screenshot and finishes task
      */
     function makeScreenshot() {
-        var window,
+        var window, callback,
             task = inProgress;
 
         // If timeout and message both triggered
@@ -93,6 +95,7 @@
 
         inProgress = false;
         window = task.windowId;
+        callback = task.callback;
 
         clearTimeout(task.timeoutId);
         saveTasks();
@@ -106,7 +109,7 @@
                 app.telegram.sendMessage(task.chat, resp, null);
             } else {
                 compression = app.settings.compression(task.chat);
-                app.telegram.sendPhoto(task.chat, img, compression);
+                app.telegram.sendPhoto(task.chat, img, compression, callback);
             }
 
             chrome.windows.remove(window);

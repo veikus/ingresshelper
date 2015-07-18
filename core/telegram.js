@@ -25,14 +25,18 @@
         });
     };
 
-    app.telegram.sendPhoto = function(chatId, photo, compression) {
+    app.telegram.sendPhoto = function(chatId, photo, compression, callback) {
         var url = API_URL + (compression ? '/sendPhoto' : '/sendDocument'),
             params = {};
 
         params.chat_id = chatId;
         params[compression ? 'photo' : 'document'] = photo;
 
-        request('post', url, params);
+        request('post', url, params, function(data) {
+            if (typeof callback === 'function') {
+                callback(data && data.ok, data.description);
+            }
+        });
     };
 
     app.telegram.getUpdates = function(callback) {
@@ -89,14 +93,10 @@
                 return;
             }
 
-            if (xmlhttp.status == 200) {
-                try {
-                    result = JSON.parse(xmlhttp.responseText);
-                } catch (e) {
-                    console.error('JSON parse error: ' + e);
-                }
-            } else {
-                console.error('Request incorrect status: ' + xmlhttp.status + ' ' + xmlhttp.statusText);
+            try {
+                result = JSON.parse(xmlhttp.responseText);
+            } catch (e) {
+                console.error('JSON parse error: ' + e);
             }
 
             if (callback) {

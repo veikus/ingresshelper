@@ -42,7 +42,7 @@
             if (task.shutdownTime <= ts) {
                 lang = app.settings.lang(task.chat);
 
-                app.sendMessage(task.chat, intervalFinishedText[lang] || intervalFinishedText.en, null);
+                app.telegram.sendMessage(task.chat, intervalFinishedText[lang] || intervalFinishedText.en, null);
                 delete(intervals[k]);
             }
         });

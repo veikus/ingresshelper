@@ -1,5 +1,5 @@
 (function() {
-    var languages, welcomeText, incorrectLanguage, saved,
+    var languages, welcomeText, incorrectLanguage, helpUsText, saved,
         markup = {};
 
     app.modules = app.modules || {};
@@ -25,6 +25,8 @@
         if (languages[text]) {
             lang = languages[text];
             resp = saved[lang] || saved.en;
+            resp += '\n\n';
+            resp += helpUsText[lang] || helpUsText.en;
 
             app.settings.lang(this.chat, lang);
 
@@ -66,4 +68,9 @@
     saved.en = 'Changes saved';
     saved.ru = 'Изменения сохранены';
     saved.ua = 'Зміни збережено';
+
+    helpUsText = {};
+    helpUsText.en = 'You can translate this bot to your language. Send message to @veikus if you want to participate';
+    helpUsText.ru = 'Хотите помочь с переводом на другой язык? Напишите об этом @veikus';
+    helpUsText.ua = 'Бажаете допомогти з перекладом на інші мови? Звертайтеся до @veikus';
 }());

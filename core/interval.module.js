@@ -277,53 +277,63 @@
     ];
 
     // Translations
-    cancelOptionText = {};
-    cancelOptionText.en = 'Cancel setup';
-    cancelOptionText.ru = 'Отменить настройку';
-    cancelOptionText.ua = 'Відмінити налаштування';
+    cancelOptionText = {
+        en: 'Cancel setup',
+        ru: 'Отменить настройку',
+        ua: 'Відмінити налаштування'
+    };
 
-    cancelPreviousText = {};
-    cancelPreviousText.en = 'You already have interval task. You can cancel this task and create new one';
-    cancelPreviousText.ru = 'У вас уже есть активная задача. Вы должны отменить ее перед созданием новой';
-    cancelPreviousText.ua = 'У вас вже є активне завдання. Ви маєте відмінити її перед створенням нової';
+    cancelPreviousText = {
+        en: 'You already have interval task. You can cancel this task and create new one',
+        ru: 'У вас уже есть активная задача. Вы должны отменить ее перед созданием новой',
+        ua: 'У вас вже є активне завдання. Ви маєте відмінити її перед створенням нової'
+    };
 
-    cancelPreviousOptionText = {};
-    cancelPreviousOptionText.en = 'Cancel previous and create new';
-    cancelPreviousOptionText.ru = 'Отменить задачу и создать новую';
-    cancelPreviousOptionText.ua = 'Відмінити завдання та створити нову';
+    cancelPreviousOptionText = {
+        en: 'Cancel previous and create new',
+        ru: 'Отменить задачу и создать новую',
+        ua: 'Відмінити завдання та створити нову'
+    };
 
-    timeoutSetupText = {};
-    timeoutSetupText.en = 'How long do you need interval?';
-    timeoutSetupText.ru = 'Как долго нужно создавать скриншоты?';
-    timeoutSetupText.ua = 'Протягом якого часу робити знімки?';
+    timeoutSetupText = {
+        en: 'How long do you need interval?',
+        ru: 'Как долго нужно создавать скриншоты?',
+        ua: 'Протягом якого часу робити знімки?'
+    };
 
-    pauseSetupText = {};
-    pauseSetupText.en = 'How often do you need screenshots?';
-    pauseSetupText.ru = 'Как часто присылать скриншоты?';
-    pauseSetupText.ua = 'Як часто надсилати знімки?';
+    pauseSetupText = {
+        en: 'How often do you need screenshots?',
+        ru: 'Как часто присылать скриншоты?',
+        ua: 'Як часто надсилати знімки?'
+    };
 
-    locationSetupText = {};
-    locationSetupText.en = 'Send geolocation now';
-    locationSetupText.ru = 'Пришлите геолокацию нужной области';
-    locationSetupText.ua = 'Надішліть геолокацію необхідної області';
+    locationSetupText = {
+        en: 'Send geolocation now',
+        ru: 'Пришлите геолокацию нужной области',
+        ua: 'Надішліть геолокацію необхідної області'
+    };
 
-    zoomSetupText = {};
-    zoomSetupText.en = 'Select zoom level';
-    zoomSetupText.ru = 'Выберите масштаб карты';
-    zoomSetupText.ua = 'Оберіть масштаб мапи';
+    zoomSetupText = {
+        en: 'Select zoom level',
+        ru: 'Выберите масштаб карты',
+        ua: 'Оберіть масштаб мапи'
+    };
 
-    incorrectInputText = {};
-    incorrectInputText.en = 'Incorrect input';
-    incorrectInputText.ru = 'Неверный ввод. Выберите из предложенных вариантов';
-    incorrectInputText.ua = 'Неправильне значення. Виберіть із запропонованих варіантів';
+    incorrectInputText = {
+        en: 'Incorrect input',
+        ru: 'Неверный ввод. Выберите из предложенных вариантов',
+        ua: 'Неправильне значення. Виберіть із запропонованих варіантів'
+    };
 
-    taskSavedText = {};
-    taskSavedText.en = 'Task saved. You will start to receive screenshots soon';
-    taskSavedText.ru = 'Задача сохранена. Скоро вы начнете получать скриншоты';
-    taskSavedText.ua = 'Завдання збережено. Згодом Ви почнете отримувати знімки';
+    taskSavedText = {
+        en: 'Task saved. You will start to receive screenshots soon',
+        ru: 'Задача сохранена. Скоро вы начнете получать скриншоты',
+        ua: 'Завдання збережено. Згодом Ви почнете отримувати знімки'
+    };
 
-    intervalFinishedText = {};
-    intervalFinishedText.en = 'Interval complete. You will receive last screenshot in few minutes';
-    intervalFinishedText.ru = 'Интервал окончен. Через несколько минут вы получите последний скриншот';
-    intervalFinishedText.ua = 'Інтервал завершено. За декілька хвилин Ви отримаєте останній знімок';
+    intervalFinishedText = {
+        en: 'Interval complete. You will receive last screenshot in few minutes',
+        ru: 'Интервал окончен. Через несколько минут вы получите последний скриншот',
+        ua: 'Інтервал завершено. За декілька хвилин Ви отримаєте останній знімок'
+    };
 }());

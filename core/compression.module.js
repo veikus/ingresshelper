@@ -50,28 +50,33 @@
     };
 
     // Translations
-    helpText = {};
-    helpText.en = 'You can get uncompressed images (increase data transfer)';
-    helpText.ru = 'Вы можете отключить сжатие изображений (требуется больше трафика)';
-    helpText.ua = 'Ви можете вимкнути стиснення зображень (потребує більше трафіку)';
+    helpText = {
+        en: 'You can get uncompressed images (increase data transfer)',
+        ru: 'Вы можете отключить сжатие изображений (требуется больше трафика)',
+        ua: 'Ви можете вимкнути стиснення зображень (потребує більше трафіку)'
+    };
 
-    onText = {};
-    onText.en = 'Enable compression';
-    onText.ru = 'Включить сжатие';
-    onText.ua = 'Увімкнути стиснення';
+    onText = {
+        en: 'Enable compression',
+        ru: 'Включить сжатие',
+        ua: 'Увімкнути стиснення'
+    };
 
-    offText = {};
-    offText.en = 'Disable compression';
-    offText.ru = 'Отключить сжатие';
-    offText.ua = 'Вимкнути стиснення';
+    offText = {
+        en:'Disable compression',
+        ru: 'Отключить сжатие',
+        ua: 'Вимкнути стиснення'
+    };
 
-    savedText = {};
-    savedText.en = 'Changes saved';
-    savedText.ru = 'Изменения сохранены';
-    savedText.ua = 'Зміни збережено';
+    savedText = {
+        en: 'Changes saved',
+        ru: 'Изменения сохранены',
+        ua: 'Зміни збережено'
+    };
 
-    incorrectOptionText = {};
-    incorrectOptionText.en = 'Incorrect input. Please try again';
-    incorrectOptionText.ru = 'Неправильный выбор. Выберите из предложенных вариантов';
-    incorrectOptionText.ua = 'Неправильний вибір. Виберіть із запропонованих варіантів';
+    incorrectOptionText = {
+        en: 'Incorrect input. Please try again',
+        ru: 'Неправильный выбор. Выберите из предложенных вариантов',
+        ua: 'Неправильний вибір. Виберіть із запропонованих варіантів'
+    };
 }());

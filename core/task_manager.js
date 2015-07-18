@@ -1,5 +1,5 @@
 (function() {
-    var inProgress, somethingWentWrong, tasks;
+    var somethingWentWrongText, inProgress, tasks;
 
     app.taskManager = {};
     app.taskManager.add = function(options) {
@@ -102,7 +102,7 @@
 
             if (!img) {
                 lang = app.settings.lang(task.chat);
-                resp = somethingWentWrong[lang] || somethingWentWrong.en;
+                resp = somethingWentWrongText[lang] || somethingWentWrongText.en;
                 app.telegram.sendMessage(task.chat, resp, null);
             } else {
                 compression = app.settings.compression(task.chat);
@@ -115,8 +115,9 @@
     }
 
     // Translations
-    somethingWentWrong = {};
-    somethingWentWrong.en = 'I`m sorry. Looks like something comes really wrong. Please try again in few minutes';
-    somethingWentWrong.ru = 'Ой. Что-то пошло не так. Пожалуйста, попробуйте еще раз через пару минут';
-    somethingWentWrong.ua = 'Вибачте, але щось пішло не так. Будь ласка, спробуйте знову за декілька хвилин';
+    somethingWentWrongText = {
+        en: 'I`m sorry. Looks like something comes really wrong. Please try again in few minutes',
+        ru: 'Ой. Что-то пошло не так. Пожалуйста, попробуйте еще раз через пару минут',
+        ua: 'Вибачте, але щось пішло не так. Будь ласка, спробуйте знову за декілька хвилин'
+    };
 }());

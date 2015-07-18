@@ -1,5 +1,5 @@
 (function() {
-    var levelsMarkup, selectZoomLevel, incorrectInput, taskSaved;
+    var levelsMarkupText, selectZoomLevelText, incorrectInputText, taskSavedText;
 
     app.modules = app.modules || {};
     app.modules.screenshot = Screenshot;
@@ -8,26 +8,25 @@
 
     function Screenshot(message) {
         this.chat = message.chat.id;
+        this.lang = app.settings.lang(this.chat);
         this.location = null;
         this.onMessage(message);
     }
 
     Screenshot.prototype.onMessage = function (message) {
         var resp, markup, zoom,
-            lang = app.settings.lang(this.chat),
             text = message.text,
             location = message.location;
 
-
         markup = {
-            keyboard: levelsMarkup[lang] || levelsMarkup.en,
+            keyboard: levelsMarkupText[this.lang] || levelsMarkupText.en,
             one_time_keyboard: true
         };
 
         // Step 1
         if (location && location.latitude && location.longitude ) {
             this.location = location;
-            resp = selectZoomLevel[lang] || selectZoomLevel.en;
+            resp = selectZoomLevelText[this.lang] || selectZoomLevelText.en;
 
             app.telegram.sendMessage(this.chat, resp, markup);
             return;
@@ -44,44 +43,47 @@
                 zoom: zoom
             });
 
-            resp = taskSaved[lang] || taskSaved.en ;
+            resp = taskSavedText[this.lang] || taskSavedText.en ;
             app.telegram.sendMessage(this.chat, resp, null);
         } else {
-            resp = incorrectInput[lang] || incorrectInput.en;
+            resp = incorrectInputText[this.lang] || incorrectInputText.en;
             app.telegram.sendMessage(this.chat, resp, markup);
         }
     };
 
     // Translations
-    selectZoomLevel = {};
-    selectZoomLevel.en = 'Select zoom level';
-    selectZoomLevel.ru = 'Выберите масштаб карты';
-    selectZoomLevel.ua = 'Оберіть масштаб мапи';
+    selectZoomLevelText = {
+        en: 'Select zoom level',
+        ru: 'Выберите масштаб карты',
+        ua: 'Оберіть масштаб мапи'
+    };
 
-    incorrectInput = {};
-    incorrectInput.en = 'Incorrect input';
-    incorrectInput.ru = 'Неверный ввод. Выберите из предложенных вариантов';
-    incorrectInput.ua = 'Неправильне значення. Оберіть із запропонованих варіантів';
+    incorrectInputText = {
+        en: 'Incorrect input',
+        ru: 'Неверный ввод. Выберите из предложенных вариантов',
+        ua: 'Неправильне значення. Оберіть із запропонованих варіантів'
+    };
 
-    taskSaved = {};
-    taskSaved.en = 'Task saved. Please wait for a few minutes';
-    taskSaved.ru = 'Задача сохранена. Через несколько минут вы получите скриншот';
-    taskSaved.ua = 'Завдання збережено. За декілька хвилин Ви отримаєте знімок';
+    taskSavedText = {
+        en: 'Task saved. Please wait for a few minutes',
+        ru: 'Задача сохранена. Через несколько минут вы получите скриншот',
+        ua: 'Завдання збережено. За декілька хвилин Ви отримаєте знімок'
+    };
 
-    levelsMarkup = {};
-    levelsMarkup.en = [
+    levelsMarkupText = {};
+    levelsMarkupText.en = [
         ['17 - All portals'],
         ['16', '15', '14', '13'],
         ['12', '10', '8', '6'],
         ['3 - World']
     ];
-    levelsMarkup.ru = [
+    levelsMarkupText.ru = [
         ['17 - Все порталы'],
         ['16', '15', '14', '13'],
         ['12', '10', '8', '6'],
         ['3 - Весь мир']
     ];
-    levelsMarkup.ua = [
+    levelsMarkupText.ua = [
         ['17 - Усі портали'],
         ['16', '15', '14', '13'],
         ['12', '10', '8', '6'],

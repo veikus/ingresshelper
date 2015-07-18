@@ -1,7 +1,7 @@
 var app = {};
 
 (function() {
-    var commandCancelled, unknownCommand,
+    var commandCancelledText, unknownCommandText,
         modules = {},
         activeModule = {};
 
@@ -62,7 +62,7 @@ var app = {};
             delete activeModule[chat];
 
             lang = app.settings.lang(chat);
-            app.telegram.sendMessage(chat, commandCancelled[lang] || commandCancelled.en, null);
+            app.telegram.sendMessage(chat, commandCancelledText[lang] || commandCancelledText.en, null);
         }
 
         // If user has another active module
@@ -78,9 +78,8 @@ var app = {};
         // Or maybe user made a mistake (do not reply in groups)
         else if (chat > -1) {
             lang = app.settings.lang(chat);
-            app.telegram.sendMessage(chat, unknownCommand[lang] || unknownCommand.en, null);
+            app.telegram.sendMessage(chat, unknownCommandText[lang] || unknownCommandText.en, null);
         }
-
 
         // Cleanup complete modules
         if (activeModule[chat] && activeModule[chat].complete) {
@@ -89,13 +88,15 @@ var app = {};
     }
 
     // Translation
-    unknownCommand = {};
-    unknownCommand.en = 'Unknown command';
-    unknownCommand.ru = 'Неизвестная команда';
-    unknownCommand.ua = 'Невідома команда';
+    unknownCommandText = {
+        en: 'Unknown command',
+        ru: 'Неизвестная команда',
+        ua: 'Невідома команда'
+    };
 
-    commandCancelled = {};
-    commandCancelled.en = 'Ok, i cancelled previous command';
-    commandCancelled.ru = 'Окей, команда отменена';
-    commandCancelled.ua = 'Гаразд, команду скасовано';
+    commandCancelledText = {
+        en: 'Ok, i cancelled previous command',
+        ru: 'Окей, команда отменена',
+        ua: 'Гаразд, команду скасовано'
+    };
 }());

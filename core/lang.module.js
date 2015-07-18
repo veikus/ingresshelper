@@ -1,5 +1,5 @@
 (function() {
-    var languages, welcomeText, incorrectLanguage, helpUsText, saved,
+    var welcomeText, incorrectLanguageText, helpUsText, savedText, languages,
         markup = {};
 
     app.modules = app.modules || {};
@@ -24,7 +24,7 @@
 
         if (languages[text]) {
             lang = languages[text];
-            resp = saved[lang] || saved.en;
+            resp = savedText[lang] || savedText.en;
             resp += '\n\n';
             resp += helpUsText[lang] || helpUsText.en;
 
@@ -33,7 +33,7 @@
             this.complete = true;
             app.telegram.sendMessage(this.chat, resp, null);
         } else {
-            resp = incorrectLanguage[lang] || incorrectLanguage.en;
+            resp = incorrectLanguageText[lang] || incorrectLanguageText.en;
             app.telegram.sendMessage(this.chat, resp);
         }
     };
@@ -54,23 +54,27 @@
     });
 
     // Translations
-    welcomeText = {};
-    welcomeText.en = 'Please choose your language';
-    welcomeText.ru = 'Пожалуйста выберите язык, который вам удобней использовать';
-    welcomeText.ua = 'Будь ласка, оберіть мову, якою Вам зручніше користуватися';
+    welcomeText = {
+        en: 'Please choose your language',
+        ru: 'Пожалуйста выберите язык, который вам удобней использовать',
+        ua: 'Будь ласка, оберіть мову, якою Вам зручніше користуватися'
+    };
 
-    incorrectLanguage = {};
-    incorrectLanguage.en = 'Incorrect input. Please try again';
-    incorrectLanguage.ru = 'Неправильный выбор. Выберите из предложенных вариантов';
-    incorrectLanguage.ua = 'Неправильне значення. Виберіть із запропонованих варіантів';
+    incorrectLanguageText = {
+        en: 'Incorrect input. Please try again',
+        ru: 'Неправильный выбор. Выберите из предложенных вариантов',
+        ua: 'Неправильне значення. Виберіть із запропонованих варіантів'
+    };
 
-    saved = {};
-    saved.en = 'Changes saved';
-    saved.ru = 'Изменения сохранены';
-    saved.ua = 'Зміни збережено';
+    savedText = {
+        en: 'Changes saved',
+        ru: 'Изменения сохранены',
+        ua: 'Зміни збережено'
+    };
 
-    helpUsText = {};
-    helpUsText.en = 'You can translate this bot to your language. Send message to @veikus if you want to participate';
-    helpUsText.ru = 'Хотите помочь с переводом на другой язык? Напишите об этом @veikus';
-    helpUsText.ua = 'Бажаете допомогти з перекладом на інші мови? Звертайтеся до @veikus';
+    helpUsText = {
+        en: 'You can translate this bot to your language. Send message to @veikus if you want to participate',
+        ru: 'Хотите помочь с переводом на другой язык? Напишите об этом @veikus',
+        ua: 'Бажаете допомогти з перекладом на інші мови? Звертайтеся до @veikus'
+    };
 }());

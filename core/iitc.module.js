@@ -13,6 +13,7 @@
         'Show portal weakness': 'iitc/show-portal-weakness.user.js',
         'Player tracker': 'iitc/player-tracker.user.js',
         'Portal names': 'iitc/portal-names.user.js',
+        'Portal level numbers': 'iitc/portal-level-numbers.user.js',
         'Show the direction of links': 'iitc/link-show-direction.user.js',
         'Fix Google Map offset in China': 'iitc/fix-googlemap-china-offset.user.js'
     };

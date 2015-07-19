@@ -1,5 +1,5 @@
 (function() {
-    var levelsMarkupText, selectZoomLevelText, incorrectInputText, taskSavedText;
+    var levelsMarkupText, selectZoomLevelText, incorrectInputText, taskSavedText, locationRequiredText;
 
     app.modules = app.modules || {};
     app.modules.screenshot = Screenshot;
@@ -24,11 +24,14 @@
         };
 
         // Step 1
-        if (location && location.latitude && location.longitude ) {
+        if (location && location.latitude && location.longitude) {
             this.location = location;
             resp = selectZoomLevelText[this.lang] || selectZoomLevelText.en;
-
             app.telegram.sendMessage(this.chat, resp, markup);
+            return;
+        } else if (!this.location) {
+            resp = locationRequiredText[this.lang] || this.lang;
+            app.telegram.sendMessage(this.chat, resp, null);
             return;
         }
 
@@ -68,6 +71,12 @@
         en: 'Task saved. Please wait for a few minutes',
         ru: 'Задача сохранена. Через несколько минут вы получите скриншот',
         ua: 'Завдання збережено. За декілька хвилин Ви отримаєте знімок'
+    };
+
+    locationRequiredText = {
+        en: 'Send geolocation now',
+        ru: 'Пришлите геолокацию нужной области',
+        ua: 'Надішліть геолокацію необхідної області'
     };
 
     levelsMarkupText = {};

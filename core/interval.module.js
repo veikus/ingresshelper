@@ -29,7 +29,7 @@
                 (function(k) {
                     app.taskManager.add(task, function(result, error) {
                         // Remove interval after bot lost access to group
-                        if (error === 'Error: Bad Request: Not in chat') {
+                        if (error === 'Error: Bad Request: Not in chat' || error === 'Error: Bot was kicked from a chat') {
                             delete(intervals[k]);
                             saveIntervals();
                         }

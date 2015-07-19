@@ -56,7 +56,7 @@
      * Creates intel tab
      */
     function startNextTask() {
-        var latitude, longitude, timeout, url,
+        var latitude, longitude, timeout, url, isFullScreen,
             task = tasks.shift();
 
         if (!task) {
@@ -67,6 +67,7 @@
         latitude = task.location.latitude;
         longitude = task.location.longitude;
         url = 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=' + task.zoom;
+        isFullScreen = localStorage.getItem('fullscreen');
 
         // Set higher timeout for L7+ portals
         if (task.zoom <= 7) {
@@ -78,6 +79,10 @@
         chrome.windows.create({ url: url, type: 'popup' }, function(window) {
             task.windowId = window.id;
             task.timeoutId = setTimeout(makeScreenshot, timeout);
+
+            if (isFullScreen) {
+                chrome.windows.update(window.id, { state: 'fullscreen' });
+            }
         });
     }
 

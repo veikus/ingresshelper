@@ -92,9 +92,9 @@
             isEnabled = enabled.indexOf(url) > -1;
 
             if (isEnabled) {
-                result.push(name + ': ' + enabledText[this.lang] || enabledText.en);
+                result.push(name + ': ' + (enabledText[this.lang] || enabledText.en));
             } else {
-                result.push(name + ': ' + disabledText[this.lang] || disabledText.en);
+                result.push(name + ': ' + (disabledText[this.lang] || disabledText.en));
             }
         }
 

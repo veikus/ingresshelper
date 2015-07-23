@@ -1,3 +1,8 @@
+/**
+ * @file Help module
+ * @author Artem Veikus artem@veikus.com
+ * @version 2.0
+ */
 (function() {
     var helpResponseText;
 
@@ -6,10 +11,17 @@
 
     Help.initMessage = '/help';
 
+    /**
+     * @param message {object} Telegram message object
+     * @constructor
+     */
     function Help(message) {
         this.onMessage(message);
     }
 
+    /**
+     * @param message {object} Telegram message object
+     */
     Help.prototype.onMessage = function (message) {
         var chat = message.chat.id,
             lang = app.settings.lang(chat),

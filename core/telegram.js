@@ -7,6 +7,12 @@
 
     app.telegram = {};
 
+    /**
+     * Send message to specified chat
+     * @param chatId {Number} Chat id
+     * @param message {String} Message
+     * @param markup {Object|undefined|null} Keyboard markup (null hides previous keyboard, undefined leaves it)
+     */
     app.telegram.sendMessage = function(chatId, message, markup) {
         var url;
 
@@ -25,6 +31,13 @@
         });
     };
 
+    /**
+     * Send photo to specified chat
+     * @param chatId {Number} Chat id
+     * @param photo {String} Base64 encrypted image
+     * @param compression {Boolean} If true image will be compressed by telegram
+     * @param callback {Function} Callback function
+     */
     app.telegram.sendPhoto = function(chatId, photo, compression, callback) {
         var url = API_URL + (compression ? '/sendPhoto' : '/sendDocument'),
             params = {};
@@ -39,6 +52,10 @@
         });
     };
 
+    /**
+     * Get new messages from server
+     * @param callback {Function} Callback function
+     */
     app.telegram.getUpdates = function(callback) {
         var result = [],
             url = API_URL + '/getUpdates';
@@ -58,6 +75,13 @@
         })
     };
 
+    /**
+     * Request wrapper
+     * @param method {String} GET or POST
+     * @param url {String} Request url
+     * @param data {Object} Request parameters
+     * @param callback {Function} Callback function
+     */
     function request(method, url, data, callback) {
         var formData, i,
             xmlhttp = new XMLHttpRequest();

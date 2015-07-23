@@ -1,3 +1,8 @@
+/**
+ * @file Compression setup module
+ * @author Artem Veikus artem@veikus.com
+ * @version 2.0
+ */
 (function() {
     var helpText, onText, offText, savedText, incorrectOptionText;
 
@@ -6,6 +11,10 @@
 
     Compression.initMessage = '/compression';
 
+    /**
+     * @param message {object} Telegram message object
+     * @constructor
+     */
     function Compression(message) {
         var resp, markup;
 
@@ -25,6 +34,9 @@
         app.telegram.sendMessage(this.chat, resp, markup);
     }
 
+    /**
+     * @param message {object} Telegram message object
+     */
     Compression.prototype.onMessage = function (message) {
         var resp, offOption, onOption,
             text = message.text;

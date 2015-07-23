@@ -1,3 +1,8 @@
+/**
+ * @file Language setup module
+ * @author Artem Veikus artem@veikus.com
+ * @version 2.0
+ */
 (function() {
     var welcomeText, incorrectLanguageText, helpUsText, savedText, languages,
         markup = {};
@@ -7,6 +12,10 @@
 
     Lang.initMessage = '/language';
 
+    /**
+     * @param message {object} Telegram message object
+     * @constructor
+     */
     function Lang(message) {
         var resp;
 
@@ -17,6 +26,9 @@
         app.telegram.sendMessage(this.chat, resp, markup);
     }
 
+    /**
+     * @param message {object} Telegram message object
+     */
     Lang.prototype.onMessage = function (message) {
         var resp,
             lang = this.lang,

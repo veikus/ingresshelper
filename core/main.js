@@ -1,3 +1,8 @@
+/**
+ * @file Primary bot file
+ * @author Artem Veikus artem@veikus.com
+ * @version 2.0
+ */
 var app = {};
 
 (function() {
@@ -7,6 +12,9 @@ var app = {};
 
     window.onload = init;
 
+    /**
+     * Modules initialization
+     */
     function init() {
         Object.keys(app.modules).forEach(function(name) {
             var module = app.modules[name],

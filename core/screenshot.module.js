@@ -1,3 +1,8 @@
+/**
+ * @file Screenshot task creation module
+ * @author Artem Veikus artem@veikus.com
+ * @version 2.0
+ */
 (function() {
     var levelsMarkupText, selectZoomLevelText, incorrectInputText, taskSavedText, locationRequiredText;
 
@@ -6,6 +11,10 @@
 
     Screenshot.initMessage = '/screenshot';
 
+    /**
+     * @param message {object} Telegram message object
+     * @constructor
+     */
     function Screenshot(message) {
         this.chat = message.chat.id;
         this.lang = app.settings.lang(this.chat);
@@ -13,6 +22,9 @@
         this.onMessage(message);
     }
 
+    /**
+     * @param message {object} Telegram message object
+     */
     Screenshot.prototype.onMessage = function (message) {
         var resp, markup, zoom,
             text = message.text,

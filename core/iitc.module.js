@@ -1,3 +1,8 @@
+/**
+ * @file IITC setup module
+ * @author Artem Veikus artem@veikus.com
+ * @version 2.0
+ */
 (function() {
     var helpText, statusText, enabledText, disabledText, pluginNotFoundText, completeText,
         plugins, markup;
@@ -18,6 +23,10 @@
         'Fix Google Map offset in China': 'iitc/fix-googlemap-china-offset.user.js'
     };
 
+    /**
+     * @param message {object} Telegram message object
+     * @constructor
+     */
     function IITC(message) {
         var resp;
 
@@ -37,6 +46,9 @@
         app.telegram.sendMessage(this.chat, resp, markup);
     }
 
+    /**
+     * @param message {object} Telegram message object
+     */
     IITC.prototype.onMessage = function (message) {
         var index, isEnabled, url, resp, temp,
             text = message.text,
@@ -77,6 +89,10 @@
         }
     };
 
+    /**
+     * Build message with current modules status
+     * @returns {String} String with modules names and their statuses
+     */
     IITC.prototype.getCurrentStatus = function() {
         var name, url, isEnabled,
             result = [],
@@ -102,6 +118,10 @@
         return result.join('\n');
     };
 
+    /**
+     * Build keyboard with modules list
+     * @returns {Array} Array ready to use in markup
+     */
     IITC.prototype.buildKeyboard = function() {
         var name,
             result = [];

@@ -1,3 +1,8 @@
+/**
+ * @file Interval setup and processing module
+ * @author Artem Veikus artem@veikus.com
+ * @version 2.0
+ */
 (function() {
     var cancelOptionText, cancelPreviousText, cancelPreviousOptionText, timeoutSetupText, pauseSetupText, locationSetupText,
         zoomSetupText, incorrectInputText, taskSavedText, intervalFinishedText,
@@ -50,7 +55,10 @@
         saveIntervals();
     }, 30000);
 
-
+    /**
+     * @param message {object} Telegram message object
+     * @constructor
+     */
     function Interval(message) {
         this.chat = message.chat.id;
         this.lang = app.settings.lang(this.chat);
@@ -62,6 +70,9 @@
         this.onMessage(message);
     }
 
+    /**
+     * @param message {object} Telegram message object
+     */
     Interval.prototype.onMessage = function (message) {
         var zoom, temp,
             text = message.text,
@@ -142,6 +153,10 @@
         }
     };
 
+    /**
+     * Prepare and send response for each step
+     * @param step {String}
+     */
     Interval.prototype.sendMessage = function(step) {
         var resp, markup;
 
@@ -201,8 +216,10 @@
         app.telegram.sendMessage(this.chat, resp, markup);
     };
 
-
-    // returns array index
+    /**
+     * Find active task for current chat
+     * @returns {number} Array index of found task (or -1)
+     */
     Interval.prototype.findActiveTask = function() {
         var result = -1,
             chat = this.chat;
@@ -216,10 +233,14 @@
         return result;
     };
 
+    /**
+     * Save intervals in localStorage
+     */
     function saveIntervals() {
         localStorage.setItem('interval__tasks', JSON.stringify(intervals));
     }
 
+    // Translations
     allowedTimeouts = {
         '1 hour': 3600 * 1000,
         '2 hours': 2 * 3600 * 1000,

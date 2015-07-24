@@ -144,35 +144,47 @@
         en: 'You can setup IITC plugins from this menus',
         ru: 'Вы можете настроить плагины IITC из этого меню',
         ua: 'Ви можете налаштувати плагіни IITC із цього меню'
+        zh-cmn-Hans: '在此界面设置ITTC插件'
+        zh-cmn-Hant: '在此界面設置ITTC插件'
     };
 
     statusText = {
         en: 'Current status:',
         ru: 'Текущее состояние:',
         ua: 'Поточний стан:'
+        zh-cmn-Hans: '当前状态'
+        zh-cmn-Hant: '當前狀態'
     };
 
     enabledText = {
         en: 'Plugin enabled',
         ru: 'Плагин включен',
         ua: 'Плагін увімкнено'
+        zh-cmn-Hans: '插件已启用'
+        zh-cmn-Hant: '插件已啟用'
     };
 
     disabledText = {
         en: 'Plugin disabled',
         ru: 'Плагин отключен',
         ua: 'Плагін вимкнено'
+        zh-cmn-Hans: '插件已停用'
+        zh-cmn-Hant: '插件已停用'
     };
 
     pluginNotFoundText = {
         en: 'Plugin not found',
         ru: 'Плагин не найден',
         ua: 'Плагін не знайдено'
+        zh-cmn-Hans: '没有找到插件'
+        zh-cmn-Hant: '沒有找到插件'
     };
 
     completeText = {
         en: 'Complete setup',
         ru: 'Завершить настройку',
         ua: 'Завершити налаштування'
+        zh-cmn-Hans: '设置完成'
+        zh-cmn-Hant: '設置完成'
     };
 }());

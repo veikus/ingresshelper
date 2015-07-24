@@ -17,7 +17,8 @@
             "core/iitc.module.js",
             "core/interval.module.js",
             "core/compression.module.js",
-            "core/banderavec.module.js"
+            "core/banderavec.module.js",
+            "core/stats.module.js"
         ]
     },
     "content_scripts": [

@@ -60,6 +60,15 @@
 
             resp = taskSavedText[this.lang] || taskSavedText.en ;
             app.telegram.sendMessage(this.chat, resp, null);
+
+            // Stats
+            if (app.modules.stats) {
+                app.modules.stats.trackScreenshot({
+                    chat: this.chat,
+                    zoom: zoom,
+                    location: this.location
+                });
+            }
         } else {
             resp = incorrectInputText[this.lang] || incorrectInputText.en;
             app.telegram.sendMessage(this.chat, resp, markup);

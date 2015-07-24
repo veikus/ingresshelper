@@ -1,17 +1,24 @@
-var moscow_map;
+var map,
+    screenshotsData;
+
+// Init
+screenshotsData = localStorage.getItem('stats__screenshots');
+screenshotsData = screenshotsData ? JSON.parse(screenshotsData) : [];
 
 ymaps.ready(function(){
-    moscow_map = new ymaps.Map('first_map', {
-        center: [55.76, 37.64],
-        zoom: 10
+    map = new ymaps.Map('map', {
+        center: [50.442565, 30.520585],
+        zoom: 3
     });
 
     ymaps.modules.require(['Heatmap'], function (Heatmap) {
-        var data = [[37.782551, -122.445368], [37.782745, -122.444586], [55.76, 37.64]],
-            heatmap = new Heatmap(data);
+        var data = [];
 
-        console.log('xx', heatmap);
-        heatmap.setMap(moscow_map);
+        screenshotsData.forEach(function(item) {
+            data.push([item.location.latitude, item.location.longitude]);
+        });
+
+        new Heatmap(data).setMap(map);
     });
 
 });

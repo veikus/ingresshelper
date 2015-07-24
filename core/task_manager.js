@@ -128,7 +128,7 @@
                 app.telegram.sendPhoto(task.chat, img, compression, callback);
             }
 
-            //chrome.windows.remove(window);
+            chrome.windows.remove(window);
             startNextTask();
         });
     }

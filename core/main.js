@@ -99,16 +99,16 @@ var app = {};
     unknownCommandText = {
         en: 'Unknown command',
         ru: 'Неизвестная команда',
-        ua: 'Невідома команда'
-        zh-cmn-Hans: '无效指令',
-        zh-cmn-Hant: '無效指令'
+        ua: 'Невідома команда',
+        'zh-cmn-Hans': '无效指令',
+        'zh-cmn-Hant': '無效指令'
     };
 
     commandCancelledText = {
         en: 'Ok, i cancelled previous command',
         ru: 'Окей, команда отменена',
-        ua: 'Гаразд, команду скасовано'
-        zh-cmn-Hans: '好的，我将取消上一条指令',
-        zh-cmn-Hant: '好的，我將取消上一條指令'
+        ua: 'Гаразд, команду скасовано',
+        'zh-cmn-Hans': '好的，我将取消上一条指令',
+        'zh-cmn-Hant': '好的，我將取消上一條指令'
     };
 }());

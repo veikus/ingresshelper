@@ -53,17 +53,17 @@
         'Оригінал коду: http://github.com/veikus/ingresshelper'
     ].join('\n\r');
 
-    helpResponseText.zh-cmn-Hans = [
+    helpResponseText['zh-cmn-Hans'] = [
         '把你的位置发送给机器人，然后选择放大等级（3 - 17）. 玩得开心哦!',
         '作者: @veikus',
-        '翻译：@aerocaterpillar'
+        '翻译：@aerocaterpillar',
         '源代码: http://github.com/veikus/ingresshelper'
     ].join('\n\r');
     
-    helpResponseText.zh-cmn-Hant = [
+    helpResponseText['zh-cmn-Hant'] = [
         '把你的位置發送給機器人，然後選擇放大等級（3 - 17）. 玩得開心哦!',
         '作者: @veikus',
-        '翻譯：@aerocaterpillar'
+        '翻譯：@aerocaterpillar',
         '源代碼: http://github.com/veikus/ingresshelper'
     ].join('\n\r');
     

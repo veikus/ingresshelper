@@ -24,13 +24,22 @@
         this.lang = app.settings.lang(this.chat);
         this.complete = true;
 
-        app.telegram.sendMessage(this.chat, 'Nothing here yet', null);
+        this.onMessage(message);
     }
 
     /**
      * @param message {object} Telegram message object
      */
-    Stats.prototype.onMessage = function (message) {};
+    Stats.prototype.onMessage = function (message) {
+        var result = [];
+
+        if (app.taskManager) {
+            // todo translation
+            result.push('Tasks in queue: ' + app.taskManager.queueLength());
+        }
+
+        app.telegram.sendMessage(this.chat, result.join('\n\r'), null);
+    };
 
     /**
      * Saves screenshot requests statistics

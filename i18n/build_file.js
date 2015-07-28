@@ -61,7 +61,7 @@ function saveFile(data) {
     var result = '';
 
     result += '// THIS FILE IS BUILD AUTOMATICALLY. PLEASE DO NOT MODIFY IT\n';
-    result += 'app.i18n = ' + JSON.stringify(data, null, '\t');
+    result += 'app.i18nTexts = ' + JSON.stringify(data, null, '\t');
     result += ';';
 
     fs.open(__dirname + '/i18n.js', 'w', function(err, fd) {

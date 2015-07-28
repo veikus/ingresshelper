@@ -6,8 +6,10 @@
         "persistent": true,
         "scripts": [
             "core/main.js",
+            "i18n/i18n.js",
             "core/settings.js",
             "core/telegram.js",
+            "core/i18n_extend.js",
             "core/task_manager.js",
             "core/help.module.js",
             "core/lang.module.js",

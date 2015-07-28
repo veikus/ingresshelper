@@ -1,5 +1,5 @@
 // THIS FILE IS BUILD AUTOMATICALLY. PLEASE DO NOT MODIFY IT
-app.i18n = {
+app.i18nTexts = {
 	"compression": {
 		"welcome": {
 			"en": "You can get uncompressed images (increase data transfer)",

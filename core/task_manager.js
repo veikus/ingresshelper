@@ -24,6 +24,20 @@
         }
     };
 
+    /**
+     * Return task length count
+     * @returns {Number} Tasks count
+     */
+    app.taskManager.queueLength = function() {
+        var count = tasks ? tasks.length : 0;
+
+        if (inProgress) {
+            ++count;
+        }
+
+        return count;
+    };
+
 
     tasks = localStorage.getItem('task_manager__tasks');
 

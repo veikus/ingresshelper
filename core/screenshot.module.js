@@ -66,6 +66,15 @@
 
             resp = app.i18n(this.lang, 'screenshot', 'task_saved');
             app.telegram.sendMessage(this.chat, resp, null);
+
+            // Stats
+            if (app.modules.stats) {
+                app.modules.stats.trackScreenshot({
+                    chat: this.chat,
+                    zoom: zoom,
+                    location: this.location
+                });
+            }
         } else {
             resp = app.i18n(this.lang, 'screenshot', 'incorrect_input');
             app.telegram.sendMessage(this.chat, resp, markup);

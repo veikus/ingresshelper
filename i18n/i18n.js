@@ -194,7 +194,7 @@ app.i18nTexts = {
 			"fi": "Lopeta asennus.",
 			"de": "Setup abschliessen",
 			"chde": "Setup abschlüsse",
-			"es": "Configuración completa.",
+			"es": "Configuración completa",
 			"br": "Configuração completa",
 			"it": "Configurazione completata"
 		}
@@ -432,7 +432,7 @@ app.i18nTexts = {
 			"fi": "Muutokset tallennettu.",
 			"de": "Änderungen gespeichert",
 			"chde": "Änderige gspeicheret.",
-			"es": "Cambios guardados",
+			"es": "Cambios guardados.",
 			"br": "Alterações guardadas",
 			"it": "Modifiche salvate"
 		},
@@ -460,7 +460,7 @@ app.i18nTexts = {
 			"fi": "Tuntematon komento.",
 			"de": "Unbekannter Befehl",
 			"chde": "De Befehl känni nöd.",
-			"es": "Comando desconocido",
+			"es": "Comando desconocido.",
 			"br": "Comando desconhecido",
 			"it": "Comando sconosciuto"
 		},
@@ -473,13 +473,14 @@ app.i18nTexts = {
 			"fi": "Peruutin edellisen komennon.",
 			"de": "Ok, vorheriger Befehl abgebrochen.",
 			"chde": "Ok, vorhärige Befehl abbroche.",
-			"es": "Ok, cancelé comando anterior",
+			"es": "Ok, cancelé comando anterior.",
 			"br": "Ok, Cancelei o comando anterior",
 			"it": "Ok, ho cancellato il comando precedente"
 		},
 		"rate_us_1": {
 			"en": "⭐⭐⭐⭐⭐",
 			"ru": "⭐⭐⭐⭐⭐",
+			"ua": "⭐⭐⭐⭐⭐",
 			"fi": "⭐⭐⭐⭐⭐",
 			"de": "⭐⭐⭐⭐⭐",
 			"chde": "⭐⭐⭐⭐⭐",
@@ -490,6 +491,7 @@ app.i18nTexts = {
 		"rate_us_2": {
 			"en": "Please rate us in the storebot",
 			"ru": "Пожалуйста оцените нашего бота",
+			"ua": "Оцініть нас в storebot",
 			"fi": "Arvostele tämä botti @storebot​issa:",
 			"de": "Wir würden uns über eine Bewertung beim storebot freuen!",
 			"chde": "Mier würded eus über en bewertig bim storebot freue!",
@@ -500,6 +502,7 @@ app.i18nTexts = {
 		"rate_us_3": {
 			"en": "http://telegram.me/storebot?start=ingressmap_bot",
 			"ru": "http://telegram.me/storebot?start=ingressmap_bot",
+			"ua": "http://telegram.me/storebot?start=ingressmap_bot",
 			"fi": "http://telegram.me/storebot?start=ingressmap_bot",
 			"de": "http://telegram.me/storebot?start=ingressmap_bot",
 			"chde": "http://telegram.me/storebot?start=ingressmap_bot",
@@ -518,6 +521,7 @@ app.i18nTexts = {
 			"fi": "Valitse zoomaustaso.",
 			"de": "Zoom Level auswählen",
 			"chde": "Zoom Level uswähle",
+			"es": "Selecciona el nivel de zoom.",
 			"br": "Escolha um nível de zoom",
 			"it": "Seleziona il livello dello zoom"
 		},
@@ -530,6 +534,7 @@ app.i18nTexts = {
 			"fi": "Virheellinen syöte",
 			"de": "Fehlerhafte Eingabe",
 			"chde": "Fählerhafti Iigab",
+			"es": "Entrada incorrecta.",
 			"br": "Entrada incorreta",
 			"it": "Inserimento incorretto"
 		},
@@ -542,6 +547,7 @@ app.i18nTexts = {
 			"fi": "Tehtävä tallennettu. Odota hetki.",
 			"de": "Task gespeichert. Bitte einige Minuten warten.",
 			"chde": "Task gspeicheret. Bitte es paar minute warte.",
+			"es": "Tarea guardada. Por favor espera unos minutos.",
 			"br": "Tarefa guardada. Por favor, aguarde por alguns minutos",
 			"it": "Comando salvato, Per favore, attendi qualche minuto"
 		},
@@ -621,7 +627,7 @@ app.i18nTexts = {
 			"fi": "Huppistakeikkaa, nyt meni bitti vinoon. Yritä hetkisen kuluttua uudestaan.",
 			"de": "Entschuldigung. Etwas ist schief gelaufen. Bitte in ein paar Minuten erneut versuchen.",
 			"chde": "Tschuldigung. Öppis isch ganz lätz gloffe. Bitte in es paar Minute nomol probiere.",
-			"es": "Lo siento. Parece que algo esta realmente mal. Vuelve a intentarlo en unos minutos.",
+			"es": "Lo siento. Parece que algo está realmente mal. Vuelve a intentarlo en unos minutos.",
 			"br": "Desculpe. Parece que algo deu errado. Por favor, tente novamente em alguns minutos",
 			"it": "Mi dispiace. Sembra che qualcosa sia andato storto. Riprova tra qualche minuto"
 		}
@@ -633,7 +639,7 @@ app.i18nTexts = {
 			"fi": "Tehtäviä jonossa:",
 			"de": "Tasks in Warteschlange:",
 			"chde": "Wartendi Tasks:",
-			"es": "Solicitud esta en cola:",
+			"es": "Solicitud en cola:",
 			"br": "Tarefas na fila:",
 			"it": "Comandi in attesa"
 		}

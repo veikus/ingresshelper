@@ -6,8 +6,7 @@
 var app = {};
 
 (function() {
-    var commandCancelledText, unknownCommandText,
-        modules = {},
+    var modules = {},
         activeModule = {};
 
     window.onload = init;
@@ -70,7 +69,7 @@ var app = {};
             delete activeModule[chat];
 
             lang = app.settings.lang(chat);
-            app.telegram.sendMessage(chat, commandCancelledText[lang] || commandCancelledText.en, null);
+            app.telegram.sendMessage(chat, app.i18n(lang, 'main', 'cancelled'), null);
         }
 
         // If user has another active module
@@ -86,7 +85,7 @@ var app = {};
         // Or maybe user made a mistake (do not reply in groups)
         else if (chat > -1) {
             lang = app.settings.lang(chat);
-            app.telegram.sendMessage(chat, unknownCommandText[lang] || unknownCommandText.en, null);
+            app.telegram.sendMessage(chat, app.i18n(lang, 'main', 'unknown_command'), null);
         }
 
         // Cleanup complete modules
@@ -95,20 +94,4 @@ var app = {};
         }
     }
 
-    // Translation
-    unknownCommandText = {
-        en: 'Unknown command',
-        ru: 'Неизвестная команда',
-        ua: 'Невідома команда',
-        'zh-cmn-Hans': '无效指令',
-        'zh-cmn-Hant': '無效指令'
-    };
-
-    commandCancelledText = {
-        en: 'Ok, i cancelled previous command',
-        ru: 'Окей, команда отменена',
-        ua: 'Гаразд, команду скасовано',
-        'zh-cmn-Hans': '好的，我将取消上一条指令',
-        'zh-cmn-Hant': '好的，我將取消上一條指令'
-    };
 }());

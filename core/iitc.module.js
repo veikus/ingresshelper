@@ -4,8 +4,7 @@
  * @version 2.0
  */
 (function() {
-    var helpText, statusText, enabledText, disabledText, pluginNotFoundText, completeText,
-        plugins, markup;
+    var plugins, markup;
 
     app.modules = app.modules || {};
     app.modules.iitc = IITC;
@@ -39,8 +38,8 @@
             keyboard: this.buildKeyboard()
         };
 
-        resp = helpText[this.lang] || helpText.en;
-        resp += '\n\r';
+        resp = app.i18n(this.lang, 'iitc', 'help');
+        resp += '\n';
         resp += this.getCurrentStatus();
 
         app.telegram.sendMessage(this.chat, resp, markup);
@@ -54,7 +53,7 @@
             text = message.text,
             enabled = app.settings.plugins(this.chat);
 
-        temp = completeText[this.lang] || completeText.en;
+        temp = app.i18n(this.lang, 'iitc', 'complete_setup');
 
         if (temp === text) {
             this.complete = true;
@@ -84,7 +83,7 @@
             app.telegram.sendMessage(this.chat, resp, markup);
 
         } else {
-            resp = pluginNotFoundText[this.lang] || pluginNotFoundText.en;
+            resp = app.i18n(this.lang, 'iitc', 'plugin_not_found');
             app.telegram.sendMessage(this.chat, resp);
         }
     };
@@ -98,7 +97,7 @@
             result = [],
             enabled = app.settings.plugins(this.chat);
 
-        result.push(statusText[this.lang] || statusText.en);
+        result.push(app.i18n(this.lang, 'iitc', 'status'));
 
         for (name in plugins) {
             if (!plugins.hasOwnProperty(name)) {
@@ -109,9 +108,9 @@
             isEnabled = enabled.indexOf(url) > -1;
 
             if (isEnabled) {
-                result.push(name + ': ' + (enabledText[this.lang] || enabledText.en));
+                result.push(name + ': ' + app.i18n(this.lang, 'iitc', 'enabled'));
             } else {
-                result.push(name + ': ' + (disabledText[this.lang] || disabledText.en));
+                result.push(name + ': ' + app.i18n(this.lang, 'iitc', 'disabled'));
             }
         }
 
@@ -134,57 +133,9 @@
             result.push([name]);
         }
 
-        result.push([completeText[this.lang] || completeText.en]);
+        result.push([app.i18n(this.lang, 'iitc', 'complete_setup')]);
 
         return result;
     };
 
-    // Translations
-    helpText = {
-        en: 'You can setup IITC plugins from this menus',
-        ru: 'Вы можете настроить плагины IITC из этого меню',
-        ua: 'Ви можете налаштувати плагіни IITC із цього меню',
-        'zh-cmn-Hans': '在此界面设置ITTC插件',
-        'zh-cmn-Hant': '在此界面設置ITTC插件'
-    };
-
-    statusText = {
-        en: 'Current status:',
-        ru: 'Текущее состояние:',
-        ua: 'Поточний стан:',
-        'zh-cmn-Hans': '当前状态',
-        'zh-cmn-Hant': '當前狀態'
-    };
-
-    enabledText = {
-        en: 'Plugin enabled',
-        ru: 'Плагин включен',
-        ua: 'Плагін увімкнено',
-        'zh-cmn-Hans': '插件已启用',
-        'zh-cmn-Hant': '插件已啟用'
-    };
-
-    disabledText = {
-        en: 'Plugin disabled',
-        ru: 'Плагин отключен',
-        ua: 'Плагін вимкнено',
-        'zh-cmn-Hans': '插件已停用',
-        'zh-cmn-Hant': '插件已停用'
-    };
-
-    pluginNotFoundText = {
-        en: 'Plugin not found',
-        ru: 'Плагин не найден',
-        ua: 'Плагін не знайдено',
-        'zh-cmn-Hans': '没有找到插件',
-        'zh-cmn-Hant': '沒有找到插件'
-    };
-
-    completeText = {
-        en: 'Complete setup',
-        ru: 'Завершить настройку',
-        ua: 'Завершити налаштування',
-        'zh-cmn-Hans': '设置完成',
-        'zh-cmn-Hant': '設置完成'
-    };
 }());

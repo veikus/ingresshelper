@@ -4,7 +4,7 @@
  * @version 2.0
  */
 (function() {
-    var somethingWentWrongText, inProgress, tasks;
+    var inProgress, tasks;
 
     app.taskManager = {};
 
@@ -121,7 +121,7 @@
 
             if (!img) {
                 lang = app.settings.lang(task.chat);
-                resp = somethingWentWrongText[lang] || somethingWentWrongText.en;
+                resp = app.i18n(lang, 'tasks', 'something_went_wrong');
                 app.telegram.sendMessage(task.chat, resp, null);
             } else {
                 compression = app.settings.compression(task.chat);
@@ -133,12 +133,4 @@
         });
     }
 
-    // Translations
-    somethingWentWrongText = {
-        en: 'I`m sorry. Looks like something comes really wrong. Please try again in few minutes',
-        ru: 'Ой. Что-то пошло не так. Пожалуйста, попробуйте еще раз через пару минут',
-        ua: 'Вибачте, але щось пішло не так. Будь ласка, спробуйте знову за декілька хвилин',
-        'zh-cmn-Hans': '不好意思，机器人好像出错了，请稍后再试',
-        'zh-cmn-Hant': '不好意思，機器人好像壞掉了，請稍後再試'
-    };
 }());

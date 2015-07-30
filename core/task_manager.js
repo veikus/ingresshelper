@@ -140,6 +140,11 @@
             } else {
                 compression = app.settings.compression(task.chat);
                 app.telegram.sendPhoto(task.chat, img, compression, callback);
+
+                // Rate us
+                if (app.rateUs) {
+                    app.rateUs(task.chat);
+                }
             }
 
             chrome.windows.remove(window);

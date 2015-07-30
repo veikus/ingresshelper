@@ -108,9 +108,9 @@
             isEnabled = enabled.indexOf(url) > -1;
 
             if (isEnabled) {
-                result.push(name + ': ' + app.i18n(this.lang, 'iitc', 'enabled'));
+                result.push('✅' + name);
             } else {
-                result.push(name + ': ' + app.i18n(this.lang, 'iitc', 'disabled'));
+                result.push('❎' + name);
             }
         }
 

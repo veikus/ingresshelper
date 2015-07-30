@@ -7,7 +7,7 @@ app.i18nTexts = {
 			"ua": "Ви можете вимкнути стиснення зображень (потребує більше трафіку)",
 			"zh-cmn-Hans": "你可以收到未经压缩的图片（会增加传输的数据）",
 			"zh-cmn-Hant": "你可以收到未經壓縮的圖片（會增加傳輸的數據）",
-			"fi": "Voit saada kuvat pakkaamattomina (tiedonsiirto kasvaa).",
+			"fi": "Haluaisitko kuvat pakkaamattomina? Kuvat saapuvat hiukan hitaammin, mutta ovat tarkempia.",
 			"de": "Bilder können unkomprimiert versendet werden (erhöhtes Datenvolumen).",
 			"chde": "Bilder chönd unkomprimiert gschickt werde (meh Dateverbruuch).",
 			"es": "Puedes obtener imagenes sin comprimir (aumenta la transferencia de datos)",
@@ -20,7 +20,7 @@ app.i18nTexts = {
 			"ua": "Увімкнути стиснення",
 			"zh-cmn-Hans": "启用压缩",
 			"zh-cmn-Hant": "啟用壓縮",
-			"fi": "Ota kuvien pakkaus käyttöön",
+			"fi": "Ota kuvien pakkaus käyttöön!",
 			"de": "Komprimierung aktivieren",
 			"chde": "Komprimierig aktiviere",
 			"es": "Habilitar compresión",
@@ -33,7 +33,7 @@ app.i18nTexts = {
 			"ua": "Вимкнути стиснення",
 			"zh-cmn-Hans": "停用压缩",
 			"zh-cmn-Hant": "停用壓縮",
-			"fi": "Poista kuvien pakkaus käytöstä",
+			"fi": "Ei kiitos.",
 			"de": "Komprimierung deaktivieren",
 			"chde": "Komprimierig deaktiviere",
 			"es": "Deshabilitar compresión",
@@ -49,7 +49,7 @@ app.i18nTexts = {
 			"fi": "Muutokset tallennettu.",
 			"de": "Änderungen gespeichert",
 			"chde": "Änderige speichere",
-			"es": "Cambios guardados",
+			"es": "Cambios guardados.",
 			"br": "Alterações salvas",
 			"it": "Modifiche salvate"
 		},
@@ -62,7 +62,7 @@ app.i18nTexts = {
 			"fi": "Virheellinen syöte. Yritä uudelleen.",
 			"de": "Fehlerhafte Eingabe. Bitte erneut versuchen.",
 			"chde": "Fählerhafti Iigab. Bitte no einisch probiere.",
-			"es": "Entrada incorrecta. Por favor, intenta de nuevo",
+			"es": "Entrada incorrecta. Por favor, intenta de nuevo.",
 			"br": "Entrada incorreta. Por favor, tente novamente",
 			"it": "Inserimento incorretto. Per favore, riprova."
 		}
@@ -91,7 +91,7 @@ app.i18nTexts = {
 			"de": "Idee: @veikus",
 			"chde": "Idee: @veikus",
 			"es": "Idea original: @veikus",
-			"br": " Idéia original:@veikus",
+			"br": "Idéia original:@veikus",
 			"it": "Idea originale di: @veikus"
 		},
 		"line_3": {
@@ -152,7 +152,7 @@ app.i18nTexts = {
 			"ua": "Плагін увімкнено",
 			"zh-cmn-Hans": "插件已启用",
 			"zh-cmn-Hant": "插件已啟用",
-			"fi": "Liitännäinen käytössä",
+			"fi": "Liitännäinen käytössä.",
 			"de": "Plugin aktiviert",
 			"chde": "Plugin aktiviert",
 			"es": "Plugin activado",
@@ -165,7 +165,7 @@ app.i18nTexts = {
 			"ua": "Плагін вимкнено",
 			"zh-cmn-Hans": "插件已停用",
 			"zh-cmn-Hant": "插件已停用",
-			"fi": "Liitännäinen poissa käytöstä",
+			"fi": "Liitännäinen poissa käytöstä.",
 			"de": "Plugin deaktiviert",
 			"chde": "Plugin deaktiviert",
 			"es": "Plugin desactivado",
@@ -178,10 +178,10 @@ app.i18nTexts = {
 			"ua": "Плагін не знайдено",
 			"zh-cmn-Hans": "没有找到插件",
 			"zh-cmn-Hant": "沒有找到插件",
-			"fi": "Liitännäistä ei löytynyt",
+			"fi": "Liitännäistä ei löytynyt.",
 			"de": "Plugin nicht gefunden",
 			"chde": "Plugin ned gfunde",
-			"es": "Plugin no encontrado",
+			"es": "Plugin no encontrado.",
 			"br": "Plugin não encontrado",
 			"it": "Plugin non trovato"
 		},
@@ -191,11 +191,11 @@ app.i18nTexts = {
 			"ua": "Завершити налаштування",
 			"zh-cmn-Hans": "设置完成",
 			"zh-cmn-Hant": "設置完成",
-			"fi": "Lopeta asennus",
+			"fi": "Lopeta asennus.",
 			"de": "Setup abschliessen",
 			"chde": "Setup abschlüsse",
-			"es": "Configuración completa",
-			"br": " Configuração completa",
+			"es": "Configuración completa.",
+			"br": "Configuração completa",
 			"it": "Configurazione completata"
 		}
 	},
@@ -249,7 +249,7 @@ app.i18nTexts = {
 			"de": "3 - Global",
 			"chde": "3 - Global",
 			"es": "3 - El mundo",
-			"br": " 3 - Mundial",
+			"br": "3 - Mundial",
 			"it": "3 - Tutto il Mondo"
 		},
 		"cancel": {
@@ -258,11 +258,11 @@ app.i18nTexts = {
 			"ua": "Відмінити налаштування",
 			"zh-cmn-Hans": "取消设置",
 			"zh-cmn-Hant": "取消设置",
-			"fi": "Peruuta",
+			"fi": "Peruuta.",
 			"de": "Setup abbrechen",
 			"chde": "Setup abbreche",
-			"es": "Cancelar configuración",
-			"br": " cancelar a configuração",
+			"es": "Cancelar configuración.",
+			"br": "cancelar a configuração",
 			"it": "Cancella la configurazione"
 		},
 		"cancel_previous": {
@@ -271,11 +271,12 @@ app.i18nTexts = {
 			"ua": "У вас вже є активне завдання. Ви маєте відмінити її перед створенням нової",
 			"zh-cmn-Hans": "已有任务存在，您可以取消此任务后创建新任务",
 			"zh-cmn-Hant": "已有任務存在，您可以取消此任務后創建新任務",
-			"fi": "Sinulla on jo aikavälitehtävä määritettynä. Voit peruuttaa tämän tehtävän ja luoda uuden.",
+			"fi": "Sinulla on jo aikavälitehtävä määritettynä. Voit poistaa nykyisen tehtävän ja luoda uuden.",
 			"de": "Ein Interval Task ist bereits aktiv. Vor dem erstellen eines neuen, muss der bestehende beendet werden.",
 			"chde": "En Interval Task isch scho am lauffe. Vor em erstelle vomene neue Task mues de alt abboche werde.",
-			"es": "Ya tienes una tarea de intervalo. Puedes cancelarla y crear una nueva",
-			"br": " Você já tem tarefa de intervalo. Você pode cancelar esta tarefa e criar uma nova"
+			"es": "Ya tienes una tarea de intervalo. Puedes cancelarla y crear una nueva.",
+			"br": "Você já tem tarefa de intervalo. Você pode cancelar esta tarefa e criar uma nova",
+			"it": "Hai già un comando salvato. Puoi cancellarlo e crearne uno nuovo."
 		},
 		"cancel_previous_option": {
 			"en": "Cancel previous and create new",
@@ -283,11 +284,11 @@ app.i18nTexts = {
 			"ua": "Відмінити завдання та створити нову",
 			"zh-cmn-Hans": "取消上一个任务并创建新任务",
 			"zh-cmn-Hant": "取消上一個任務并創建新任務",
-			"fi": "Peruuta edellinen ja luo uusi",
+			"fi": "Poista edellinen ja luo uusi.",
 			"de": "Aktiven Task abbrechen und neuen erstellen",
 			"chde": "De aktivi Task abbreche und en neue erstelle",
-			"es": "Cancelar la previa y configurar nueva",
-			"br": " Cancelar anterior e criar nova",
+			"es": "Cancelar la previa y configurar nueva.",
+			"br": "Cancelar anterior e criar nova",
 			"it": "Cancella la precedente e creane una nuova"
 		},
 		"timeout_setup": {
@@ -300,7 +301,8 @@ app.i18nTexts = {
 			"de": "Wie lange soll der Task aktiv sein?",
 			"chde": "Wie lang söll de Task aktiviert bliibe?",
 			"es": "¿Cúanto tiempo necesita el intervalo?",
-			"br": " Quanto tempo de intervalo você precisa?"
+			"br": "Quanto tempo de intervalo você precisa?",
+			"it": "Quanto tempo hai bisogno nell'intervallo?"
 		},
 		"pause_setup": {
 			"en": "How often do you need screenshots?",
@@ -312,7 +314,8 @@ app.i18nTexts = {
 			"de": "Wie häufig soll der Bot Screenshots senden?",
 			"chde": "Wie hüffig sött de Bot Screenshots schicke?",
 			"es": "¿Con qué frecuencia necesita las capturas de pantalla?",
-			"br": " Com que fequência você precisa de capturas de tela?"
+			"br": "Com que fequência você precisa de capturas de tela?",
+			"it": "Ogni quanto tempo hai bisogno di uno screenshot?"
 		},
 		"location_setup": {
 			"en": "Send geolocation now",
@@ -320,11 +323,11 @@ app.i18nTexts = {
 			"ua": "Надішліть геолокацію необхідної області",
 			"zh-cmn-Hans": "请发送位置坐标",
 			"zh-cmn-Hant": "請發送位置坐標",
-			"fi": "Lähetä sijainti nyt",
+			"fi": "Lähetä sijaintisi.",
 			"de": "Bitte den Standort senden",
 			"chde": "Bitte de Standort schicke",
-			"es": "Enviar geolocalización ahora",
-			"br": " Enviar geolocalização agora",
+			"es": "Envía geolocalización ahora.",
+			"br": "Enviar geolocalização agora",
 			"it": "Invia la tua posizione ora"
 		},
 		"zoom_setup": {
@@ -333,11 +336,11 @@ app.i18nTexts = {
 			"ua": "Оберіть масштаб мапи",
 			"zh-cmn-Hans": "选择放大等级",
 			"zh-cmn-Hant": "選擇放大等級",
-			"fi": "Valitse zoomaustaso",
+			"fi": "Valitse zoomaustaso.",
 			"de": "Zoom Level auswählen",
 			"chde": "Zoom Level uswähle",
-			"es": "Seleccione el nivel de zoom",
-			"br": " Escolha um nível de zoom",
+			"es": "Seleccione el nivel de zoom.",
+			"br": "Escolha um nível de zoom",
 			"it": "Seleziona il livello di zoom"
 		},
 		"incorrect_input": {
@@ -349,8 +352,8 @@ app.i18nTexts = {
 			"fi": "Virheellinen syöte.",
 			"de": "Fehlerhafte Eingabe",
 			"chde": "Fählerhafti Iigab",
-			"es": "Entrada incorrecta",
-			"br": " Entrada incorreta",
+			"es": "Entrada incorrecta.",
+			"br": "Entrada incorreta",
 			"it": "Inserimento incorretto"
 		},
 		"task_saved": {
@@ -362,8 +365,9 @@ app.i18nTexts = {
 			"fi": "Tehtävä tallennettu. Alan pian spämmimään sinua kuvankaappauksilla.",
 			"de": "Task gespeichert. Die ersten Screenshots werden bald gesendet.",
 			"chde": "Task gspeicheret. Die erschte Screenshots werdet bald gschickt.",
-			"es": "Tarea guardada. Emprezarás a recibir capturas de pantalla pronto",
-			"br": " Tarefa guardada. Você vai começar a receber screenshots em breve"
+			"es": "Tarea guardada. Emprezarás a recibir capturas de pantalla pronto.",
+			"br": "Tarefa guardada. Você vai começar a receber screenshots em breve",
+			"it": "Comando salvato. Comincerai presto a ricevere screenshot."
 		},
 		"interval_finished": {
 			"en": "Interval complete. You will receive last screenshot in few minutes",
@@ -371,11 +375,12 @@ app.i18nTexts = {
 			"ua": "Інтервал завершено. За декілька хвилин Ви отримаєте останній знімок",
 			"zh-cmn-Hans": "即将收到截屏",
 			"zh-cmn-Hant": "即將受到截屏",
-			"fi": "Aikaväli loppu. Saat viimeisen ruutukaappauksen parin minuutin sisään.",
+			"fi": "Aikaväli loppui. Saat viimeisen ruutukaappauksen parin minuutin sisään.",
 			"de": "Task abgeschlossen. Der letzte Screenshot wird in Kürze gesendet.",
 			"chde": "Task abgschlosse. De letscht Screenshot wird glii gschickt.",
 			"es": "Intervalo completo. Recibirás la última captura de pantalla en algunos minutos",
-			"br": " Intervalo completo. Você receberá a última captura de tela em poucos minutos"
+			"br": "Intervalo completo. Você receberá a última captura de tela em poucos minutos",
+			"it": "Intervallo completo. Riceverai l'ultimo screenshot in pochi minuti."
 		}
 	},
 	"lang": {
@@ -398,7 +403,7 @@ app.i18nTexts = {
 			"ua": "Будь ласка, оберіть мову, якою Вам зручніше користуватися",
 			"zh-cmn-Hans": "请选择语言",
 			"zh-cmn-Hant": "請選擇語言",
-			"fi": "Valitse kieli",
+			"fi": "Valitse kieli.",
 			"de": "Bitte Sprache auswählen",
 			"chde": "Bitte Spraach uswähle",
 			"es": "Por favor, elige tu idioma",
@@ -437,7 +442,7 @@ app.i18nTexts = {
 			"ua": "Бажаете допомогти з перекладом на інші мови? Звертайтеся до @veikus",
 			"zh-cmn-Hans": "您可以参与此机器人的本地化工作，详情请联系@veikus",
 			"zh-cmn-Hant": "您可以參與此機器人的語言翻譯，詳情請聯繫@veikus",
-			"fi": "Voit kääntää tämän botin omalle kielellesi. Lähetä viesti @veikus​ille, jos haluat osallistua kääntämiseen.",
+			"fi": "Voit kääntää tämän botin omalle kielellesi! Lähetä viesti @veikus​ille, jos haluat osallistua kääntämiseen.",
 			"de": "Du willst den Bot in eine weitere Sprache übersetzen? Sende eine Nachricht an @veikus um deine Übersetzung einzureichen.",
 			"chde": "Du wetsch de Bot in en wiiteri Spraach übersetze? Schick eifach en Nachricht an @veikus zum dini Übersetzig iireiche.",
 			"es": "Puedes traducir este bot a tu idioma. Envía un mensaje @aveikus si quieres ayudar.",
@@ -469,7 +474,7 @@ app.i18nTexts = {
 			"de": "Ok, vorheriger Befehl abgebrochen.",
 			"chde": "Ok, vorhärige Befehl abbroche.",
 			"es": "Ok, cancelé comando anterior",
-			"br": " Ok, Cancelei o comando anterior",
+			"br": "Ok, Cancelei o comando anterior",
 			"it": "Ok, ho cancellato il comando precedente"
 		},
 		"rate_us_1": {
@@ -479,17 +484,17 @@ app.i18nTexts = {
 			"de": "⭐⭐⭐⭐⭐",
 			"chde": "⭐⭐⭐⭐⭐",
 			"es": "⭐⭐⭐⭐⭐",
-			"br": " ⭐⭐⭐⭐⭐",
+			"br": "⭐⭐⭐⭐⭐",
 			"it": "⭐⭐⭐⭐⭐"
 		},
 		"rate_us_2": {
 			"en": "Please rate us in the storebot",
 			"ru": "Пожалуйста оцените нашего бота",
-			"fi": "Arvostele tämä botti @storebot​issa",
+			"fi": "Arvostele tämä botti @storebot​issa:",
 			"de": "Wir würden uns über eine Bewertung beim storebot freuen!",
 			"chde": "Mier würded eus über en bewertig bim storebot freue!",
 			"es": "Por favor califícanos en storebot",
-			"br": " Por favor, classifique-nos no storebot",
+			"br": "Por favor, classifique-nos no storebot",
 			"it": "Per favore, valutaci nello storebot"
 		},
 		"rate_us_3": {
@@ -499,7 +504,7 @@ app.i18nTexts = {
 			"de": "http://telegram.me/storebot?start=ingressmap_bot",
 			"chde": "http://telegram.me/storebot?start=ingressmap_bot",
 			"es": "http://telegram.me/storebot?start=ingressmap_bot",
-			"br": " http://telegram.me/storebot?start=ingressmap_bot",
+			"br": "http://telegram.me/storebot?start=ingressmap_bot",
 			"it": "http://telegram.me/storebot?start=ingressmap_bot"
 		}
 	},
@@ -510,7 +515,7 @@ app.i18nTexts = {
 			"ua": "Оберіть масштаб мапи",
 			"zh-cmn-Hans": "选择放大级别",
 			"zh-cmn-Hant": "選擇放大級別",
-			"fi": "Valitse zoomaustaso",
+			"fi": "Valitse zoomaustaso.",
 			"de": "Zoom Level auswählen",
 			"chde": "Zoom Level uswähle",
 			"br": "Escolha um nível de zoom",
@@ -525,7 +530,7 @@ app.i18nTexts = {
 			"fi": "Virheellinen syöte",
 			"de": "Fehlerhafte Eingabe",
 			"chde": "Fählerhafti Iigab",
-			"br": " Entrada incorreta",
+			"br": "Entrada incorreta",
 			"it": "Inserimento incorretto"
 		},
 		"task_saved": {
@@ -537,7 +542,7 @@ app.i18nTexts = {
 			"fi": "Tehtävä tallennettu. Odota hetki.",
 			"de": "Task gespeichert. Bitte einige Minuten warten.",
 			"chde": "Task gspeicheret. Bitte es paar minute warte.",
-			"br": " Tarefa guardada. Por favor, aguarde por alguns minutos",
+			"br": "Tarefa guardada. Por favor, aguarde por alguns minutos",
 			"it": "Comando salvato, Per favore, attendi qualche minuto"
 		},
 		"location_required": {
@@ -546,11 +551,11 @@ app.i18nTexts = {
 			"ua": "Надішліть геолокацію необхідної області",
 			"zh-cmn-Hans": "选择放大级别",
 			"zh-cmn-Hant": "選擇放大級別",
-			"fi": "Lähetä sijainti nyt",
+			"fi": "Lähetä sijaintisi.",
 			"de": "Bitte den Standort senden",
 			"chde": "Bitte de Standort schicke",
 			"es": "Envía geolocalización ahora.",
-			"br": " Enviar geolocalização agora",
+			"br": "Enviar geolocalização agora",
 			"it": "Manda adesso la tua posizione"
 		},
 		"options_1": {
@@ -563,7 +568,7 @@ app.i18nTexts = {
 			"de": "17 - Alle Portale",
 			"chde": "17 - Alli Portal",
 			"es": "17 - Todos los portales",
-			"br": " 17 - Todos os portais",
+			"br": "17 - Todos os portais",
 			"it": "17 - Tutti i portali"
 		},
 		"options_2": {
@@ -576,7 +581,7 @@ app.i18nTexts = {
 			"de": "16;15;14;13",
 			"chde": "16;15;14;13",
 			"es": "16;15;14;13",
-			"br": " 16; 15; 14; 13",
+			"br": "16;15;14;13",
 			"it": "16;15;14;13"
 		},
 		"options_3": {
@@ -589,7 +594,7 @@ app.i18nTexts = {
 			"de": "12;10;8;6",
 			"chde": "12;10;8;6",
 			"es": "12;10;8;6",
-			"br": " 12; 10; 8; 6",
+			"br": "12;10;8;6",
 			"it": "12;10;8;6"
 		},
 		"options_4": {
@@ -602,7 +607,7 @@ app.i18nTexts = {
 			"de": "3 - Global",
 			"chde": "3 - Global",
 			"es": "3 - Mundo",
-			"br": " 3 - Mundial",
+			"br": "3 - Mundial",
 			"it": "3 - Mondo"
 		}
 	},

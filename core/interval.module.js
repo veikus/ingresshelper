@@ -1,7 +1,7 @@
 /**
  * @file Interval setup and processing module
  * @author Artem Veikus artem@veikus.com
- * @version 2.0
+ * @version 2.2
  */
 (function() {
     var allowedTimeouts, allowedPauses, timeoutMarkup, pauseMarkup,
@@ -252,21 +252,22 @@
         '6 hours': 6 * 3600 * 1000,
         '12 hours': 12 * 3600 * 1000,
         '24 hours': 86400 * 1000,
-        '2 days': 2 * 86400 * 1000,
-        '3 days': 3 * 86400 * 1000,
-        '4 days': 4 * 86400 * 1000,
-        '1 week': 7 * 86400 * 1000,
-        '2 weeks': 14 * 86400 * 1000,
-        '3 weeks': 21 * 86400 * 1000,
-        '1 year': 365 * 86400 * 1000
+        //'2 days': 2 * 86400 * 1000,
+        //'3 days': 3 * 86400 * 1000,
+        //'4 days': 4 * 86400 * 1000,
+        //'1 week': 7 * 86400 * 1000,
+        //'2 weeks': 14 * 86400 * 1000,
+        //'3 weeks': 21 * 86400 * 1000,
+        //'1 year': 365 * 86400 * 1000
     };
 
     allowedPauses = {
-        '3 minutes': 3 * 60 * 1000,
+        //'3 minutes': 3 * 60 * 1000,
         '5 minutes': 5 * 60 * 1000,
         '10 minutes': 10 * 60 * 1000,
         '15 minutes': 15 * 60 * 1000,
         '30 minutes': 30 * 60 * 1000,
+        '45 minutes': 45 * 60 * 1000,
         '60 minutes': 3600 * 1000,
         '2 hours': 2 * 3600 * 1000,
         '4 hours': 4 * 3600 * 1000,
@@ -277,15 +278,15 @@
 
     timeoutMarkup = [
         ['1 hour', '2 hours', '3 hours'],
-        ['6 hours', '12 hours', '24 hours'],
-        ['2 days', '3 days', '4 days'],
-        ['1 week', '2 weeks', '3 weeks'],
-        ['1 year']
+        ['6 hours', '12 hours', '24 hours']
+        //['2 days', '3 days', '4 days'],
+        //['1 week', '2 weeks', '3 weeks'],
+        //['1 year']
     ];
 
     pauseMarkup = [
-        ['3 minutes', '5 minutes', '10 minutes'],
-        ['15 minutes', '30 minutes', '60 minutes'],
+        ['5 minutes', '10 minutes', '15 minutes'],
+        ['30 minutes', '45 minutes', '60 minutes'],
         ['2 hours', '4 hours', '6 hours'],
         ['12 hours', '24 hours']
     ];

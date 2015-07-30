@@ -1,5 +1,5 @@
 (function() {
-    var TOKEN = '98042950:AAHhAU0ln5zdxxSxu61DzmiF29AiewCrH8Q', // TODO: BETA
+    var TOKEN = 'INSERT_TOKEN_HERE',
         API_URL = 'https://api.telegram.org/bot' + TOKEN,
         TIMEOUT = 10,
         offset = localStorage.getItem('telegram_offset') || 0,

@@ -7,12 +7,13 @@ app.i18nTexts = {
 			"ua": "Ви можете вимкнути стиснення зображень (потребує більше трафіку)",
 			"zh-cmn-Hans": "你可以收到未经压缩的图片（会增加传输的数据）",
 			"zh-cmn-Hant": "你可以收到未經壓縮的圖片（會增加傳輸的數據）",
-			"fi": "Haluaisitko kuvat pakkaamattomina? Kuvat saapuvat hiukan hitaammin, mutta ovat tarkempia.",
+			"fi": "Haluaisitko kuvat pakkattuina? Kuvat saapuvat näin nopeammin, mutta eivät ole niin tarkkoja.",
 			"de": "Bilder können unkomprimiert versendet werden (erhöhtes Datenvolumen).",
 			"chde": "Bilder chönd unkomprimiert gschickt werde (meh Dateverbruuch).",
 			"es": "Puedes obtener imagenes sin comprimir (aumenta la transferencia de datos)",
 			"br": "Você pode obter imagens não comprimidas ( aumenta a transferência de dados)",
-			"it": "Puoi ricevere le immagini non compresse (aumento del traffico)"
+			"it": "Puoi ricevere le immagini non compresse (aumento del traffico)",
+			"ro-md": "Dumneavoastră puteți deactiva comprimarea imaginilor (E nevoie de mai mult trafic)"
 		},
 		"enable": {
 			"en": "Enable compression",
@@ -25,7 +26,8 @@ app.i18nTexts = {
 			"chde": "Komprimierig aktiviere",
 			"es": "Habilitar compresión",
 			"br": "Habilitar compactação",
-			"it": "Abilita la compressione"
+			"it": "Abilita la compressione",
+			"ro-md": "Activați comprimarea"
 		},
 		"disable": {
 			"en": "Disable compression",
@@ -38,7 +40,8 @@ app.i18nTexts = {
 			"chde": "Komprimierig deaktiviere",
 			"es": "Deshabilitar compresión",
 			"br": "Desabilitar compactação",
-			"it": "Disabilita la compressione"
+			"it": "Disabilita la compressione",
+			"ro-md": "Deactivați comprimarea"
 		},
 		"saved": {
 			"en": "Changes saved",
@@ -48,10 +51,11 @@ app.i18nTexts = {
 			"zh-cmn-Hant": "修改已保存",
 			"fi": "Muutokset tallennettu.",
 			"de": "Änderungen gespeichert",
-			"chde": "Änderige speichere",
+			"chde": "Änderige gspeicheret",
 			"es": "Cambios guardados.",
 			"br": "Alterações salvas",
-			"it": "Modifiche salvate"
+			"it": "Modifiche salvate",
+			"ro-md": "Schimbările au fost salvate"
 		},
 		"wrong_input": {
 			"en": "Incorrect input. Please try again",
@@ -64,7 +68,8 @@ app.i18nTexts = {
 			"chde": "Fählerhafti Iigab. Bitte no einisch probiere.",
 			"es": "Entrada incorrecta. Por favor, intenta de nuevo.",
 			"br": "Entrada incorreta. Por favor, tente novamente",
-			"it": "Inserimento incorretto. Per favore, riprova."
+			"it": "Inserimento incorretto. Per favore, riprova.",
+			"ro-md": "Alegerea greșită. Vă rog incercati din nou"
 		}
 	},
 	"help": {
@@ -79,7 +84,8 @@ app.i18nTexts = {
 			"chde": "Schick zerscht din Standort und wähl den es Zoom Level uus (3 - 17).",
 			"es": "Envía tu ubicación al bot, luego selecciona el zoom del mapa (3 - 17). ¡Feliz Ingressing!",
 			"br": "Envie a sua localização para o bot, em seguida, selecione o zoom do mapa (3-17).  Feliz Ingressing!",
-			"it": "Manda la tua posizione al bot e seleziona lo zoom della mappa (3 - 17). Buon divertimento!"
+			"it": "Manda la tua posizione al bot e seleziona lo zoom della mappa (3 - 17). Buon divertimento!",
+			"ro-md": "Transmiteți botului coordonatele dumneavoastră, apoi selectati nivelul de zoom, și în cîteva minute veți primi un screenshot Intel"
 		},
 		"line_2": {
 			"en": "Original idea: @veikus",
@@ -92,7 +98,8 @@ app.i18nTexts = {
 			"chde": "Idee: @veikus",
 			"es": "Idea original: @veikus",
 			"br": "Idéia original:@veikus",
-			"it": "Idea originale di: @veikus"
+			"it": "Idea originale di: @veikus",
+			"ro-md": "Idea: @veikus"
 		},
 		"line_3": {
 			"ua": "Автор українскього перекладу: @Ukrrooter",
@@ -101,7 +108,7 @@ app.i18nTexts = {
 			"fi": "Suomenkielinen käännös: @Igetin",
 			"de": "Deutsche Übersetzung: @murco",
 			"chde": "Schwiizerdütschi Übersetzig: @murco",
-			"es": "Traducción al español hecha por: @YersonPerez y colaboración de @Blooddarkness",
+			"es": "Traducción al español hecha por: @YersonPerez, @JorgeDominguez",
 			"br": "Traduzido para portugês por Sidnei Daleprani - Ingress @sd2 ; Telegram @daleprani",
 			"it": "Traduzione italiana di Marco Piccoli  (Telegram: @gible) e Max Ferrari (Telegram: @OniKoi) "
 		},
@@ -116,7 +123,8 @@ app.i18nTexts = {
 			"chde": "Sourcecode: http://github.com/veikus/ingresshelper",
 			"es": "Código fuente: http://github.com/veikus/ingresshelper",
 			"br": "código fonte: http://github.com/veikus/ingresshelper",
-			"it": "Codice sorgente: http://github.com/veikus/ingresshelper"
+			"it": "Codice sorgente: http://github.com/veikus/ingresshelper",
+			"ro-md": "Codul sursă: http://github.com/veikus/ingresshelper"
 		}
 	},
 	"iitc": {
@@ -131,7 +139,8 @@ app.i18nTexts = {
 			"chde": "IITC Plugins chönd i dem Menu konfiguriert wärde",
 			"es": "Puedes configurar los plugins de IITC desde este menú",
 			"br": "Você pode configurar  plugins do IITC neste Menu",
-			"it": "Puoi impostare i plugin IITC da questo menu"
+			"it": "Puoi impostare i plugin IITC da questo menu",
+			"ro-md": "Dumneavoastră  puteți configura plugin-urile  IITC în meniul dat"
 		},
 		"status": {
 			"en": "Current status:",
@@ -144,7 +153,8 @@ app.i18nTexts = {
 			"chde": "Jetzige Status:",
 			"es": "Estado actual:",
 			"br": "Situação atual:",
-			"it": "Stato attuale:"
+			"it": "Stato attuale:",
+			"ro-md": "Statusul actual:"
 		},
 		"enabled": {
 			"en": "Plugin enabled",
@@ -157,7 +167,8 @@ app.i18nTexts = {
 			"chde": "Plugin aktiviert",
 			"es": "Plugin activado",
 			"br": "Plugin ativado",
-			"it": "Plugin abilitato"
+			"it": "Plugin abilitato",
+			"ro-md": "Plugin-ul este activat"
 		},
 		"disabled": {
 			"en": "Plugin disabled",
@@ -170,7 +181,8 @@ app.i18nTexts = {
 			"chde": "Plugin deaktiviert",
 			"es": "Plugin desactivado",
 			"br": "Plugin desativado",
-			"it": "Plugin disabilitato"
+			"it": "Plugin disabilitato",
+			"ro-md": "Plugin-ul este desactivat"
 		},
 		"plugin_not_found": {
 			"en": "Plugin not found",
@@ -183,7 +195,8 @@ app.i18nTexts = {
 			"chde": "Plugin ned gfunde",
 			"es": "Plugin no encontrado.",
 			"br": "Plugin não encontrado",
-			"it": "Plugin non trovato"
+			"it": "Plugin non trovato",
+			"ro-md": "Plugin-ul nu a fost găsit"
 		},
 		"complete_setup": {
 			"en": "Complete setup",
@@ -196,7 +209,8 @@ app.i18nTexts = {
 			"chde": "Setup abschlüsse",
 			"es": "Configuración completa",
 			"br": "Configuração completa",
-			"it": "Configurazione completata"
+			"it": "Configurazione completata",
+			"ro-md": "Finisați configurările. "
 		}
 	},
 	"interval": {
@@ -211,7 +225,8 @@ app.i18nTexts = {
 			"chde": "17 - Alli Portal",
 			"es": "17 - Todos los portales",
 			"br": "17 - Todos os portais",
-			"it": "17 - Tutti i portali"
+			"it": "17 - Tutti i portali",
+			"ro-md": "17 - Toate portalurile"
 		},
 		"options_2": {
 			"en": "16;15;14;13",
@@ -224,7 +239,8 @@ app.i18nTexts = {
 			"chde": "16;15;14;13",
 			"es": "16;15;14;13",
 			"br": "16;15;14;13",
-			"it": "16;15;14;13"
+			"it": "16;15;14;13",
+			"ro-md": "16;15;14;13"
 		},
 		"options_3": {
 			"en": "12;10;8;6",
@@ -237,7 +253,8 @@ app.i18nTexts = {
 			"chde": "12;10;8;6",
 			"es": "12;10;8;6",
 			"br": "12;10;8;6",
-			"it": "12;10;8;6"
+			"it": "12;10;8;6",
+			"ro-md": "12;10;8;6"
 		},
 		"options_4": {
 			"en": "3 - World",
@@ -250,7 +267,8 @@ app.i18nTexts = {
 			"chde": "3 - Global",
 			"es": "3 - El mundo",
 			"br": "3 - Mundial",
-			"it": "3 - Tutto il Mondo"
+			"it": "3 - Tutto il Mondo",
+			"ro-md": "3 - Toată lumea"
 		},
 		"cancel": {
 			"en": "Cancel setup",
@@ -263,7 +281,8 @@ app.i18nTexts = {
 			"chde": "Setup abbreche",
 			"es": "Cancelar configuración.",
 			"br": "cancelar a configuração",
-			"it": "Cancella la configurazione"
+			"it": "Cancella la configurazione",
+			"ro-md": "Anulează configurarea"
 		},
 		"cancel_previous": {
 			"en": "You already have interval task. You can cancel this task and create new one",
@@ -276,7 +295,8 @@ app.i18nTexts = {
 			"chde": "En Interval Task isch scho am lauffe. Vor em erstelle vomene neue Task mues de alt abboche werde.",
 			"es": "Ya tienes una tarea de intervalo. Puedes cancelarla y crear una nueva.",
 			"br": "Você já tem tarefa de intervalo. Você pode cancelar esta tarefa e criar uma nova",
-			"it": "Hai già un comando salvato. Puoi cancellarlo e crearne uno nuovo."
+			"it": "Hai già un comando salvato. Puoi cancellarlo e crearne uno nuovo.",
+			"ro-md": "La dumneavoastră deja este o sarcină activă. E nevoie de anulat sarcina precedentă, înainte de a crea o sarcină nouă. "
 		},
 		"cancel_previous_option": {
 			"en": "Cancel previous and create new",
@@ -289,7 +309,8 @@ app.i18nTexts = {
 			"chde": "De aktivi Task abbreche und en neue erstelle",
 			"es": "Cancelar la previa y configurar nueva.",
 			"br": "Cancelar anterior e criar nova",
-			"it": "Cancella la precedente e creane una nuova"
+			"it": "Cancella la precedente e creane una nuova",
+			"ro-md": "Anulează sarcina și creați una nouă. "
 		},
 		"timeout_setup": {
 			"en": "How long do you need interval?",
@@ -302,7 +323,8 @@ app.i18nTexts = {
 			"chde": "Wie lang söll de Task aktiviert bliibe?",
 			"es": "¿Cúanto tiempo necesita el intervalo?",
 			"br": "Quanto tempo de intervalo você precisa?",
-			"it": "Quanto tempo hai bisogno nell'intervallo?"
+			"it": "Quanto tempo hai bisogno nell'intervallo?",
+			"ro-md": "Cît timp de creat screenshot-urile"
 		},
 		"pause_setup": {
 			"en": "How often do you need screenshots?",
@@ -315,7 +337,8 @@ app.i18nTexts = {
 			"chde": "Wie hüffig sött de Bot Screenshots schicke?",
 			"es": "¿Con qué frecuencia necesita las capturas de pantalla?",
 			"br": "Com que fequência você precisa de capturas de tela?",
-			"it": "Ogni quanto tempo hai bisogno di uno screenshot?"
+			"it": "Ogni quanto tempo hai bisogno di uno screenshot?",
+			"ro-md": "Cît de des a transmite screenshot-urile ?"
 		},
 		"location_setup": {
 			"en": "Send geolocation now",
@@ -328,7 +351,8 @@ app.i18nTexts = {
 			"chde": "Bitte de Standort schicke",
 			"es": "Envía geolocalización ahora.",
 			"br": "Enviar geolocalização agora",
-			"it": "Invia la tua posizione ora"
+			"it": "Invia la tua posizione ora",
+			"ro-md": "Transmiteți geolocația zonei dorite"
 		},
 		"zoom_setup": {
 			"en": "Select zoom level",
@@ -341,7 +365,8 @@ app.i18nTexts = {
 			"chde": "Zoom Level uswähle",
 			"es": "Seleccione el nivel de zoom.",
 			"br": "Escolha um nível de zoom",
-			"it": "Seleziona il livello di zoom"
+			"it": "Seleziona il livello di zoom",
+			"ro-md": "Selectați scara hărții."
 		},
 		"incorrect_input": {
 			"en": "Incorrect input",
@@ -354,7 +379,8 @@ app.i18nTexts = {
 			"chde": "Fählerhafti Iigab",
 			"es": "Entrada incorrecta.",
 			"br": "Entrada incorreta",
-			"it": "Inserimento incorretto"
+			"it": "Inserimento incorretto",
+			"ro-md": "Intrare Nevalidă. Selectați una din opțiuni"
 		},
 		"task_saved": {
 			"en": "Task saved. You will start to receive screenshots soon",
@@ -367,7 +393,8 @@ app.i18nTexts = {
 			"chde": "Task gspeicheret. Die erschte Screenshots werdet bald gschickt.",
 			"es": "Tarea guardada. Emprezarás a recibir capturas de pantalla pronto.",
 			"br": "Tarefa guardada. Você vai começar a receber screenshots em breve",
-			"it": "Comando salvato. Comincerai presto a ricevere screenshot."
+			"it": "Comando salvato. Comincerai presto a ricevere screenshot.",
+			"ro-md": "Sarcina a fost salvată. Degrabă veți începe primi screenshot-urile."
 		},
 		"interval_finished": {
 			"en": "Interval complete. You will receive last screenshot in few minutes",
@@ -380,7 +407,8 @@ app.i18nTexts = {
 			"chde": "Task abgschlosse. De letscht Screenshot wird glii gschickt.",
 			"es": "Intervalo completo. Recibirás la última captura de pantalla en algunos minutos",
 			"br": "Intervalo completo. Você receberá a última captura de tela em poucos minutos",
-			"it": "Intervallo completo. Riceverai l'ultimo screenshot in pochi minuti."
+			"it": "Intervallo completo. Riceverai l'ultimo screenshot in pochi minuti.",
+			"ro-md": "Intervalul este finisat. În scurt timp veți primi ultimul screenshot."
 		}
 	},
 	"lang": {
@@ -394,8 +422,9 @@ app.i18nTexts = {
 			"de": "🇩🇪Deutsch",
 			"chde": "🇨🇭Schwiizerdütsch",
 			"es": "🇪🇸Español",
-			"br": "🇵🇹Português",
-			"it": "🇮🇹Italiano"
+			"br": "🇵🇹🇧🇷Português",
+			"it": "🇮🇹Italiano",
+			"ro-md": "🇷🇺Româna / Moldovenească"
 		},
 		"welcome": {
 			"en": "Please choose your language",
@@ -408,7 +437,8 @@ app.i18nTexts = {
 			"chde": "Bitte Spraach uswähle",
 			"es": "Por favor, elige tu idioma",
 			"br": "Por favor, escolha o seu idioma",
-			"it": "Per favore, scegli la tua lingua"
+			"it": "Per favore, scegli la tua lingua",
+			"ro-md": "Vă rugăm, selectați limba, care vă este mai comod de utilizat. "
 		},
 		"incorrect_language": {
 			"en": "Incorrect input. Please try again",
@@ -421,7 +451,8 @@ app.i18nTexts = {
 			"chde": "Fehlerhafti Iigab. Bitte no einisch probiere.",
 			"es": "Entrada incorrecta. Por favor, inténtalo de nuevo.",
 			"br": "Entrada incorreta. Por favor, tente novamente",
-			"it": "Inserimento incorretto. Per favore, riprova."
+			"it": "Inserimento incorretto. Per favore, riprova.",
+			"ro-md": "Alegerea greșită. Vă rugăm sa selectați din opîiunile propuse ."
 		},
 		"saved": {
 			"en": "Changes saved",
@@ -434,7 +465,8 @@ app.i18nTexts = {
 			"chde": "Änderige gspeicheret.",
 			"es": "Cambios guardados.",
 			"br": "Alterações guardadas",
-			"it": "Modifiche salvate"
+			"it": "Modifiche salvate",
+			"ro-md": "Chimbprile au fost salvate."
 		},
 		"help_us": {
 			"en": "You can translate this bot to your language. Send message to @veikus if you want to participate",
@@ -447,7 +479,8 @@ app.i18nTexts = {
 			"chde": "Du wetsch de Bot in en wiiteri Spraach übersetze? Schick eifach en Nachricht an @veikus zum dini Übersetzig iireiche.",
 			"es": "Puedes traducir este bot a tu idioma. Envía un mensaje @aveikus si quieres ayudar.",
 			"br": "Você pode traduzir este bot para o seu idioma. Envie mensagem para @veikus se você quiser participar",
-			"it": "Puoi tradurre questo bot nella tua lingua, manda un messaggio a @veikus se vuoi partecipare."
+			"it": "Puoi tradurre questo bot nella tua lingua, manda un messaggio a @veikus se vuoi partecipare.",
+			"ro-md": "Doriți a ajuta cu traducerea ? Scrieți despre aceasta lui @veikus"
 		}
 	},
 	"main": {
@@ -462,7 +495,8 @@ app.i18nTexts = {
 			"chde": "De Befehl känni nöd.",
 			"es": "Comando desconocido.",
 			"br": "Comando desconhecido",
-			"it": "Comando sconosciuto"
+			"it": "Comando sconosciuto",
+			"ro-md": "Comanda necunoscută."
 		},
 		"cancelled": {
 			"en": "Ok, i cancelled previous command",
@@ -475,7 +509,8 @@ app.i18nTexts = {
 			"chde": "Ok, vorhärige Befehl abbroche.",
 			"es": "Ok, cancelé comando anterior.",
 			"br": "Ok, Cancelei o comando anterior",
-			"it": "Ok, ho cancellato il comando precedente"
+			"it": "Ok, ho cancellato il comando precedente",
+			"ro-md": "Okey,am anulat comanda precedentă. "
 		},
 		"rate_us_1": {
 			"en": "⭐⭐⭐⭐⭐",
@@ -486,7 +521,8 @@ app.i18nTexts = {
 			"chde": "⭐⭐⭐⭐⭐",
 			"es": "⭐⭐⭐⭐⭐",
 			"br": "⭐⭐⭐⭐⭐",
-			"it": "⭐⭐⭐⭐⭐"
+			"it": "⭐⭐⭐⭐⭐",
+			"ro-md": "⭐⭐⭐⭐⭐"
 		},
 		"rate_us_2": {
 			"en": "Please rate us in the storebot",
@@ -497,7 +533,8 @@ app.i18nTexts = {
 			"chde": "Mier würded eus über en bewertig bim storebot freue!",
 			"es": "Por favor califícanos en storebot",
 			"br": "Por favor, classifique-nos no storebot",
-			"it": "Per favore, valutaci nello storebot"
+			"it": "Per favore, valutaci nello storebot",
+			"ro-md": "Vă rugăm să ne evaluați în storebot."
 		},
 		"rate_us_3": {
 			"en": "http://telegram.me/storebot?start=ingressmap_bot",
@@ -508,7 +545,8 @@ app.i18nTexts = {
 			"chde": "http://telegram.me/storebot?start=ingressmap_bot",
 			"es": "http://telegram.me/storebot?start=ingressmap_bot",
 			"br": "http://telegram.me/storebot?start=ingressmap_bot",
-			"it": "http://telegram.me/storebot?start=ingressmap_bot"
+			"it": "http://telegram.me/storebot?start=ingressmap_bot",
+			"ro-md": "http://telegram.me/storebot?start=ingressmap_bot"
 		}
 	},
 	"screenshot": {
@@ -523,7 +561,8 @@ app.i18nTexts = {
 			"chde": "Zoom Level uswähle",
 			"es": "Selecciona el nivel de zoom.",
 			"br": "Escolha um nível de zoom",
-			"it": "Seleziona il livello dello zoom"
+			"it": "Seleziona il livello dello zoom",
+			"ro-md": "Selectați scara hărții"
 		},
 		"incorrect_input": {
 			"en": "Incorrect input",
@@ -536,7 +575,8 @@ app.i18nTexts = {
 			"chde": "Fählerhafti Iigab",
 			"es": "Entrada incorrecta.",
 			"br": "Entrada incorreta",
-			"it": "Inserimento incorretto"
+			"it": "Inserimento incorretto",
+			"ro-md": "Intrare Nevalidă. Selectați una din opțiuni"
 		},
 		"task_saved": {
 			"en": "Task saved. Please wait for a few minutes",
@@ -549,7 +589,8 @@ app.i18nTexts = {
 			"chde": "Task gspeicheret. Bitte es paar minute warte.",
 			"es": "Tarea guardada. Por favor espera unos minutos.",
 			"br": "Tarefa guardada. Por favor, aguarde por alguns minutos",
-			"it": "Comando salvato, Per favore, attendi qualche minuto"
+			"it": "Comando salvato, Per favore, attendi qualche minuto",
+			"ro-md": "Sarcina este salvat. După câteva minute, vei primi un screenshot"
 		},
 		"location_required": {
 			"en": "Send geolocation now",
@@ -562,7 +603,8 @@ app.i18nTexts = {
 			"chde": "Bitte de Standort schicke",
 			"es": "Envía geolocalización ahora.",
 			"br": "Enviar geolocalização agora",
-			"it": "Manda adesso la tua posizione"
+			"it": "Manda adesso la tua posizione",
+			"ro-md": "Trimite geolocația zonei dorite"
 		},
 		"options_1": {
 			"en": "17 - All portals",
@@ -575,7 +617,8 @@ app.i18nTexts = {
 			"chde": "17 - Alli Portal",
 			"es": "17 - Todos los portales",
 			"br": "17 - Todos os portais",
-			"it": "17 - Tutti i portali"
+			"it": "17 - Tutti i portali",
+			"ro-md": "17 - Toate portalurile"
 		},
 		"options_2": {
 			"en": "16;15;14;13",
@@ -588,7 +631,8 @@ app.i18nTexts = {
 			"chde": "16;15;14;13",
 			"es": "16;15;14;13",
 			"br": "16;15;14;13",
-			"it": "16;15;14;13"
+			"it": "16;15;14;13",
+			"ro-md": "16;15;14;13"
 		},
 		"options_3": {
 			"en": "12;10;8;6",
@@ -601,7 +645,8 @@ app.i18nTexts = {
 			"chde": "12;10;8;6",
 			"es": "12;10;8;6",
 			"br": "12;10;8;6",
-			"it": "12;10;8;6"
+			"it": "12;10;8;6",
+			"ro-md": "12;10;8;6"
 		},
 		"options_4": {
 			"en": "3 - World",
@@ -614,7 +659,8 @@ app.i18nTexts = {
 			"chde": "3 - Global",
 			"es": "3 - Mundo",
 			"br": "3 - Mundial",
-			"it": "3 - Mondo"
+			"it": "3 - Mondo",
+			"ro-md": "3 - Toată lumea"
 		}
 	},
 	"tasks": {
@@ -629,7 +675,8 @@ app.i18nTexts = {
 			"chde": "Tschuldigung. Öppis isch ganz lätz gloffe. Bitte in es paar Minute nomol probiere.",
 			"es": "Lo siento. Parece que algo está realmente mal. Vuelve a intentarlo en unos minutos.",
 			"br": "Desculpe. Parece que algo deu errado. Por favor, tente novamente em alguns minutos",
-			"it": "Mi dispiace. Sembra che qualcosa sia andato storto. Riprova tra qualche minuto"
+			"it": "Mi dispiace. Sembra che qualcosa sia andato storto. Riprova tra qualche minuto",
+			"ro-md": "Oh. Ceva n-a mers bine. Vă rugăm să încercați din nou în câteva minute"
 		}
 	},
 	"stats": {
@@ -641,7 +688,8 @@ app.i18nTexts = {
 			"chde": "Wartendi Tasks:",
 			"es": "Solicitud en cola:",
 			"br": "Tarefas na fila:",
-			"it": "Comandi in attesa"
+			"it": "Comandi in attesa",
+			"ro-md": "Sarcini în așteptare:"
 		}
 	}
 };

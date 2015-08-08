@@ -1,166 +1,188 @@
-(function() {
-    var TOKEN = 'INSERT_TOKEN_HERE',
-        API_URL = 'https://api.telegram.org/bot' + TOKEN,
-        TIMEOUT = 10,
-        offset = localStorage.getItem('telegram_offset') || 0,
-        chatSettings = localStorage.getItem('chatSettings') || '{}';
+var TOKEN = 'INSET_TOKEN_HERE',
+    API_URL = 'https://api.telegram.org/bot' + TOKEN,
+    TIMEOUT = 10,
+    FormData = require('form-data'),
+    https = require('https'),
+    querystring = require('querystring'),
+    request = require('request'),
+    q = require('q'),
+    offset = 0;
 
-    app.telegram = {};
+/**
+ * Send message to specified chat
+ * @param chatId {Number} Chat id
+ * @param message {String} Message
+ * @param markup {Object|undefined|null} Keyboard markup (null hides previous keyboard, undefined leaves it)
+ * @return promise
+ */
+module.exports.sendMessage = function (chatId, message, markup) {
+    var url,
+        dfd = q.defer();
 
-    /**
-     * Send message to specified chat
-     * @param chatId {Number} Chat id
-     * @param message {String} Message
-     * @param markup {Object|undefined|null} Keyboard markup (null hides previous keyboard, undefined leaves it)
-     */
-    app.telegram.sendMessage = function(chatId, message, markup) {
-        var url;
+    if (markup === null) {
+        markup = { hide_keyboard: true };
+    }
 
-        if (markup === null) {
-            markup = { hide_keyboard: true };
-        }
+    markup = JSON.stringify(markup);
+    url = API_URL + '/sendMessage';
 
-        markup = JSON.stringify(markup);
-        url = API_URL + '/sendMessage';
-
-        request('post', url, {
-            chat_id: chatId,
-            text: message,
-            disable_web_page_preview: true,
-            reply_markup: markup
-        });
-    };
-
-    /**
-     * Send photo to specified chat
-     * @param chatId {Number} Chat id
-     * @param photo {String} Base64 encrypted image
-     * @param compression {Boolean} If true image will be compressed by telegram
-     * @param callback {Function} Callback function
-     */
-    app.telegram.sendPhoto = function(chatId, photo, compression, callback) {
-        var url = API_URL + (compression ? '/sendPhoto' : '/sendDocument'),
-            params = {};
-
-        params.chat_id = chatId;
-        params[compression ? 'photo' : 'document'] = photo;
-
-        request('post', url, params, function(data) {
-            if (typeof callback === 'function') {
-                callback(data && data.ok, data.description);
-            }
-        });
-    };
-
-    /**
-     * Get new messages from server
-     * @param callback {Function} Callback function
-     */
-    app.telegram.getUpdates = function(callback) {
-        var result = [],
-            url = API_URL + '/getUpdates';
-
-        request('get', url, { timeout: TIMEOUT, offset: offset }, function(data) {
-            if (data && data.ok) {
-                data.result.forEach(function(val) {
-                    result.push(val.message);
-                    offset = val.update_id + 1;
-                    localStorage.setItem('telegram_offset', offset);
-                });
-
-                callback(result);
+    apiRequest('post', url, {
+        chat_id: chatId,
+        text: message,
+        disable_web_page_preview: true,
+        reply_markup: markup
+    })
+        .then(function(res) {
+            if (res.ok) {
+                dfd.resolve();
             } else {
-                callback(null);
+                dfd.reject({ error: res.description })
             }
         })
-    };
+        .fail(dfd.reject);
 
-    /**
-     * Request wrapper
-     * @param method {String} GET or POST
-     * @param url {String} Request url
-     * @param data {Object} Request parameters
-     * @param callback {Function} Callback function
-     */
-    function request(method, url, data, callback) {
-        var formData, i,
-            xmlhttp = new XMLHttpRequest();
+    return dfd.promise;
+};
 
-        if (typeof callback !== 'function') {
-            callback = undefined;
-        }
+/**
+ * Send photo to specified chat
+ * @param chatId {Number} Chat id
+ * @param photo {String} Url to image file or telegram image id
+ * @param compression {Boolean} If true image will be compressed by telegram
+ * @return promise
+ */
+module.exports.sendPhoto = function (chatId, photo, compression) {
+    var url = API_URL + (compression ? '/sendPhoto' : '/sendDocument'),
+        isImageUrl = photo.indexOf('http') === 0,
+        form = new FormData(),
+        dfd = q.defer();
 
-        if (method.toLowerCase() === 'post') {
-            formData = new FormData();
+    form.append('chat_id', chatId);
+    form.append(compression ? 'photo' : 'document', isImageUrl ? request(photo) : photo);
 
-            for (i in data) {
-                if (!data.hasOwnProperty(i)) {
-                    continue;
-                }
+    try {
+        // form.submit crashed several times
+        form.submit(url, submitCb);
+    } catch(e) {
+        dfd.reject({ error: 'form.submit crashed' });
+    }
 
-                if (i === 'photo') {
-                    formData.append('photo', dataURItoBlob(data[i]), 'screen.png');
-                } else if (i === 'document') {
-                    formData.append('document', dataURItoBlob(data[i]), 'screen.png');
-                } else {
-                    formData.append(i, data[i]);
-                }
-            }
-        } else {
-            url += '?' + serialize(data);
-        }
+    function submitCb(err, res) {
+        var responseText = '';
 
-        xmlhttp.onreadystatechange = function() {
-            var result = null;
+        res.setEncoding('utf8');
 
-            if (xmlhttp.readyState !== 4) {
-                return;
-            }
+        res.on('data', function (chunk) {
+            responseText += chunk;
+        });
+
+        res.on('end', function() {
+            var photo;
 
             try {
-                result = JSON.parse(xmlhttp.responseText);
+                responseText = JSON.parse(responseText);
+                photo = responseText.ok && responseText.result.photo && responseText.result.photo.pop();
+
+                if (photo && photo.file_id) {
+                    dfd.resolve({ fileId: photo.file_id });
+                } else {
+                    dfd.reject({ error: 'No file id' });
+                }
             } catch (e) {
+                dfd.reject({ error: 'JSON parse error: ' + e });
+            }
+        });
+
+        res.on('error', function() {
+            dfd.reject({ error: 'Request error' });
+        });
+    }
+
+    return dfd.promise;
+};
+
+/**
+ * Get new messages from server
+ * @param callback {Function} Callback function
+ */
+module.exports.getUpdates = function (callback) {
+    var url = API_URL + '/getUpdates';
+
+    apiRequest('get', url, { timeout: TIMEOUT, offset: offset })
+        .then(function(data) {
+            var result = [];
+
+            if (data && data.ok) {
+                data.result.forEach(function (val) {
+                    result.push(val.message);
+                    offset = val.update_id + 1;
+                });
+            }
+
+            callback(result);
+        })
+        .fail(function() {
+            callback(null);
+        });
+};
+
+/**
+ * Request wrapper
+ * @param method {String} GET or POST
+ * @param url {String} Request url
+ * @param data {Object} Request parameters
+ * @return promise
+ */
+function apiRequest(method, url, data) {
+    var req, options,
+        dfd = q.defer();
+
+    options = {
+        hostname: 'api.telegram.org',
+        port: 443,
+        path: url,
+        method: method
+    };
+
+    data = querystring.stringify(data);
+
+    if (method.toLowerCase() === 'post') {
+        options.headers = {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Length': data.length
+        };
+    } else {
+        options.path += '?' + data;
+    }
+
+    req = https.request(options, function(res) {
+        var responseText = '';
+
+        res.setEncoding('utf8');
+
+        res.on('data', function (chunk) {
+            responseText += chunk;
+        });
+
+        res.on('end', function() {
+            try {
+                dfd.resolve(JSON.parse(responseText));
+            } catch (e) {
+                dfd.reject({ error: 'JSON parse error: ' + e, text: responseText });
                 console.error('JSON parse error: ' + e);
             }
+        })
+    });
 
-            if (callback) {
-                callback(result);
-            }
-        };
+    req.on('error', function(e) {
+        dfd.reject({ error: 'Request error: ' + e.message });
+    });
 
-        xmlhttp.open(method, url, true);
-        xmlhttp.send(formData);
+    if (method.toLowerCase() === 'post') {
+        req.write(data);
     }
 
-    function serialize(obj) {
-        var p,
-            str = [];
+    req.end();
 
-        for (p in obj)
-            if (obj.hasOwnProperty(p)) {
-                str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
-            }
-
-        return str.join('&');
-    }
-
-    /**
-     * Convert base64 to raw binary data held in a string
-     */
-    function dataURItoBlob(dataURI) {
-        var mimeString, ab, ia, i,
-            byteString = atob(dataURI.split(',')[1]);
-
-        // separate out the mime component
-        mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-        // write the bytes of the string to an ArrayBuffer
-        ab = new ArrayBuffer(byteString.length);
-        ia = new Uint8Array(ab);
-        for (i = 0; i < byteString.length; i++) {
-            ia[i] = byteString.charCodeAt(i);
-        }
-
-        return new Blob([ab], {type: mimeString});
-    }
-}());
+    return dfd.promise;
+}

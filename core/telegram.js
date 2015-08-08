@@ -103,10 +103,11 @@ module.exports.sendPhoto = function (chatId, photo, compression) {
 
 /**
  * Get new messages from server
- * @param callback {Function} Callback function
+ * @return promise
  */
-module.exports.getUpdates = function (callback) {
-    var url = API_URL + '/getUpdates';
+module.exports.getUpdates = function () {
+    var url = API_URL + '/getUpdates',
+        dfd = q.defer();
 
     apiRequest('get', url, { timeout: TIMEOUT, offset: offset })
         .then(function(data) {
@@ -119,11 +120,13 @@ module.exports.getUpdates = function (callback) {
                 });
             }
 
-            callback(result);
+            dfd.resolve(result);
         })
         .fail(function() {
-            callback(null);
+            dfd.reject(null);
         });
+
+    return dfd.promise;
 };
 
 /**

@@ -1,12 +1,12 @@
 /**
  * @file i18n
  * @author Artem Veikus artem@veikus.com
- * @version 2.0
+ * @version 3.0
  */
 (function() {
-    var texts = app.i18nTexts;
+    var texts = require(__dirname + '/../i18n/i18n.js');
 
-    app.i18n = function(lang, module, key) {
+    module.exports = function(lang, module, key) {
         var result;
 
         result = texts[module] && texts[module][key] && texts[module][key][lang];

@@ -1,28 +1,23 @@
 /**
  * @file Primary bot file
  * @author Artem Veikus artem@veikus.com
- * @version 2.0
+ * @version 3.0
  */
-var app = {};
 
 (function() {
-    var modules = {},
+    var i18n = require(__dirname + '/i18n_extend.js'),
+        telegram = require(__dirname + '/telegram.js'),
+        settings = require(__dirname + '/settings.js'),
+        modules = {},
         activeModule = {};
 
-    window.onload = init;
+    init();
 
     /**
      * Modules initialization
      */
     function init() {
-        Object.keys(app.modules).forEach(function(name) {
-            var module = app.modules[name],
-                magicWord = module.initMessage;
-
-            if (magicWord) {
-                modules[magicWord] = module;
-            }
-        });
+        modules['/help'] = require(__dirname + '/help.module.js');
 
         getUpdates();
     }
@@ -31,17 +26,24 @@ var app = {};
      * Receive updates from telegram
      */
     function getUpdates() {
-        app.telegram.getUpdates(function(messages) {
-            if (messages) {
+        telegram
+            .getUpdates()
+            .then(function(messages) {
                 messages.forEach(function(message) {
-                    processMessage(message);
+
+                    try {
+                        processMessage(message);
+                    } catch(e) {
+                        console.log('Message processing error', e);
+                        console.log(e.stack);
+                    }
                 });
 
                 getUpdates();
-            } else {
+            })
+            .fail(function() {
                 setTimeout(getUpdates, 5000);
-            }
-        });
+            })
     }
 
     /**
@@ -55,7 +57,8 @@ var app = {};
 
         // Hack for a new users
         if (text === '/start') {
-            app.telegram.sendMessage(chat, 'Thank you for installing me. Send me location to get intel screenshot');
+            // todo replace with i18n
+            telegram.sendMessage(chat, 'Thank you for installing me. Send me location to get intel screenshot');
             text = '/language';
         }
 
@@ -68,8 +71,8 @@ var app = {};
         else if (text === '/cancel') {
             delete activeModule[chat];
 
-            lang = app.settings.lang(chat);
-            app.telegram.sendMessage(chat, app.i18n(lang, 'main', 'cancelled'), null);
+            lang = settings.lang(chat);
+            telegram.sendMessage(chat, i18n(lang, 'main', 'cancelled'), null);
         }
 
         // If user has another active module
@@ -77,15 +80,15 @@ var app = {};
             activeModule[chat].onMessage(message);
         }
 
-        // In other case check is it location
-        else if (message.location && app.modules.screenshot) {
-            activeModule[chat] = new app.modules.screenshot(message);
+        // In other case check is it location TODO
+        else if (message.location && modules['/screenshot']) {
+            activeModule[chat] = new modules['/screenshot'](message);
         }
 
         // Or maybe user made a mistake (do not reply in groups)
         else if (chat > -1) {
-            lang = app.settings.lang(chat);
-            app.telegram.sendMessage(chat, app.i18n(lang, 'main', 'unknown_command'), null);
+            lang = settings.lang(chat);
+            telegram.sendMessage(chat, i18n(lang, 'main', 'unknown_command'), null);
         }
 
         // Cleanup complete modules

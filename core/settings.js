@@ -1,10 +1,18 @@
 /**
  * @file Settings getters/setters
  * @author Artem Veikus artem@veikus.com
- * @version 2.0
+ * @version 3.0
  */
 (function() {
-    app.settings = {};
+    var localStorage = {
+        getItem: function() {
+            return undefined;
+        },
+
+        setItem: function() {
+            return true;
+        }
+    };
 
     /**
      * Chat settings
@@ -12,7 +20,7 @@
      * @param lang {String} Set user language
      * @returns {String|null} Current language code (or null if not defined)
      */
-    app.settings.lang = function(id, lang) {
+    module.exports.lang = function(id, lang) {
         var settings = localStorage.getItem('settings__chat_' + id);
 
         if (settings) {
@@ -35,7 +43,7 @@
      * @param value {Boolean} Set compression value
      * @returns {Boolean} Value of compression setting
      */
-    app.settings.compression = function(id, value) {
+    module.exports.compression = function(id, value) {
         var settings = localStorage.getItem('settings__chat_' + id);
 
         if (settings) {
@@ -58,7 +66,7 @@
      * @param value {Array} Set new plugins list
      * @returns {Array} Enabled plugins list
      */
-    app.settings.plugins = function(id, value) {
+    module.exports.plugins = function(id, value) {
         var settings = localStorage.getItem('settings__chat_' + id);
 
         if (settings) {

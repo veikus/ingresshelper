@@ -1,11 +1,12 @@
 /**
  * @file Help module
  * @author Artem Veikus artem@veikus.com
- * @version 2.0
+ * @version 3.0
  */
 (function() {
-    app.modules = app.modules || {};
-    app.modules.help = Help;
+    var i18n = require(__dirname + '/i18n_extend.js'),
+        telegram = require(__dirname + '/telegram.js'),
+        settings = require(__dirname + '/settings.js');
 
     Help.initMessage = '/help';
 
@@ -22,16 +23,17 @@
      */
     Help.prototype.onMessage = function (message) {
         var chat = message.chat.id,
-            lang = app.settings.lang(chat),
+            lang = settings.lang(chat),
             resp = [];
 
-        resp.push(app.i18n(lang, 'help', 'line_1'));
-        resp.push(app.i18n(lang, 'help', 'line_2'));
-        resp.push(app.i18n(lang, 'help', 'line_3'));
-        resp.push(app.i18n(lang, 'help', 'line_4'));
+        resp.push(i18n(lang, 'help', 'line_1'));
+        resp.push(i18n(lang, 'help', 'line_2'));
+        resp.push(i18n(lang, 'help', 'line_3'));
+        resp.push(i18n(lang, 'help', 'line_4'));
 
         this.complete = true;
-        app.telegram.sendMessage(chat, resp.join('\n'), null);
+        telegram.sendMessage(chat, resp.join('\n'), null);
     };
-    
+
+    module.exports = Help;
 }());

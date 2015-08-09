@@ -17,10 +17,14 @@
      * Modules initialization
      */
     function init() {
-        modules['/help'] = require(__dirname + '/help.module.js');
-        modules['/screenshot'] = require(__dirname + '/screenshot.module.js');
-        modules['/stats'] = require(__dirname + '/stats.module.js');
-        modules['/language'] = require(__dirname + '/lang.module.js');
+        var magicWord, module,
+            list = ['help.module.js', 'screenshot.module.js', 'stats.module.js', 'lang.module.js'];
+
+        list.forEach(function(fileName) {
+            module = require(__dirname + '/' + fileName);
+            magicWord = module.initMessage;
+            modules[magicWord] = module;
+        });
 
         getUpdates();
     }

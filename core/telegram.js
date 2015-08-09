@@ -6,6 +6,7 @@ var TOKEN = 'INSET_TOKEN_HERE',
     querystring = require('querystring'),
     request = require('request'),
     q = require('q'),
+    fs = require('fs'),
     offset = 0;
 
 /**
@@ -47,18 +48,17 @@ module.exports.sendMessage = function (chatId, message, markup) {
 /**
  * Send photo to specified chat
  * @param chatId {Number} Chat id
- * @param photo {String} Url to image file or telegram image id
+ * @param photo {String} Path to image file
  * @param compression {Boolean} If true image will be compressed by telegram
  * @return promise
  */
 module.exports.sendPhoto = function (chatId, photo, compression) {
     var url = API_URL + (compression ? '/sendPhoto' : '/sendDocument'),
-        isImageUrl = photo.indexOf('http') === 0,
         form = new FormData(),
         dfd = q.defer();
 
     form.append('chat_id', chatId);
-    form.append(compression ? 'photo' : 'document', isImageUrl ? request(photo) : photo);
+    form.append(compression ? 'photo' : 'document', fs.createReadStream(photo));
 
     try {
         // form.submit crashed several times

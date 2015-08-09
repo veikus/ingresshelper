@@ -18,6 +18,7 @@
      */
     function init() {
         modules['/help'] = require(__dirname + '/help.module.js');
+        modules['/screenshot'] = require(__dirname + '/screenshot.module.js');
 
         getUpdates();
     }

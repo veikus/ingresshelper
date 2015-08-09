@@ -1,11 +1,13 @@
 /**
  * @file Screenshot task creation module
  * @author Artem Veikus artem@veikus.com
- * @version 2.0
+ * @version 3.0
  */
 (function() {
-    app.modules = app.modules || {};
-    app.modules.screenshot = Screenshot;
+    var i18n = require(__dirname + '/i18n_extend.js'),
+        telegram = require(__dirname + '/telegram.js'),
+        settings = require(__dirname + '/settings.js'),
+        taskManager = require(__dirname + '/task_manager.js');
 
     Screenshot.initMessage = '/screenshot';
 
@@ -15,7 +17,7 @@
      */
     function Screenshot(message) {
         this.chat = message.chat.id;
-        this.lang = app.settings.lang(this.chat);
+        this.lang = settings.lang(this.chat);
         this.location = null;
         this.onMessage(message);
     }
@@ -24,16 +26,15 @@
      * @param message {object} Telegram message object
      */
     Screenshot.prototype.onMessage = function (message) {
-        var resp, markup, zoom,
-            keyboard = [],
+        var resp, markup, zoom, keyboard,
             text = message.text,
             location = message.location;
 
         keyboard = [
-            app.i18n(this.lang, 'interval', 'options_1').split(';'),
-            app.i18n(this.lang, 'interval', 'options_2').split(';'),
-            app.i18n(this.lang, 'interval', 'options_3').split(';'),
-            app.i18n(this.lang, 'interval', 'options_4').split(';')
+            i18n(this.lang, 'interval', 'options_1').split(';'),
+            i18n(this.lang, 'interval', 'options_2').split(';'),
+            i18n(this.lang, 'interval', 'options_3').split(';'),
+            i18n(this.lang, 'interval', 'options_4').split(';')
         ];
 
         markup = {
@@ -44,12 +45,12 @@
         // Step 1
         if (location && location.latitude && location.longitude) {
             this.location = location;
-            resp = app.i18n(this.lang, 'screenshot', 'zoom_setup');
-            app.telegram.sendMessage(this.chat, resp, markup);
+            resp = i18n(this.lang, 'screenshot', 'zoom_setup');
+            telegram.sendMessage(this.chat, resp, markup);
             return;
         } else if (!this.location) {
-            resp = app.i18n(this.lang, 'screenshot', 'location_required');
-            app.telegram.sendMessage(this.chat, resp, null);
+            resp = i18n(this.lang, 'screenshot', 'location_required');
+            telegram.sendMessage(this.chat, resp, null);
             return;
         }
 
@@ -58,27 +59,29 @@
         if (zoom && zoom >= 3 && zoom <= 17) {
             this.complete = true;
 
-            app.taskManager.add({
+            taskManager.add({
                 chat: this.chat,
                 location: this.location,
                 zoom: zoom
             });
 
-            resp = app.i18n(this.lang, 'screenshot', 'task_saved');
-            app.telegram.sendMessage(this.chat, resp, null);
+            resp = i18n(this.lang, 'screenshot', 'task_saved');
+            telegram.sendMessage(this.chat, resp, null);
 
             // Stats
-            if (app.modules.stats) {
-                app.modules.stats.trackScreenshot({
-                    chat: this.chat,
-                    zoom: zoom,
-                    location: this.location
-                });
-            }
+            // TODO: Replace with db record
+            //if (app.modules.stats) {
+            //    app.modules.stats.trackScreenshot({
+            //        chat: this.chat,
+            //        zoom: zoom,
+            //        location: this.location
+            //    });
+            //}
         } else {
-            resp = app.i18n(this.lang, 'screenshot', 'incorrect_input');
-            app.telegram.sendMessage(this.chat, resp, markup);
+            resp = i18n(this.lang, 'screenshot', 'incorrect_input');
+            telegram.sendMessage(this.chat, resp, markup);
         }
     };
 
+    module.exports = Screenshot;
 }());

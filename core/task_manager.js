@@ -1,34 +1,33 @@
 /**
  * @file Task processing module
  * @author Artem Veikus artem@veikus.com
- * @version 2.0
+ * @version 3.0
  */
 (function() {
-    var inProgress, tasks;
-
-    app.taskManager = {};
+    var inProgress, tasks,
+        i18n = require(__dirname + '/i18n_extend.js'),
+        telegram = require(__dirname + '/telegram.js'),
+        settings = require(__dirname + '/settings.js'),
+        express = require('express'),
+        expressApp = express();
 
     /**
      * Add task to queue
      * @param options {object} Task options
      * @param callback {Function} Function that will be called after telegram sent response
      */
-    app.taskManager.add = function(options, callback) {
+    module.exports.add = function(options, callback) {
         options = JSON.parse(JSON.stringify(options)); // TODO: Find better way to clone objects
         options.callback = callback;
         tasks.push(options);
-        saveTasks();
-
-        if (!inProgress) {
-            startNextTask();
-        }
+        // TODO: Save task in DB
     };
 
     /**
      * Return task length count
      * @returns {Number} Tasks count
      */
-    app.taskManager.queueLength = function() {
+    module.exports.queueLength = function() {
         var count = tasks ? tasks.length : 0;
 
         if (inProgress) {
@@ -38,118 +37,66 @@
         return count;
     };
 
+    tasks = []; // TODO: Load tasks from DB
 
-    tasks = localStorage.getItem('task_manager__tasks');
+    // Local server to communicate with phantom
+    expressApp.get('/get-task', function(req, res) {
+        var plugins, lang, resp, latitude, longitude;
 
-    if (tasks) {
-        tasks = JSON.parse(tasks);
-    } else {
-        tasks = [];
-    }
-
-    chrome.runtime.onMessage.addListener(function(params, sender, callback) {
-        var plugins,
-            action = params && params.action;
-
-        switch (action) {
-            case 'complete':
-                setTimeout(makeScreenshot, 5000); // Give time for iitc modules to finish their actions
-                break;
-
-            case 'getExtScripts':
-                if (inProgress) {
-                    plugins = app.settings.plugins(inProgress.chat);
-                    plugins.forEach(function(val, k) {
-                        plugins[k] = location.origin + '/' + val;
-                    });
-
-                    callback(plugins);
-                }
-                break;
+        if (inProgress) {
+            // TODO: Mark previous task as failed in DB
+            lang = settings.lang(inProgress.chat);
+            resp = i18n(lang, 'tasks', 'something_went_wrong');
+            telegram.sendMessage(inProgress.chat, resp, null);
         }
+
+        inProgress = tasks.pop();
+
+        // If no more tasks
+        if (!inProgress) {
+            res.send(204);
+            return;
+        }
+
+        plugins = settings.plugins(inProgress.chat);
+        plugins.forEach(function(val, k) {
+            plugins[k] = location.origin + '/' + val;
+        });
+        inProgress.plugins = plugins;
+
+
+        latitude = inProgress.location.latitude;
+        longitude = inProgress.location.longitude;
+        inProgress.url = 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=' + inProgress.zoom;
+
+        inProgress.fileName = 'task-' + new Date().getTime();
+
+        if (inProgress.zoom <= 7) {
+            inProgress.timeout = 3 * 60 * 1000;
+        } else {
+            inProgress.timeout = 2 * 60 * 1000;
+        }
+
+        res.send(JSON.stringify(inProgress));
     });
 
-    startNextTask();
+    expressApp.get('/complete-task', function(req, res) {
+        var compression;
 
-
-    function saveTasks() {
-        var json = JSON.stringify(tasks);
-        localStorage.setItem('task_manager__tasks', json);
-    }
-
-    /**
-     * Creates intel tab
-     */
-    function startNextTask() {
-        var latitude, longitude, timeout, url, isFullScreen,
-            task = tasks.shift();
-
-        if (!task) {
+        if (!inProgress) {
+            res.sendStatus(400);
             return;
         }
 
-        inProgress = task;
-        latitude = task.location.latitude;
-        longitude = task.location.longitude;
-        url = 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=' + task.zoom;
-        isFullScreen = localStorage.getItem('fullscreen');
+        // TODO: Mark task as finished
 
-        // Set higher timeout for L7+ portals
-        if (task.zoom <= 7) {
-            timeout = 3 * 60 * 1000;
-        } else {
-            timeout = 2 * 60 * 1000;
-        }
+        compression = settings.compression(inProgress.chat);
+        telegram.sendPhoto(inProgress.chat, inProgress.fileName, compression);
 
-        chrome.windows.create({ url: url, type: 'popup' }, function(window) {
-            task.windowId = window.id;
-            task.timeoutId = setTimeout(makeScreenshot, timeout);
+        inProgress = null;
+        res.sendStatus(200);
+    });
 
-            if (isFullScreen) {
-                chrome.windows.update(window.id, { state: 'fullscreen' });
-            }
-        });
-    }
-
-    /**
-     * Makes screenshot and finishes task
-     */
-    function makeScreenshot() {
-        var window, callback,
-            task = inProgress;
-
-        // If timeout and message both triggered
-        if (!task) {
-            return;
-        }
-
-        inProgress = false;
-        window = task.windowId;
-        callback = task.callback;
-
-        clearTimeout(task.timeoutId);
-        saveTasks();
-
-        chrome.tabs.captureVisibleTab(window, { format: 'png' }, function(img) {
-            var compression, lang, resp;
-
-            if (!img) {
-                lang = app.settings.lang(task.chat);
-                resp = app.i18n(lang, 'tasks', 'something_went_wrong');
-                app.telegram.sendMessage(task.chat, resp, null);
-            } else {
-                compression = app.settings.compression(task.chat);
-                app.telegram.sendPhoto(task.chat, img, compression, callback);
-
-                // Rate us
-                if (app.rateUs) {
-                    app.rateUs(task.chat);
-                }
-            }
-
-            chrome.windows.remove(window);
-            startNextTask();
-        });
-    }
+    expressApp.listen(9999);
 
 }());

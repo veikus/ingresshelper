@@ -1,14 +1,14 @@
 /**
  * @file Language setup module
  * @author Artem Veikus artem@veikus.com
- * @version 2.0
+ * @version 3.0
  */
 (function() {
     var languages,
+        i18n = require(__dirname + '/i18n_extend.js'),
+        telegram = require(__dirname + '/telegram.js'),
+        settings = require(__dirname + '/settings.js'),
         markup = {};
-
-    app.modules = app.modules || {};
-    app.modules.lang = Lang;
 
     Lang.initMessage = '/language';
 
@@ -20,10 +20,10 @@
         var resp;
 
         this.chat = message.chat.id;
-        this.lang = app.settings.lang(this.chat);
+        this.lang = settings.lang(this.chat);
 
-        resp = app.i18n(this.lang, 'lang', 'welcome');
-        app.telegram.sendMessage(this.chat, resp, markup);
+        resp = i18n(this.lang, 'lang', 'welcome');
+        telegram.sendMessage(this.chat, resp, markup);
     }
 
     /**
@@ -36,34 +36,22 @@
 
         if (languages[text]) {
             lang = languages[text];
-            resp = app.i18n(lang, 'lang', 'saved');
+            resp = i18n(lang, 'lang', 'saved');
             resp += '\n\n';
-            resp += app.i18n(lang, 'lang', 'help_us');
+            resp += i18n(lang, 'lang', 'help_us');
 
-            app.settings.lang(this.chat, lang);
+            settings.lang(this.chat, lang);
 
             this.complete = true;
-            app.telegram.sendMessage(this.chat, resp, null);
+            telegram.sendMessage(this.chat, resp, null);
         } else {
-            resp = app.i18n(this.lang, 'lang', 'incorrect_language');
-            app.telegram.sendMessage(this.chat, resp);
+            resp = i18n(this.lang, 'lang', 'incorrect_language');
+            telegram.sendMessage(this.chat, resp);
         }
     };
 
     // Markup generator
-    languages = {};
-
-    (function() {
-        var key, val,
-            all = app.i18nTexts.lang.title; // Hack
-
-        for (key in all) {
-            if (all.hasOwnProperty(key)) {
-                val = all[key];
-                languages[val] = key;
-            }
-        }
-    }());
+    languages = i18n.getLanguages();
 
     markup.one_time_keyboard = true;
     markup.resize_keyboard = true;
@@ -72,4 +60,6 @@
     Object.keys(languages).forEach(function(lang) {
         markup.keyboard.push([lang]);
     });
+
+    module.exports = Lang;
 }());

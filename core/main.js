@@ -19,6 +19,8 @@
     function init() {
         modules['/help'] = require(__dirname + '/help.module.js');
         modules['/screenshot'] = require(__dirname + '/screenshot.module.js');
+        modules['/stats'] = require(__dirname + '/stats.module.js');
+        modules['/language'] = require(__dirname + '/lang.module.js');
 
         getUpdates();
     }

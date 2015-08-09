@@ -1,19 +1,15 @@
 /**
  * @file Statistic calculation module
  * @author Artem Veikus artem@veikus.com
- * @version 2.1
+ * @version 3.0
  */
 (function() {
-    var screenshotsData;
-
-    app.modules = app.modules || {};
-    app.modules.stats = Stats;
+    var i18n = require(__dirname + '/i18n_extend.js'),
+        telegram = require(__dirname + '/telegram.js'),
+        settings = require(__dirname + '/settings.js'),
+        taskManager = require(__dirname + '/task_manager.js');
 
     Stats.initMessage = '/stats';
-
-    // Initialization
-    screenshotsData = localStorage.getItem('stats__screenshots');
-    screenshotsData = screenshotsData ? JSON.parse(screenshotsData) : [];
 
     /**
      * @param message {object} Telegram message object
@@ -21,7 +17,7 @@
      */
     function Stats(message) {
         this.chat = message.chat.id;
-        this.lang = app.settings.lang(this.chat);
+        this.lang = settings.lang(this.chat);
         this.complete = true;
 
         this.onMessage(message);
@@ -33,32 +29,10 @@
     Stats.prototype.onMessage = function (message) {
         var result = [];
 
-        if (app.taskManager) {
-            // todo translation
-            result.push('Tasks in queue: ' + app.taskManager.queueLength());
-        }
+        result.push(i18n(this.lang, 'stats', 'tasks_in_queue') + taskManager.queueLength());
 
-        app.telegram.sendMessage(this.chat, result.join('\n\r'), null);
+        telegram.sendMessage(this.chat, result.join('\n\r'), null);
     };
 
-    /**
-     * Saves screenshot requests statistics
-     * @param task {object}
-     * @param task.chat {Number} Chat id
-     * @param task.location {Object} Longitude and latitude
-     * @param task.zoom {Number} Zoom value
-     */
-    Stats.trackScreenshot = function(task) {
-        screenshotsData.push({
-            ts: new Date(),
-            chat: task.chat,
-            zoom: task.zoom,
-            location: {
-                latitude: task.location.latitude,
-                longitude: task.location.longitude
-            }
-        });
-
-        localStorage.setItem('stats__screenshots', JSON.stringify(screenshotsData));
-    }
+    module.exports = Stats;
 }());

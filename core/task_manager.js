@@ -9,6 +9,7 @@
         telegram = require(__dirname + '/telegram.js'),
         settings = require(__dirname + '/settings.js'),
         express = require('express'),
+        path = require('path'),
         expressApp = express();
 
     /**
@@ -40,8 +41,13 @@
     tasks = []; // TODO: Load tasks from DB
 
     // Local server to communicate with phantom
+    expressApp.use('/iitc', express.static(__dirname + '/../ice_based_server/iitc'));
+    expressApp.use('/client', express.static(__dirname + '/../ice_based_server/client'));
+
     expressApp.get('/get-task', function(req, res) {
         var plugins, lang, resp, latitude, longitude;
+
+        res.setHeader('Access-Control-Allow-Origin', '*');
 
         if (inProgress) {
             // TODO: Mark previous task as failed in DB
@@ -54,7 +60,7 @@
 
         // If no more tasks
         if (!inProgress) {
-            res.send(204);
+            res.sendStatus(204);
             return;
         }
 
@@ -69,7 +75,7 @@
         longitude = inProgress.location.longitude;
         inProgress.url = 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=' + inProgress.zoom;
 
-        inProgress.fileName = 'task-' + new Date().getTime();
+        inProgress.fileName = path.resolve(__dirname + '/../screenshots/task-' + new Date().getTime() + '.png');
 
         if (inProgress.zoom <= 7) {
             inProgress.timeout = 3 * 60 * 1000;
@@ -82,6 +88,8 @@
 
     expressApp.get('/complete-task', function(req, res) {
         var compression;
+
+        res.setHeader('Access-Control-Allow-Origin', '*');
 
         if (!inProgress) {
             res.sendStatus(400);

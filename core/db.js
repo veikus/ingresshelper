@@ -1,4 +1,4 @@
-`var q = require('q'),
+var q = require('q'),
     mysql = require('mysql'),
     sqlString = require('mysql/lib/protocol/SqlString'),
     pool = mysql.createPool({
@@ -17,6 +17,7 @@
         }
     });
 
+// USERS
 function getUsers() {
     var dfd = q.defer();
 
@@ -62,10 +63,55 @@ function updateUser(params) {
     return dfd.promise;
 }
 
-function getPlugins(params) {
+// ITTC
+function getIITCPlugins() {
+    var dfd = q.defer();
 
+    pool.query('SELECT * from iitc_plugins', function(err, rows) {
+        if (err) {
+            console.log('getIITCPlugins', err);
+            dfd.reject();
+        } else {
+            dfd.resolve(rows);
+        }
+    });
+
+    return dfd.promise;
+}
+
+function createIITCRow(params) {
+    var dfd = q.defer();
+
+    pool.query('INSERT INTO iitc_plugins SET ?', params, function(err, rows) {
+        if (err) {
+            console.log('createIITCRow', err);
+            dfd.reject();
+        } else {
+            dfd.resolve();
+        }
+    });
+
+    return dfd.promise;
+}
+
+function updateIITCRow(params) {
+    var dfd = q.defer();
+
+    pool.query('UPDATE iitc_plugins SET ? WHERE chat = ?', [params, params.chat], function(err, rows) {
+        if (err) {
+            console.log('updateIITCRow', err);
+            dfd.reject();
+        } else {
+            dfd.resolve();
+        }
+    });
+
+    return dfd.promise;
 }
 
 module.exports.getUsers = getUsers;
 module.exports.createUser = createUser;
 module.exports.updateUser = updateUser;
+module.exports.getIITCPlugins = getIITCPlugins;
+module.exports.createIITCRow = createIITCRow;
+module.exports.updateIITCRow = updateIITCRow;

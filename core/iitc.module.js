@@ -12,14 +12,14 @@
     IITC.initMessage = '/iitc';
 
     plugins = {
-        'IITC': 'iitc/total-conversion-build.user.js',
-        'Missions': 'iitc/missions.user.js',
-        'Show portal weakness': 'iitc/show-portal-weakness.user.js',
-        'Player tracker': 'iitc/player-tracker.user.js',
-        'Portal names': 'iitc/portal-names.user.js',
-        'Portal level numbers': 'iitc/portal-level-numbers.user.js',
-        'Show the direction of links': 'iitc/link-show-direction.user.js',
-        'Fix Google Map offset in China': 'iitc/fix-googlemap-china-offset.user.js'
+        'IITC': { file: 'total-conversion-build.user.js', id: 'iitc' },
+        'Missions': { file: 'missions.user.js', id: 'missions' },
+        'Show portal weakness': { file: 'show-portal-weakness.user.js', id: 'portal_weakness' },
+        'Player tracker': { file: 'player-tracker.user.js', id: 'player_tracker' },
+        'Portal names': { file: 'portal-names.user.js', id: 'portal_names' },
+        'Portal level numbers': { file: 'portal-level-numbers.user.js', id: 'portal_levels' },
+        'Show the direction of links': { file: 'link-show-direction.user.js', id: 'link_directions' },
+        'Fix Google Map offset in China': { file: 'fix-googlemap-china-offset.user.js', id: 'china_offset' }
     };
 
     /**
@@ -49,7 +49,7 @@
      * @param message {object} Telegram message object
      */
     IITC.prototype.onMessage = function (message) {
-        var index, isEnabled, url, resp, temp,
+        var index, isEnabled, plugin, resp, temp,
             text = message.text,
             enabled = settings.plugins(this.chat);
 
@@ -59,8 +59,8 @@
             this.complete = true;
             telegram.sendMessage(this.chat, '👍', null); // thumbs up
         } else if (plugins[text]) {
-            url = plugins[text];
-            index = enabled.indexOf(url);
+            plugin = plugins[text];
+            index = enabled.indexOf(plugin.id);
             isEnabled = index > -1;
 
             if (isEnabled) {
@@ -70,11 +70,11 @@
                     enabled.splice(index, 1);
                 }
             } else {
-                if (enabled.length === 0 && url !== plugins.IITC) {
-                    enabled.push(plugins.IITC);
+                if (enabled.length === 0 && text !== 'IITC') {
+                    enabled.push(plugins.IITC.id);
                 }
 
-                enabled.push(url);
+                enabled.push(plugin.id);
             }
 
             settings.plugins(this.chat, enabled);
@@ -92,7 +92,7 @@
      * @returns {String} String with modules names and their statuses
      */
     IITC.prototype.getCurrentStatus = function() {
-        var name, url, isEnabled,
+        var name, plugin, isEnabled,
             result = [],
             enabled = settings.plugins(this.chat);
 
@@ -103,8 +103,8 @@
                 continue;
             }
 
-            url = plugins[name];
-            isEnabled = enabled.indexOf(url) > -1;
+            plugin = plugins[name];
+            isEnabled = enabled.indexOf(plugin.id) > -1;
 
             if (isEnabled) {
                 result.push('✅' + name);

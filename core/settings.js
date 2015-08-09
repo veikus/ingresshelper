@@ -5,16 +5,32 @@
  */
 var q = require('q'),
     db = require(__dirname + '/db.js'),
-    users = {};
-
+    users = {},
+    plugins = {};
 
 function getUsers() {
     var dfd = q.defer();
 
     db.getUsers()
         .then(function(data) {
-            data.forEach(function(user) {
-                users[user.chat] = user;
+            data.forEach(function(row) {
+                users[row.chat] = row;
+            });
+
+            dfd.resolve();
+        })
+        .fail(dfd.reject);
+
+    return dfd.promise;
+}
+
+function getIITCPlugins() {
+    var dfd = q.defer();
+
+    db.getIITCPlugins()
+        .then(function(data) {
+            data.forEach(function(row) {
+                plugins[row.chat] = row;
             });
 
             dfd.resolve();
@@ -56,14 +72,47 @@ function updateUsers() {
     })
 }
 
+function updateIITCPlugins() {
+    var list = Object.keys(plugins);
+
+    list.forEach(function(id) {
+        var row = plugins[id];
+
+        if (!row._updated) {
+            return;
+        }
+
+        if (row._new) {
+            delete row._new;
+            delete row._updated;
+
+            db
+                .createIITCRow(row)
+                .fail(function() {
+                    row._new = true;
+                    row._updated = true;
+                });
+        } else {
+            delete row._updated;
+
+            db
+                .updateIITCRow(row)
+                .fail(function() {
+                    row._updated = true;
+                });
+        }
+    })
+}
+
 setInterval(function() {
     updateUsers();
+    updateIITCPlugins();
     console.log('Db updated');
 }, 60 * 1000);
 
 
 module.exports.init = function(cb) {
-    q.all([getUsers()])
+    q.all([getUsers(), getIITCPlugins()])
         .then(function() {
             if (cb) {
                 cb();
@@ -166,5 +215,39 @@ module.exports.compression = function (id, value) {
  * @returns {Array} Enabled plugins list
  */
 module.exports.plugins = function (id, value) {
-    return [];
+    var settings, allPlugins,
+        result = [];
+
+    // TODO get from iitc.module.js
+    allPlugins = ['iitc', 'missions', 'portal_weakness', 'player_tracker', 'portal_names', 'portal_levels',
+        'link_directions', 'china_offset'];
+
+    if (!plugins[id]) {
+        plugins[id] = { chat: id, _new: true };
+    }
+
+    settings = plugins[id];
+
+    if (value) {
+        // Generate new set of data based on value
+        settings._updated = true;
+
+        allPlugins.forEach(function(plugin) {
+            settings[plugin] = false;
+        });
+
+        value.forEach(function(plugin) {
+            settings[plugin] = true;
+        });
+
+        plugins[id] = settings;
+    }
+
+    Object.keys(settings).forEach(function(plugin) {
+        if (allPlugins.indexOf(plugin) > -1 && settings[plugin]) {
+            result.push(plugin);
+        }
+    });
+
+    return result;
 };

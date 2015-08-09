@@ -1,0 +1,10 @@
+{
+  "ignoreSslErrors": true,
+  "webSecurityEnabled": false,
+  "localToRemoteUrlAccessEnabled": true,
+  "sslProtocol": "any",
+  "cookiesFile": "tmp/cookies.txt",
+  "offlineStoragePath": "tmp/localStorage.txt",
+  "diskCacheEnabled": true,
+  "maxDiskCacheSize": 51200
+}

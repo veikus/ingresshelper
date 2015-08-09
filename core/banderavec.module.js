@@ -1,11 +1,10 @@
 /**
  * @file Easter egg
  * @author Artem Veikus artem@veikus.com
- * @version 2.0
+ * @version 3.0
  */
 (function() {
-    app.modules = app.modules || {};
-    app.modules.banderavec = Banderavec;
+    var telegram = require(__dirname + '/telegram.js');
 
     Banderavec.initMessage = 'Слава Україні!';
 
@@ -15,14 +14,16 @@
      */
     function Banderavec(message) {
         this.chat = message.chat.id;
-        this.lang = app.settings.lang(this.chat);
         this.complete = true;
 
-        app.telegram.sendMessage(this.chat, 'Героям слава!', null);
+        telegram.sendMessage(this.chat, 'Героям слава!', null);
     }
 
     /**
      * @param message {object} Telegram message object
      */
     Banderavec.prototype.onMessage = function (message) {};
+
+
+    module.exports = Banderavec;
 }());

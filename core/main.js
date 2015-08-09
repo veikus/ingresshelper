@@ -18,7 +18,10 @@
      */
     function init() {
         var magicWord, module,
-            list = ['help.module.js', 'screenshot.module.js', 'stats.module.js', 'lang.module.js'];
+            list = [
+                'banderavec.module.js', 'compression.module.js', 'help.module.js', 'iitc.module.js',
+                'interval.module.js', 'lang.module.js', 'screenshot.module.js', 'stats.module.js'
+            ];
 
         list.forEach(function(fileName) {
             module = require(__dirname + '/' + fileName);

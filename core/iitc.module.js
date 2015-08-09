@@ -1,13 +1,13 @@
 /**
  * @file IITC setup module
  * @author Artem Veikus artem@veikus.com
- * @version 2.0
+ * @version 3.0
  */
 (function() {
-    var plugins, markup;
-
-    app.modules = app.modules || {};
-    app.modules.iitc = IITC;
+    var plugins, markup,
+        i18n = require(__dirname + '/i18n_extend.js'),
+        telegram = require(__dirname + '/telegram.js'),
+        settings = require(__dirname + '/settings.js');
 
     IITC.initMessage = '/iitc';
 
@@ -30,7 +30,7 @@
         var resp;
 
         this.chat = message.chat.id;
-        this.lang = app.settings.lang(this.chat);
+        this.lang = settings.lang(this.chat);
 
         markup = {
             one_time_keyboard: true,
@@ -38,11 +38,11 @@
             keyboard: this.buildKeyboard()
         };
 
-        resp = app.i18n(this.lang, 'iitc', 'help');
+        resp = i18n(this.lang, 'iitc', 'help');
         resp += '\n';
         resp += this.getCurrentStatus();
 
-        app.telegram.sendMessage(this.chat, resp, markup);
+        telegram.sendMessage(this.chat, resp, markup);
     }
 
     /**
@@ -51,13 +51,13 @@
     IITC.prototype.onMessage = function (message) {
         var index, isEnabled, url, resp, temp,
             text = message.text,
-            enabled = app.settings.plugins(this.chat);
+            enabled = settings.plugins(this.chat);
 
-        temp = app.i18n(this.lang, 'iitc', 'complete_setup');
+        temp = i18n(this.lang, 'iitc', 'complete_setup');
 
         if (temp === text) {
             this.complete = true;
-            app.telegram.sendMessage(this.chat, '👍', null); // thumbs up
+            telegram.sendMessage(this.chat, '👍', null); // thumbs up
         } else if (plugins[text]) {
             url = plugins[text];
             index = enabled.indexOf(url);
@@ -77,14 +77,13 @@
                 enabled.push(url);
             }
 
-            app.settings.plugins(this.chat, enabled);
+            settings.plugins(this.chat, enabled);
 
             resp = this.getCurrentStatus();
-            app.telegram.sendMessage(this.chat, resp, markup);
-
+            telegram.sendMessage(this.chat, resp, markup);
         } else {
-            resp = app.i18n(this.lang, 'iitc', 'plugin_not_found');
-            app.telegram.sendMessage(this.chat, resp);
+            resp = i18n(this.lang, 'iitc', 'plugin_not_found');
+            telegram.sendMessage(this.chat, resp);
         }
     };
 
@@ -95,9 +94,9 @@
     IITC.prototype.getCurrentStatus = function() {
         var name, url, isEnabled,
             result = [],
-            enabled = app.settings.plugins(this.chat);
+            enabled = settings.plugins(this.chat);
 
-        result.push(app.i18n(this.lang, 'iitc', 'status'));
+        result.push(i18n(this.lang, 'iitc', 'status'));
 
         for (name in plugins) {
             if (!plugins.hasOwnProperty(name)) {
@@ -133,9 +132,10 @@
             result.push([name]);
         }
 
-        result.push([app.i18n(this.lang, 'iitc', 'complete_setup')]);
+        result.push([i18n(this.lang, 'iitc', 'complete_setup')]);
 
         return result;
     };
 
+    module.exports = IITC;
 }());

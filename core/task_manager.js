@@ -24,6 +24,7 @@ module.exports.add = function (options) {
     options.status = 'new';
     options.latitude = options.location.latitude;
     options.longitude = options.location.longitude;
+    options.created = new Date().getTime();
 
     delete options.location.latitude;
     delete options.location.longitude;
@@ -76,6 +77,7 @@ setTimeout(function() {
             params.interval = true;
         }
 
+        params.created = task.created;
         params.chat = task.chat;
         params.status = task.status;
         params.latitude = task.latitude;

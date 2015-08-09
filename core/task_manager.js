@@ -3,24 +3,32 @@
  * @author Artem Veikus artem@veikus.com
  * @version 3.0
  */
-var inProgress, tasks,
+var tasks,
     i18n = require(__dirname + '/i18n_extend.js'),
     telegram = require(__dirname + '/telegram.js'),
     settings = require(__dirname + '/settings.js'),
+    db = require(__dirname + '/db.js'),
+    iitc = require(__dirname + '/iitc.module.js'),
     express = require('express'),
     path = require('path'),
-    expressApp = express();
+    expressApp = express(),
+    currentTask = -1;
 
 /**
  * Add task to queue
  * @param options {object} Task options
- * @param callback {Function} Function that will be called after telegram sent response
  */
-module.exports.add = function (options, callback) {
+module.exports.add = function (options) {
     options = JSON.parse(JSON.stringify(options)); // TODO: Find better way to clone objects
-    options.callback = callback;
+
+    options.status = 'new';
+    options.latitude = options.location.latitude;
+    options.longitude = options.location.longitude;
+
+    delete options.location.latitude;
+    delete options.location.longitude;
+
     tasks.push(options);
-    // TODO: Save task in DB
 };
 
 /**
@@ -28,79 +36,127 @@ module.exports.add = function (options, callback) {
  * @returns {Number} Tasks count
  */
 module.exports.queueLength = function () {
-    var count = tasks ? tasks.length : 0;
+    var count = 0;
 
-    if (inProgress) {
-        ++count;
-    }
+    tasks.forEach(function(task) {
+        if (task.status === 'new') {
+            ++count;
+        }
+    });
 
     return count;
 };
 
-tasks = []; // TODO: Load tasks from DB
+// Asynchronously load data from db
+tasks = [];
+
+db
+    .getIncompleteTasks()
+    .then(function(data) {
+        data.forEach(function(task) {
+            tasks.push(task);
+        })
+    });
+
+// Save data in DB
+setTimeout(function() {
+    tasks.forEach(function(task, i) {
+        var method,
+            params = {};
+
+        if (task.id && task.status === 'new') {
+            return;
+        }
+
+        if (task.id) {
+            params.id = task.id;
+        }
+
+        if (task.interval) {
+            params.interval = true;
+        }
+
+        params.chat = task.chat;
+        params.status = task.status;
+        params.latitude = task.latitude;
+        params.longitude = task.longitude;
+        params.zoom = task.zoom;
+
+        method = task.id ? db.updateTask(params) : db.createTask(params);
+
+        method.then(function(id) {
+            task.id = id;
+
+            if (task.status !== 'new') {
+                tasks[i] = null;
+            }
+        });
+    });
+}, 60 * 1000);
 
 // Local server to communicate with phantom
+expressApp.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+});
+
 expressApp.use('/iitc', express.static(__dirname + '/../ice_based_server/iitc'));
 expressApp.use('/client', express.static(__dirname + '/../ice_based_server/client'));
 
 expressApp.get('/get-task', function (req, res) {
-    var plugins, lang, resp, latitude, longitude;
+    var plugins, lang, resp, latitude, longitude, task, file;
 
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    // If previous task is not finished - mark it as failed
+    if (tasks[currentTask] && tasks[currentTask].status === 'new') {
+        tasks[currentTask].status = 'error';
 
-    if (inProgress) {
-        // TODO: Mark previous task as failed in DB
-        lang = settings.lang(inProgress.chat);
+        lang = settings.lang(tasks[currentTask].chat);
         resp = i18n(lang, 'tasks', 'something_went_wrong');
-        telegram.sendMessage(inProgress.chat, resp, null);
+        telegram.sendMessage(tasks[currentTask].chat, resp, null);
     }
 
-    inProgress = tasks.pop();
-
-    // If no more tasks
-    if (!inProgress) {
+    if (!tasks[currentTask + 1]) {
+        // If no more tasks
         res.sendStatus(204);
         return;
     }
 
-    plugins = settings.plugins(inProgress.chat);
-    plugins.forEach(function (val, k) {
-        plugins[k] = location.origin + '/' + val;
+    ++currentTask;
+    task = tasks[currentTask];
+
+    plugins = settings.plugins(task.chat);
+    plugins = iitc.idToName(plugins).forEach(function (val, k) {
+        plugins[k] = 'http://localhost/iitc/' + val;
     });
-    inProgress.plugins = plugins;
+    task.plugins = plugins;
 
+    latitude = task.latitude;
+    longitude = task.longitude;
+    task.url = 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=' + task.zoom;
 
-    latitude = inProgress.location.latitude;
-    longitude = inProgress.location.longitude;
-    inProgress.url = 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=' + inProgress.zoom;
+    file = __dirname + '/../screenshots/task_' + task.chat + '_' + new Date().getTime() + '.png';
+    task.fileName = path.resolve(file);
 
-    inProgress.fileName = path.resolve(__dirname + '/../screenshots/task-' + new Date().getTime() + '.png');
-
-    if (inProgress.zoom <= 7) {
-        inProgress.timeout = 3 * 60 * 1000;
+    if (task.zoom <= 7) {
+        task.timeout = 3 * 60 * 1000;
     } else {
-        inProgress.timeout = 2 * 60 * 1000;
+        task.timeout = 2 * 60 * 1000;
     }
 
-    res.send(JSON.stringify(inProgress));
+    res.send(JSON.stringify(task));
 });
 
 expressApp.get('/complete-task', function (req, res) {
-    var compression;
+    var compression, task;
 
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    task = tasks[currentTask];
+    task.status = 'ok';
 
-    if (!inProgress) {
-        res.sendStatus(400);
-        return;
-    }
+    compression = settings.compression(task.chat);
+    telegram.sendPhoto(task.chat, task.fileName, compression);
 
-    // TODO: Mark task as finished
+    // TODO: Track send status and block users who blacklisted bot
 
-    compression = settings.compression(inProgress.chat);
-    telegram.sendPhoto(inProgress.chat, inProgress.fileName, compression);
-
-    inProgress = null;
     res.sendStatus(200);
 });
 

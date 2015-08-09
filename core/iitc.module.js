@@ -137,5 +137,20 @@
         return result;
     };
 
+    // Convert array of plugins id's to array of filenames
+    IITC.idToName = function(list) {
+        var result = [];
+
+        Object.keys(plugins).forEach(function(name) {
+            var plugin = plugins[name];
+
+            if (list.indexOf(plugin.id) > -1) {
+                result.push(plugin.file);
+            }
+        });
+
+        return result;
+    };
+
     module.exports = IITC;
 }());

@@ -3,13 +3,113 @@
  * @author Artem Veikus artem@veikus.com
  * @version 3.0
  */
-var localStorage = {
-    getItem: function () {
-        return undefined;
-    },
+var q = require('q'),
+    db = require(__dirname + '/db.js'),
+    users = {};
 
-    setItem: function () {
-        return true;
+
+function getUsers() {
+    var dfd = q.defer();
+
+    db.getUsers()
+        .then(function(data) {
+            data.forEach(function(user) {
+                users[user.chat] = user;
+            });
+
+            dfd.resolve();
+        })
+        .fail(dfd.reject);
+
+    return dfd.promise;
+}
+
+function updateUsers() {
+    var list = Object.keys(users);
+
+    list.forEach(function(id) {
+        var user = users[id];
+
+        if (!user._updated) {
+            return;
+        }
+
+        if (user._new) {
+            delete user._new;
+            delete user._updated;
+
+            db
+                .createUser(user)
+                .fail(function() {
+                    user._new = true;
+                    user._updated = true;
+                });
+        } else {
+            delete user._updated;
+
+            db
+                .updateUser(user)
+                .fail(function() {
+                    user._updated = true;
+                });
+        }
+    })
+}
+
+setInterval(function() {
+    updateUsers();
+    console.log('Db updated');
+}, 60 * 1000);
+
+
+module.exports.init = function(cb) {
+    q.all([getUsers()])
+        .then(function() {
+            if (cb) {
+                cb();
+            }
+        })
+        .fail(function() {
+            console.log('INIT FAILED');
+        })
+};
+
+module.exports.profile = function(id, params) {
+    var profile;
+
+    if (!users[id]) {
+        users[id] = { chat: id, _new: true };
+    }
+
+    profile = users[id];
+
+    if (params) {
+        if (profile.first_name !== params.first_name) {
+            profile.first_name =  params.first_name;
+            profile._updated = true;
+        }
+
+        if (profile.last_name !== params.last_name) {
+            profile.last_name =  params.last_name;
+            profile._updated = true;
+        }
+
+        if (profile.title !== params.title) {
+            profile.title =  params.title;
+            profile._updated = true;
+        }
+
+        if (profile.username !== params.username) {
+            profile.username =  params.username;
+            profile._updated = true;
+        }
+    }
+
+    return {
+        first_name: profile.first_name,
+        last_name: profile.last_name,
+        title: profile.title,
+        username: profile.username
     }
 };
 
@@ -20,20 +120,20 @@ var localStorage = {
  * @returns {String|null} Current language code (or null if not defined)
  */
 module.exports.lang = function (id, lang) {
-    var settings = localStorage.getItem('settings__chat_' + id);
+    var settings;
 
-    if (settings) {
-        settings = JSON.parse(settings);
-    } else {
-        settings = {};
+    if (!users[id]) {
+        users[id] = { chat: id, _new: true };
     }
+
+    settings = users[id];
 
     if (lang) {
         settings.language = lang;
-        localStorage.setItem('settings__chat_' + id, JSON.stringify(settings));
+        settings._updated = true;
     }
 
-    return settings && settings.language || null;
+    return settings.language || null;
 };
 
 /**
@@ -43,20 +143,20 @@ module.exports.lang = function (id, lang) {
  * @returns {Boolean} Value of compression setting
  */
 module.exports.compression = function (id, value) {
-    var settings = localStorage.getItem('settings__chat_' + id);
+    var settings;
 
-    if (settings) {
-        settings = JSON.parse(settings);
-    } else {
-        settings = {};
+    if (!users[id]) {
+        users[id] = { chat: id, _new: true };
     }
+
+    settings = users[id];
 
     if (typeof (value) === 'boolean') {
         settings.compression = value;
-        localStorage.setItem('settings__chat_' + id, JSON.stringify(settings));
+        settings._updated = true;
     }
 
-    return settings && settings.hasOwnProperty('compression') ? settings.compression : true;
+    return settings.hasOwnProperty('compression') ? settings.compression : true;
 };
 
 /**
@@ -66,18 +166,5 @@ module.exports.compression = function (id, value) {
  * @returns {Array} Enabled plugins list
  */
 module.exports.plugins = function (id, value) {
-    var settings = localStorage.getItem('settings__chat_' + id);
-
-    if (settings) {
-        settings = JSON.parse(settings);
-    } else {
-        settings = {};
-    }
-
-    if (value) {
-        settings.plugins = value;
-        localStorage.setItem('settings__chat_' + id, JSON.stringify(settings));
-    }
-
-    return settings && settings.plugins || [];
+    return [];
 };

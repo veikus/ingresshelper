@@ -29,7 +29,7 @@
             modules[magicWord] = module;
         });
 
-        getUpdates();
+        settings.init(getUpdates);
     }
 
     /**
@@ -64,6 +64,14 @@
         var lang,
             chat = message.chat.id,
             text = message.text;
+
+        // Save user data
+        settings.profile(chat, {
+            first_name: message.chat.first_name || '',
+            last_name: message.chat.last_name || '',
+            title: message.chat.title || '',
+            username: message.chat.username || ''
+        });
 
         // Hack for a new users
         if (text === '/start') {

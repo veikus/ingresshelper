@@ -7,38 +7,74 @@ var allowedTimeouts, allowedPauses, timeoutMarkup, pauseMarkup, intervals,
     i18n = require(__dirname + '/i18n_extend.js'),
     telegram = require(__dirname + '/telegram.js'),
     settings = require(__dirname + '/settings.js'),
-    taskManager = require(__dirname + '/task_manager.js');
+    taskManager = require(__dirname + '/task_manager.js'),
+    db = require(__dirname + '/db.js');
 
 Interval.initMessage = '/interval';
 
-// TODO: Load from DB
+// Asynchronously load data from db
 intervals = [];
+
+db
+    .getActiveIntervals()
+    .then(function(data) {
+        data.forEach(function(interval) {
+            intervals.push(interval);
+        })
+    });
+
+// Save data in DB
+setInterval(function() {
+    intervals.forEach(function(interval, i) {
+        var method;
+
+        if (!interval.id) {
+            method = db.createInterval(interval);
+        } else if (interval._updated) {
+            method = db.updateInterval(interval);
+        } else {
+            return;
+        }
+
+        method.then(function(id) {
+            interval._updated = false;
+
+            if (id) {
+                interval.id = id;
+            }
+
+            if (interval.id && interval.complete) {
+                interval[i] = null;
+            }
+        })
+    });
+}, 60 * 1000);
 
 setInterval(function () {
     var lang,
         ts = new Date().getTime();
 
     intervals.forEach(function (task, k) {
-        if (!task) {
+        if (!task || task.complete) {
             return;
         }
 
-        // TODO: Check in inactive users list
-
         if (task.nextPhotoAt <= ts) {
-            taskManager.add(task);
             task.nextPhotoAt = ts + task.pause;
+            task.interval = true;
+            task._updated = true;
+
+            taskManager.add(task);
         }
 
         if (task.shutdownTime <= ts) {
             lang = settings.lang(task.chat);
-
             telegram.sendMessage(task.chat, i18n(lang, 'interval', 'interval_finished'));
-            delete(intervals[k]);
+
+            task.complete = true;
+            task._updated = true;
         }
     });
-
-    saveIntervals();
 }, 30000);
 
 /**
@@ -60,7 +96,7 @@ function Interval(message) {
  * @param message {object} Telegram message object
  */
 Interval.prototype.onMessage = function (message) {
-    var zoom, temp,
+    var zoom, temp, i,
         text = message.text,
         location = message.location;
 
@@ -75,8 +111,12 @@ Interval.prototype.onMessage = function (message) {
     // Active task warning
     temp = i18n(this.lang, 'interval', 'cancel_previous_option');
     if (this.hasTask && text === temp) {
-        delete intervals[this.findActiveTask()];
-        saveIntervals();
+        i = this.findActiveTask();
+
+        if (i !== -1) {
+            intervals[i].complete = true;
+            intervals[i]._updated = true;
+        }
 
         this.hasTask = false;
         this.sendMessage('timeout');
@@ -126,12 +166,13 @@ Interval.prototype.onMessage = function (message) {
             chat: this.chat,
             timeout: this.timeout,
             pause: this.pause,
-            location: this.location,
+            latitude: this.location.latitude,
+            longitude: this.location.longitude,
             zoom: this.zoom,
+            created: new Date().getTime(),
             shutdownTime: new Date().getTime() + this.timeout,
             nextPhotoAt: new Date().getTime()
         });
-        saveIntervals();
 
         this.sendMessage('complete');
     } else if (!this.zoom) {
@@ -217,20 +258,13 @@ Interval.prototype.findActiveTask = function () {
         chat = this.chat;
 
     intervals.forEach(function (interval, i) {
-        if (interval && interval.chat === chat) {
+        if (interval && !interval.complete && interval.chat === chat) {
             result = i;
         }
     });
 
     return result;
 };
-
-/**
- * Save intervals in localStorage
- */
-function saveIntervals() {
-    // TODO: Db
-}
 
 // Translations
 allowedTimeouts = {

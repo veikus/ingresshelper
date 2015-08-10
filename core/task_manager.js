@@ -11,6 +11,7 @@ var tasks,
     iitc = require(__dirname + '/iitc.module.js'),
     express = require('express'),
     path = require('path'),
+    util = require('util'),
     expressApp = express(),
     currentTask = -1;
 
@@ -19,15 +20,10 @@ var tasks,
  * @param options {object} Task options
  */
 module.exports.add = function (options) {
-    options = JSON.parse(JSON.stringify(options)); // TODO: Find better way to clone objects
+    options = util._extend({}, options);
 
     options.status = 'new';
-    options.latitude = options.location.latitude;
-    options.longitude = options.location.longitude;
     options.created = new Date().getTime();
-
-    delete options.location.latitude;
-    delete options.location.longitude;
 
     tasks.push(options);
 };
@@ -60,7 +56,7 @@ db
     });
 
 // Save data in DB
-setTimeout(function() {
+setInterval(function() {
     tasks.forEach(function(task, i) {
         var method,
             params = {};
@@ -87,9 +83,9 @@ setTimeout(function() {
         method = task.id ? db.updateTask(params) : db.createTask(params);
 
         method.then(function(id) {
-            task.id = id;
-
-            if (task.status !== 'new') {
+            if (task.status === 'new') {
+                task.id = id;
+            } else {
                 tasks[i] = null;
             }
         });

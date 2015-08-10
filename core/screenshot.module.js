@@ -61,7 +61,8 @@
 
             taskManager.add({
                 chat: this.chat,
-                location: this.location,
+                latitude: this.location.latitude,
+                longitude: this.location.longitude,
                 zoom: zoom
             });
 

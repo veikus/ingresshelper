@@ -20,12 +20,15 @@ var tasks,
  * @param options {object} Task options
  */
 module.exports.add = function (options) {
-    options = util._extend({}, options);
-
-    options.status = 'new';
-    options.created = new Date().getTime();
-
-    tasks.push(options);
+    tasks.push({
+        chat: options.chat,
+        latitude: options.latitude,
+        longitude: options.longitude,
+        zoom: options.zoom,
+        interval: options.interval || false,
+        status: 'new',
+        created: new Date().getTime()
+    });
 };
 
 /**
@@ -58,29 +61,13 @@ db
 // Save data in DB
 setInterval(function() {
     tasks.forEach(function(task, i) {
-        var method,
-            params = {};
+        var method;
 
         if (task.id && task.status === 'new') {
             return;
         }
 
-        if (task.id) {
-            params.id = task.id;
-        }
-
-        if (task.interval) {
-            params.interval = true;
-        }
-
-        params.created = task.created;
-        params.chat = task.chat;
-        params.status = task.status;
-        params.latitude = task.latitude;
-        params.longitude = task.longitude;
-        params.zoom = task.zoom;
-
-        method = task.id ? db.updateTask(params) : db.createTask(params);
+        method = task.id ? db.updateTask(task) : db.createTask(task);
 
         method.then(function(id) {
             if (task.status === 'new') {

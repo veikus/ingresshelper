@@ -47,7 +47,12 @@ function getUsers() {
 }
 
 function createUser(params) {
-    var dfd = q.defer();
+    var allowed,
+        dfd = q.defer();
+
+    allowed = ['chat', 'first_name', 'last_name', 'title', 'username', 'screenshots_requested', 'first_activity',
+        'last_activity', 'language', 'compression'];
+    params = filterFields(params, allowed);
 
     pool.query('INSERT INTO users SET ?', params, function(err, rows) {
         if (err) {
@@ -62,9 +67,15 @@ function createUser(params) {
 }
 
 function updateUser(params) {
-    var dfd = q.defer();
+    var allowed,
+        dfd = q.defer(),
+        chat = params.chat;
 
-    pool.query('UPDATE users SET ? WHERE chat = ?', [params, params.chat], function(err, rows) {
+    allowed = ['first_name', 'last_name', 'title', 'username', 'screenshots_requested', 'first_activity',
+        'last_activity', 'language', 'compression'];
+    params = filterFields(params, allowed);
+
+    pool.query('UPDATE users SET ? WHERE chat = ?', [params, chat], function(err, rows) {
         if (err) {
             console.log('updateUser', err);
             dfd.reject();
@@ -93,7 +104,12 @@ function getIITCPlugins() {
 }
 
 function createIITCRow(params) {
-    var dfd = q.defer();
+    var allowed,
+        dfd = q.defer();
+
+    allowed = ['chat', 'iitc', 'missions', 'portal_weakness', 'player_tracker', 'portal_names', 'portal_levels',
+        'link_directions', 'china_offset'];
+    params = filterFields(params, allowed);
 
     pool.query('INSERT INTO iitc_plugins SET ?', params, function(err, rows) {
         if (err) {
@@ -108,9 +124,15 @@ function createIITCRow(params) {
 }
 
 function updateIITCRow(params) {
-    var dfd = q.defer();
+    var allowed,
+        dfd = q.defer(),
+        chat = params.chat;
 
-    pool.query('UPDATE iitc_plugins SET ? WHERE chat = ?', [params, params.chat], function(err, rows) {
+    allowed = ['iitc', 'missions', 'portal_weakness', 'player_tracker', 'portal_names', 'portal_levels',
+        'link_directions', 'china_offset'];
+    params = filterFields(params, allowed);
+
+    pool.query('UPDATE iitc_plugins SET ? WHERE chat = ?', [params, chat], function(err, rows) {
         if (err) {
             console.log('updateIITCRow', err);
             dfd.reject();
@@ -143,10 +165,12 @@ function getIncompleteTasks() {
 }
 
 function createTask(params) {
-    var dfd = q.defer();
+    var dfd = q.defer(),
+        allowed = ['created', 'chat', 'status', 'latitude', 'longitude', 'zoom', 'interval'];
 
     params = util._extend({}, params);
     params.created /= 1000;
+    params = filterFields(params, allowed);
 
     pool.query('INSERT INTO tasks SET ?', params, function(err, result) {
         if (err) {
@@ -161,12 +185,15 @@ function createTask(params) {
 }
 
 function updateTask(params) {
-    var dfd = q.defer();
+    var dfd = q.defer(),
+        id = params.id,
+        allowed = ['created', 'chat', 'status', 'latitude', 'longitude', 'zoom', 'interval'];
 
     params = util._extend({}, params);
     params.created /= 1000;
+    params = filterFields(params, allowed);
 
-    pool.query('UPDATE tasks SET ? WHERE id = ?', [params, params.id], function(err, rows) {
+    pool.query('UPDATE tasks SET ? WHERE id = ?', [params, id], function(err, rows) {
         if (err) {
             console.log('updateTask', err);
             dfd.reject();
@@ -209,7 +236,7 @@ function createInterval(params) {
     var allowed,
         dfd = q.defer();
 
-    allowed = ['id', 'chat', 'complete', 'created', 'latitude', 'longitude', 'zoom', 'pause', 'shutdown_time',
+    allowed = ['chat', 'complete', 'created', 'latitude', 'longitude', 'zoom', 'pause', 'shutdown_time',
         'next_photo_at'];
 
     params = util._extend({}, params);

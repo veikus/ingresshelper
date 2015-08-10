@@ -127,36 +127,41 @@ module.exports.profile = function(id, params) {
     var profile;
 
     if (!users[id]) {
-        users[id] = { chat: id, _new: true };
+        users[id] = {
+            chat: id,
+            firstActivity: new Date().getTime(),
+            lastActivity: new Date().getTime(),
+            screenshotsRequested: 0,
+            _new: true
+        };
     }
 
     profile = users[id];
 
     if (params) {
-        if (profile.first_name !== params.first_name) {
-            profile.first_name =  params.first_name;
-            profile._updated = true;
+        if (profile.firstName !== params.first_name) {
+            profile.firstName = params.first_name;
         }
 
-        if (profile.last_name !== params.last_name) {
-            profile.last_name =  params.last_name;
-            profile._updated = true;
+        if (profile.lastName !== params.last_name) {
+            profile.lastName = params.last_name;
         }
 
         if (profile.title !== params.title) {
-            profile.title =  params.title;
-            profile._updated = true;
+            profile.title = params.title;
         }
 
         if (profile.username !== params.username) {
-            profile.username =  params.username;
-            profile._updated = true;
+            profile.username = params.username;
         }
+
+        profile.lastActivity = new Date().getTime();
+        profile._updated = true;
     }
 
     return {
-        first_name: profile.first_name,
-        last_name: profile.last_name,
+        firstName: profile.firstName,
+        lastName: profile.lastName,
         title: profile.title,
         username: profile.username
     }
@@ -219,8 +224,8 @@ module.exports.plugins = function (id, value) {
         result = [];
 
     // TODO get from iitc.module.js
-    allPlugins = ['iitc', 'missions', 'portal_weakness', 'player_tracker', 'portal_names', 'portal_levels',
-        'link_directions', 'china_offset'];
+    allPlugins = ['iitc', 'missions', 'portalWeakness', 'playerTracker', 'portalNames', 'portalLevels',
+        'linkDirections', 'chinaOffset'];
 
     if (!plugins[id]) {
         plugins[id] = { chat: id, _new: true };

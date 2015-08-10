@@ -14,12 +14,12 @@
     plugins = {
         'IITC': { file: 'total-conversion-build.user.js', id: 'iitc' },
         'Missions': { file: 'missions.user.js', id: 'missions' },
-        'Show portal weakness': { file: 'show-portal-weakness.user.js', id: 'portal_weakness' },
-        'Player tracker': { file: 'player-tracker.user.js', id: 'player_tracker' },
-        'Portal names': { file: 'portal-names.user.js', id: 'portal_names' },
-        'Portal level numbers': { file: 'portal-level-numbers.user.js', id: 'portal_levels' },
-        'Show the direction of links': { file: 'link-show-direction.user.js', id: 'link_directions' },
-        'Fix Google Map offset in China': { file: 'fix-googlemap-china-offset.user.js', id: 'china_offset' }
+        'Show portal weakness': { file: 'show-portal-weakness.user.js', id: 'portalWeakness' },
+        'Player tracker': { file: 'player-tracker.user.js', id: 'playerTracker' },
+        'Portal names': { file: 'portal-names.user.js', id: 'portalNames' },
+        'Portal level numbers': { file: 'portal-level-numbers.user.js', id: 'portalLevels' },
+        'Show the direction of links': { file: 'link-show-direction.user.js', id: 'linkDirections' },
+        'Fix Google Map offset in China': { file: 'fix-googlemap-china-offset.user.js', id: 'chinaOffset' }
     };
 
     /**

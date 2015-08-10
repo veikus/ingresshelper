@@ -39,6 +39,10 @@ function getUsers() {
             console.log('getUsers', err);
             dfd.reject();
         } else {
+            rows.forEach(function(row) {
+                row.firstActivity *= 1000;
+                row.lastActivity *= 1000;
+            });
             dfd.resolve(rows);
         }
     });
@@ -50,8 +54,12 @@ function createUser(params) {
     var allowed,
         dfd = q.defer();
 
-    allowed = ['chat', 'first_name', 'last_name', 'title', 'username', 'screenshots_requested', 'first_activity',
-        'last_activity', 'language', 'compression'];
+    allowed = ['chat', 'firstName', 'lastName', 'title', 'username', 'screenshotsRequested', 'firstActivity',
+        'lastActivity', 'language', 'compression'];
+
+    params = util._extend({}, params);
+    params.firstActivity /= 1000;
+    params.lastActivity /= 1000;
     params = filterFields(params, allowed);
 
     pool.query('INSERT INTO users SET ?', params, function(err, rows) {
@@ -71,8 +79,12 @@ function updateUser(params) {
         dfd = q.defer(),
         chat = params.chat;
 
-    allowed = ['first_name', 'last_name', 'title', 'username', 'screenshots_requested', 'first_activity',
-        'last_activity', 'language', 'compression'];
+    allowed = ['firstName', 'lastName', 'title', 'username', 'screenshotsRequested', 'firstActivity',
+        'lastActivity', 'language', 'compression'];
+
+    params = util._extend({}, params);
+    params.firstActivity /= 1000;
+    params.lastActivity /= 1000;
     params = filterFields(params, allowed);
 
     pool.query('UPDATE users SET ? WHERE chat = ?', [params, chat], function(err, rows) {
@@ -107,8 +119,8 @@ function createIITCRow(params) {
     var allowed,
         dfd = q.defer();
 
-    allowed = ['chat', 'iitc', 'missions', 'portal_weakness', 'player_tracker', 'portal_names', 'portal_levels',
-        'link_directions', 'china_offset'];
+    allowed = ['chat', 'iitc', 'missions', 'portalWeakness', 'playerTracker', 'portalNames', 'portalLevels',
+        'linkDirections', 'chinaOffset'];
     params = filterFields(params, allowed);
 
     pool.query('INSERT INTO iitc_plugins SET ?', params, function(err, rows) {
@@ -128,8 +140,8 @@ function updateIITCRow(params) {
         dfd = q.defer(),
         chat = params.chat;
 
-    allowed = ['iitc', 'missions', 'portal_weakness', 'player_tracker', 'portal_names', 'portal_levels',
-        'link_directions', 'china_offset'];
+    allowed = ['iitc', 'missions', 'portalWeakness', 'playerTracker', 'portalNames', 'portalLevels',
+        'linkDirections', 'chinaOffset'];
     params = filterFields(params, allowed);
 
     pool.query('UPDATE iitc_plugins SET ? WHERE chat = ?', [params, chat], function(err, rows) {
@@ -218,11 +230,8 @@ function getActiveIntervals() {
             rows.forEach(function(row) {
                 row.created *= 1000;
                 row.pause *= 1000;
-                row.shutdownTime = row.shutdown_time * 1000;
-                row.nextPhotoAt = row.next_photo_at * 1000;
-
-                delete row.shutdown_time;
-                delete row.next_photo_at;
+                row.shutdownTime *= 1000;
+                row.nextPhotoAt *= 1000;
             });
 
             dfd.resolve(rows);
@@ -236,14 +245,13 @@ function createInterval(params) {
     var allowed,
         dfd = q.defer();
 
-    allowed = ['chat', 'complete', 'created', 'latitude', 'longitude', 'zoom', 'pause', 'shutdown_time',
-        'next_photo_at'];
+    allowed = ['chat', 'complete', 'created', 'latitude', 'longitude', 'zoom', 'pause', 'shutdownTime', 'nextPhotoAt'];
 
     params = util._extend({}, params);
     params.created /= 1000;
     params.pause /= 1000;
-    params.shutdown_time = params.shutdownTime / 1000;
-    params.next_photo_at = params.nextPhotoAt / 1000;
+    params.shutdownTime /= 1000;
+    params.nextPhotoAt /= 1000;
     params = filterFields(params, allowed);
 
     pool.query('INSERT INTO intervals SET ?', params, function(err, result) {
@@ -263,14 +271,13 @@ function updateInterval(params) {
         dfd = q.defer(),
         id = params.id;
 
-    allowed = ['chat', 'complete', 'created', 'latitude', 'longitude', 'zoom', 'pause', 'shutdown_time',
-        'next_photo_at'];
+    allowed = ['chat', 'complete', 'created', 'latitude', 'longitude', 'zoom', 'pause', 'shutdownTime', 'nextPhotoAt'];
 
     params = util._extend({}, params);
     params.created /= 1000;
     params.pause /= 1000;
-    params.shutdown_time = params.shutdownTime / 1000;
-    params.next_photo_at = params.nextPhotoAt / 1000;
+    params.shutdownTime /= 1000;
+    params.nextPhotoAt /= 1000;
     params = filterFields(params, allowed);
 
     pool.query('UPDATE intervals SET ? WHERE id = ?', [params, id], function(err, result) {

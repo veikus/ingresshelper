@@ -13,7 +13,10 @@ module.exports = {
 			"es": "Puedes obtener imagenes sin comprimir (aumenta la transferencia de datos)",
 			"br": "Você pode obter imagens não comprimidas ( aumenta a transferência de dados)",
 			"it": "Puoi ricevere le immagini non compresse (aumento del traffico)",
-			"ro-md": "Dumneavoastră puteți deactiva comprimarea imaginilor (E nevoie de mai mult trafic)"
+			"ro-md": "Dumneavoastră puteți deactiva comprimarea imaginilor (E nevoie de mai mult trafic)",
+			"fr": "Vous pouvez décompresser les images (augmente la taille du fichier)",
+			"nl": "U kan in gecomprimeerde afbeeldingen krijgen (maakt dataoverdracht klijner)",
+			"fa": "شما میتوناید تصاویر غیر فشرده دریافت کنید(کیفیت تصاویر و حجمشان در اینصورت بیشتر است!)"
 		},
 		"enable": {
 			"en": "Enable compression",
@@ -27,7 +30,10 @@ module.exports = {
 			"es": "Habilitar compresión",
 			"br": "Habilitar compactação",
 			"it": "Abilita la compressione",
-			"ro-md": "Activați comprimarea"
+			"ro-md": "Activați comprimarea",
+			"fr": "Compression activée",
+			"nl": "Gecomprimeerde bestanden aan zetten",
+			"fa": "فشرده سازی فعال شود"
 		},
 		"disable": {
 			"en": "Disable compression",
@@ -41,7 +47,10 @@ module.exports = {
 			"es": "Deshabilitar compresión",
 			"br": "Desabilitar compactação",
 			"it": "Disabilita la compressione",
-			"ro-md": "Deactivați comprimarea"
+			"ro-md": "Deactivați comprimarea",
+			"fr": "Compression désactivée",
+			"nl": "Gecomprimeerde bestanden uit zetten",
+			"fa": "فشرده سازی غیر فعال شود"
 		},
 		"saved": {
 			"en": "Changes saved",
@@ -55,7 +64,10 @@ module.exports = {
 			"es": "Cambios guardados.",
 			"br": "Alterações salvas",
 			"it": "Modifiche salvate",
-			"ro-md": "Schimbările au fost salvate"
+			"ro-md": "Schimbările au fost salvate",
+			"fr": "Changements sauvegardés",
+			"nl": "Wijzigingen opgeslagen",
+			"fa": "تغییرات ذخیره شد!"
 		},
 		"wrong_input": {
 			"en": "Incorrect input. Please try again",
@@ -69,7 +81,10 @@ module.exports = {
 			"es": "Entrada incorrecta. Por favor, intenta de nuevo.",
 			"br": "Entrada incorreta. Por favor, tente novamente",
 			"it": "Inserimento incorretto. Per favore, riprova.",
-			"ro-md": "Alegerea greșită. Vă rog incercati din nou"
+			"ro-md": "Alegerea greșită. Vă rog incercati din nou",
+			"fr": "Entrée incorrecte. Veuillez réessayer",
+			"nl": "Verkeerde input. Probeert u het alstublieft opnieuw",
+			"fa": "ورودی نامعتبراست(اشتباست) لطفا دوباره امتحان کنید."
 		}
 	},
 	"help": {
@@ -85,7 +100,10 @@ module.exports = {
 			"es": "Envía tu ubicación al bot, luego selecciona el zoom del mapa (3 - 17). ¡Feliz Ingressing!",
 			"br": "Envie a sua localização para o bot, em seguida, selecione o zoom do mapa (3-17).  Feliz Ingressing!",
 			"it": "Manda la tua posizione al bot e seleziona lo zoom della mappa (3 - 17). Buon divertimento!",
-			"ro-md": "Transmiteți botului coordonatele dumneavoastră, apoi selectati nivelul de zoom, și în cîteva minute veți primi un screenshot Intel"
+			"ro-md": "Transmiteți botului coordonatele dumneavoastră, apoi selectati nivelul de zoom, și în cîteva minute veți primi un screenshot Intel",
+			"fr": "Envoyez votre localisation au bot, puis choisissez un zoom (3 - 17). Joyeux Ingress !",
+			"nl": "Stuur uw locatie naar de bot, selecteer daarna de map met zoom (3 - 17). ",
+			"fa": "مکان خودتون رو به ربات بفرستید سپس مقدار بزرگنمایی نقشه را انتخاب کنید "
 		},
 		"line_2": {
 			"en": "Original idea: @veikus",
@@ -99,7 +117,10 @@ module.exports = {
 			"es": "Idea original: @veikus",
 			"br": "Idéia original:@veikus",
 			"it": "Idea originale di: @veikus",
-			"ro-md": "Idea: @veikus"
+			"ro-md": "Idea: @veikus",
+			"fr": "Idée originale : @veikus",
+			"nl": "Originele idee: @veikus",
+			"fa": "ایده پرداز(ایده اصلی) : @veikus"
 		},
 		"line_3": {
 			"ua": "Автор українскього перекладу: @Ukrrooter",
@@ -110,7 +131,10 @@ module.exports = {
 			"chde": "Schwiizerdütschi Übersetzig: @murco",
 			"es": "Traducción al español hecha por: @YersonPerez, @JorgeDominguez",
 			"br": "Traduzido para portugês por Sidnei Daleprani - Ingress @sd2 ; Telegram @daleprani",
-			"it": "Traduzione italiana di Marco Piccoli  (Telegram: @gible) e Max Ferrari (Telegram: @OniKoi) "
+			"it": "Traduzione italiana di Marco Piccoli  (Telegram: @gible) e Max Ferrari (Telegram: @OniKoi) ",
+			"fr": "Traduit en français par @Kbueno et @Coquelibio",
+			"nl": "Nederlandse vertaling: @Lord_Roest en @Robin",
+			"fa": "ترجمه شده توسط سجاد پورمشرفی @kind_brother"
 		},
 		"line_4": {
 			"en": "Source code: http://github.com/veikus/ingresshelper",
@@ -124,7 +148,10 @@ module.exports = {
 			"es": "Código fuente: http://github.com/veikus/ingresshelper",
 			"br": "código fonte: http://github.com/veikus/ingresshelper",
 			"it": "Codice sorgente: http://github.com/veikus/ingresshelper",
-			"ro-md": "Codul sursă: http://github.com/veikus/ingresshelper"
+			"ro-md": "Codul sursă: http://github.com/veikus/ingresshelper",
+			"fr": "Code Source: http://github.com/veikus/ingresshelper",
+			"nl": "Broncode: http://github.com/veikus/ingresshelper",
+			"fa": "سورس کد:https://github.com/veikus/ingresshelper"
 		}
 	},
 	"iitc": {
@@ -140,7 +167,10 @@ module.exports = {
 			"es": "Puedes configurar los plugins de IITC desde este menú",
 			"br": "Você pode configurar  plugins do IITC neste Menu",
 			"it": "Puoi impostare i plugin IITC da questo menu",
-			"ro-md": "Dumneavoastră  puteți configura plugin-urile  IITC în meniul dat"
+			"ro-md": "Dumneavoastră  puteți configura plugin-urile  IITC în meniul dat",
+			"fr": "Vous pouvez configurer les plug-ins IITC depuis ce menu.",
+			"nl": "U kan IITC-plug-ins opstellen van deze menu's",
+			"fa": "شما میتوانید IITC راه اندازی کنید (نصب کنید) از طریق (توسط ) این منو ها"
 		},
 		"status": {
 			"en": "Current status:",
@@ -154,7 +184,10 @@ module.exports = {
 			"es": "Estado actual:",
 			"br": "Situação atual:",
 			"it": "Stato attuale:",
-			"ro-md": "Statusul actual:"
+			"ro-md": "Statusul actual:",
+			"fr": "État actuel :",
+			"nl": "Huidige status:",
+			"fa": "وضعیت فعلی:"
 		},
 		"enabled": {
 			"en": "Plugin enabled",
@@ -168,7 +201,10 @@ module.exports = {
 			"es": "Plugin activado",
 			"br": "Plugin ativado",
 			"it": "Plugin abilitato",
-			"ro-md": "Plugin-ul este activat"
+			"ro-md": "Plugin-ul este activat",
+			"fr": "Plug-in activé",
+			"nl": "Plug-in ingeschakeld",
+			"fa": "پلاگین فعال است :))\n"
 		},
 		"disabled": {
 			"en": "Plugin disabled",
@@ -182,7 +218,10 @@ module.exports = {
 			"es": "Plugin desactivado",
 			"br": "Plugin desativado",
 			"it": "Plugin disabilitato",
-			"ro-md": "Plugin-ul este desactivat"
+			"ro-md": "Plugin-ul este desactivat",
+			"fr": "Plug-in désactivé",
+			"nl": "Plug-in uitgeschakeld",
+			"fa": "پلاگین غیر فعال است :("
 		},
 		"plugin_not_found": {
 			"en": "Plugin not found",
@@ -196,7 +235,10 @@ module.exports = {
 			"es": "Plugin no encontrado.",
 			"br": "Plugin não encontrado",
 			"it": "Plugin non trovato",
-			"ro-md": "Plugin-ul nu a fost găsit"
+			"ro-md": "Plugin-ul nu a fost găsit",
+			"fr": "Plug-in introuvable",
+			"nl": "Plug-in niet gevonden",
+			"fa": "پلاگین یافت نشد! :("
 		},
 		"complete_setup": {
 			"en": "Complete setup",
@@ -210,7 +252,10 @@ module.exports = {
 			"es": "Configuración completa",
 			"br": "Configuração completa",
 			"it": "Configurazione completata",
-			"ro-md": "Finisați configurările. "
+			"ro-md": "Finisați configurările. ",
+			"fr": "Valider la configuation",
+			"nl": "Complete opstelling",
+			"fa": "راه اندازی کامل شد.تبریک میگم :))"
 		}
 	},
 	"interval": {
@@ -226,7 +271,10 @@ module.exports = {
 			"es": "17 - Todos los portales",
 			"br": "17 - Todos os portais",
 			"it": "17 - Tutti i portali",
-			"ro-md": "17 - Toate portalurile"
+			"ro-md": "17 - Toate portalurile",
+			"fr": "17 - Tous les portails",
+			"nl": "17 - Alle portalen",
+			"fa": "17 - همه پورتال"
 		},
 		"options_2": {
 			"en": "16;15;14;13",
@@ -240,7 +288,10 @@ module.exports = {
 			"es": "16;15;14;13",
 			"br": "16;15;14;13",
 			"it": "16;15;14;13",
-			"ro-md": "16;15;14;13"
+			"ro-md": "16;15;14;13",
+			"fr": "16;15;14;13",
+			"nl": "16;15;14;13",
+			"fa": "16;15;14;13"
 		},
 		"options_3": {
 			"en": "12;10;8;6",
@@ -254,7 +305,10 @@ module.exports = {
 			"es": "12;10;8;6",
 			"br": "12;10;8;6",
 			"it": "12;10;8;6",
-			"ro-md": "12;10;8;6"
+			"ro-md": "12;10;8;6",
+			"fr": "12;10;8;6",
+			"nl": "12;10;8;6",
+			"fa": "12;10;8;6"
 		},
 		"options_4": {
 			"en": "3 - World",
@@ -268,7 +322,10 @@ module.exports = {
 			"es": "3 - El mundo",
 			"br": "3 - Mundial",
 			"it": "3 - Tutto il Mondo",
-			"ro-md": "3 - Toată lumea"
+			"ro-md": "3 - Toată lumea",
+			"fr": "3 - Vue mondiale",
+			"nl": "3 - Wereld",
+			"fa": "3 - جهان (دنیا)"
 		},
 		"cancel": {
 			"en": "Cancel setup",
@@ -282,7 +339,10 @@ module.exports = {
 			"es": "Cancelar configuración.",
 			"br": "cancelar a configuração",
 			"it": "Cancella la configurazione",
-			"ro-md": "Anulează configurarea"
+			"ro-md": "Anulează configurarea",
+			"fr": "Annuler la configuration",
+			"nl": "Opstelling annuleren",
+			"fa": "لغو راه اندازی"
 		},
 		"cancel_previous": {
 			"en": "You already have interval task. You can cancel this task and create new one",
@@ -296,7 +356,10 @@ module.exports = {
 			"es": "Ya tienes una tarea de intervalo. Puedes cancelarla y crear una nueva.",
 			"br": "Você já tem tarefa de intervalo. Você pode cancelar esta tarefa e criar uma nova",
 			"it": "Hai già un comando salvato. Puoi cancellarlo e crearne uno nuovo.",
-			"ro-md": "La dumneavoastră deja este o sarcină activă. E nevoie de anulat sarcina precedentă, înainte de a crea o sarcină nouă. "
+			"ro-md": "La dumneavoastră deja este o sarcină activă. E nevoie de anulat sarcina precedentă, înainte de a crea o sarcină nouă. ",
+			"fr": "Vous avez déjà une requête périodique en cours. Vous pouvez l'annuler puis en créer une nouvelle.",
+			"nl": "U heeft al een interval taal. U kan deze taak annuleren en een nieuwe maken",
+			"fa": "شما در حال حاظر وظیفه به ربات داده اید .میتوانید آن را لغو و وظیفه( دستور) جدیدی اضافه کنید."
 		},
 		"cancel_previous_option": {
 			"en": "Cancel previous and create new",
@@ -310,7 +373,10 @@ module.exports = {
 			"es": "Cancelar la previa y configurar nueva.",
 			"br": "Cancelar anterior e criar nova",
 			"it": "Cancella la precedente e creane una nuova",
-			"ro-md": "Anulează sarcina și creați una nouă. "
+			"ro-md": "Anulează sarcina și creați una nouă. ",
+			"fr": "Annuler l'ancienne requête et en créer une nouvelle.",
+			"nl": "Vorige annuleren en een nieuwe maken",
+			"fa": "دستور قبلی را لغو کنید و و دستور جدیدی دست کنید(اضافه کنید)"
 		},
 		"timeout_setup": {
 			"en": "How long do you need interval?",
@@ -324,7 +390,10 @@ module.exports = {
 			"es": "¿Cúanto tiempo necesita el intervalo?",
 			"br": "Quanto tempo de intervalo você precisa?",
 			"it": "Quanto tempo hai bisogno nell'intervallo?",
-			"ro-md": "Cît timp de creat screenshot-urile"
+			"ro-md": "Cît timp de creat screenshot-urile",
+			"fr": "Sur quelle période souhaitez-vous recevoir des screenshots ?",
+			"nl": "Hoelang heeft u een interval nodig?",
+			"fa": "تا چه مدت این سرویس را میخواهید؟"
 		},
 		"pause_setup": {
 			"en": "How often do you need screenshots?",
@@ -338,7 +407,10 @@ module.exports = {
 			"es": "¿Con qué frecuencia necesita las capturas de pantalla?",
 			"br": "Com que fequência você precisa de capturas de tela?",
 			"it": "Ogni quanto tempo hai bisogno di uno screenshot?",
-			"ro-md": "Cît de des a transmite screenshot-urile ?"
+			"ro-md": "Cît de des a transmite screenshot-urile ?",
+			"fr": "A quelle fréquence sounhaitez vous recevoir les screenshots ?",
+			"nl": "Hoe vaak wilt u schermafbeeldingen?",
+			"fa": "هر چه مدت یکبار به تصاویر نیاز دارید؟"
 		},
 		"location_setup": {
 			"en": "Send geolocation now",
@@ -349,10 +421,13 @@ module.exports = {
 			"fi": "Lähetä sijaintisi.",
 			"de": "Bitte den Standort senden",
 			"chde": "Bitte de Standort schicke",
-			"es": "Envía geolocalización ahora.",
+			"es": "Envía ubicación ahora.",
 			"br": "Enviar geolocalização agora",
 			"it": "Invia la tua posizione ora",
-			"ro-md": "Transmiteți geolocația zonei dorite"
+			"ro-md": "Transmiteți geolocația zonei dorite",
+			"fr": "Envoyez votre localisation maintenant",
+			"nl": "Stuur nu uw geolocatie",
+			"fa": "منتطقه جغرافیایی خود را ارسال کنید(مکان خود)"
 		},
 		"zoom_setup": {
 			"en": "Select zoom level",
@@ -366,7 +441,10 @@ module.exports = {
 			"es": "Seleccione el nivel de zoom.",
 			"br": "Escolha um nível de zoom",
 			"it": "Seleziona il livello di zoom",
-			"ro-md": "Selectați scara hărții."
+			"ro-md": "Selectați scara hărții.",
+			"fr": "Choisissez le niveau de zoom",
+			"nl": "Selecteer zoomniveau",
+			"fa": "میزان بزرگنمایی را انتخاب کنید"
 		},
 		"incorrect_input": {
 			"en": "Incorrect input",
@@ -380,7 +458,10 @@ module.exports = {
 			"es": "Entrada incorrecta.",
 			"br": "Entrada incorreta",
 			"it": "Inserimento incorretto",
-			"ro-md": "Intrare Nevalidă. Selectați una din opțiuni"
+			"ro-md": "Intrare Nevalidă. Selectați una din opțiuni",
+			"fr": "Entrée incorrecte.",
+			"nl": "Verkeerde input",
+			"fa": "ورودی نا معتبر(اشتباه)"
 		},
 		"task_saved": {
 			"en": "Task saved. You will start to receive screenshots soon",
@@ -394,7 +475,10 @@ module.exports = {
 			"es": "Tarea guardada. Emprezarás a recibir capturas de pantalla pronto.",
 			"br": "Tarefa guardada. Você vai começar a receber screenshots em breve",
 			"it": "Comando salvato. Comincerai presto a ricevere screenshot.",
-			"ro-md": "Sarcina a fost salvată. Degrabă veți începe primi screenshot-urile."
+			"ro-md": "Sarcina a fost salvată. Degrabă veți începe primi screenshot-urile.",
+			"fr": "Tâche enregistrée. Vous commencerez à recevoir les screenshots bientôt.",
+			"nl": "Taak opgeslagen. U zal binnenkort schermafbeeldingen ontvangen",
+			"fa": "دستور شما ذخیره شد به زودی شما اسکرین شات ها را دریافت خواهید کرد!"
 		},
 		"interval_finished": {
 			"en": "Interval complete. You will receive last screenshot in few minutes",
@@ -405,26 +489,32 @@ module.exports = {
 			"fi": "Aikaväli loppui. Saat viimeisen ruutukaappauksen parin minuutin sisään.",
 			"de": "Task abgeschlossen. Der letzte Screenshot wird in Kürze gesendet.",
 			"chde": "Task abgschlosse. De letscht Screenshot wird glii gschickt.",
-			"es": "Intervalo completo. Recibirás la última captura de pantalla en algunos minutos",
+			"es": "Intervalo completo. Recibirás la última captura de pantalla en algunos minutos.",
 			"br": "Intervalo completo. Você receberá a última captura de tela em poucos minutos",
 			"it": "Intervallo completo. Riceverai l'ultimo screenshot in pochi minuti.",
-			"ro-md": "Intervalul este finisat. În scurt timp veți primi ultimul screenshot."
+			"ro-md": "Intervalul este finisat. În scurt timp veți primi ultimul screenshot.",
+			"fr": "Période terminée. Vous recevrez le dernier screenshot dans quelques minutes.",
+			"nl": "Interval compleet. U zal de laatste schermafbeelding ontvangen in een paar minuten.",
+			"fa": "شما تا چند دقیقه دیگر آخرین اسکرین شات را دریافت خواهید کرد :)"
 		}
 	},
 	"lang": {
 		"title": {
-			"en": "🇬🇧English",
-			"ru": "🇷🇺Русский",
-			"ua": "🇺🇦Українська",
-			"zh-cmn-Hans": "🇨🇳简体中文",
-			"zh-cmn-Hant": "🇨🇳繁體中文",
-			"fi": "🇫🇮Suomi",
-			"de": "🇩🇪Deutsch",
-			"chde": "🇨🇭Schwiizerdütsch",
-			"es": "🇪🇸Español",
-			"br": "🇵🇹🇧🇷Português",
-			"it": "🇮🇹Italiano",
-			"ro-md": "🇷🇺Româna / Moldovenească"
+			"en": "🇬🇧 English",
+			"ru": "🇷🇺 Русский",
+			"ua": "🇺🇦 Українська",
+			"zh-cmn-Hans": "🇨🇳 简体中文",
+			"zh-cmn-Hant": "🇨🇳 繁體中文",
+			"fi": "🇫🇮 Suomi",
+			"de": "🇩🇪 Deutsch",
+			"chde": "🇨🇭 Schwiizerdütsch",
+			"es": "🇪🇸 Español",
+			"br": "🇵🇹🇧🇷 Português",
+			"it": "🇮🇹 Italiano",
+			"ro-md": "🇷🇺 Româna / Moldovenească",
+			"fr": "🇫🇷 Français",
+			"nl": "🇳🇱 Nederlands",
+			"fa": "🇮🇷 فارسی"
 		},
 		"welcome": {
 			"en": "Please choose your language",
@@ -438,7 +528,10 @@ module.exports = {
 			"es": "Por favor, elige tu idioma",
 			"br": "Por favor, escolha o seu idioma",
 			"it": "Per favore, scegli la tua lingua",
-			"ro-md": "Vă rugăm, selectați limba, care vă este mai comod de utilizat. "
+			"ro-md": "Vă rugăm, selectați limba, care vă este mai comod de utilizat. ",
+			"fr": "Veuillez choisir la langue",
+			"nl": "Kies alstublieft uw taal",
+			"fa": "لطفا زبان مورد نظرتون رو انتخاب کنید"
 		},
 		"incorrect_language": {
 			"en": "Incorrect input. Please try again",
@@ -452,7 +545,10 @@ module.exports = {
 			"es": "Entrada incorrecta. Por favor, inténtalo de nuevo.",
 			"br": "Entrada incorreta. Por favor, tente novamente",
 			"it": "Inserimento incorretto. Per favore, riprova.",
-			"ro-md": "Alegerea greșită. Vă rugăm sa selectați din opîiunile propuse ."
+			"ro-md": "Alegerea greșită. Vă rugăm sa selectați din opîiunile propuse .",
+			"fr": "Entrée incorrecte. Veuillez réessayer",
+			"nl": "Foute input. Probeert het opnieuw",
+			"fa": "ورودی اشتباست. لطفا دوباره تلاش کنی"
 		},
 		"saved": {
 			"en": "Changes saved",
@@ -466,10 +562,13 @@ module.exports = {
 			"es": "Cambios guardados.",
 			"br": "Alterações guardadas",
 			"it": "Modifiche salvate",
-			"ro-md": "Chimbprile au fost salvate."
+			"ro-md": "Chimbprile au fost salvate.",
+			"fr": "Changements sauvegardés",
+			"nl": "Wijzigingen opgeslagen",
+			"fa": "تغییرات ذخیره شد!"
 		},
 		"help_us": {
-			"en": "You can translate this bot to your language. Send message to @veikus if you want to participate",
+			"en": "You can translate this bot to your language. Send a message to @veikus if you want to participate.",
 			"ru": "Хотите помочь с переводом на другой язык? Напишите об этом @veikus",
 			"ua": "Бажаете допомогти з перекладом на інші мови? Звертайтеся до @veikus",
 			"zh-cmn-Hans": "您可以参与此机器人的本地化工作，详情请联系@veikus",
@@ -477,10 +576,13 @@ module.exports = {
 			"fi": "Voit kääntää tämän botin omalle kielellesi! Lähetä viesti @veikus​ille, jos haluat osallistua kääntämiseen.",
 			"de": "Du willst den Bot in eine weitere Sprache übersetzen? Sende eine Nachricht an @veikus um deine Übersetzung einzureichen.",
 			"chde": "Du wetsch de Bot in en wiiteri Spraach übersetze? Schick eifach en Nachricht an @veikus zum dini Übersetzig iireiche.",
-			"es": "Puedes traducir este bot a tu idioma. Envía un mensaje @aveikus si quieres ayudar.",
+			"es": "Puedes traducir este bot a tu idioma. Envía un mensaje a @veikus si quieres ayudar.",
 			"br": "Você pode traduzir este bot para o seu idioma. Envie mensagem para @veikus se você quiser participar",
 			"it": "Puoi tradurre questo bot nella tua lingua, manda un messaggio a @veikus se vuoi partecipare.",
-			"ro-md": "Doriți a ajuta cu traducerea ? Scrieți despre aceasta lui @veikus"
+			"ro-md": "Doriți a ajuta cu traducerea ? Scrieți despre aceasta lui @veikus",
+			"fr": "Vous pouvez traduire ce bot dans votre langue. Envoyez un message à @veikus si vous souhaitez participer.",
+			"nl": "U kan deze bot vertalen in uw taal. Stuur een bericht naar @veikus als u wilt deelnemen",
+			"fa": "شما میتوناید این ربات را به زبان خودتون ترجمه کنید ;) به @veikus پیام بدید اگر میخواید در این کار شرکت کنید!"
 		}
 	},
 	"main": {
@@ -496,10 +598,13 @@ module.exports = {
 			"es": "Comando desconocido.",
 			"br": "Comando desconhecido",
 			"it": "Comando sconosciuto",
-			"ro-md": "Comanda necunoscută."
+			"ro-md": "Comanda necunoscută.",
+			"fr": "Commande inconnue",
+			"nl": "Onbekende opdracht",
+			"fa": "دستور نامعتبر است(شناسایی نشد)"
 		},
 		"cancelled": {
-			"en": "Ok, i cancelled previous command",
+			"en": "Ok, I cancelled the previous command",
 			"ru": "Окей, команда отменена",
 			"ua": "Гаразд, команду скасовано",
 			"zh-cmn-Hans": "好的，我将取消上一条指令",
@@ -507,10 +612,13 @@ module.exports = {
 			"fi": "Peruutin edellisen komennon.",
 			"de": "Ok, vorheriger Befehl abgebrochen.",
 			"chde": "Ok, vorhärige Befehl abbroche.",
-			"es": "Ok, cancelé comando anterior.",
+			"es": "Ok, cancelé el comando anterior.",
 			"br": "Ok, Cancelei o comando anterior",
 			"it": "Ok, ho cancellato il comando precedente",
-			"ro-md": "Okey,am anulat comanda precedentă. "
+			"ro-md": "Okey,am anulat comanda precedentă. ",
+			"fr": "Ok, j'ai supprimé la commande précédente.",
+			"nl": "Oké, vorige opdracht geannuleerd",
+			"fa": "دستور قبلی شما لغو شد!"
 		},
 		"rate_us_1": {
 			"en": "⭐⭐⭐⭐⭐",
@@ -522,7 +630,9 @@ module.exports = {
 			"es": "⭐⭐⭐⭐⭐",
 			"br": "⭐⭐⭐⭐⭐",
 			"it": "⭐⭐⭐⭐⭐",
-			"ro-md": "⭐⭐⭐⭐⭐"
+			"ro-md": "⭐⭐⭐⭐⭐",
+			"nl": "⭐⭐⭐⭐⭐",
+			"fa": "⭐⭐⭐⭐⭐"
 		},
 		"rate_us_2": {
 			"en": "Please rate us in the storebot",
@@ -531,10 +641,13 @@ module.exports = {
 			"fi": "Arvostele tämä botti @storebot​issa:",
 			"de": "Wir würden uns über eine Bewertung beim storebot freuen!",
 			"chde": "Mier würded eus über en bewertig bim storebot freue!",
-			"es": "Por favor califícanos en storebot",
+			"es": "Por favor califícanos en la storebot",
 			"br": "Por favor, classifique-nos no storebot",
 			"it": "Per favore, valutaci nello storebot",
-			"ro-md": "Vă rugăm să ne evaluați în storebot."
+			"ro-md": "Vă rugăm să ne evaluați în storebot.",
+			"fr": "Merci de nous évaluer dans le storebot",
+			"nl": "Beoordeel ons in de storebot",
+			"fa": "لطفا به ما در استور بات رای دهید! "
 		},
 		"rate_us_3": {
 			"en": "http://telegram.me/storebot?start=ingressmap_bot",
@@ -546,12 +659,15 @@ module.exports = {
 			"es": "http://telegram.me/storebot?start=ingressmap_bot",
 			"br": "http://telegram.me/storebot?start=ingressmap_bot",
 			"it": "http://telegram.me/storebot?start=ingressmap_bot",
-			"ro-md": "http://telegram.me/storebot?start=ingressmap_bot"
+			"ro-md": "http://telegram.me/storebot?start=ingressmap_bot",
+			"fr": "http://telegram.me/storebot?start=ingressmap_bot",
+			"nl": "http://telegram.me/storebot?start=ingressmap_bot",
+			"fa": "http://telegram.me/storebot?start=ingressmap_bot"
 		}
 	},
 	"screenshot": {
 		"zoom_setup": {
-			"en": "Select zoom level",
+			"en": "Select a zoom level",
 			"ru": "Выберите масштаб карты",
 			"ua": "Оберіть масштаб мапи",
 			"zh-cmn-Hans": "选择放大级别",
@@ -562,7 +678,10 @@ module.exports = {
 			"es": "Selecciona el nivel de zoom.",
 			"br": "Escolha um nível de zoom",
 			"it": "Seleziona il livello dello zoom",
-			"ro-md": "Selectați scara hărții"
+			"ro-md": "Selectați scara hărții",
+			"fr": "Sélectionnez le niveau de zoom",
+			"nl": "Selecteer zoomniveau",
+			"fa": "میزان بزرگنمایی را انتخاب کنید"
 		},
 		"incorrect_input": {
 			"en": "Incorrect input",
@@ -576,7 +695,10 @@ module.exports = {
 			"es": "Entrada incorrecta.",
 			"br": "Entrada incorreta",
 			"it": "Inserimento incorretto",
-			"ro-md": "Intrare Nevalidă. Selectați una din opțiuni"
+			"ro-md": "Intrare Nevalidă. Selectați una din opțiuni",
+			"fr": "Entrée incorrecte. Veuillez réessayer",
+			"nl": "Foute input",
+			"fa": "ورودی نا معتبر(اشتباه)"
 		},
 		"task_saved": {
 			"en": "Task saved. Please wait for a few minutes",
@@ -590,7 +712,10 @@ module.exports = {
 			"es": "Tarea guardada. Por favor espera unos minutos.",
 			"br": "Tarefa guardada. Por favor, aguarde por alguns minutos",
 			"it": "Comando salvato, Per favore, attendi qualche minuto",
-			"ro-md": "Sarcina este salvat. După câteva minute, vei primi un screenshot"
+			"ro-md": "Sarcina este salvat. După câteva minute, vei primi un screenshot",
+			"fr": "Tâche enregistrée. Merci d'attendre quelques minutes.",
+			"nl": "Taak opgeslagen. Wacht alstublieft een paar minuten",
+			"fa": "دستور یا وظیفه ذخیره شد لطفا برای چند دقیقه صبر کنید..."
 		},
 		"location_required": {
 			"en": "Send geolocation now",
@@ -601,10 +726,13 @@ module.exports = {
 			"fi": "Lähetä sijaintisi.",
 			"de": "Bitte den Standort senden",
 			"chde": "Bitte de Standort schicke",
-			"es": "Envía geolocalización ahora.",
+			"es": "Envía ubicación ahora.",
 			"br": "Enviar geolocalização agora",
 			"it": "Manda adesso la tua posizione",
-			"ro-md": "Trimite geolocația zonei dorite"
+			"ro-md": "Trimite geolocația zonei dorite",
+			"fr": "Envoyez votre localisation maintenant",
+			"nl": "Stuur nu uw geolocatie",
+			"fa": "منتطقه جغرافیایی خود را ارسال کنید(مکان خود)"
 		},
 		"options_1": {
 			"en": "17 - All portals",
@@ -618,7 +746,9 @@ module.exports = {
 			"es": "17 - Todos los portales",
 			"br": "17 - Todos os portais",
 			"it": "17 - Tutti i portali",
-			"ro-md": "17 - Toate portalurile"
+			"ro-md": "17 - Toate portalurile",
+			"fr": "17 - Tous les portails",
+			"nl": "17 - Alle portalen"
 		},
 		"options_2": {
 			"en": "16;15;14;13",
@@ -632,7 +762,9 @@ module.exports = {
 			"es": "16;15;14;13",
 			"br": "16;15;14;13",
 			"it": "16;15;14;13",
-			"ro-md": "16;15;14;13"
+			"ro-md": "16;15;14;13",
+			"fr": "16;15;14;13",
+			"nl": "16;15;14;13"
 		},
 		"options_3": {
 			"en": "12;10;8;6",
@@ -646,7 +778,9 @@ module.exports = {
 			"es": "12;10;8;6",
 			"br": "12;10;8;6",
 			"it": "12;10;8;6",
-			"ro-md": "12;10;8;6"
+			"ro-md": "12;10;8;6",
+			"fr": "12;10;8;6",
+			"nl": "12;10;8;6"
 		},
 		"options_4": {
 			"en": "3 - World",
@@ -660,12 +794,14 @@ module.exports = {
 			"es": "3 - Mundo",
 			"br": "3 - Mundial",
 			"it": "3 - Mondo",
-			"ro-md": "3 - Toată lumea"
+			"ro-md": "3 - Toată lumea",
+			"fr": "3 - Vue mondiale",
+			"nl": "3 - Wereld"
 		}
 	},
 	"tasks": {
 		"something_went_wrong": {
-			"en": "I`m sorry. Looks like something comes really wrong. Please try again in few minutes",
+			"en": "I'm sorry. It looks like something realy went wrong. Please try again in few minutes.",
 			"ru": "Ой. Что-то пошло не так. Пожалуйста, попробуйте еще раз через пару минут",
 			"ua": "Вибачте, але щось пішло не так. Будь ласка, спробуйте знову за декілька хвилин",
 			"zh-cmn-Hans": "不好意思，机器人好像出错了，请稍后再试",
@@ -676,20 +812,133 @@ module.exports = {
 			"es": "Lo siento. Parece que algo está realmente mal. Vuelve a intentarlo en unos minutos.",
 			"br": "Desculpe. Parece que algo deu errado. Por favor, tente novamente em alguns minutos",
 			"it": "Mi dispiace. Sembra che qualcosa sia andato storto. Riprova tra qualche minuto",
-			"ro-md": "Oh. Ceva n-a mers bine. Vă rugăm să încercați din nou în câteva minute"
+			"ro-md": "Oh. Ceva n-a mers bine. Vă rugăm să încercați din nou în câteva minute",
+			"fr": "Je suis désolé. Quelque chose a l'air de s'être mal déroulé. Merci de réessayer dans quelques minutes.",
+			"nl": "Het spijt mij. Waarschijnlijk werkt er iets niet. Probeert u het alstublieft opnieuw over een paar minuten",
+			"fa": "من متاسفم به نظر میاد یک چیزی اشتباست لطفا چند دقیقه دیگر دوباره تلاش کنید "
 		}
 	},
 	"stats": {
 		"tasks_in_queue": {
 			"en": "Tasks in queue: ",
 			"ru": "Задач в очереди:",
+			"ua": "Завдань у черзі:",
 			"fi": "Tehtäviä jonossa:",
 			"de": "Tasks in Warteschlange:",
 			"chde": "Wartendi Tasks:",
 			"es": "Solicitud en cola:",
 			"br": "Tarefas na fila:",
 			"it": "Comandi in attesa",
-			"ro-md": "Sarcini în așteptare:"
+			"ro-md": "Sarcini în așteptare:",
+			"fr": "Demandes en attente :",
+			"nl": "Taken in de rij:",
+			"fa": "وظایف در صف:"
+		}
+	},
+	"beta": {
+		"rate_us": {
+			"en": "Rate us",
+			"ru": "Оценить бота",
+			"ua": "Оцінити бота",
+			"fi": "Arvostele tämä botti.",
+			"de": "Bewerte uns",
+			"chde": "Bewärt eus",
+			"es": "Califícanos",
+			"fr": "Evaluez nous",
+			"nl": "Beoordeel ons"
+		},
+		"subscibe": {
+			"en": "Subscribe newsletter",
+			"ru": "Подписаться на новости",
+			"ua": "Підписатися на новини",
+			"fi": "Tilaa uutiskirje.",
+			"de": "Newsletter abonnieren",
+			"chde": "Newsletter abonniere",
+			"es": "Suscríbete a las noticias",
+			"fr": "Abonnez vous à la newsletter",
+			"nl": "Abonneren op nieuwsbrief"
+		},
+		"unsubscribe": {
+			"en": "Unsubscribe newsletter",
+			"ru": "Отписаться от новостей",
+			"ua": "Відписатися від новин",
+			"fi": "Lopeta uutiskirjeen tilaus.",
+			"de": "Newsletter deabonnieren",
+			"chde": "Newsletter deabonniere",
+			"es": "Desuscribirte de las noticias",
+			"fr": "Désabonnez vous de la newsletter",
+			"nl": "Uitschrijven van nieuwsbrief"
+		},
+		"homepage": {
+			"en": "Back to actions list",
+			"ru": "К списку действий",
+			"ua": "До списку дій",
+			"fi": "Takaisin toimintolistaan.",
+			"de": "Zurück zur Befehlsliste",
+			"chde": "Zrugg zu de Befehlslischte",
+			"es": "Volver a la lista de acciones",
+			"fr": "Retour à la liste d'actions",
+			"nl": "Terug naar lijst met acties"
+		},
+		"make_screenshot": {
+			"en": "Make screenshot",
+			"ru": "Запросить скриншот",
+			"ua": "Запит на знімок екрану",
+			"fi": "Ota kuvankaappaus.",
+			"de": "Screenshot machen",
+			"chde": "Schreenshot mache",
+			"es": "Hacer screenshot",
+			"fr": "Faire un screenshot",
+			"nl": "Schermafbeelding maken"
+		},
+		"location_help": {
+			"en": "To send location press \"📎 > Location\"",
+			"ru": "Для отправки локации нажмите  \"📎 > Location\"",
+			"ua": "Щоб надіслати локацію натисніть  \"📎 > Location\"",
+			"fi": "Lähettääksesi sijaintisi, paina 📎 → Location.",
+			"de": "Drücke \"📎 > Standort\" um deinen Standort zu senden",
+			"chde": "Über \"📎 > Standort\" chasch din Standort schicke.",
+			"es": "Para enviar ubicación presiona \"📎 > Ubicación\"",
+			"fr": "Pour envoyer votre localisation choisir \"📎 > Location\"",
+			"nl": "Druk op \"📎 > Locatie\" om je locatie te sturen."
+		},
+		"what_is_ingress_option": {
+			"en": "What is Ingress?",
+			"ru": "Что такое ingress?",
+			"ua": "Що таке Ingress?",
+			"fi": "Mikä Ingress on?",
+			"de": "Was ist Ingress?",
+			"chde": "Was isch Ingress?",
+			"es": "¿Qué es Ingress?",
+			"fr": "Ingress, qu'est-ce ?",
+			"nl": "Wat is Ingress?"
+		},
+		"what_is_ingress_resp_1": {
+			"en": "Ingress is a multiplayer online location-based game created by Niantic Labs. Download it on http://ingress.com",
+			"ru": "Ingress - это многопользовательская мобильная игра, разработанная Niantic Labs. Скачайте её на http://ingress.com",
+			"ua": "Ingress - це багатокористувацька мобільна гра, розроблена Niantic Labs. Завантажте її на http://ingress.com",
+			"fi": "Ingress on moninpelattava sijaintipohjainen peli, jota kehittää Niantic Labs. Lataa peli osoitteesta http://ingress.com.",
+			"de": "Ingress ist ein standortbasiertes online multiplayer Game, welches von Niantic Labs entwickelt wurde. Download: http://ingress.com",
+			"chde": "Ingress isch es standort basierends online multiplayer Game wo vo Niantic LAbs erstellt worde isch. Download: http://ingress.com",
+			"es": "Ingress es un juego en línea multijugador que funciona con la ubicación GPS creado por Niantic Labs. Descárgalo en http://ingress.com",
+			"fr": "Ingress est un jeu multijoueur en ligne basé sur la localisation, créé par Niantic Labs. Télécharger sur http://ingress.com",
+			"nl": "Ingress is een multiplayer online locatiegebaseerd spel gemaakt door Niantic Labs. Download het op http://ingress.com"
+		},
+		"what_is_ingress_resp_2": {
+			"en": "This bot is useless if you're not an ingress player.",
+			"ru": "Бот будет полезен только игрокам в ingress.",
+			"ua": "Цей бот буде корисним лише для гравців Ingress",
+			"fi": "Tästä botti on hyödyllinen ainoastaan Ingress-pelaajille.",
+			"de": "Dieser Bot ist nutzlos für dich, wenn du kein Ingress-Spieler bist.",
+			"chde": "De Bot bringt der absolut GAAAR NÜÜT, wenn kein Ingress Spieler bisch.",
+			"es": "Este bot no te sirve de nada si no eres un jugador de Ingress.",
+			"fr": "Ce bot ne sert à rien si vous n'êtes pas un joueur d'Ingress.",
+			"nl": "Deze bot is waardeloos als je geen Ingress-speler bent."
+		},
+		"welcome_message": {
+			"en": "Thank you for installing me. Send me location to get intel screenshot.",
+			"es": "Gracias por instalarme. Envíame tu ubicación para obtener intel en una captura de pantalla.",
+			"nl": "Bedankt dat je me hebt geïnstalleerd. Stuur me nu je locatie om een intel-schermafbeelding te krijgen."
 		}
 	}
 };

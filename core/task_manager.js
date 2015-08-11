@@ -136,6 +136,10 @@ expressApp.get('/get-task', function (req, res) {
 expressApp.get('/complete-task', function (req, res) {
     var compression, task;
 
+    if (currentTask === -1) {
+        return;
+    }
+
     task = tasks[currentTask];
     task.status = 'ok';
 

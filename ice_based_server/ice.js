@@ -16,26 +16,20 @@
  * if the first argument is a string, use old config format
  * if the first argument is config version, use that version of config
  */
-var l, p, width, height, iitc, page, loginTimeout, activeTask, taskTimeout, isLoadedTimeout;
+var l, p, width, height, loginTimeout, activeTask, taskTimeout, isLoadedTimeout,
+    page = require('webpage').create();
 
 l = 'google_login';
 p = 'google_pass';
-width = 1280;
-height = 1024;
-iitc = true;
+width = 1920;
+height = 1080;
 loginTimeout = 10 * 1000;
-
-page = require('webpage').create();
 
 /** @function setVieportSize */
 page.viewportSize = {
     width: width,
     height: height
 };
-
-//page.onResourceRequested = function(requestData, networkRequest) {
-//    console.log('\n\nRequest (#' + requestData.id + '): ' + JSON.stringify(requestData));
-//};
 
 startNextTask();
 
@@ -54,27 +48,18 @@ function get(url, cb) {
 }
 
 function startNextTask() {
-    clearTimeout(taskTimeout);
-    clearTimeout(isLoadedTimeout);
-
     get('http://localhost:9999/get-task', onResp);
 
     function onResp(resp, status) {
-        console.log('xxx >', status);
-
         if (status !== 200) {
             setTimeout(startNextTask, 10 * 1000);
             return;
         }
 
-        console.log('xxx', resp);
-
         activeTask = JSON.parse(resp);
-        //taskTimeout = setTimeout(completeTask, activeTask.timeout);
+        taskTimeout = setTimeout(completeTask, activeTask.timeout);
 
-        createScreenshot({
-            url: activeTask.url
-        });
+        createScreenshot();
     }
 }
 
@@ -84,17 +69,16 @@ function completeTask() {
 
     setTimeout(function() {
         page.render(activeTask.fileName);
-
-        get('http://localhost:9999/complete-task', function() {
-            startNextTask();
-        });
+        get('http://localhost:9999/complete-task', startNextTask);
     }, 5000);
 }
 
 function failTask() {
+    clearTimeout(taskTimeout);
+    clearTimeout(isLoadedTimeout);
+
     startNextTask();
 }
-
 
 /**
  * console.log() wrapper
@@ -110,25 +94,47 @@ function announce(str) {
  * @param p - google password
  */
 function login(l, p) {
+    // Login enter step
     page.evaluate(function (l) {
-        document.getElementById('Email').value = l;
+        var elem = document.getElementById('Email');
+
+        if (elem) {
+            elem.value = l;
+        }
     }, l);
 
     page.evaluate(function () {
-        document.querySelector("#next").click();
+        var elem = document.querySelector('#next');
+
+        if (elem) {
+            elem.click();
+        }
     });
 
-    window.setTimeout(function () {
+    // Password enter step
+    setTimeout(function () {
         page.evaluate(function (p) {
-            document.getElementById('Passwd').value = p;
+            var elem = document.getElementById('Passwd');
+
+            if (elem) {
+                elem.value = p;
+            }
         }, p);
 
         page.evaluate(function () {
-            document.querySelector("#next").click();
+            var elem = document.querySelector('#next');
+
+            if (elem) {
+                elem.click();
+            }
         });
 
         page.evaluate(function () {
-            document.getElementById('gaia_loginform').submit();
+            var elem = document.getElementById('gaia_loginform');
+
+            if (elem) {
+                elem.submit();
+            }
         });
     }, loginTimeout);
 }
@@ -159,13 +165,14 @@ function isLogged() {
 }
 
 /**
- * Inserts IITC
- * @param {boolean} iitc
- * @author akileos (https://github.com/akileos)
- * @author Nikitakun
+ * Inserts plugins (IITC)
  */
-function injectITTC() {
-    page.includeJs('http://localhost:9999/iitc/total-conversion-build.user.js');
+function injectPlugins() {
+    var plugins = activeTask.plugins || [];
+
+    plugins.forEach(function(url) {
+        page.includeJs(url);
+    })
 }
 
 function injectCSS() {
@@ -196,8 +203,8 @@ function isLoaded() {
     }
 }
 
-function createScreenshot(params) {
-    var url = params.url;
+function createScreenshot() {
+    var url = activeTask.url;
 
     page.open(url, function (status) {
         var link;
@@ -217,7 +224,7 @@ function createScreenshot(params) {
 
             page.open(link, function () {
                 if (status !== 'success') {
-                    announce('Can`t login. Network problem');
+                    announce('Can`t open login page. Network problem');
                     failTask();
                     return;
                 }
@@ -227,7 +234,7 @@ function createScreenshot(params) {
                 setTimeout(function() {
                     if (checkLogin()) {
                         announce('Login successful');
-                        createScreenshot(params, callback);
+                        createScreenshot();
                     } else {
                         announce('Login error');
                         failTask();
@@ -238,9 +245,7 @@ function createScreenshot(params) {
             return;
         }
 
-        if (iitc) {
-            injectITTC();
-        }
+        injectPlugins();
 
         // Wait for data load
         isLoaded();

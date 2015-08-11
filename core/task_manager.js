@@ -11,7 +11,6 @@ var tasks,
     iitc = require(__dirname + '/iitc.module.js'),
     express = require('express'),
     path = require('path'),
-    util = require('util'),
     expressApp = express(),
     currentTask = -1;
 
@@ -63,6 +62,10 @@ setInterval(function() {
     tasks.forEach(function(task, i) {
         var method;
 
+        if (!task) {
+            return;
+        }
+
         if (task.id && task.status === 'new') {
             return;
         }
@@ -89,7 +92,7 @@ expressApp.use('/iitc', express.static(__dirname + '/../ice_based_server/iitc'))
 expressApp.use('/client', express.static(__dirname + '/../ice_based_server/client'));
 
 expressApp.get('/get-task', function (req, res) {
-    var plugins, lang, resp, latitude, longitude, task, file;
+    var plugins, lang, resp, task, file;
 
     // If previous task is not finished - mark it as failed
     if (tasks[currentTask] && tasks[currentTask].status === 'new') {
@@ -110,14 +113,13 @@ expressApp.get('/get-task', function (req, res) {
     task = tasks[currentTask];
 
     plugins = settings.plugins(task.chat);
-    plugins = iitc.idToName(plugins).forEach(function (val, k) {
-        plugins[k] = 'http://localhost/iitc/' + val;
-    });
-    task.plugins = plugins;
 
-    latitude = task.latitude;
-    longitude = task.longitude;
-    task.url = 'https://www.ingress.com/intel?ll=' + latitude + ',' + longitude + '&z=' + task.zoom;
+    iitc.idToName(plugins).forEach(function (val, k) {
+        plugins[k] = 'http://localhost:9999/iitc/' + val;
+    });
+
+    task.plugins = plugins;
+    task.url = 'https://www.ingress.com/intel?ll=' + task.latitude + ',' + task.longitude + '&z=' + task.zoom;
 
     file = __dirname + '/../screenshots/task_' + task.chat + '_' + new Date().getTime() + '.png';
     task.fileName = path.resolve(file);

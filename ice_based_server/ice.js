@@ -16,20 +16,14 @@
  * if the first argument is a string, use old config format
  * if the first argument is config version, use that version of config
  */
-var l, p, width, height, loginTimeout, activeTask, taskTimeout, isLoadedTimeout,
-    page = require('webpage').create();
+var l, p, width, height, loginTimeout, activeTask, taskTimeout, isLoadedTimeout, page,
+    webPage = require('webpage');
 
 l = 'google_login';
 p = 'google_pass';
 width = 1920;
 height = 1080;
 loginTimeout = 10 * 1000;
-
-/** @function setVieportSize */
-page.viewportSize = {
-    width: width,
-    height: height
-};
 
 startNextTask();
 
@@ -48,6 +42,10 @@ function get(url, cb) {
 }
 
 function startNextTask() {
+    if (page) {
+        page.close();
+    }
+
     get('http://localhost:9999/get-task', onResp);
 
     function onResp(resp, status) {
@@ -172,7 +170,11 @@ function injectPlugins() {
 
     plugins.forEach(function(url) {
         page.includeJs(url);
-    })
+    });
+
+    page.evaluate(function () {
+        localStorage.setItem('iitc-base-map', 'Google Roads');
+    });
 }
 
 function injectCSS() {
@@ -205,6 +207,13 @@ function isLoaded() {
 
 function createScreenshot() {
     var url = activeTask.url;
+
+    page = webPage.create();
+
+    page.viewportSize = {
+        width: width,
+        height: height
+    };
 
     page.open(url, function (status) {
         var link;

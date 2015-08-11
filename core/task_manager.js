@@ -38,7 +38,7 @@ module.exports.queueLength = function () {
     var count = 0;
 
     tasks.forEach(function(task) {
-        if (task.status === 'new') {
+        if (task && task.status === 'new') {
             ++count;
         }
     });

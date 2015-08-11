@@ -187,10 +187,7 @@ module.exports.calculateScreenshotRequest = calculateScreenshotRequest;
 module.exports.lang = function (id, lang) {
     var settings;
 
-    if (!users[id]) {
-        users[id] = { chat: id, _new: true };
-    }
-
+    profile(id); // Create user (if it's not exists)
     settings = users[id];
 
     if (lang) {
@@ -210,10 +207,7 @@ module.exports.lang = function (id, lang) {
 module.exports.compression = function (id, value) {
     var settings;
 
-    if (!users[id]) {
-        users[id] = { chat: id, _new: true };
-    }
-
+    profile(id); // Create user (if it's not exists)
     settings = users[id];
 
     if (typeof (value) === 'boolean') {

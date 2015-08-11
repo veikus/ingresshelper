@@ -123,7 +123,7 @@ module.exports.init = function(cb) {
         })
 };
 
-module.exports.profile = function(id, params) {
+function profile(id, params) {
     var profile;
 
     if (!users[id]) {
@@ -163,9 +163,20 @@ module.exports.profile = function(id, params) {
         firstName: profile.firstName,
         lastName: profile.lastName,
         title: profile.title,
-        username: profile.username
+        username: profile.username,
+        screenshotsRequested: profile.screenshotsRequested
     }
-};
+}
+
+function calculateScreenshotRequest(id) {
+    profile(id); // Create user (if it's not exists)
+
+    ++users[id].screenshotsRequested;
+    users[id]._updated = true;
+}
+
+module.exports.profile = profile;
+module.exports.calculateScreenshotRequest = calculateScreenshotRequest;
 
 /**
  * Chat settings

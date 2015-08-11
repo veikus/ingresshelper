@@ -70,14 +70,7 @@
             telegram.sendMessage(this.chat, resp, null);
 
             // Stats
-            // TODO: Replace with db record
-            //if (app.modules.stats) {
-            //    app.modules.stats.trackScreenshot({
-            //        chat: this.chat,
-            //        zoom: zoom,
-            //        location: this.location
-            //    });
-            //}
+            settings.calculateScreenshotRequest(this.chat);
         } else {
             resp = i18n(this.lang, 'screenshot', 'incorrect_input');
             telegram.sendMessage(this.chat, resp, markup);

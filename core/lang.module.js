@@ -8,6 +8,7 @@
         i18n = require(__dirname + '/i18n_extend.js'),
         telegram = require(__dirname + '/telegram.js'),
         settings = require(__dirname + '/settings.js'),
+        botan = require('botanio')(61578),
         markup = {};
 
     Lang.initMessage = '/language';
@@ -24,6 +25,7 @@
 
         resp = i18n(this.lang, 'lang', 'welcome');
         telegram.sendMessage(this.chat, resp, markup);
+        botan.track(message, 'Language');
     }
 
     /**

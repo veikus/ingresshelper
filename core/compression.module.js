@@ -6,7 +6,8 @@
 (function() {
     var i18n = require(__dirname + '/i18n_extend.js'),
         telegram = require(__dirname + '/telegram.js'),
-        settings = require(__dirname + '/settings.js');
+        settings = require(__dirname + '/settings.js'),
+        botan = require('botanio')(61578);
 
     Compression.initMessage = '/compression';
 
@@ -31,6 +32,7 @@
 
         resp = i18n(this.lang, 'compression', 'welcome');
         telegram.sendMessage(this.chat, resp, markup);
+        botan.track(message, 'Compression');
     }
 
     /**

@@ -7,7 +7,8 @@
     var plugins, markup,
         i18n = require(__dirname + '/i18n_extend.js'),
         telegram = require(__dirname + '/telegram.js'),
-        settings = require(__dirname + '/settings.js');
+        settings = require(__dirname + '/settings.js'),
+        botan = require('botanio')(61578);
 
     IITC.initMessage = '/iitc';
 
@@ -43,6 +44,7 @@
         resp += this.getCurrentStatus();
 
         telegram.sendMessage(this.chat, resp, markup);
+        botan.track(message, 'IITC');
     }
 
     /**

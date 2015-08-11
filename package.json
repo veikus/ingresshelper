@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/veikus/ingresshelper#readme",
   "dependencies": {
+    "botanio": "0.0.5",
     "express": "^4.13.3",
     "form-data": "^0.2.0",
     "https": "^1.0.0",

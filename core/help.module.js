@@ -6,7 +6,8 @@
 (function() {
     var i18n = require(__dirname + '/i18n_extend.js'),
         telegram = require(__dirname + '/telegram.js'),
-        settings = require(__dirname + '/settings.js');
+        settings = require(__dirname + '/settings.js'),
+        botan = require('botanio')(61578);
 
     Help.initMessage = '/help';
 
@@ -16,6 +17,7 @@
      */
     function Help(message) {
         this.onMessage(message);
+        botan.track(message, 'Help');
     }
 
     /**

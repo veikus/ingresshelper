@@ -4,9 +4,10 @@
  * @version 3.0
  */
 (function() {
-    var telegram = require(__dirname + '/telegram.js');
+    var telegram = require(__dirname + '/telegram.js'),
+        botan = require('botanio')(61578);
 
-    Banderavec.initMessage = 'Слава Україні!';
+        Banderavec.initMessage = 'Слава Україні!';
 
     /**
      * @param message {object} Telegram message object
@@ -17,6 +18,7 @@
         this.complete = true;
 
         telegram.sendMessage(this.chat, 'Героям слава!', null);
+        botan.track(message, 'Easter egg');
     }
 
     /**

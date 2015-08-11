@@ -8,7 +8,8 @@ var allowedTimeouts, allowedPauses, timeoutMarkup, pauseMarkup, intervals,
     telegram = require(__dirname + '/telegram.js'),
     settings = require(__dirname + '/settings.js'),
     taskManager = require(__dirname + '/task_manager.js'),
-    db = require(__dirname + '/db.js');
+    db = require(__dirname + '/db.js'),
+    botan = require('botanio')(61578);
 
 Interval.initMessage = '/interval';
 
@@ -90,6 +91,7 @@ function Interval(message) {
     this.location = null;
 
     this.onMessage(message);
+    botan.track(message, 'Interval begin');
 }
 
 /**
@@ -175,6 +177,7 @@ Interval.prototype.onMessage = function (message) {
         });
 
         this.sendMessage('complete');
+        botan.track(message, 'Interval complete');
     } else if (!this.zoom) {
         this.sendMessage('zoom');
     }

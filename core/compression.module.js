@@ -14,7 +14,7 @@
     Compression.initMessage = function(message) {
         var chat = message.chat.id,
             lang = settings.lang(chat),
-            text = message.text;
+            text = message.text && message.text.toLowerCase();
 
         return text === '/compression';
     };

@@ -1,12 +1,13 @@
-var TOKEN = 'INSET_TOKEN_HERE',
-    API_URL = 'https://api.telegram.org/bot' + TOKEN,
-    TIMEOUT = 10,
+var config = require(__dirname + '/../config.js'),
     FormData = require('form-data'),
     https = require('https'),
     querystring = require('querystring'),
     request = require('request'),
     q = require('q'),
     fs = require('fs'),
+    common = require(__dirname + '/common.js'),
+    API_URL = 'https://api.telegram.org/bot' + config.telegramToken,
+    TIMEOUT = 10,
     offset = 0;
 
 /**
@@ -22,6 +23,10 @@ module.exports.sendMessage = function (chatId, message, markup) {
 
     if (markup === null) {
         markup = { hide_keyboard: true };
+    }
+
+    if (markup === 'home') {
+        markup = common.homeMarkup(chatId);
     }
 
     markup = JSON.stringify(markup);

@@ -517,9 +517,9 @@ module.exports = {
 			"fa": "🇮🇷 فارسی"
 		},
 		"welcome": {
-			"en": "Please choose your language",
-			"ru": "Пожалуйста выберите язык, который вам удобней использовать",
-			"ua": "Будь ласка, оберіть мову, якою Вам зручніше користуватися",
+			"en": "Please choose your language:",
+			"ru": "Пожалуйста выберите язык, который вам удобней использовать:",
+			"ua": "Будь ласка, оберіть мову, якою Вам зручніше користуватися:",
 			"zh-cmn-Hans": "请选择语言",
 			"zh-cmn-Hant": "請選擇語言",
 			"fi": "Valitse kieli.",
@@ -534,9 +534,9 @@ module.exports = {
 			"fa": "لطفا زبان مورد نظرتون رو انتخاب کنید"
 		},
 		"incorrect_language": {
-			"en": "Incorrect input. Please try again",
-			"ru": "Неправильный выбор. Выберите из предложенных вариантов",
-			"ua": "Неправильне значення. Виберіть із запропонованих варіантів",
+			"en": "Incorrect input. Please select one of this options:",
+			"ru": "Неправильный выбор. Выберите из предложенных вариантов:",
+			"ua": "Неправильне значення. Виберіть із запропонованих варіантів:",
 			"zh-cmn-Hans": "输入有误，请重试",
 			"zh-cmn-Hant": "輸入有誤，請重試",
 			"fi": "Virheellinen syöte, yritä uudelleen.",
@@ -551,9 +551,9 @@ module.exports = {
 			"fa": "ورودی اشتباست. لطفا دوباره تلاش کنی"
 		},
 		"saved": {
-			"en": "Changes saved",
-			"ru": "Изменения сохранены",
-			"ua": "Зміни збережено",
+			"en": "Changes saved.",
+			"ru": "Изменения сохранены.",
+			"ua": "Зміни збережено.",
 			"zh-cmn-Hans": "修改完成",
 			"zh-cmn-Hant": "修改完成",
 			"fi": "Muutokset tallennettu.",
@@ -569,7 +569,7 @@ module.exports = {
 		},
 		"help_us": {
 			"en": "You can translate this bot to your language. Send a message to @veikus if you want to participate.",
-			"ru": "Хотите помочь с переводом на другой язык? Напишите об этом @veikus",
+			"ru": "Хотите помочь с переводом на другой язык? Напишите об этом @veikus.",
 			"ua": "Бажаете допомогти з перекладом на інші мови? Звертайтеся до @veikus",
 			"zh-cmn-Hans": "您可以参与此机器人的本地化工作，详情请联系@veikus",
 			"zh-cmn-Hant": "您可以參與此機器人的語言翻譯，詳情請聯繫@veikus",
@@ -635,9 +635,9 @@ module.exports = {
 			"fa": "⭐⭐⭐⭐⭐"
 		},
 		"rate_us_2": {
-			"en": "Please rate us in the storebot",
-			"ru": "Пожалуйста оцените нашего бота",
-			"ua": "Оцініть нас в storebot",
+			"en": "Please rate us in the storebot:",
+			"ru": "Пожалуйста оцените нашего бота:",
+			"ua": "Оцініть нас в storebot:",
 			"fi": "Arvostele tämä botti @storebot​issa:",
 			"de": "Wir würden uns über eine Bewertung beim storebot freuen!",
 			"chde": "Mier würded eus über en bewertig bim storebot freue!",
@@ -892,15 +892,15 @@ module.exports = {
 			"nl": "Schermafbeelding maken"
 		},
 		"location_help": {
-			"en": "💡To send location press \"📎 > Location\".",
+			"en": "💡 To send location press \"📎 > Location\".",
 			"ru": "💡 Для отправки локации нажмите  \"📎 > Location\".",
 			"ua": "💡 Щоб надіслати локацію натисніть  \"📎 > Location\".",
-			"fi": "Lähettääksesi sijaintisi, paina 📎 → Location.",
-			"de": "Drücke \"📎 > Standort\" um deinen Standort zu senden",
-			"chde": "Über \"📎 > Standort\" chasch din Standort schicke.",
-			"es": "Para enviar ubicación presiona \"📎\" > \"Ubicación\"",
-			"fr": "Pour envoyer votre localisation choisir \"📎 > Location\"",
-			"nl": "Druk op \"📎 > Locatie\" om je locatie te sturen."
+			"fi": "💡 Lähettääksesi sijaintisi, paina 📎 → Location.",
+			"de": "💡 Drücke \"📎 > Standort\" um deinen Standort zu senden",
+			"chde": "💡 Über \"📎 > Standort\" chasch din Standort schicke.",
+			"es": "💡 Para enviar ubicación presiona \"📎\" > \"Ubicación\"",
+			"fr": "💡 Pour envoyer votre localisation choisir \"📎 > Location\"",
+			"nl": "💡 Druk op \"📎 > Locatie\" om je locatie te sturen."
 		},
 		"what_is_ingress_option": {
 			"en": "What is Ingress?",
@@ -952,6 +952,10 @@ module.exports = {
 		"language": {
 			"en": "Change language",
 			"ru": "Изменить язык"
+		},
+		"iitc_setup": {
+			"en": "Setup IITC",
+			"ru": "Настроить IITC"
 		}
 	}
 };

@@ -9,7 +9,15 @@
         settings = require(__dirname + '/settings.js'),
         botan = require('botanio')(61578);
 
-    Compression.initMessage = '/compression';
+    Compression.name = 'compression';
+
+    Compression.initMessage = function(message) {
+        var chat = message.chat.id,
+            lang = settings.lang(chat),
+            text = message.text;
+
+        return text === '/compression';
+    };
 
     /**
      * @param message {object} Telegram message object

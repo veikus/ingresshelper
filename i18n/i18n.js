@@ -835,7 +835,7 @@ module.exports = {
 			"fa": "وظایف در صف:"
 		}
 	},
-	"beta": {
+	"common": {
 		"rate_us": {
 			"en": "Rate us",
 			"ru": "Оценить бота",
@@ -898,7 +898,7 @@ module.exports = {
 			"fi": "Lähettääksesi sijaintisi, paina 📎 → Location.",
 			"de": "Drücke \"📎 > Standort\" um deinen Standort zu senden",
 			"chde": "Über \"📎 > Standort\" chasch din Standort schicke.",
-			"es": "Para enviar ubicación presiona \"📎 > Ubicación\"",
+			"es": "Para enviar ubicación presiona \"📎\" > \"Ubicación\"",
 			"fr": "Pour envoyer votre localisation choisir \"📎 > Location\"",
 			"nl": "Druk op \"📎 > Locatie\" om je locatie te sturen."
 		},
@@ -926,7 +926,7 @@ module.exports = {
 		},
 		"what_is_ingress_resp_2": {
 			"en": "This bot is useless if you're not an ingress player.",
-			"ru": "Бот будет полезен только игрокам в ingress.",
+			"ru": "Бот будет полезен только игрокам в ingress",
 			"ua": "Цей бот буде корисним лише для гравців Ingress",
 			"fi": "Tästä botti on hyödyllinen ainoastaan Ingress-pelaajille.",
 			"de": "Dieser Bot ist nutzlos für dich, wenn du kein Ingress-Spieler bist.",
@@ -937,8 +937,21 @@ module.exports = {
 		},
 		"welcome_message": {
 			"en": "Thank you for installing me. Send me location to get intel screenshot.",
+			"ru": "Спасибо за то, что установили меня. Пришлите мне локацию, чтобы получить скриншот с интела",
 			"es": "Gracias por instalarme. Envíame tu ubicación para obtener intel en una captura de pantalla.",
 			"nl": "Bedankt dat je me hebt geïnstalleerd. Stuur me nu je locatie om een intel-schermafbeelding te krijgen."
+		},
+		"device_poll": {
+			"en": "POLL: What`s your device?",
+			"ru": "ОПРОС: Какое у вас устройство?"
+		},
+		"device_poll_resp": {
+			"en": "Thank you for your vote",
+			"ru": "Спасибо за ваш голос"
+		},
+		"language": {
+			"en": "Change language",
+			"ru": "Выбор языка"
 		}
 	}
 };

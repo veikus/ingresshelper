@@ -7,7 +7,11 @@
     var telegram = require(__dirname + '/telegram.js'),
         botan = require('botanio')(61578);
 
-        Banderavec.initMessage = 'Слава Україні!';
+    Banderavec.name = 'banderavec';
+
+    Banderavec.initMessage = function(message) {
+        return message.text === 'Слава Україні!';
+    };
 
     /**
      * @param message {object} Telegram message object

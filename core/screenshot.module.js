@@ -10,7 +10,15 @@
         taskManager = require(__dirname + '/task_manager.js'),
         botan = require('botanio')(61578);
 
-    Screenshot.initMessage = '/screenshot';
+    Screenshot.name = 'screenshot';
+
+    Screenshot.initMessage = function(message) {
+        var chat = message.chat.id,
+            lang = settings.lang(chat),
+            text = message.text;
+
+        return text === '/screenshot';
+    };
 
     /**
      * @param message {object} Telegram message object

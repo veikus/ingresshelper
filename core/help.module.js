@@ -9,7 +9,15 @@
         settings = require(__dirname + '/settings.js'),
         botan = require('botanio')(61578);
 
-    Help.initMessage = '/help';
+    Help.name = 'help';
+
+    Help.initMessage = function(message) {
+        var chat = message.chat.id,
+            lang = settings.lang(chat),
+            text = message.text;
+
+        return text === '/help';
+    };
 
     /**
      * @param message {object} Telegram message object

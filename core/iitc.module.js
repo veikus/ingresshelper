@@ -10,7 +10,15 @@
         settings = require(__dirname + '/settings.js'),
         botan = require('botanio')(61578);
 
-    IITC.initMessage = '/iitc';
+    IITC.name = 'iitc';
+
+    IITC.initMessage = function(message) {
+        var chat = message.chat.id,
+            lang = settings.lang(chat),
+            text = message.text;
+
+        return text === '/iitc';
+    };
 
     plugins = {
         'IITC': { file: 'total-conversion-build.user.js', id: 'iitc' },

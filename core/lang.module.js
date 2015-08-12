@@ -11,7 +11,15 @@
         botan = require('botanio')(61578),
         markup = {};
 
-    Lang.initMessage = '/language';
+    Lang.name = 'lang';
+
+    Lang.initMessage = function(message) {
+        var chat = message.chat.id,
+            lang = settings.lang(chat),
+            text = message.text;
+
+        return text === '/language' || text === i18n(lang, 'common', 'language').toLowerCase();
+    };
 
     /**
      * @param message {object} Telegram message object

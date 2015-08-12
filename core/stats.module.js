@@ -10,7 +10,15 @@
         taskManager = require(__dirname + '/task_manager.js'),
         botan = require('botanio')(61578);
 
-    Stats.initMessage = '/stats';
+    Stats.name = 'stats';
+    
+    Stats.initMessage = function(message) {
+        var chat = message.chat.id,
+            lang = settings.lang(chat),
+            text = message.text;
+
+        return text === '/stats';
+    };
 
     /**
      * @param message {object} Telegram message object

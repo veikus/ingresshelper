@@ -12,7 +12,15 @@ var allowedTimeouts, allowedPauses, timeoutMarkup, pauseMarkup, intervals,
     config = require(__dirname + '/../config.js'),
     botan = require('botanio')(61578);
 
-Interval.initMessage = '/interval';
+Interval.name = 'interval';
+
+Interval.initMessage = function(message) {
+    var chat = message.chat.id,
+        lang = settings.lang(chat),
+        text = message.text;
+
+    return text === '/interval';
+};
 
 // Asynchronously load data from db
 intervals = [];

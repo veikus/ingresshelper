@@ -8,7 +8,7 @@
     var i18n = require(__dirname + '/i18n_extend.js'),
         telegram = require(__dirname + '/telegram.js'),
         settings = require(__dirname + '/settings.js'),
-        modules = {},
+        modules = [],
         activeModule = {};
 
     init();
@@ -17,7 +17,7 @@
      * Modules initialization
      */
     function init() {
-        var magicWord, module,
+        var module,
             list = [
                 'banderavec.module.js', 'compression.module.js', 'help.module.js', 'iitc.module.js',
                 'interval.module.js', 'lang.module.js', 'screenshot.module.js', 'stats.module.js'
@@ -25,8 +25,9 @@
 
         list.forEach(function(fileName) {
             module = require(__dirname + '/' + fileName);
-            magicWord = module.initMessage;
-            modules[magicWord] = module;
+
+            modules.push(module);
+            modules[module.name] = module;
         });
 
         settings.init(getUpdates);
@@ -73,16 +74,18 @@
             username: message.chat.username || ''
         });
 
+        // If user asked for another module
+        modules.forEach(function(module) {
+            if (module.initMessage(message)) {
+                activeModule[chat] = new module(message);
+            }
+        });
+
         // Hack for a new users
         if (text === '/start') {
             // todo replace with i18n
             telegram.sendMessage(chat, 'Thank you for installing me. Send me location to get intel screenshot');
             text = '/language';
-        }
-
-        // If user asked for another module
-        if (modules[text]) {
-            activeModule[chat] = new modules[text](message);
         }
 
         // If user asked to cancel current action - just remove a module
@@ -99,8 +102,8 @@
         }
 
         // In other case check is it location TODO
-        else if (message.location && modules['/screenshot']) {
-            activeModule[chat] = new modules['/screenshot'](message);
+        else if (message.location && modules.screenshot) {
+            activeModule[chat] = new modules.screenshot(message);
         }
 
         // Or maybe user made a mistake (do not reply in groups)

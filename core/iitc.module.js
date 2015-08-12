@@ -10,14 +10,12 @@
         settings = require(__dirname + '/settings.js'),
         botan = require('botanio')(61578);
 
-    IITC.name = 'iitc';
-
     IITC.initMessage = function(message) {
         var chat = message.chat.id,
             lang = settings.lang(chat),
             text = message.text && message.text.toLowerCase();
 
-        return text === '/iitc';
+        return text === '/iitc' || text === i18n(lang, 'common', 'iitc_setup').toLowerCase();
     };
 
     plugins = {

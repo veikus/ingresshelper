@@ -89,9 +89,8 @@
 
         // Hack for a new users
         else if (text === '/start') {
-            // todo replace with i18n
-            telegram.sendMessage(chat, 'Thank you for installing me. Send me location to get intel screenshot');
-            text = '/language';
+            telegram.sendMessage(chat, i18n(lang, 'common', 'welcome_message'));
+            activeModule[chat] = new modules.lang(message);
         }
 
         // If user asked to cancel current action - just remove a module

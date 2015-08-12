@@ -27,7 +27,7 @@
             module = require(__dirname + '/' + fileName);
 
             modules.push(module);
-            modules[module.name] = module;
+            modules[module.name.toLowerCase()] = module;
         });
 
         settings.init(getUpdates);
@@ -62,8 +62,9 @@
      * @param message {object} Message from getUpdates
      */
     function processMessage(message) {
-        var lang, moduleFound,
+        var moduleFound,
             chat = message.chat.id,
+            lang = settings.lang(chat),
             text = message.text && message.text.toLowerCase();
 
         // Save user data
@@ -94,10 +95,8 @@
         }
 
         // If user asked to cancel current action - just remove a module
-        else if (text === '/cancel') {
+        else if (text === '/cancel' || text === i18n(lang, 'common', 'homepage').toLowerCase()) {
             delete activeModule[chat];
-
-            lang = settings.lang(chat);
             telegram.sendMessage(chat, i18n(lang, 'main', 'cancelled'), 'home');
         }
 

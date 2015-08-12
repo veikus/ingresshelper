@@ -10,14 +10,12 @@
         taskManager = require(__dirname + '/task_manager.js'),
         botan = require('botanio')(61578);
 
-    Screenshot.name = 'screenshot';
-
     Screenshot.initMessage = function(message) {
         var chat = message.chat.id,
             lang = settings.lang(chat),
             text = message.text && message.text.toLowerCase();
 
-        return text === '/screenshot';
+        return text === '/screenshot' || text === i18n(lang, 'common', 'make_screenshot').toLowerCase();
     };
 
     /**
@@ -36,32 +34,24 @@
      * @param message {object} Telegram message object
      */
     Screenshot.prototype.onMessage = function (message) {
-        var resp, markup, zoom, keyboard,
+        var resp, zoom,
             text = message.text,
             location = message.location;
-
-        keyboard = [
-            i18n(this.lang, 'interval', 'options_1').split(';'),
-            i18n(this.lang, 'interval', 'options_2').split(';'),
-            i18n(this.lang, 'interval', 'options_3').split(';'),
-            i18n(this.lang, 'interval', 'options_4').split(';')
-        ];
-
-        markup = {
-            keyboard: keyboard,
-            one_time_keyboard: true
-        };
 
         // Step 1
         if (location && location.latitude && location.longitude) {
             this.location = location;
             resp = i18n(this.lang, 'screenshot', 'zoom_setup');
-            telegram.sendMessage(this.chat, resp, markup);
+            telegram.sendMessage(this.chat, resp, this.getZoomMarkup());
             botan.track(message, 'Screenshot location done');
             return;
         } else if (!this.location) {
-            resp = i18n(this.lang, 'screenshot', 'location_required');
-            telegram.sendMessage(this.chat, resp, null);
+            resp = [
+                i18n(this.lang, 'screenshot', 'location_required'),
+                i18n(this.lang, 'common', 'location_help')
+            ].join('\n\n');
+
+            telegram.sendMessage(this.chat, resp, this.getInitMarkup());
             botan.track(message, 'Screenshot location error');
             return;
         }
@@ -86,9 +76,33 @@
             botan.track(message, 'Screenshot complete');
         } else {
             resp = i18n(this.lang, 'screenshot', 'incorrect_input');
-            telegram.sendMessage(this.chat, resp, markup);
+            telegram.sendMessage(this.chat, resp);
             botan.track(message, 'Screenshot zoom error');
         }
+    };
+
+    Screenshot.prototype.getInitMarkup = function() {
+        return {
+            one_time_keyboard: true,
+            resize_keyboard: true,
+            keyboard: [
+                [i18n(this.lang, 'common', 'homepage')]
+            ]
+        };
+    };
+
+    Screenshot.prototype.getZoomMarkup = function() {
+        return {
+            one_time_keyboard: true,
+            resize_keyboard: true,
+            keyboard: [
+                i18n(this.lang, 'interval', 'options_1').split(';'),
+                i18n(this.lang, 'interval', 'options_2').split(';'),
+                i18n(this.lang, 'interval', 'options_3').split(';'),
+                i18n(this.lang, 'interval', 'options_4').split(';'),
+                [i18n(this.lang, 'common', 'homepage')]
+            ]
+        };
     };
 
     module.exports = Screenshot;

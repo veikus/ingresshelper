@@ -11,7 +11,7 @@
         botan = require('botanio')(61578);
 
     Stats.name = 'stats';
-    
+
     Stats.initMessage = function(message) {
         var chat = message.chat.id,
             lang = settings.lang(chat),
@@ -39,9 +39,9 @@
     Stats.prototype.onMessage = function (message) {
         var result = [];
 
-        result.push(i18n(this.lang, 'stats', 'tasks_in_queue') + taskManager.queueLength());
+        result.push(i18n(this.lang, 'stats', 'tasks_in_queue') + ' ' + taskManager.queueLength());
 
-        telegram.sendMessage(this.chat, result.join('\n\r'), null);
+        telegram.sendMessage(this.chat, result.join('\n'), 'home');
     };
 
     module.exports = Stats;

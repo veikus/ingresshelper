@@ -16,7 +16,7 @@
     Lang.initMessage = function(message) {
         var chat = message.chat.id,
             lang = settings.lang(chat),
-            text = message.text;
+            text = message.text && message.text.toLowerCase();
 
         return text === '/language' || text === i18n(lang, 'common', 'language').toLowerCase();
     };
@@ -53,7 +53,7 @@
             settings.lang(this.chat, lang);
 
             this.complete = true;
-            telegram.sendMessage(this.chat, resp, null);
+            telegram.sendMessage(this.chat, resp, 'home');
         } else {
             resp = i18n(this.lang, 'lang', 'incorrect_language');
             telegram.sendMessage(this.chat, resp);

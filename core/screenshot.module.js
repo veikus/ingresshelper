@@ -79,7 +79,7 @@
             });
 
             resp = i18n(this.lang, 'screenshot', 'task_saved');
-            telegram.sendMessage(this.chat, resp, null);
+            telegram.sendMessage(this.chat, resp, 'home');
 
             // Stats
             settings.calculateScreenshotRequest(this.chat);

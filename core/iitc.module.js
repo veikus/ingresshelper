@@ -67,7 +67,7 @@
 
         if (temp === text) {
             this.complete = true;
-            telegram.sendMessage(this.chat, '👍', null); // thumbs up
+            telegram.sendMessage(this.chat, '👍', 'home'); // thumbs up
         } else if (plugins[text]) {
             plugin = plugins[text];
             index = enabled.indexOf(plugin.id);

@@ -62,9 +62,9 @@
      * @param message {object} Message from getUpdates
      */
     function processMessage(message) {
-        var lang,
+        var lang, moduleFound,
             chat = message.chat.id,
-            text = message.text;
+            text = message.text && message.text.toLowerCase();
 
         // Save user data
         settings.profile(chat, {
@@ -78,11 +78,16 @@
         modules.forEach(function(module) {
             if (module.initMessage(message)) {
                 activeModule[chat] = new module(message);
+                moduleFound = true;
             }
         });
 
+        if (moduleFound) {
+            // We already made everything above
+        }
+
         // Hack for a new users
-        if (text === '/start') {
+        else if (text === '/start') {
             // todo replace with i18n
             telegram.sendMessage(chat, 'Thank you for installing me. Send me location to get intel screenshot');
             text = '/language';
@@ -93,7 +98,7 @@
             delete activeModule[chat];
 
             lang = settings.lang(chat);
-            telegram.sendMessage(chat, i18n(lang, 'main', 'cancelled'), null);
+            telegram.sendMessage(chat, i18n(lang, 'main', 'cancelled'), 'home');
         }
 
         // If user has another active module
@@ -109,7 +114,7 @@
         // Or maybe user made a mistake (do not reply in groups)
         else if (chat > -1) {
             lang = settings.lang(chat);
-            telegram.sendMessage(chat, i18n(lang, 'main', 'unknown_command'), null);
+            telegram.sendMessage(chat, i18n(lang, 'main', 'unknown_command'), 'home');
         }
 
         // Cleanup complete modules

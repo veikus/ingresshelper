@@ -119,7 +119,7 @@ Interval.prototype.onMessage = function (message) {
     temp = i18n(this.lang, 'interval', 'cancel');
     if (text === temp) {
         this.complete = true;
-        telegram.sendMessage(this.chat, '👍', null); // thumbs up
+        telegram.sendMessage(this.chat, '👍', 'home'); // thumbs up
         return;
     }
 
@@ -255,7 +255,7 @@ Interval.prototype.sendMessage = function (step) {
 
         case 'complete':
             resp = i18n(this.lang, 'interval', 'task_saved');
-            markup = null;
+            markup = 'home';
     }
 
     if (markup) {

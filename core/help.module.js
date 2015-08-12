@@ -42,7 +42,7 @@
         resp.push(i18n(lang, 'help', 'line_4'));
 
         this.complete = true;
-        telegram.sendMessage(chat, resp.join('\n'), null);
+        telegram.sendMessage(chat, resp.join('\n'), 'home');
     };
 
     module.exports = Help;

@@ -21,7 +21,7 @@
         this.chat = message.chat.id;
         this.complete = true;
 
-        telegram.sendMessage(this.chat, 'Героям слава!', null);
+        telegram.sendMessage(this.chat, 'Героям слава!', 'home');
         botan.track(message, 'Easter egg');
     }
 

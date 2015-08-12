@@ -5,7 +5,12 @@ var i18n = require(__dirname + '/i18n_extend.js'),
 
 module.exports.homeMarkup = function(id) {
     var markup,
-        lang = settings.language(id);
+        lang = settings.lang(id);
+
+    // Do not display keyboard in groups
+    if (id < 0) {
+        return null;
+    }
 
     markup = {
         one_time_keyboard: true,

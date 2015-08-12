@@ -63,7 +63,7 @@
 
         if (this.complete) {
             resp = i18n(this.lang, 'compression', 'saved');
-            telegram.sendMessage(this.chat, resp, null);
+            telegram.sendMessage(this.chat, resp, 'home');
         } else {
             resp = i18n(this.lang, 'compression', 'wrong_input');
             telegram.sendMessage(this.chat, resp);

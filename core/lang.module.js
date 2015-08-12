@@ -47,8 +47,6 @@
         if (languages[text]) {
             lang = languages[text];
             resp = i18n(lang, 'lang', 'saved');
-            resp += '\n\n';
-            resp += i18n(lang, 'lang', 'help_us');
 
             settings.lang(this.chat, lang);
 

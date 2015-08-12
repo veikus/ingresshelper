@@ -22,12 +22,14 @@ module.exports.homeMarkup = function(id) {
 
     if (settings.profile(id).screenshotsRequested < 3) {
         markup.keyboard.push([i18n(lang, 'common', 'what_is_ingress_option')]);
+        markup.keyboard.push([i18n(lang, 'common', 'language')]);
     } else {
-        //markup.keyboard.push([i18n(lang, 'common', 'rate_us')]);
+        markup.keyboard.push([
+            i18n(lang, 'common', 'rate_us'),
+            i18n(lang, 'common', 'language')
+        ]);
         //markup.keyboard.push([i18n(lang, 'common', 'device_poll')]);
     }
-
-    markup.keyboard.push([i18n(lang, 'common', 'language')]);
 
     return markup;
 };

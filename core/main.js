@@ -20,7 +20,7 @@
         var module,
             list = [
                 'banderavec.module.js', 'compression.module.js', 'help.module.js', 'iitc.module.js',
-                'interval.module.js', 'lang.module.js', 'screenshot.module.js', 'stats.module.js'
+                'interval.module.js', 'lang.module.js', 'screenshot.module.js', 'stats.module.js', 'rate_us.module.js'
             ];
 
         list.forEach(function(fileName) {
@@ -104,7 +104,7 @@
             activeModule[chat].onMessage(message);
         }
 
-        // In other case check is it location TODO
+        // In other case check is it location
         else if (message.location && modules.screenshot) {
             activeModule[chat] = new modules.screenshot(message);
         }

@@ -11,6 +11,7 @@ var tasks,
     iitc = require(__dirname + '/iitc.module.js'),
     express = require('express'),
     path = require('path'),
+    config = require(__dirname + '/../config.js'),
     expressApp = express(),
     currentTask = -1;
 
@@ -59,6 +60,10 @@ db
 
 // Save data in DB
 setInterval(function() {
+    if (config.dbReadOnly) {
+        return;
+    }
+
     tasks.forEach(function(task, i) {
         var method;
 

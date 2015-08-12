@@ -9,6 +9,7 @@ var allowedTimeouts, allowedPauses, timeoutMarkup, pauseMarkup, intervals,
     settings = require(__dirname + '/settings.js'),
     taskManager = require(__dirname + '/task_manager.js'),
     db = require(__dirname + '/db.js'),
+    config = require(__dirname + '/../config.js'),
     botan = require('botanio')(61578);
 
 Interval.initMessage = '/interval';
@@ -26,6 +27,10 @@ db
 
 // Save data in DB
 setInterval(function() {
+    if (config.dbReadOnly) {
+        return;
+    }
+
     intervals.forEach(function(interval, i) {
         var method;
 

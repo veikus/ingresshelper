@@ -5,6 +5,7 @@
  */
 var q = require('q'),
     db = require(__dirname + '/db.js'),
+    config = require(__dirname + '/../config.js'),
     users = {},
     plugins = {};
 
@@ -105,6 +106,10 @@ function updateIITCPlugins() {
 }
 
 setInterval(function() {
+    if (config.dbReadOnly) {
+        return;
+    }
+
     updateUsers();
     updateIITCPlugins();
     console.log('Db updated');

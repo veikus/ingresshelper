@@ -253,7 +253,7 @@ module.exports = {
 			"br": "Configuração completa",
 			"it": "Configurazione completata",
 			"ro-md": "Finisați configurările. ",
-			"fr": "Valider la configuation",
+			"fr": "Valider la configuration",
 			"nl": "Complete opstelling",
 			"fa": "راه اندازی کامل شد.تبریک میگم :))"
 		}
@@ -408,7 +408,7 @@ module.exports = {
 			"br": "Com que fequência você precisa de capturas de tela?",
 			"it": "Ogni quanto tempo hai bisogno di uno screenshot?",
 			"ro-md": "Cît de des a transmite screenshot-urile ?",
-			"fr": "A quelle fréquence sounhaitez vous recevoir les screenshots ?",
+			"fr": "A quelle fréquence souhaitez vous recevoir les screenshots ?",
 			"nl": "Hoe vaak wilt u schermafbeeldingen?",
 			"fa": "هر چه مدت یکبار به تصاویر نیاز دارید؟"
 		},
@@ -710,7 +710,7 @@ module.exports = {
 			"de": "Task gespeichert. Bitte einige Minuten warten.",
 			"chde": "Task gspeicheret. Bitte es paar minute warte.",
 			"es": "Tarea guardada. Por favor espera unos minutos.",
-			"br": "Tarefa guardada. Por favor, aguarde por alguns minutos",
+			"br": "Tarefa guardada. Por favor, aguarde alguns minutos",
 			"it": "Comando salvato, Per favore, attendi qualche minuto",
 			"ro-md": "Sarcina este salvat. După câteva minute, vei primi un screenshot",
 			"fr": "Tâche enregistrée. Merci d'attendre quelques minutes.",
@@ -844,6 +844,7 @@ module.exports = {
 			"de": "Bewerte uns",
 			"chde": "Bewärt eus",
 			"es": "Califícanos",
+			"br": "Classifique nosso app",
 			"fr": "Evaluez nous",
 			"nl": "Beoordeel ons"
 		},
@@ -855,6 +856,7 @@ module.exports = {
 			"de": "Newsletter abonnieren",
 			"chde": "Newsletter abonniere",
 			"es": "Suscríbete a las noticias",
+			"br": "Subscrever para receber notícias",
 			"fr": "Abonnez vous à la newsletter",
 			"nl": "Abonneren op nieuwsbrief"
 		},
@@ -866,6 +868,7 @@ module.exports = {
 			"de": "Newsletter deabonnieren",
 			"chde": "Newsletter deabonniere",
 			"es": "Desuscribirte de las noticias",
+			"br": "Cancelar Subscrição",
 			"fr": "Désabonnez vous de la newsletter",
 			"nl": "Uitschrijven van nieuwsbrief"
 		},
@@ -877,6 +880,7 @@ module.exports = {
 			"de": "Zurück zur Befehlsliste",
 			"chde": "Zrugg zu de Befehlslischte",
 			"es": "Volver a la lista de acciones",
+			"br": "Voltar à lista de ações",
 			"fr": "Retour à la liste d'actions",
 			"nl": "Terug naar lijst met acties"
 		},
@@ -888,6 +892,7 @@ module.exports = {
 			"de": "Screenshot machen",
 			"chde": "Schreenshot mache",
 			"es": "Hacer screenshot",
+			"br": "Fazer Screenshot",
 			"fr": "Faire un screenshot",
 			"nl": "Schermafbeelding maken"
 		},
@@ -899,6 +904,7 @@ module.exports = {
 			"de": "💡 Drücke \"📎 > Standort\" um deinen Standort zu senden",
 			"chde": "💡 Über \"📎 > Standort\" chasch din Standort schicke.",
 			"es": "💡 Para enviar ubicación presiona \"📎\" > \"Ubicación\"",
+			"br": "💡 Para enviar localização pressione \"📎\" > \"localização\"",
 			"fr": "💡 Pour envoyer votre localisation choisir \"📎 > Location\"",
 			"nl": "💡 Druk op \"📎 > Locatie\" om je locatie te sturen."
 		},
@@ -910,6 +916,7 @@ module.exports = {
 			"de": "Was ist Ingress?",
 			"chde": "Was isch Ingress?",
 			"es": "¿Qué es Ingress?",
+			"br": "O que é Ingress?",
 			"fr": "Ingress, qu'est-ce ?",
 			"nl": "Wat is Ingress?"
 		},
@@ -921,13 +928,14 @@ module.exports = {
 			"de": "Ingress ist ein standortbasiertes online multiplayer Game, welches von Niantic Labs entwickelt wurde. Download: http://ingress.com",
 			"chde": "Ingress isch es standort basierends online multiplayer Game wo vo Niantic LAbs erstellt worde isch. Download: http://ingress.com",
 			"es": "Ingress es un juego en línea multijugador que funciona con la ubicación GPS creado por Niantic Labs. Descárgalo en http://ingress.com",
+			"br": "Ingress é um jogo baseado em localização multiplayer online criado por Niantic Labs. Baixe-o em http://ingress.com",
 			"fr": "Ingress est un jeu multijoueur en ligne basé sur la localisation, créé par Niantic Labs. Télécharger sur http://ingress.com",
 			"nl": "Ingress is een multiplayer online locatiegebaseerd spel gemaakt door Niantic Labs. Download het op http://ingress.com"
 		},
 		"what_is_ingress_resp_2": {
 			"en": "This bot is useless if you're not an ingress player.",
-			"ru": "Бот будет полезен только игрокам в ingress",
-			"ua": "Цей бот буде корисним лише для гравців Ingress",
+			"ru": "Бот будет полезен только игрокам в ingress.",
+			"ua": "Цей бот буде корисним лише для гравців Ingress.",
 			"fi": "Tästä botti on hyödyllinen ainoastaan Ingress-pelaajille.",
 			"de": "Dieser Bot ist nutzlos für dich, wenn du kein Ingress-Spieler bist.",
 			"chde": "De Bot bringt der absolut GAAAR NÜÜT, wenn kein Ingress Spieler bisch.",
@@ -938,24 +946,85 @@ module.exports = {
 		"welcome_message": {
 			"en": "Thank you for installing me. Send me location to get intel screenshot.",
 			"ru": "Спасибо за то, что установили меня. Пришлите мне локацию, чтобы получить скриншот с интела",
+			"ua": "Дякуємо за встановлення. Надішліть мені локацію, щоб отримати знімок інтелу",
 			"es": "Gracias por instalarme. Envíame tu ubicación para obtener intel en una captura de pantalla.",
+			"fr": "Merci de m'avoir installé. Envoyez moi votre localisation pour recevoir un screenshot de l'intel.",
 			"nl": "Bedankt dat je me hebt geïnstalleerd. Stuur me nu je locatie om een intel-schermafbeelding te krijgen."
 		},
 		"device_poll": {
-			"en": "POLL: What`s your device?",
-			"ru": "ОПРОС: Какое у вас устройство?"
+			"en": "Poll: What`s your device?",
+			"ru": "Опрос: Какое у вас устройство?",
+			"ua": "Опитування: який у вас девайс?",
+			"es": "Encuesta: ¿Cuál es tu dispositivo?",
+			"fr": "Sondage : Quel est votre appareil ?"
 		},
 		"device_poll_resp": {
 			"en": "Thank you for your vote",
-			"ru": "Спасибо за ваш голос"
+			"ru": "Спасибо за ваш голос",
+			"ua": "Дякую за ваш голос",
+			"es": "Gracias por tu voto",
+			"fr": "Merci pour votre vote"
 		},
 		"language": {
 			"en": "Change language",
-			"ru": "Изменить язык"
+			"ru": "Изменить язык",
+			"ua": "Змінити мову",
+			"es": "Cambiar idioma",
+			"fr": "Changer de langue",
+			"nl": "Taal veranderen"
 		},
 		"iitc_setup": {
 			"en": "Setup IITC",
-			"ru": "Настроить IITC"
-		}
+			"ru": "Настроить IITC",
+			"ua": "Налаштувати IITC",
+			"es": "Configuración IITC",
+			"fr": "Configurer IITC",
+			"nl": "IITC instellen"
+		},
+		"donate": {
+			"en": "Donate",
+			"ru": "Помочь проекту",
+			"ua": "Допомогти проекту",
+			"es": "Donar",
+			"fr": "Donner"
+		},
+		"donate_response": {
+			"en": "Hi. You can help the further development of the project by transferring us some money.",
+			"ru": "Привет, вы можете помочь дальнейшему развитию проекта, перечислив нам немного денег.",
+			"ua": "Вітаємо, ви можете допомогти подальшому розвитку проекту, перерахувавши нам трохи грошей",
+			"es": "Hola. Tu puedes ayudar a que continuemos el desarrollo de este bot al hacer una donación.",
+			"fr": "Bonjour, vous pouvez aider à des développements complémentaires du projet en nous transférant de l'argent."
+		},
+		"donate_option_yandex": {
+			"en": "Yandex.Money",
+			"ru": "Яндекс.Деньги",
+			"ua": "Яндекс.Гроші",
+			"es": "Yandex.Money"
+		},
+		"donate_option_card": {
+			"en": "VISA / Mastercard",
+			"ru": "VISA / Mastercard",
+			"ua": "VISA / Mastercard",
+			"es": "VISA / Mastercard"
+		},
+		"donate_option_paypal": {
+			"en": "PayPal",
+			"ru": "PayPal",
+			"ua": "PayPal",
+			"es": "PayPal"
+		},
+		"donate_response_yandex": {
+			"en": "Thank you. Follow this url: https://goo.gl/uRpdDo",
+			"ru": "Спасибо. Для продолжения перейдите по ссылке: https://goo.gl/uRpdDo",
+			"ua": "Дякуємо. Для продовження перейдіть за посиланням: https://goo.gl/uRpdDo",
+			"es": "Gracias. Entra aqui para hacer tu donación: https://goo.gl/uRpdDo"
+		},
+		"donate_response_card": {
+			"en": "Thank you. Follow this url: https://goo.gl/iRTsra",
+			"ru": "Спасибо. Для продолжения перейдите по ссылке: https://goo.gl/iRTsra",
+			"ua": "Дякуємо. Для продовження перейдіть за посиланням: https://goo.gl/iRTsra",
+			"es": "Gracias. Entra aqui para hacer tu donación: https://goo.gl/iRTsra"
+		},
+		"donate_response_paypal": {}
 	}
 };

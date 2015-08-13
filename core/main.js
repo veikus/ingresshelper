@@ -21,7 +21,7 @@
             list = [
                 'banderavec.module.js', 'compression.module.js', 'help.module.js', 'iitc.module.js',
                 'interval.module.js', 'lang.module.js', 'screenshot.module.js', 'stats.module.js', 'rate_us.module.js',
-                'what_is_ingress.module.js'
+                'what_is_ingress.module.js', 'donate.module.js'
             ];
 
         list.forEach(function(fileName) {

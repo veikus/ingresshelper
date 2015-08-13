@@ -710,7 +710,7 @@ module.exports = {
 			"de": "Task gespeichert. Bitte einige Minuten warten.",
 			"chde": "Task gspeicheret. Bitte es paar minute warte.",
 			"es": "Tarea guardada. Por favor espera unos minutos.",
-			"br": "Tarefa guardada. Por favor, aguarde alguns minutos",
+			"br": "Tarefa guardada. Por favor, aguarde um pouco",
 			"it": "Comando salvato, Per favore, attendi qualche minuto",
 			"ro-md": "Sarcina este salvat. După câteva minute, vei primi un screenshot",
 			"fr": "Tâche enregistrée. Merci d'attendre quelques minutes.",
@@ -844,7 +844,7 @@ module.exports = {
 			"de": "Bewerte uns",
 			"chde": "Bewärt eus",
 			"es": "Califícanos",
-			"br": "Classifique nosso app",
+			"br": "Avalie nosso app",
 			"fr": "Evaluez nous",
 			"nl": "Beoordeel ons"
 		},
@@ -892,7 +892,7 @@ module.exports = {
 			"de": "Screenshot machen",
 			"chde": "Schreenshot mache",
 			"es": "Hacer screenshot",
-			"br": "Fazer Screenshot",
+			"br": "Tirar Screenshot",
 			"fr": "Faire un screenshot",
 			"nl": "Schermafbeelding maken"
 		},
@@ -928,7 +928,7 @@ module.exports = {
 			"de": "Ingress ist ein standortbasiertes online multiplayer Game, welches von Niantic Labs entwickelt wurde. Download: http://ingress.com",
 			"chde": "Ingress isch es standort basierends online multiplayer Game wo vo Niantic LAbs erstellt worde isch. Download: http://ingress.com",
 			"es": "Ingress es un juego en línea multijugador que funciona con la ubicación GPS creado por Niantic Labs. Descárgalo en http://ingress.com",
-			"br": "Ingress é um jogo baseado em localização multiplayer online criado por Niantic Labs. Baixe-o em http://ingress.com",
+			"br": "Ingress é um jogo multiplayer online  baseado em localização, criado por Niantic Labs. Baixe-o em http://ingress.com",
 			"fr": "Ingress est un jeu multijoueur en ligne basé sur la localisation, créé par Niantic Labs. Télécharger sur http://ingress.com",
 			"nl": "Ingress is een multiplayer online locatiegebaseerd spel gemaakt door Niantic Labs. Download het op http://ingress.com"
 		},
@@ -940,6 +940,7 @@ module.exports = {
 			"de": "Dieser Bot ist nutzlos für dich, wenn du kein Ingress-Spieler bist.",
 			"chde": "De Bot bringt der absolut GAAAR NÜÜT, wenn kein Ingress Spieler bisch.",
 			"es": "Este bot no te sirve de nada si no eres un jugador de Ingress.",
+			"br": "Este bot é inútil se você não é um jogador de Ingress.",
 			"fr": "Ce bot ne sert à rien si vous n'êtes pas un joueur d'Ingress.",
 			"nl": "Deze bot is waardeloos als je geen Ingress-speler bent."
 		},
@@ -948,6 +949,7 @@ module.exports = {
 			"ru": "Спасибо за то, что установили меня. Пришлите мне локацию, чтобы получить скриншот с интела",
 			"ua": "Дякуємо за встановлення. Надішліть мені локацію, щоб отримати знімок інтелу",
 			"es": "Gracias por instalarme. Envíame tu ubicación para obtener intel en una captura de pantalla.",
+			"br": "Obrigado por instalar. Envie localização para recebeer screenshot do Intel.",
 			"fr": "Merci de m'avoir installé. Envoyez moi votre localisation pour recevoir un screenshot de l'intel.",
 			"nl": "Bedankt dat je me hebt geïnstalleerd. Stuur me nu je locatie om een intel-schermafbeelding te krijgen."
 		},
@@ -956,6 +958,7 @@ module.exports = {
 			"ru": "Опрос: Какое у вас устройство?",
 			"ua": "Опитування: який у вас девайс?",
 			"es": "Encuesta: ¿Cuál es tu dispositivo?",
+			"br": "Enquete: Qual é seu dispositivo?",
 			"fr": "Sondage : Quel est votre appareil ?"
 		},
 		"device_poll_resp": {
@@ -963,6 +966,7 @@ module.exports = {
 			"ru": "Спасибо за ваш голос",
 			"ua": "Дякую за ваш голос",
 			"es": "Gracias por tu voto",
+			"br": "Obrigado pelo voto.",
 			"fr": "Merci pour votre vote"
 		},
 		"language": {
@@ -970,6 +974,7 @@ module.exports = {
 			"ru": "Изменить язык",
 			"ua": "Змінити мову",
 			"es": "Cambiar idioma",
+			"br": "Mudar idioma",
 			"fr": "Changer de langue",
 			"nl": "Taal veranderen"
 		},
@@ -978,6 +983,7 @@ module.exports = {
 			"ru": "Настроить IITC",
 			"ua": "Налаштувати IITC",
 			"es": "Configuración IITC",
+			"br": "Configurações do IITC",
 			"fr": "Configurer IITC",
 			"nl": "IITC instellen"
 		},
@@ -986,6 +992,7 @@ module.exports = {
 			"ru": "Помочь проекту",
 			"ua": "Допомогти проекту",
 			"es": "Donar",
+			"br": "Doar",
 			"fr": "Donner"
 		},
 		"donate_response": {
@@ -993,37 +1000,43 @@ module.exports = {
 			"ru": "Привет, вы можете помочь дальнейшему развитию проекта, перечислив нам немного денег.",
 			"ua": "Вітаємо, ви можете допомогти подальшому розвитку проекту, перерахувавши нам трохи грошей",
 			"es": "Hola. Tu puedes ayudar a que continuemos el desarrollo de este bot al hacer una donación.",
+			"br": "Oi. Você pode ajudar o desenvolvimento e aprimoramento do projeto fazendo uma doação. ",
 			"fr": "Bonjour, vous pouvez aider à des développements complémentaires du projet en nous transférant de l'argent."
 		},
 		"donate_option_yandex": {
 			"en": "Yandex.Money",
 			"ru": "Яндекс.Деньги",
 			"ua": "Яндекс.Гроші",
-			"es": "Yandex.Money"
+			"es": "Yandex.Money",
+			"br": "Yandex.Money"
 		},
 		"donate_option_card": {
 			"en": "VISA / Mastercard",
 			"ru": "VISA / Mastercard",
 			"ua": "VISA / Mastercard",
-			"es": "VISA / Mastercard"
+			"es": "VISA / Mastercard",
+			"br": "VISA / Mastercard"
 		},
 		"donate_option_paypal": {
 			"en": "PayPal",
 			"ru": "PayPal",
 			"ua": "PayPal",
-			"es": "PayPal"
+			"es": "PayPal",
+			"br": "PayPal"
 		},
 		"donate_response_yandex": {
-			"en": "Thank you. Follow this url: https://goo.gl/uRpdDo",
-			"ru": "Спасибо. Для продолжения перейдите по ссылке: https://goo.gl/uRpdDo",
-			"ua": "Дякуємо. Для продовження перейдіть за посиланням: https://goo.gl/uRpdDo",
-			"es": "Gracias. Entra aqui para hacer tu donación: https://goo.gl/uRpdDo"
+			"en": "Follow this url: https://goo.gl/uRpdDo",
+			"ru": "Для продолжения перейдите по ссылке: https://goo.gl/uRpdDo",
+			"ua": "Для продовження перейдіть за посиланням: https://goo.gl/uRpdDo",
+			"es": "Gracias. Entra aqui para hacer tu donación: https://goo.gl/uRpdDo",
+			"br": "Obrigado. Faça sua doação no link: https://goo.gl/uRpdDo"
 		},
 		"donate_response_card": {
-			"en": "Thank you. Follow this url: https://goo.gl/iRTsra",
-			"ru": "Спасибо. Для продолжения перейдите по ссылке: https://goo.gl/iRTsra",
-			"ua": "Дякуємо. Для продовження перейдіть за посиланням: https://goo.gl/iRTsra",
-			"es": "Gracias. Entra aqui para hacer tu donación: https://goo.gl/iRTsra"
+			"en": "Follow this url: https://goo.gl/iRTsra",
+			"ru": "Для продолжения перейдите по ссылке: https://goo.gl/iRTsra",
+			"ua": "Для продовження перейдіть за посиланням: https://goo.gl/iRTsra",
+			"es": "Gracias. Entra aqui para hacer tu donación: https://goo.gl/iRTsra",
+			"br": "Obrigado. Faça sua doação no link: https://goo.gl/iRTsra"
 		},
 		"donate_response_paypal": {}
 	}

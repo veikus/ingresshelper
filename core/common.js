@@ -28,8 +28,8 @@ module.exports.homeMarkup = function(id) {
         ]);
     } else {
         markup.keyboard.push([
-            i18n(lang, 'common', 'rate_us')
-            //lang === 'ru' || lang === 'ua' ? i18n(lang, 'common', 'donate') : ''
+            i18n(lang, 'common', 'rate_us'),
+            lang === 'ru' || lang === 'ua' ? i18n(lang, 'common', 'donate') : ''
         ]);
 
         markup.keyboard.push([

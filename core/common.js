@@ -27,7 +27,11 @@ module.exports.homeMarkup = function(id) {
             i18n(lang, 'common', 'language')
         ]);
     } else {
-        markup.keyboard.push([i18n(lang, 'common', 'rate_us')]);
+        markup.keyboard.push([
+            i18n(lang, 'common', 'rate_us')
+            //lang === 'ru' || lang === 'ua' ? i18n(lang, 'common', 'donate') : ''
+        ]);
+
         markup.keyboard.push([
             i18n(lang, 'common', 'iitc_setup'),
             i18n(lang, 'common', 'language')

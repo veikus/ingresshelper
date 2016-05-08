@@ -1,14 +1,14 @@
 # Ingress Helper Bot
 Русский перевод ниже
 
-## How to start your own bot
-1. Download and unpack archive ("Download zip" button on the right column on this page).
+## Usage
+1. Download and unpack archive ("Download Zip" button on the right column on this page).
 2. Download iitc plugins in iitc folder (check out core/iitc.module.js file to get list of required plugins).
-2. Send message to [@BotFather](http://telegram.me/botfather) and create new bot. You will get token.
-3. Edit core/telegram.js and replace YOUR_TOKEN_HERE with token from step 3.
-4. Open chrome, then select Preferences > Extensions.
-5. Check "Developer mode" checkbox, click "Load unpacked extension" and choose folder you got on step 1.
-6. Do not close chrome.
+2. Send message to [@BotFather](http://telegram.me/botfather) to create a new bot. You will get a token.
+3. Edit core/telegram.js and replace YOUR_TOKEN_HERE with the token from step 3.
+4. Open Google Chrome, then select Preferences > Extensions.
+5. Check "Developer mode" checkbox, click "Load unpacked extension" and choose the folder you got in step 1.
+6. Don't close chrome, or the bot will stop running!
 
 ## Как запустить своего бота
 1. Скачиваем и распаковываем архив (Кнопка "Download zip" на этой странице справа).

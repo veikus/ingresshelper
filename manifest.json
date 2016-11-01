@@ -1,11 +1,12 @@
 {
     "manifest_version": 2,
     "name": "Ingress Intel Helper",
-    "version": "2.3.0",
+    "version": "2.4.0",
     "description": "Makes screenshots for intel map",
     "background": {
         "persistent": true,
         "scripts": [
+            "core/config.js",
             "core/main.js",
             "i18n/i18n.js",
             "core/settings.js",

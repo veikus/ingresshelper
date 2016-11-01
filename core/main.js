@@ -1,13 +1,16 @@
 /**
  * @file Primary bot file
  * @author Artem Veikus artem@veikus.com
- * @version 2.0
+ * @version 2.4.0
  */
-var app = {};
-
 (function() {
     var modules = {},
         activeModule = {};
+
+    if (app.config.telegramKey === 'YOUR_TOKEN_HERE') {
+        alert('Telegram key is not set. Please update "core/config.js" file and restart extension (or browser).');
+        return;
+    }
 
     window.onload = init;
 

@@ -1,6 +1,5 @@
 (function() {
-    var TOKEN = 'INSERT_TOKEN_HERE',
-        API_URL = 'https://api.telegram.org/bot' + TOKEN,
+    var API_URL = 'https://api.telegram.org/bot' + app.config.telegramKey,
         TIMEOUT = 10,
         offset = localStorage.getItem('telegram_offset') || 0,
         chatSettings = localStorage.getItem('chatSettings') || '{}';

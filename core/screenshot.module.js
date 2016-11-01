@@ -1,13 +1,11 @@
 /**
  * @file Screenshot task creation module
  * @author Artem Veikus artem@veikus.com
- * @version 2.0
+ * @version 2.5.0
  */
 (function() {
     app.modules = app.modules || {};
     app.modules.screenshot = Screenshot;
-
-    Screenshot.initMessage = '/screenshot';
 
     /**
      * @param message {object} Telegram message object
@@ -19,6 +17,17 @@
         this.location = null;
         this.onMessage(message);
     }
+
+    /**
+     * @static
+     * @param message {object} Telegram message object
+     * @returns {boolean}
+     */
+    Screenshot.initMessage = function(message) {
+        var text = message.text && message.text.toLowerCase();
+
+        return text && text === '/screenshot';
+    };
 
     /**
      * @param message {object} Telegram message object

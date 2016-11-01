@@ -1,15 +1,13 @@
 /**
  * @file Statistic calculation module
  * @author Artem Veikus artem@veikus.com
- * @version 2.1
+ * @version 2.5.0
  */
 (function() {
     var screenshotsData;
 
     app.modules = app.modules || {};
     app.modules.stats = Stats;
-
-    Stats.initMessage = '/stats';
 
     // Initialization
     screenshotsData = localStorage.getItem('stats__screenshots');
@@ -26,6 +24,17 @@
 
         this.onMessage(message);
     }
+
+    /**
+     * @static
+     * @param message {object} Telegram message object
+     * @returns {boolean}
+     */
+    Stats.initMessage = function(message) {
+        var text = message.text && message.text.toLowerCase();
+
+        return text && text === '/stats';
+    };
 
     /**
      * @param message {object} Telegram message object

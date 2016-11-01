@@ -9,7 +9,7 @@
     /**
      * Chat settings
      * @param id {Number} Chat id
-     * @param lang {String} Set user language
+     * @param lang {String=} Set user language
      * @returns {String|null} Current language code (or null if not defined)
      */
     app.settings.lang = function(id, lang) {

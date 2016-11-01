@@ -1,13 +1,11 @@
 /**
  * @file Compression setup module
  * @author Artem Veikus artem@veikus.com
- * @version 2.0
+ * @version 2.5.0
  */
 (function() {
     app.modules = app.modules || {};
     app.modules.compression = Compression;
-
-    Compression.initMessage = '/compression';
 
     /**
      * @param message {object} Telegram message object
@@ -31,6 +29,17 @@
         resp = app.i18n(this.lang, 'compression', 'welcome');
         app.telegram.sendMessage(this.chat, resp, markup);
     }
+
+    /**
+     * @static
+     * @param message {object} Telegram message object
+     * @returns {boolean}
+     */
+    Compression.initMessage = function(message) {
+        var text = message.text && message.text.toLowerCase();
+
+        return text && text === '/compression';
+    };
 
     /**
      * @param message {object} Telegram message object

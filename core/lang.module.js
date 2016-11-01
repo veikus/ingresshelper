@@ -1,7 +1,7 @@
 /**
  * @file Language setup module
  * @author Artem Veikus artem@veikus.com
- * @version 2.0
+ * @version 2.5.0
  */
 (function() {
     var languages,
@@ -9,8 +9,6 @@
 
     app.modules = app.modules || {};
     app.modules.lang = Lang;
-
-    Lang.initMessage = '/language';
 
     /**
      * @param message {object} Telegram message object
@@ -25,6 +23,17 @@
         resp = app.i18n(this.lang, 'lang', 'welcome');
         app.telegram.sendMessage(this.chat, resp, markup);
     }
+
+    /**
+     * @static
+     * @param message {object} Telegram message object
+     * @returns {boolean}
+     */
+    Lang.initMessage = function(message) {
+        var text = message.text && message.text.toLowerCase();
+
+        return text && text === '/language';
+    };
 
     /**
      * @param message {object} Telegram message object

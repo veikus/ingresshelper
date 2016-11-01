@@ -1,13 +1,11 @@
 /**
  * @file Help module
  * @author Artem Veikus artem@veikus.com
- * @version 2.0
+ * @version 2.5.0
  */
 (function() {
     app.modules = app.modules || {};
     app.modules.help = Help;
-
-    Help.initMessage = '/help';
 
     /**
      * @param message {object} Telegram message object
@@ -16,6 +14,17 @@
     function Help(message) {
         this.onMessage(message);
     }
+
+    /**
+     * @static
+     * @param message {object} Telegram message object
+     * @returns {boolean}
+     */
+    Help.initMessage = function(message) {
+        var text = message.text && message.text.toLowerCase();
+
+        return text && text === '/help';
+    };
 
     /**
      * @param message {object} Telegram message object

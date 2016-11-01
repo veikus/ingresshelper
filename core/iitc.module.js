@@ -1,15 +1,13 @@
 /**
  * @file IITC setup module
  * @author Artem Veikus artem@veikus.com
- * @version 2.0
+ * @version 2.5.0
  */
 (function() {
     var plugins, markup;
 
     app.modules = app.modules || {};
     app.modules.iitc = IITC;
-
-    IITC.initMessage = '/iitc';
 
     plugins = {
         'IITC': 'iitc/total-conversion-build.user.js',
@@ -44,6 +42,17 @@
 
         app.telegram.sendMessage(this.chat, resp, markup);
     }
+
+    /**
+     * @static
+     * @param message {object} Telegram message object
+     * @returns {boolean}
+     */
+    IITC.initMessage = function(message) {
+        var text = message.text && message.text.toLowerCase();
+
+        return text && text === '/iitc';
+    };
 
     /**
      * @param message {object} Telegram message object

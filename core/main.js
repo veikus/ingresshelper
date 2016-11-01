@@ -1,10 +1,10 @@
 /**
  * @file Primary bot file
  * @author Artem Veikus artem@veikus.com
- * @version 2.4.0
+ * @version 2.5.0
  */
 (function() {
-    var modules = {},
+    var modulesArray = [],
         activeModule = {};
 
     if (app.config.telegramKey === 'YOUR_TOKEN_HERE') {
@@ -19,12 +19,7 @@
      */
     function init() {
         Object.keys(app.modules).forEach(function(name) {
-            var module = app.modules[name],
-                magicWord = module.initMessage;
-
-            if (magicWord) {
-                modules[magicWord] = module;
-            }
+            modulesArray.push(app.modules[name]);
         });
 
         getUpdates();
@@ -52,27 +47,34 @@
      * @param message {object} Message from getUpdates
      */
     function processMessage(message) {
-        var lang,
-            chat = message.chat.id,
-            text = message.text;
-
-        // Hack for a new users
-        if (text === '/start') {
-            app.telegram.sendMessage(chat, 'Thank you for installing me. Send me location to get intel screenshot');
-            text = '/language';
-        }
+        var moduleFound,
+            i18n = app.i18n,
+            chat = parseInt(message.chat.id), // WebStorm was not sure about type of this variable. It help him a little
+            lang = app.settings.lang(chat),
+            text = message.text && message.text.toLowerCase();
 
         // If user asked for another module
-        if (modules[text]) {
-            activeModule[chat] = new modules[text](message);
+        modulesArray.forEach(function(module) {
+            if (module.initMessage(message)) {
+                activeModule[chat] = new module(message);
+                moduleFound = true;
+            }
+        });
+
+        if (moduleFound) {
+            // We already made everything above
+        }
+
+        // Hack for a new users
+        else if (text === '/start') {
+            app.telegram.sendMessage(chat, i18n(lang, 'common', 'welcome_message'));
+            activeModule[chat] = new app.modules.lang(message);
         }
 
         // If user asked to cancel current action - just remove a module
-        else if (text === '/cancel') {
+        else if (text === '/cancel' || text === i18n(lang, 'common', 'homepage').toLowerCase()) {
             delete activeModule[chat];
-
-            lang = app.settings.lang(chat);
-            app.telegram.sendMessage(chat, app.i18n(lang, 'main', 'cancelled'), null);
+            app.telegram.sendMessage(chat, i18n(lang, 'main', 'cancelled'));
         }
 
         // If user has another active module
@@ -88,7 +90,7 @@
         // Or maybe user made a mistake (do not reply in groups)
         else if (chat > -1) {
             lang = app.settings.lang(chat);
-            app.telegram.sendMessage(chat, app.i18n(lang, 'main', 'unknown_command'), null);
+            app.telegram.sendMessage(chat, i18n(lang, 'main', 'unknown_command'));
         }
 
         // Cleanup complete modules
@@ -96,5 +98,4 @@
             delete activeModule[chat];
         }
     }
-
 }());

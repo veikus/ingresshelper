@@ -1,7 +1,7 @@
 /**
  * @file Interval setup and processing module
  * @author Artem Veikus artem@veikus.com
- * @version 2.2
+ * @version 2.5.0
  */
 (function() {
     var allowedTimeouts, allowedPauses, timeoutMarkup, pauseMarkup,
@@ -9,7 +9,6 @@
 
     app.modules = app.modules || {};
     app.modules.interval = Interval;
-    Interval.initMessage = '/interval';
 
     intervals = localStorage.getItem('interval__tasks');
 
@@ -67,6 +66,17 @@
 
         this.onMessage(message);
     }
+
+    /**
+     * @static
+     * @param message {object} Telegram message object
+     * @returns {boolean}
+     */
+    Interval.initMessage = function(message) {
+        var text = message.text && message.text.toLowerCase();
+
+        return text && text === '/interval';
+    };
 
     /**
      * @param message {object} Telegram message object

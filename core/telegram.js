@@ -10,7 +10,7 @@
      * Send message to specified chat
      * @param chatId {Number} Chat id
      * @param message {String} Message
-     * @param markup {Object|undefined|null} Keyboard markup (null hides previous keyboard, undefined leaves it)
+     * @param markup {Object|undefined|null=} Keyboard markup (null hides previous keyboard, undefined leaves it)
      */
     app.telegram.sendMessage = function(chatId, message, markup) {
         var url;

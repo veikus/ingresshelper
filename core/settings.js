@@ -55,7 +55,7 @@
     /**
      * Plugins settings
      * @param id {Number} Chat id
-     * @param value {Array} Set new plugins list
+     * @param value {Array=} Set new plugins list
      * @returns {Array} Enabled plugins list
      */
     app.settings.plugins = function(id, value) {
@@ -63,15 +63,18 @@
 
         if (settings) {
             settings = JSON.parse(settings);
+
+            // Clean up old format
+            delete settings.plugins;
         } else {
             settings = {};
         }
 
         if (value) {
-            settings.plugins = value;
+            settings.pluginsV2 = value;
             localStorage.setItem('settings__chat_' + id, JSON.stringify(settings));
         }
 
-        return settings && settings.plugins || [];
+        return settings && settings.pluginsV2 || [];
     };
 }());

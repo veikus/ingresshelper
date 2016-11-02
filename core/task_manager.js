@@ -39,6 +39,7 @@
     };
 
 
+    // Reload data from localStorage on init
     tasks = localStorage.getItem('task_manager__tasks');
 
     if (tasks) {
@@ -47,6 +48,7 @@
         tasks = [];
     }
 
+    // Listen for messages from content script
     chrome.runtime.onMessage.addListener(function(params, sender, callback) {
         var plugins,
             action = params && params.action;
@@ -57,12 +59,9 @@
                 break;
 
             case 'getExtScripts':
-                if (inProgress) {
+                if (inProgress && app.modules.iitc) {
                     plugins = app.settings.plugins(inProgress.chat);
-                    plugins.forEach(function(val, k) {
-                        plugins[k] = location.origin + '/' + val;
-                    });
-
+                    plugins = app.modules.iitc.idToUrl(plugins);
                     callback(plugins);
                 }
                 break;

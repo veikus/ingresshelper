@@ -30,9 +30,11 @@
      * @returns {boolean}
      */
     Lang.initMessage = function(message) {
-        var text = message.text && message.text.toLowerCase();
+        var chat = message.chat.id,
+            lang = app.settings.lang(chat),
+            text = message.text && message.text.toLowerCase();
 
-        return text && text === '/language';
+        return text === '/language' || text === app.i18n(lang, 'common', 'language').toLowerCase();
     };
 
     /**
@@ -45,14 +47,13 @@
 
         if (languages[text]) {
             lang = languages[text];
-            resp = app.i18n(lang, 'lang', 'saved');
-            resp += '\n\n';
+            resp = app.i18n(lang, 'lang', 'saved') + '\n\n';
             resp += app.i18n(lang, 'lang', 'help_us');
 
             app.settings.lang(this.chat, lang);
+            app.telegram.sendMessage(this.chat, resp, app.getHomeMarkup(this.chat));
 
             this.complete = true;
-            app.telegram.sendMessage(this.chat, resp, null);
         } else {
             resp = app.i18n(this.lang, 'lang', 'incorrect_language');
             app.telegram.sendMessage(this.chat, resp);
@@ -63,15 +64,12 @@
     languages = {};
 
     (function() {
-        var key, val,
-            all = app.i18nTexts.lang.title; // Hack
+        var all = app.i18nTexts.lang.title;
 
-        for (key in all) {
-            if (all.hasOwnProperty(key)) {
-                val = all[key];
-                languages[val] = key;
-            }
-        }
+        Object.keys(all).forEach(function(key) {
+            var val = all[key];
+            languages[val] = key;
+        });
     }());
 
     markup.one_time_keyboard = true;

@@ -10,14 +10,38 @@
     app.modules.iitc = IITC;
 
     plugins = {
-        'IITC': 'iitc/total-conversion-build.user.js',
-        'Missions': 'iitc/missions.user.js',
-        'Show portal weakness': 'iitc/show-portal-weakness.user.js',
-        'Player tracker': 'iitc/player-tracker.user.js',
-        'Portal names': 'iitc/portal-names.user.js',
-        'Portal level numbers': 'iitc/portal-level-numbers.user.js',
-        'Show the direction of links': 'iitc/link-show-direction.user.js',
-        'Fix Google Map offset in China': 'iitc/fix-googlemap-china-offset.user.js'
+        'IITC': {
+            id: 'iitc',
+            url: location.origin + '/iitc/total-conversion-build.user.js'
+        },
+        'Missions': {
+            id: 'missions',
+            url: location.origin + '/iitc/missions.user.js'
+        },
+        'Show portal weakness': {
+            id: 'portalWeakness',
+            url: location.origin + '/iitc/show-portal-weakness.user.js'
+        },
+        'Player tracker': {
+            id: 'playerTracker',
+            url: location.origin + '/iitc/player-tracker.user.js'
+        },
+        'Portal names': {
+            id: 'portalNames',
+            url: location.origin + '/iitc/portal-names.user.js'
+        },
+        'Portal level numbers': {
+            id: 'portalLevels',
+            url: location.origin + '/iitc/portal-level-numbers.user.js'
+        },
+        'Show the direction of links': {
+            id: 'linksDirection',
+            url: location.origin + '/iitc/link-show-direction.user.js'
+        },
+        'Fix Google Map offset in China': {
+            id: 'chinaFix',
+            url: location.origin + '/iitc/fix-googlemap-china-offset.user.js'
+        }
     };
 
     /**
@@ -49,41 +73,62 @@
      * @returns {boolean}
      */
     IITC.initMessage = function(message) {
-        var text = message.text && message.text.toLowerCase();
+        var chat = message.chat.id,
+            lang = app.settings.lang(chat),
+            text = message.text && message.text.toLowerCase();
 
-        return text && text === '/iitc';
+        return text === '/iitc' || text === app.i18n(lang, 'common', 'iitc_setup').toLowerCase();
+    };
+
+    /**
+     * Convert plugins id to plugins urls
+     * @static
+     * @params plugins {Array} Array of plugins ids
+     * @returns {Array} Array of plugin urls
+     */
+    IITC.idToUrl = function(ids) {
+        var result = [];
+
+        Object.keys(plugins).forEach(function(name) {
+            var plugin = plugins[name];
+
+            if (ids.indexOf(plugin.id) > -1) {
+                result.push(plugin.url);
+            }
+        });
+
+        return result;
     };
 
     /**
      * @param message {object} Telegram message object
      */
     IITC.prototype.onMessage = function (message) {
-        var index, isEnabled, url, resp, temp,
+        var index, isEnabled, resp, selectedPlugin,
             text = message.text,
-            enabled = app.settings.plugins(this.chat);
+            enabled = app.settings.plugins(this.chat),
+            completeMessage = app.i18n(this.lang, 'iitc', 'complete_setup');
 
-        temp = app.i18n(this.lang, 'iitc', 'complete_setup');
-
-        if (temp === text) {
+        if (completeMessage === text) {
             this.complete = true;
-            app.telegram.sendMessage(this.chat, '👍', null); // thumbs up
+            app.telegram.sendMessage(this.chat, '👍', app.getHomeMarkup(chat)); // thumbs up
         } else if (plugins[text]) {
-            url = plugins[text];
-            index = enabled.indexOf(url);
+            selectedPlugin = plugins[text];
+            index = enabled.indexOf(selectedPlugin.id);
             isEnabled = index > -1;
 
             if (isEnabled) {
-                if (text === 'IITC') {
+                if (selectedPlugin.id === 'iitc') {
                     enabled = [];
                 } else {
                     enabled.splice(index, 1);
                 }
             } else {
-                if (enabled.length === 0 && url !== plugins.IITC) {
-                    enabled.push(plugins.IITC);
+                if (enabled.length === 0 && selectedPlugin !== plugins.IITC) {
+                    enabled.push(plugins.IITC.id);
                 }
 
-                enabled.push(url);
+                enabled.push(selectedPlugin.id);
             }
 
             app.settings.plugins(this.chat, enabled);
@@ -102,7 +147,7 @@
      * @returns {String} String with modules names and their statuses
      */
     IITC.prototype.getCurrentStatus = function() {
-        var name, url, isEnabled,
+        var name, plugin, isEnabled,
             result = [],
             enabled = app.settings.plugins(this.chat);
 
@@ -113,8 +158,8 @@
                 continue;
             }
 
-            url = plugins[name];
-            isEnabled = enabled.indexOf(url) > -1;
+            plugin = plugins[name];
+            isEnabled = enabled.indexOf(plugin.id) > -1;
 
             if (isEnabled) {
                 result.push('✅' + name);
@@ -131,16 +176,11 @@
      * @returns {Array} Array ready to use in markup
      */
     IITC.prototype.buildKeyboard = function() {
-        var name,
-            result = [];
+        var result = [];
 
-        for (name in plugins) {
-            if (!plugins.hasOwnProperty(name)) {
-                continue;
-            }
-
+        Object.keys(plugins).forEach(function(name) {
             result.push([name]);
-        }
+        });
 
         result.push([app.i18n(this.lang, 'iitc', 'complete_setup')]);
 

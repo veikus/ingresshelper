@@ -12,6 +12,7 @@
         return;
     }
 
+    app.getHomeMarkup = getHomeMarkup;
     window.onload = init;
 
     /**
@@ -40,6 +41,41 @@
                 setTimeout(getUpdates, 5000);
             }
         });
+    }
+
+    /**
+     * Get home screen markup
+     */
+    function getHomeMarkup(chat) {
+        var markup,
+            i18n = app.i18n,
+            lang = app.settings.lang(chat);
+
+        // Do not display keyboard in groups
+        if (chat < 0) {
+            return null;
+        }
+
+        markup = {
+            one_time_keyboard: true,
+            resize_keyboard: true,
+            keyboard: []
+        };
+
+        markup.keyboard.push([
+            i18n(lang, 'common', 'make_screenshot')
+        ]);
+
+        markup.keyboard.push([
+            i18n(lang, 'common', 'rate_us')
+        ]);
+
+        markup.keyboard.push([
+            i18n(lang, 'common', 'iitc_setup'),
+            i18n(lang, 'common', 'language')
+        ]);
+
+        return markup;
     }
 
     /**
@@ -74,7 +110,7 @@
         // If user asked to cancel current action - just remove a module
         else if (text === '/cancel' || text === i18n(lang, 'common', 'homepage').toLowerCase()) {
             delete activeModule[chat];
-            app.telegram.sendMessage(chat, i18n(lang, 'main', 'cancelled'));
+            app.telegram.sendMessage(chat, i18n(lang, 'main', 'cancelled'), app.getHomeMarkup(chat));
         }
 
         // If user has another active module
@@ -90,7 +126,7 @@
         // Or maybe user made a mistake (do not reply in groups)
         else if (chat > -1) {
             lang = app.settings.lang(chat);
-            app.telegram.sendMessage(chat, i18n(lang, 'main', 'unknown_command'));
+            app.telegram.sendMessage(chat, i18n(lang, 'main', 'unknown_command'), app.getHomeMarkup(chat));
         }
 
         // Cleanup complete modules

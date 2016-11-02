@@ -24,41 +24,34 @@
      * @returns {boolean}
      */
     Screenshot.initMessage = function(message) {
-        var text = message.text && message.text.toLowerCase();
+        var chat = message.chat.id,
+            lang = app.settings.lang(chat),
+            text = message.text && message.text.toLowerCase();
 
-        return text && text === '/screenshot';
+        return text === '/screenshot' || text === app.i18n(lang, 'common', 'make_screenshot').toLowerCase();
     };
 
     /**
      * @param message {object} Telegram message object
      */
     Screenshot.prototype.onMessage = function (message) {
-        var resp, markup, zoom,
-            keyboard = [],
+        var resp, zoom,
             text = message.text,
             location = message.location;
-
-        keyboard = [
-            app.i18n(this.lang, 'interval', 'options_1').split(';'),
-            app.i18n(this.lang, 'interval', 'options_2').split(';'),
-            app.i18n(this.lang, 'interval', 'options_3').split(';'),
-            app.i18n(this.lang, 'interval', 'options_4').split(';')
-        ];
-
-        markup = {
-            keyboard: keyboard,
-            one_time_keyboard: true
-        };
 
         // Step 1
         if (location && location.latitude && location.longitude) {
             this.location = location;
             resp = app.i18n(this.lang, 'screenshot', 'zoom_setup');
-            app.telegram.sendMessage(this.chat, resp, markup);
+            app.telegram.sendMessage(this.chat, resp, this.getZoomMarkup());
             return;
         } else if (!this.location) {
-            resp = app.i18n(this.lang, 'screenshot', 'location_required');
-            app.telegram.sendMessage(this.chat, resp, null);
+            resp = [
+                app.i18n(this.lang, 'screenshot', 'location_required'),
+                app.i18n(this.lang, 'common', 'location_help')
+            ].join('\n\n');
+
+            app.telegram.sendMessage(this.chat, resp, this.getInitMarkup());
             return;
         }
 
@@ -74,7 +67,7 @@
             });
 
             resp = app.i18n(this.lang, 'screenshot', 'task_saved');
-            app.telegram.sendMessage(this.chat, resp, null);
+            app.telegram.sendMessage(this.chat, resp, app.getHomeMarkup(this.chat));
 
             // Stats
             if (app.modules.stats) {
@@ -86,8 +79,32 @@
             }
         } else {
             resp = app.i18n(this.lang, 'screenshot', 'incorrect_input');
-            app.telegram.sendMessage(this.chat, resp, markup);
+            app.telegram.sendMessage(this.chat, resp);
         }
+    };
+
+    Screenshot.prototype.getInitMarkup = function() {
+        return {
+            one_time_keyboard: true,
+            resize_keyboard: true,
+            keyboard: [
+                [app.i18n(this.lang, 'common', 'homepage')]
+            ]
+        };
+    };
+
+    Screenshot.prototype.getZoomMarkup = function() {
+        return {
+            one_time_keyboard: true,
+            resize_keyboard: true,
+            keyboard: [
+                app.i18n(this.lang, 'interval', 'options_1').split(';'),
+                app.i18n(this.lang, 'interval', 'options_2').split(';'),
+                app.i18n(this.lang, 'interval', 'options_3').split(';'),
+                app.i18n(this.lang, 'interval', 'options_4').split(';'),
+                [ app.i18n(this.lang, 'common', 'homepage') ]
+            ]
+        };
     };
 
 }());

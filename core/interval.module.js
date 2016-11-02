@@ -4,6 +4,8 @@
  * @version 2.5.0
  */
 (function() {
+    return;
+
     var allowedTimeouts, allowedPauses, timeoutMarkup, pauseMarkup,
         intervals;
 

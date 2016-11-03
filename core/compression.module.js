@@ -18,7 +18,7 @@
         this.lang = app.settings.lang(this.chat);
 
         markup = {
-            one_time_keyboard: true,
+            one_time_keyboard: false,
             resize_keyboard: true,
             keyboard: [
                 [app.i18n(this.lang, 'compression', 'disable')],
@@ -61,7 +61,7 @@
 
         if (this.complete) {
             resp = app.i18n(this.lang, 'compression', 'saved');
-            app.telegram.sendMessage(this.chat, resp, null);
+            app.telegram.sendMessage(this.chat, resp, app.getHomeMarkup(this.chat));
         } else {
             resp = app.i18n(this.lang, 'compression', 'wrong_input');
             app.telegram.sendMessage(this.chat, resp);

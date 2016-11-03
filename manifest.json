@@ -13,7 +13,7 @@
             "core/telegram.js",
             "core/i18n_extend.js",
             "core/task_manager.js",
-            "core/rate_us.js",
+            "core/rate_us.module.js",
             "core/help.module.js",
             "core/lang.module.js",
             "core/screenshot.module.js",

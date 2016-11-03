@@ -139,10 +139,11 @@
             } else {
                 compression = app.settings.compression(task.chat);
                 app.telegram.sendPhoto(task.chat, img, compression, callback);
+                app.settings.increaseReceivedScreenshots(task.chat);
 
                 // Rate us
-                if (app.rateUs) {
-                    app.rateUs(task.chat);
+                if (app.modules.rateUs && app.settings.getReceivedScreenshots(task.chat) >= 3) {
+                    app.modules.rateUs.reminder(task.chat);
                 }
             }
 

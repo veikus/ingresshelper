@@ -77,4 +77,43 @@
 
         return settings && settings.pluginsV2 || [];
     };
+
+    /**
+     * Requested screenshots counter
+     * @param id {Number} Chat id
+     * @returns {Number} Requested screenshots
+     */
+    app.settings.getReceivedScreenshots = function(id) {
+        var settings = localStorage.getItem('settings__chat_' + id);
+
+        if (settings) {
+            settings = JSON.parse(settings);
+
+            return settings.receivedScreenshots || 0;
+        } else {
+            return 0;
+        }
+    };
+
+    /**
+     * Increase requested screenshots counter
+     * @param id {Number} Chat id
+     */
+    app.settings.increaseReceivedScreenshots = function(id) {
+        var settings = localStorage.getItem('settings__chat_' + id);
+
+        if (settings) {
+            settings = JSON.parse(settings);
+        } else {
+            settings = {};
+        }
+
+        if (settings.receivedScreenshots) {
+            ++settings.receivedScreenshots;
+        } else {
+            settings.receivedScreenshots = 1;
+        }
+
+        localStorage.setItem('settings__chat_' + id, JSON.stringify(settings));
+    };
 }());

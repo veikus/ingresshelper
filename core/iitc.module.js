@@ -111,7 +111,7 @@
 
         if (completeMessage === text) {
             this.complete = true;
-            app.telegram.sendMessage(this.chat, '👍', app.getHomeMarkup(chat)); // thumbs up
+            app.telegram.sendMessage(this.chat, '👍', app.getHomeMarkup(this.chat)); // thumbs up
         } else if (plugins[text]) {
             selectedPlugin = plugins[text];
             index = enabled.indexOf(selectedPlugin.id);

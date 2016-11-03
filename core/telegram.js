@@ -13,21 +13,24 @@
      * @param markup {Object|undefined|null=} Keyboard markup (null hides previous keyboard, undefined leaves it)
      */
     app.telegram.sendMessage = function(chatId, message, markup) {
-        var url;
+        var url,
+            params = {
+                chat_id: chatId,
+                text: message,
+                disable_web_page_preview: true
+            };
 
-        if (markup === null) {
-            markup = { hide_keyboard: true };
+        if (markup) {
+            params.reply_markup = JSON.stringify(markup);
         }
 
-        markup = JSON.stringify(markup);
+        if (markup === null) {
+            params.reply_markup = { hide_keyboard: true };
+        }
+
         url = API_URL + '/sendMessage';
 
-        request('post', url, {
-            chat_id: chatId,
-            text: message,
-            disable_web_page_preview: true,
-            reply_markup: markup
-        });
+        request('post', url, params);
     };
 
     /**
@@ -79,7 +82,7 @@
      * @param method {String} GET or POST
      * @param url {String} Request url
      * @param data {Object} Request parameters
-     * @param callback {Function} Callback function
+     * @param callback {Function=} Callback function
      */
     function request(method, url, data, callback) {
         var formData, i,

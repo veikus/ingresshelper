@@ -4,7 +4,7 @@
  * @version 2.5.0
  */
 (function() {
-    var plugins, markup;
+    var plugins;
 
     app.modules = app.modules || {};
     app.modules.iitc = IITC;
@@ -49,7 +49,7 @@
      * @constructor
      */
     function IITC(message) {
-        var resp;
+        var resp, markup;
 
         this.chat = message.chat.id;
         this.lang = app.settings.lang(this.chat);
@@ -104,7 +104,7 @@
      * @param message {object} Telegram message object
      */
     IITC.prototype.onMessage = function (message) {
-        var index, isEnabled, resp, selectedPlugin,
+        var index, isEnabled, resp, selectedPlugin, markup,
             text = message.text,
             enabled = app.settings.plugins(this.chat),
             completeMessage = app.i18n(this.lang, 'iitc', 'complete_setup');
@@ -138,7 +138,14 @@
 
         } else {
             resp = app.i18n(this.lang, 'iitc', 'plugin_not_found');
-            app.telegram.sendMessage(this.chat, resp);
+
+            markup = {
+                one_time_keyboard: true,
+                resize_keyboard: true,
+                keyboard: this.buildKeyboard()
+            };
+
+            app.telegram.sendMessage(this.chat, resp, markup);
         }
     };
 

@@ -40,7 +40,7 @@
         resp.push(app.i18n(lang, 'help', 'line_4'));
 
         this.complete = true;
-        app.telegram.sendMessage(chat, resp.join('\n'), null);
+        app.telegram.sendMessage(chat, resp.join('\n'), app.getHomeMarkup(chat));
     };
     
 }());

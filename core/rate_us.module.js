@@ -4,6 +4,7 @@
  * @version 2.5.0
  */
 (function() {
+    return;
     app.modules = app.modules || {};
     app.modules.rateUs = RateUs;
 

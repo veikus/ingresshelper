@@ -72,9 +72,11 @@
             i18n(lang, 'common', 'make_screenshot')
         ]);
 
-        markup.keyboard.push([
-            i18n(lang, 'common', 'rate_us')
-        ]);
+        if (app.modules.rateUs) {
+            markup.keyboard.push([
+                i18n(lang, 'common', 'rate_us')
+            ]);
+        }
 
         markup.keyboard.push([
             i18n(lang, 'common', 'iitc_setup'),

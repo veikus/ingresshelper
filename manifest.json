@@ -14,14 +14,14 @@
             "core/i18n_extend.js",
             "core/task_manager.js",
             "core/geocoder.js",
-            "core/rate_us.module.js",
-            "core/help.module.js",
-            "core/lang.module.js",
-            "core/screenshot.module.js",
-            "core/compression.module.js",
-            "core/iitc.module.js",
-            "core/interval.module.js",
-            "core/stats.module.js"
+            "modules/rate_us.module.js",
+            "modules/help.module.js",
+            "modules/lang.module.js",
+            "modules/screenshot.module.js",
+            "modules/compression.module.js",
+            "modules/iitc.module.js",
+            "modules/interval.module.js",
+            "modules/stats.module.js"
         ]
     },
     "content_scripts": [

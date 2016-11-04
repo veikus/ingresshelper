@@ -106,21 +106,8 @@ app.i18nTexts = {
 			"fa": "مکان خودتون رو به ربات بفرستید سپس مقدار بزرگنمایی نقشه را انتخاب کنید "
 		},
 		"line_2": {
-			"en": "Original idea: @veikus",
-			"ru": "Идея: @veikus",
-			"ua": "Ідея: @veikus",
-			"zh-cmn-Hans": "作者: @veikus",
-			"zh-cmn-Hant": "作者: @veikus",
-			"fi": "Alkuperäisidea: @veikus",
-			"de": "Idee: @veikus",
-			"chde": "Idee: @veikus",
-			"es": "Idea original: @veikus",
-			"br": "Idéia original:@veikus",
-			"it": "Idea originale di: @veikus",
-			"ro-md": "Idea: @veikus",
-			"fr": "Idée originale : @veikus",
-			"nl": "Originele idee: @veikus",
-			"fa": "ایده پرداز(ایده اصلی) : @veikus"
+			"en": "Support email: ingressbot@veikus.com",
+			"ru": "Email для вопросов и предложений: ingressbot@veikus.com"
 		},
 		"line_3": {
 			"ua": "Автор українскього перекладу: @Ukrrooter",
@@ -568,21 +555,8 @@ app.i18nTexts = {
 			"fa": "تغییرات ذخیره شد!"
 		},
 		"help_us": {
-			"en": "You can translate this bot to your language. Send a message to @veikus if you want to participate.",
-			"ru": "Хотите помочь с переводом на другой язык? Напишите об этом @veikus.",
-			"ua": "Бажаете допомогти з перекладом на інші мови? Звертайтеся до @veikus",
-			"zh-cmn-Hans": "您可以参与此机器人的本地化工作，详情请联系@veikus",
-			"zh-cmn-Hant": "您可以參與此機器人的語言翻譯，詳情請聯繫@veikus",
-			"fi": "Voit kääntää tämän botin omalle kielellesi! Lähetä viesti @veikus​ille, jos haluat osallistua kääntämiseen.",
-			"de": "Du willst den Bot in eine weitere Sprache übersetzen? Sende eine Nachricht an @veikus um deine Übersetzung einzureichen.",
-			"chde": "Du wetsch de Bot in en wiiteri Spraach übersetze? Schick eifach en Nachricht an @veikus zum dini Übersetzig iireiche.",
-			"es": "Puedes traducir este bot a tu idioma. Envía un mensaje a @veikus si quieres ayudar.",
-			"br": "Você pode traduzir este bot para o seu idioma. Envie mensagem para @veikus se você quiser participar",
-			"it": "Puoi tradurre questo bot nella tua lingua, manda un messaggio a @veikus se vuoi partecipare.",
-			"ro-md": "Doriți a ajuta cu traducerea ? Scrieți despre aceasta lui @veikus",
-			"fr": "Vous pouvez traduire ce bot dans votre langue. Envoyez un message à @veikus si vous souhaitez participer.",
-			"nl": "U kan deze bot vertalen in uw taal. Stuur een bericht naar @veikus als u wilt deelnemen",
-			"fa": "شما میتوناید این ربات را به زبان خودتون ترجمه کنید ;) به @veikus پیام بدید اگر میخواید در این کار شرکت کنید!"
+			"en": "You can translate this bot to your language. Send an email to ingressbot@veikus.com if you want to participate.",
+			"ru": "Хотите помочь с переводом на другой язык? Напишите нам ingressbot@veikus.com"
 		}
 	},
 	"main": {
@@ -945,14 +919,8 @@ app.i18nTexts = {
 			"nl": "Deze bot is waardeloos als je geen Ingress-speler bent."
 		},
 		"welcome_message": {
-			"en": "Thank you for installing me. Send me location to get intel screenshot.",
-			"ru": "Спасибо за то, что установили меня. Пришлите мне локацию, чтобы получить скриншот с интела",
-			"ua": "Дякуємо за встановлення. Надішліть мені локацію, щоб отримати знімок інтелу",
-			"fi": "Kiitos, että asensit minut. äheti minulle sijainti saadaksesi Intel-kuvankaappauksia.",
-			"es": "Gracias por instalarme. Envíame tu ubicación para obtener intel en una captura de pantalla.",
-			"br": "Obrigado por instalar. Envie localização para recebeer screenshot do Intel.",
-			"fr": "Merci de m'avoir installé. Envoyez moi votre localisation pour recevoir un screenshot de l'intel.",
-			"nl": "Bedankt dat je me hebt geïnstalleerd. Stuur me nu je locatie om een intel-schermafbeelding te krijgen."
+			"en": "Thank you for installing me. I will do best to help you.",
+			"ru": "Спасибо за то, что установили меня. Я сделаю все, что в моих силах, чтобы помогать вам."
 		},
 		"device_poll": {
 			"en": "Poll: What`s your device?",
@@ -1050,6 +1018,10 @@ app.i18nTexts = {
 			"es": "Gracias. Entra aqui para hacer tu donación: https://goo.gl/iRTsra",
 			"br": "Obrigado. Faça sua doação no link: https://goo.gl/iRTsra"
 		},
-		"donate_response_paypal": {}
+		"donate_response_paypal": {},
+		"home_screen_title": {
+			"en": "Please select action:",
+			"ru": "Пожалуйста, выберите действие:"
+		}
 	}
 };

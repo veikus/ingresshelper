@@ -88,6 +88,7 @@
             one_time_keyboard: true,
             resize_keyboard: true,
             keyboard: [
+                [{ text: app.i18n(this.lang, 'screenshot', 'send_location'), request_location: true }],
                 [app.i18n(this.lang, 'common', 'homepage')]
             ]
         };

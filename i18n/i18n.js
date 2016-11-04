@@ -771,6 +771,10 @@ app.i18nTexts = {
 			"ro-md": "3 - Toată lumea",
 			"fr": "3 - Vue mondiale",
 			"nl": "3 - Wereld"
+		},
+		"send_location": {
+			"en": "Send location",
+			"ru": "Поделиться геолокацией"
 		}
 	},
 	"tasks": {

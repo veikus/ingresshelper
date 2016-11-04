@@ -25,7 +25,7 @@
         }
 
         if (markup === null) {
-            params.reply_markup = { hide_keyboard: true };
+            params.reply_markup = JSON.stringify({ hide_keyboard: true });
         }
 
         url = API_URL + '/sendMessage';

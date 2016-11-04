@@ -47,7 +47,7 @@
             result.push('Tasks in queue: ' + app.taskManager.queueLength());
         }
 
-        app.telegram.sendMessage(this.chat, result.join('\r\n'), null);
+        app.telegram.sendMessage(this.chat, result.join('\r\n'), app.getHomeMarkup(this.chat));
     };
 
     /**

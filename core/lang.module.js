@@ -4,24 +4,46 @@
  * @version 2.5.0
  */
 (function() {
-    var languages,
-        markup = {};
+    var languages = app.i18nTexts.lang.title,
+        markup = generateMarkup();
 
     app.modules = app.modules || {};
     app.modules.lang = Lang;
+
+    /**
+     * Generate default keyboard markup
+     * @return {Object} Inline keyboard markup
+     */
+    function generateMarkup() {
+        var result = {
+                inline_keyboard: []
+            };
+
+        Object.keys(languages).forEach(function(key) {
+            var text = languages[key];
+
+            result.inline_keyboard.push([{
+                text: text,
+                callback_data: 'lang::set::' + key
+            }]);
+        });
+
+        return result;
+    }
 
     /**
      * @param message {object} Telegram message object
      * @constructor
      */
     function Lang(message) {
-        var resp;
+        var resp,
+            chat = message.chat.id,
+            lang = app.settings.lang(chat);
 
-        this.chat = message.chat.id;
-        this.lang = app.settings.lang(this.chat);
+        resp = app.i18n(lang, 'lang', 'welcome');
+        app.telegram.sendMessage(chat, resp, markup);
 
-        resp = app.i18n(this.lang, 'lang', 'welcome');
-        app.telegram.sendMessage(this.chat, resp, markup);
+        this.complete = true;
     }
 
     /**
@@ -38,45 +60,27 @@
     };
 
     /**
-     * @param message {object} Telegram message object
+     * @static
+     * @param cb {object} Telegram callback object
      */
-    Lang.prototype.onMessage = function (message) {
-        var resp,
-            lang = this.lang,
-            text = message.text;
+    Lang.onCallback = function (cb) {
+        var resp, lang,
+            chat = cb.message.chat.id,
+            messageId = cb.message.message_id,
+            data = cb.data && cb.data.split('::');
 
-        if (languages[text]) {
-            lang = languages[text];
-            resp = app.i18n(lang, 'lang', 'saved') + '\n\n';
-            resp += app.i18n(lang, 'lang', 'help_us');
+        if (data[1] === 'set') {
+            lang = data[2];
 
-            app.settings.lang(this.chat, lang);
-            app.telegram.sendMessage(this.chat, resp, app.getHomeMarkup(this.chat));
+            if (lang && languages[lang]) {
+                app.settings.lang(chat, lang);
 
-            this.complete = true;
-        } else {
-            resp = app.i18n(this.lang, 'lang', 'incorrect_language');
-            app.telegram.sendMessage(this.chat, resp);
+                resp = app.i18n(lang, 'lang', 'saved') + '\n\n';
+                resp += app.i18n(lang, 'lang', 'help_us');
+
+                app.telegram.updateMessage(chat, messageId, resp, 'clear_inline');
+                app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
+            }
         }
     };
-
-    // Markup generator
-    languages = {};
-
-    (function() {
-        var all = app.i18nTexts.lang.title;
-
-        Object.keys(all).forEach(function(key) {
-            var val = all[key];
-            languages[val] = key;
-        });
-    }());
-
-    markup.one_time_keyboard = true;
-    markup.resize_keyboard = true;
-    markup.keyboard = [];
-
-    Object.keys(languages).forEach(function(lang) {
-        markup.keyboard.push([lang]);
-    });
 }());

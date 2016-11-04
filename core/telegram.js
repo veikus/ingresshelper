@@ -10,7 +10,7 @@
      * Send message to specified chat
      * @param chatId {Number} Chat id
      * @param message {String} Message
-     * @param markup {Object|undefined|null=} Keyboard markup (null hides previous keyboard, undefined leaves it)
+     * @param markup {Object|null=} Keyboard markup (null hides previous keyboard)
      */
     app.telegram.sendMessage = function(chatId, message, markup) {
         var url,
@@ -29,6 +29,37 @@
         }
 
         url = API_URL + '/sendMessage';
+
+        request('post', url, params);
+    };
+
+    /**
+     * Send message to specified chat
+     * @param chatId {Number} Chat id
+     * @param messageId {Number} Message id
+     * @param message {String} Message
+     * @param markup {Object|"clear_inline"|"hide_keyboard"} Keyboard markup
+     */
+    app.telegram.updateMessage = function(chatId, messageId, message, markup) {
+        var url,
+            params = {
+                chat_id: chatId,
+                message_id: messageId,
+                text: message,
+                disable_web_page_preview: true
+            };
+
+        if (markup === "clear_inline") {
+            params.reply_markup = JSON.stringify({ inline_keyboard: [] });
+        }
+        else if (markup === "hide_keyboard") {
+            params.reply_markup = JSON.stringify({ hide_keyboard: true });
+        }
+        else if (markup) {
+            params.reply_markup = JSON.stringify(markup);
+        }
+
+        url = API_URL + '/editMessageText';
 
         request('post', url, params);
     };
@@ -65,7 +96,7 @@
         request('get', url, { timeout: TIMEOUT, offset: offset }, function(data) {
             if (data && data.ok) {
                 data.result.forEach(function(val) {
-                    result.push(val.message);
+                    result.push(val);
                     offset = val.update_id + 1;
                     localStorage.setItem('telegram_offset', offset);
                 });

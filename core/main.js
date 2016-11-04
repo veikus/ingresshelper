@@ -30,16 +30,22 @@
      * Receive updates from telegram
      */
     function getUpdates() {
-        app.telegram.getUpdates(function(messages) {
-            if (messages) {
-                messages.forEach(function(message) {
-                    processMessage(message);
-                });
-
-                getUpdates();
-            } else {
+        app.telegram.getUpdates(function(data) {
+            if (!data) {
                 setTimeout(getUpdates, 5000);
+                return;
             }
+
+            data.forEach(function(item) {
+                if (item.message) {
+                    processMessage(item.message);
+                }
+                else if (item.callback_query) {
+                    processCallback(item.callback_query);
+                }
+            });
+
+            getUpdates();
         });
     }
 
@@ -114,7 +120,7 @@
         }
 
         // If user has another active module
-        else if (activeModule[chat]) {
+        else if (activeModule[chat] && activeModule[chat].onMessage) {
             activeModule[chat].onMessage(message);
         }
 
@@ -132,6 +138,29 @@
         // Cleanup complete modules
         if (activeModule[chat] && activeModule[chat].complete) {
             delete activeModule[chat];
+        }
+    }
+
+    function processCallback(cb) {
+        var chat = cb.message.chat.id,
+            messageId = cb.message.message_id,
+            lang = app.settings.lang(chat),
+            data = cb.data && cb.data.split('::'),
+            module = data[0];
+
+        if (!data || !module) {
+            return;
+        }
+
+        if (module === 'lang') {
+            delete activeModule[chat]; // Module can break when language will be changed
+        }
+
+        if (app.modules[module] && app.modules[module].onCallback) {
+            app.modules[module].onCallback(cb);
+        } else {
+            app.telegram.updateMessage(chat, messageId, app.i18n(lang, 'main', 'unknown_command'), 'clear_inline');
+            app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title', app.getHomeMarkup(lang)));
         }
     }
 }());

@@ -36,6 +36,7 @@
      */
     Screenshot.prototype.onMessage = function (message) {
         var resp, zoom,
+            that = this,
             text = message.text,
             location = message.location;
 
@@ -77,6 +78,21 @@
                     location: this.location
                 });
             }
+
+            // Get location name and save it to history
+            app.geocoder(this.lang, this.location, function(data) {
+                if (!data) {
+                    return;
+                }
+
+                app.settings.addToHistory(that.chat, {
+                    location: that.location,
+                    name: data.name,
+                    city: data.city,
+                    countryCode: data.country
+                });
+            });
+
         } else {
             resp = app.i18n(this.lang, 'screenshot', 'incorrect_input');
             app.telegram.sendMessage(this.chat, resp);

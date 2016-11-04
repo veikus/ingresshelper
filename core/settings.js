@@ -116,4 +116,39 @@
 
         localStorage.setItem('settings__chat_' + id, JSON.stringify(settings));
     };
+
+    /**
+     * Save location to history
+     * @params id {Number} Chat id
+     * @params params {Object}
+     * @params params.location {Object} Latitude and longitude
+     * @params params.name {String} Location name
+     * @params params.city {String} City
+     * @params params.countryCode {String} Country code
+     */
+    app.settings.addToHistory = function(id, params) {
+        var history,
+            settings = localStorage.getItem('settings__chat_' + id);
+
+        if (settings) {
+            settings = JSON.parse(settings);
+        } else {
+            settings = {};
+        }
+
+        history = settings.history || [];
+        history.unshift({
+            location: params.location,
+            name: params.name,
+            city: params.city,
+            countryCode: params.countryCode
+        });
+
+        if (history.length > 20) {
+            history.pop();
+        }
+
+        settings.history = history;
+        localStorage.setItem('settings__chat_' + id, JSON.stringify(settings));
+    };
 }());

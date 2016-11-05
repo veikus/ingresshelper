@@ -91,7 +91,12 @@
 
         markup.keyboard.push([
             i18n(lang, 'common', 'iitc_setup'),
-            i18n(lang, 'common', 'language')
+            i18n(lang, 'common', 'compression')
+        ]);
+
+        markup.keyboard.push([
+            i18n(lang, 'common', 'language'),
+            i18n(lang, 'common', 'help')
         ]);
 
         return markup;

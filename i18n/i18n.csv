@@ -95,6 +95,8 @@ donate_response_card,Follow this url: https://goo.gl/iRTsra,Для продол�
 donate_response_paypal,,,,,,,,,,,,,,,,
 home_screen_title,Please select action:,"Пожалуйста, выберите действие:",,,,,,,Por favor seleccione una acción,Por favor selcione uma ação:,,,,,,
 history,History,История,,,,,,,Historial,Histórico,,,,,,
+compression,Compression settings,Настройка оптимизации,,,,,,,,,,,,,,
+help,About bot,О боте,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,
 module history,,,,,,,,,,,,,,,,
 title,Your last %n request(s):,Последние %n запрос(ов):,,,,,,,Sus últimas %n peticiones:,Suas últimas %n requisições:,,,,,,

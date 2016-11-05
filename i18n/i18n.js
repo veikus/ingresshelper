@@ -1042,6 +1042,14 @@ app.i18nTexts = {
 			"ru": "История",
 			"es": "Historial",
 			"br": "Histórico"
+		},
+		"compression": {
+			"en": "Compression settings",
+			"ru": "Настройка оптимизации"
+		},
+		"help": {
+			"en": "About bot",
+			"ru": "О боте"
 		}
 	},
 	"history": {

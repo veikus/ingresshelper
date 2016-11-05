@@ -21,9 +21,11 @@
      * @returns {boolean}
      */
     Help.initMessage = function(message) {
-        var text = message.text && message.text.toLowerCase();
+        var chat = message.chat.id,
+            lang = app.settings.lang(chat),
+            text = message.text && message.text.toLowerCase();
 
-        return text && text === '/help';
+        return text === '/help' || text === app.i18n(lang, 'common', 'help').toLowerCase();
     };
 
     /**

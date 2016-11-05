@@ -34,9 +34,9 @@
 
                 if (task.nextPhotoAt <= ts) {
                     (function(ind) {
-                        app.taskManager.add(task, function(result, error) {
+                        app.taskManager.add(task, function(result, errorCode) {
                             // Remove interval after bot lost access to group
-                            if (error === 'Error: Bad Request: Not in chat' || error === 'Error: Bot was kicked from a chat') {
+                            if (errorCode === 403) {
                                 delete(intervals[ind]);
                                 saveIntervals();
                             }

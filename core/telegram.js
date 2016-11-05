@@ -80,7 +80,7 @@
 
         request('post', url, params, function(data) {
             if (typeof callback === 'function') {
-                callback(data && data.ok, data.description);
+                callback(data && data.ok, data.error_code);
             }
         });
     };

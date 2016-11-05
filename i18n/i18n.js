@@ -1046,10 +1046,14 @@ app.i18nTexts = {
 	},
 	"history": {
 		"title": {
-			"en": "Your last %n requests:",
-			"ru": "Последние %n запросов:",
+			"en": "Your last %n request(s):",
+			"ru": "Последние %n запрос(ов):",
 			"es": "Sus últimas %n peticiones:",
 			"br": "Suas últimas %n requisições:"
+		},
+		"no_data": {
+			"en": "You don`t have any records yet",
+			"ru": "В истории пока нет записей"
 		}
 	}
 };

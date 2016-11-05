@@ -97,4 +97,5 @@ home_screen_title,Please select action:,"Пожалуйста, выберите 
 history,History,История,,,,,,,Historial,Histórico,,,,,,
 ,,,,,,,,,,,,,,,,
 module history,,,,,,,,,,,,,,,,
-title,Your last %n requests:,Последние %n запросов:,,,,,,,Sus últimas %n peticiones:,Suas últimas %n requisições:,,,,,,
+title,Your last %n request(s):,Последние %n запрос(ов):,,,,,,,Sus últimas %n peticiones:,Suas últimas %n requisições:,,,,,,
+no_data,You don`t have any records yet,В истории пока нет записей,,,,,,,,,,,,,,

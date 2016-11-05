@@ -11,7 +11,7 @@
     /**
      * Add task to queue
      * @param options {object} Task options
-     * @param callback {Function} Function that will be called after telegram sent response
+     * @param callback {Function=} Function that will be called after telegram sent response
      */
     app.taskManager.add = function(options, callback) {
         options = JSON.parse(JSON.stringify(options)); // TODO: Find better way to clone objects

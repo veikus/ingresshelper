@@ -55,7 +55,8 @@
     function getHomeMarkup(chat) {
         var markup,
             i18n = app.i18n,
-            lang = app.settings.lang(chat);
+            lang = app.settings.lang(chat),
+            history = app.settings.getHistory(chat);
 
         // Do not display keyboard in groups
         if (chat < 0) {
@@ -75,6 +76,12 @@
         if (app.modules.rateUs) {
             markup.keyboard.push([
                 i18n(lang, 'common', 'rate_us')
+            ]);
+        }
+
+        if (app.modules.history && history.length > 0) {
+            markup.keyboard.push([
+                i18n(lang, 'common', 'history')
             ]);
         }
 
@@ -154,6 +161,13 @@
             return;
         }
 
+        if (module === 'cancel') {
+            app.telegram.updateMessage(chat, messageId, '👍', 'clear_inline');
+            app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
+            delete activeModule[chat];
+            return;
+        }
+
         if (module === 'lang') {
             delete activeModule[chat]; // Module can break when language will be changed
         }
@@ -162,7 +176,7 @@
             app.modules[module].onCallback(cb);
         } else {
             app.telegram.updateMessage(chat, messageId, 'ERROR: Module not found', 'clear_inline');
-            app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title', app.getHomeMarkup(lang)));
+            app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
         }
     }
 }());

@@ -89,7 +89,8 @@
                     location: that.location,
                     name: data.name,
                     city: data.city,
-                    countryCode: data.country
+                    countryCode: data.country,
+                    zoom: zoom
                 });
             });
 

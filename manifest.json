@@ -21,6 +21,7 @@
             "modules/compression.module.js",
             "modules/iitc.module.js",
             "modules/interval.module.js",
+            "modules/history.module.js",
             "modules/stats.module.js"
         ]
     },

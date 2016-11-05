@@ -125,6 +125,7 @@
      * @params params.name {String} Location name
      * @params params.city {String} City
      * @params params.countryCode {String} Country code
+     * @params params.zoom {Number} Zoom value
      */
     app.settings.addToHistory = function(id, params) {
         var history,
@@ -141,7 +142,8 @@
             location: params.location,
             name: params.name,
             city: params.city,
-            countryCode: params.countryCode
+            countryCode: params.countryCode,
+            zoom: params.zoom
         });
 
         if (history.length > 20) {
@@ -151,4 +153,20 @@
         settings.history = history;
         localStorage.setItem('settings__chat_' + id, JSON.stringify(settings));
     };
+
+    /**
+     * Get location history
+     * @param id {Number} Chat id
+     * @return {Array} History (see addToHistory method for details)
+     */
+    app.settings.getHistory = function(id) {
+        var settings = localStorage.getItem('settings__chat_' + id);
+
+        if (settings) {
+            settings = JSON.parse(settings);
+            return settings.history || [];
+        } else {
+            return [];
+        }
+    }
 }());

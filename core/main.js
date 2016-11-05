@@ -58,6 +58,10 @@
             lang = app.settings.lang(chat),
             history = app.settings.getHistory(chat);
 
+        if (!chat) {
+            console.error('getHomeMarkup(): Empty chat variable');
+        }
+
         // Do not display keyboard in groups
         if (chat < 0) {
             return null;

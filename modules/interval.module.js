@@ -96,7 +96,7 @@
         actMessage = app.i18n(this.lang, 'interval', 'cancel');
         if (text === actMessage) {
             this.complete = true;
-            app.telegram.sendMessage(this.chat, '👍', app.getHomeMarkup()); // thumbs up
+            app.telegram.sendMessage(this.chat, '👍', app.getHomeMarkup(this.chat)); // thumbs up
             return;
         }
 

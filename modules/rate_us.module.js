@@ -45,6 +45,6 @@
             app.i18n(lang, 'main', 'rate_us_3')
         ].join('\n');
 
-        app.telegram.sendMessage(chat, resp, app.getHomeMarkup());
+        app.telegram.sendMessage(chat, resp, app.getHomeMarkup(chat));
     }
 }());

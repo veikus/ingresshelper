@@ -55,7 +55,6 @@
         this.lang = app.settings.lang(this.chat);
 
         markup = {
-            one_time_keyboard: true,
             resize_keyboard: true,
             keyboard: this.buildKeyboard()
         };
@@ -134,6 +133,10 @@
             app.settings.plugins(this.chat, enabled);
 
             resp = this.getCurrentStatus();
+            markup = {
+                resize_keyboard: true,
+                keyboard: this.buildKeyboard()
+            };
             app.telegram.sendMessage(this.chat, resp, markup);
 
         } else {

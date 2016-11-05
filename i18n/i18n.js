@@ -107,7 +107,9 @@ app.i18nTexts = {
 		},
 		"line_2": {
 			"en": "Support email: ingressbot@veikus.com",
-			"ru": "Email для вопросов и предложений: ingressbot@veikus.com"
+			"ru": "Email для вопросов и предложений: ingressbot@veikus.com",
+			"es": "Email de Soporte: ingressbot@veikus.com",
+			"br": "Email de Suporte: ingressbot@veikus.com"
 		},
 		"line_3": {
 			"ua": "Автор українскього перекладу: @Ukrrooter",
@@ -556,7 +558,9 @@ app.i18nTexts = {
 		},
 		"help_us": {
 			"en": "You can translate this bot to your language. Send an email to ingressbot@veikus.com if you want to participate.",
-			"ru": "Хотите помочь с переводом на другой язык? Напишите нам ingressbot@veikus.com"
+			"ru": "Хотите помочь с переводом на другой язык? Напишите нам ingressbot@veikus.com",
+			"es": "Ayúdanos",
+			"br": "Você pode traduzir este bot para seu idioma. Envie um email para ingressbot@veikus.com se você quiser participar"
 		}
 	},
 	"main": {
@@ -774,7 +778,9 @@ app.i18nTexts = {
 		},
 		"send_location": {
 			"en": "Send location",
-			"ru": "Поделиться геолокацией"
+			"ru": "Поделиться геолокацией",
+			"es": "Enviar ubicación",
+			"br": "Enviar Localização"
 		}
 	},
 	"tasks": {
@@ -924,7 +930,9 @@ app.i18nTexts = {
 		},
 		"welcome_message": {
 			"en": "Thank you for installing me. I will do best to help you.",
-			"ru": "Спасибо за то, что установили меня. Я сделаю все, что в моих силах, чтобы помогать вам."
+			"ru": "Спасибо за то, что установили меня. Я сделаю все, что в моих силах, чтобы помогать вам.",
+			"es": "Gracias por instalarme. Espero ser de ayuda.",
+			"br": "Obrigado por instalar. Irei fazer o melhor para ajudar você."
 		},
 		"device_poll": {
 			"en": "Poll: What`s your device?",
@@ -1025,7 +1033,23 @@ app.i18nTexts = {
 		"donate_response_paypal": {},
 		"home_screen_title": {
 			"en": "Please select action:",
-			"ru": "Пожалуйста, выберите действие:"
+			"ru": "Пожалуйста, выберите действие:",
+			"es": "Por favor seleccione una acción",
+			"br": "Por favor selcione uma ação:"
+		},
+		"history": {
+			"en": "History",
+			"ru": "История",
+			"es": "Historial",
+			"br": "Histórico"
+		}
+	},
+	"history": {
+		"title": {
+			"en": "Your last %n requests:",
+			"ru": "Последние %n запросов:",
+			"es": "Sus últimas %n peticiones:",
+			"br": "Suas últimas %n requisições:"
 		}
 	}
 };

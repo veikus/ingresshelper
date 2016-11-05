@@ -139,6 +139,7 @@
 
         history = settings.history || [];
         history.unshift({
+            id: Math.random().toString(36).substring(7),
             location: params.location,
             name: params.name,
             city: params.city,
@@ -155,6 +156,42 @@
     };
 
     /**
+     * Move location to the first place in history list
+     * @param chatId {Number} Chat id
+     * @param recordId {String} History record id
+     * @params {Boolean} Is record exists
+     */
+    app.settings.moveUpHistoryRecord = function(chatId, recordId) {
+        var history, found,
+            settings = localStorage.getItem('settings__chat_' + chatId);
+
+        if (settings) {
+            settings = JSON.parse(settings);
+        } else {
+            settings = {};
+        }
+
+        history = settings.history || [];
+        history = history.filter(function(record) {
+            if (record.id === recordId) {
+                found = record;
+                return false;
+            } else {
+                return true;
+            }
+        });
+
+        if (found) {
+            history.unshift(found);
+        }
+
+        settings.history = history;
+        localStorage.setItem('settings__chat_' + chatId, JSON.stringify(settings));
+
+        return !!found;
+    };
+
+    /**
      * Get location history
      * @param id {Number} Chat id
      * @return {Array} History (see addToHistory method for details)
@@ -168,5 +205,5 @@
         } else {
             return [];
         }
-    }
+    };
 }());

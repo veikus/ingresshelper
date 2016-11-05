@@ -67,20 +67,24 @@
         var resp, lang,
             chat = cb.message.chat.id,
             messageId = cb.message.message_id,
-            data = cb.data && cb.data.split('::');
+            data = cb.data && cb.data.split('::') || [];
 
         if (data[1] === 'set') {
             lang = data[2];
 
-            if (lang && languages[lang]) {
+            if (!lang || !languages[lang]) {
+                app.telegram.updateMessage(chat, messageId, 'ERROR: Incorrect language value', 'clear_inline');
+            } else {
                 app.settings.lang(chat, lang);
-
                 resp = app.i18n(lang, 'lang', 'saved') + '\n\n';
                 resp += app.i18n(lang, 'lang', 'help_us');
 
                 app.telegram.updateMessage(chat, messageId, resp, 'clear_inline');
-                app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
             }
+        } else {
+            app.telegram.updateMessage(chat, messageId, 'ERROR: Incorrect action', 'clear_inline');
         }
+
+        app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
     };
 }());

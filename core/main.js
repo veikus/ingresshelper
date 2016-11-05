@@ -161,7 +161,7 @@
         if (app.modules[module] && app.modules[module].onCallback) {
             app.modules[module].onCallback(cb);
         } else {
-            app.telegram.updateMessage(chat, messageId, app.i18n(lang, 'main', 'unknown_command'), 'clear_inline');
+            app.telegram.updateMessage(chat, messageId, 'ERROR: Module not found', 'clear_inline');
             app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title', app.getHomeMarkup(lang)));
         }
     }

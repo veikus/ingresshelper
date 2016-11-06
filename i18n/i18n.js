@@ -11,12 +11,13 @@ app.i18nTexts = {
 			"de": "Bilder können unkomprimiert versendet werden (erhöhtes Datenvolumen).",
 			"chde": "Bilder chönd unkomprimiert gschickt werde (meh Dateverbruuch).",
 			"es": "Puedes obtener imagenes sin comprimir (aumenta la transferencia de datos)",
-			"br": "Você pode obter imagens não comprimidas ( aumenta a transferência de dados)",
+			"br": "Você pode obter imagens não compactadas (aumenta a transferência de dados)",
 			"it": "Puoi ricevere le immagini non compresse (aumento del traffico)",
 			"ro-md": "Dumneavoastră puteți deactiva comprimarea imaginilor (E nevoie de mai mult trafic)",
 			"fr": "Vous pouvez décompresser les images (augmente la taille du fichier)",
 			"nl": "U kan in gecomprimeerde afbeeldingen krijgen (maakt dataoverdracht klijner)",
-			"fa": "شما میتوناید تصاویر غیر فشرده دریافت کنید(کیفیت تصاویر و حجمشان در اینصورت بیشتر است!)"
+			"fa": "شما میتوناید تصاویر غیر فشرده دریافت کنید(کیفیت تصاویر و حجمشان در اینصورت بیشتر است!)",
+			"bg": "Възможно е да използвате некомпресирани .png изображения ( увеличава трафика )"
 		},
 		"enable": {
 			"en": "Enable compression",
@@ -33,7 +34,8 @@ app.i18nTexts = {
 			"ro-md": "Activați comprimarea",
 			"fr": "Compression activée",
 			"nl": "Gecomprimeerde bestanden aan zetten",
-			"fa": "فشرده سازی فعال شود"
+			"fa": "فشرده سازی فعال شود",
+			"bg": "Използвай .png компресия"
 		},
 		"disable": {
 			"en": "Disable compression",
@@ -50,7 +52,8 @@ app.i18nTexts = {
 			"ro-md": "Deactivați comprimarea",
 			"fr": "Compression désactivée",
 			"nl": "Gecomprimeerde bestanden uit zetten",
-			"fa": "فشرده سازی غیر فعال شود"
+			"fa": "فشرده سازی غیر فعال شود",
+			"bg": "Не използвай .png компресия"
 		},
 		"saved": {
 			"en": "Changes saved",
@@ -67,7 +70,8 @@ app.i18nTexts = {
 			"ro-md": "Schimbările au fost salvate",
 			"fr": "Changements sauvegardés",
 			"nl": "Wijzigingen opgeslagen",
-			"fa": "تغییرات ذخیره شد!"
+			"fa": "تغییرات ذخیره شد!",
+			"bg": "Благидаря! Промените са съхранени"
 		},
 		"wrong_input": {
 			"en": "Incorrect input. Please try again",
@@ -79,12 +83,13 @@ app.i18nTexts = {
 			"de": "Fehlerhafte Eingabe. Bitte erneut versuchen.",
 			"chde": "Fählerhafti Iigab. Bitte no einisch probiere.",
 			"es": "Entrada incorrecta. Por favor, intenta de nuevo.",
-			"br": "Entrada incorreta. Por favor, tente novamente",
+			"br": "Entrada incorreta. Por favor tente novamente",
 			"it": "Inserimento incorretto. Per favore, riprova.",
 			"ro-md": "Alegerea greșită. Vă rog incercati din nou",
 			"fr": "Entrée incorrecte. Veuillez réessayer",
 			"nl": "Verkeerde input. Probeert u het alstublieft opnieuw",
-			"fa": "ورودی نامعتبراست(اشتباست) لطفا دوباره امتحان کنید."
+			"fa": "ورودی نامعتبراست(اشتباست) لطفا دوباره امتحان کنید.",
+			"bg": "Некоректни входни данни. Моля опитайте отново!"
 		}
 	},
 	"help": {
@@ -103,13 +108,15 @@ app.i18nTexts = {
 			"ro-md": "Transmiteți botului coordonatele dumneavoastră, apoi selectati nivelul de zoom, și în cîteva minute veți primi un screenshot Intel",
 			"fr": "Envoyez votre localisation au bot, puis choisissez un zoom (3 - 17). Joyeux Ingress !",
 			"nl": "Stuur uw locatie naar de bot, selecteer daarna de map met zoom (3 - 17). ",
-			"fa": "مکان خودتون رو به ربات بفرستید سپس مقدار بزرگنمایی نقشه را انتخاب کنید "
+			"fa": "مکان خودتون رو به ربات بفرستید سپس مقدار بزرگنمایی نقشه را انتخاب کنید ",
+			"bg": "Изпратете своята локация на Bot-а, след това изберете ниво на увеличение ( от 3 - до 17)."
 		},
 		"line_2": {
 			"en": "Support email: ingressbot@veikus.com",
 			"ru": "Email для вопросов и предложений: ingressbot@veikus.com",
 			"es": "Email de Soporte: ingressbot@veikus.com",
-			"br": "Email de Suporte: ingressbot@veikus.com"
+			"br": "Email de Suporte: ingressbot@veikus.com",
+			"bg": "е-мейл за поддръжка: ingressbot@veikus.com "
 		},
 		"line_3": {
 			"ua": "Автор українскього перекладу: @Ukrrooter",
@@ -123,7 +130,8 @@ app.i18nTexts = {
 			"it": "Traduzione italiana di Marco Piccoli  (Telegram: @gible) e Max Ferrari (Telegram: @OniKoi) ",
 			"fr": "Traduit en français par @Kbueno et @Coquelibio",
 			"nl": "Nederlandse vertaling: @Lord_Roest en @Robin",
-			"fa": "ترجمه شده توسط سجاد پورمشرفی @kind_brother"
+			"fa": "ترجمه شده توسط سجاد پورمشرفی @kind_brother",
+			"bg": "(пишете на Английски) ако имате въпроси."
 		},
 		"line_4": {
 			"en": "Source code: http://github.com/veikus/ingresshelper",
@@ -140,7 +148,8 @@ app.i18nTexts = {
 			"ro-md": "Codul sursă: http://github.com/veikus/ingresshelper",
 			"fr": "Code Source: http://github.com/veikus/ingresshelper",
 			"nl": "Broncode: http://github.com/veikus/ingresshelper",
-			"fa": "سورس کد:https://github.com/veikus/ingresshelper"
+			"fa": "سورس کد:https://github.com/veikus/ingresshelper",
+			"bg": "Изходен код на Bot-a: http://github.com/veikus/ingresshelper"
 		}
 	},
 	"iitc": {
@@ -154,12 +163,13 @@ app.i18nTexts = {
 			"de": "IITC plugins können in diesem Menu konfiguriert werden",
 			"chde": "IITC Plugins chönd i dem Menu konfiguriert wärde",
 			"es": "Puedes configurar los plugins de IITC desde este menú",
-			"br": "Você pode configurar  plugins do IITC neste Menu",
+			"br": "Você pode configurar os plugins do IITC neste Menu",
 			"it": "Puoi impostare i plugin IITC da questo menu",
 			"ro-md": "Dumneavoastră  puteți configura plugin-urile  IITC în meniul dat",
 			"fr": "Vous pouvez configurer les plug-ins IITC depuis ce menu.",
 			"nl": "U kan IITC-plug-ins opstellen van deze menu's",
-			"fa": "شما میتوانید IITC راه اندازی کنید (نصب کنید) از طریق (توسط ) این منو ها"
+			"fa": "شما میتوانید IITC راه اندازی کنید (نصب کنید) از طریق (توسط ) این منو ها",
+			"bg": "Може да настроите IITC приставката от тези менюта"
 		},
 		"status": {
 			"en": "Current status:",
@@ -176,7 +186,8 @@ app.i18nTexts = {
 			"ro-md": "Statusul actual:",
 			"fr": "État actuel :",
 			"nl": "Huidige status:",
-			"fa": "وضعیت فعلی:"
+			"fa": "وضعیت فعلی:",
+			"bg": "Текущ статус:"
 		},
 		"enabled": {
 			"en": "Plugin enabled",
@@ -193,7 +204,8 @@ app.i18nTexts = {
 			"ro-md": "Plugin-ul este activat",
 			"fr": "Plug-in activé",
 			"nl": "Plug-in ingeschakeld",
-			"fa": "پلاگین فعال است :))\n"
+			"fa": "پلاگین فعال است :))\n",
+			"bg": "Приставката е включена"
 		},
 		"disabled": {
 			"en": "Plugin disabled",
@@ -210,7 +222,8 @@ app.i18nTexts = {
 			"ro-md": "Plugin-ul este desactivat",
 			"fr": "Plug-in désactivé",
 			"nl": "Plug-in uitgeschakeld",
-			"fa": "پلاگین غیر فعال است :("
+			"fa": "پلاگین غیر فعال است :(",
+			"bg": "Приставката е изключена"
 		},
 		"plugin_not_found": {
 			"en": "Plugin not found",
@@ -227,7 +240,8 @@ app.i18nTexts = {
 			"ro-md": "Plugin-ul nu a fost găsit",
 			"fr": "Plug-in introuvable",
 			"nl": "Plug-in niet gevonden",
-			"fa": "پلاگین یافت نشد! :("
+			"fa": "پلاگین یافت نشد! :(",
+			"bg": "Приставката не е открита"
 		},
 		"complete_setup": {
 			"en": "Complete setup",
@@ -244,7 +258,8 @@ app.i18nTexts = {
 			"ro-md": "Finisați configurările. ",
 			"fr": "Valider la configuration",
 			"nl": "Complete opstelling",
-			"fa": "راه اندازی کامل شد.تبریک میگم :))"
+			"fa": "راه اندازی کامل شد.تبریک میگم :))",
+			"bg": "Съхраняване на настройките"
 		}
 	},
 	"interval": {
@@ -263,7 +278,8 @@ app.i18nTexts = {
 			"ro-md": "17 - Toate portalurile",
 			"fr": "17 - Tous les portails",
 			"nl": "17 - Alle portalen",
-			"fa": "17 - همه پورتال"
+			"fa": "17 - همه پورتال",
+			"bg": "17 - Най ниско"
 		},
 		"options_2": {
 			"en": "16;15;14;13",
@@ -280,7 +296,8 @@ app.i18nTexts = {
 			"ro-md": "16;15;14;13",
 			"fr": "16;15;14;13",
 			"nl": "16;15;14;13",
-			"fa": "16;15;14;13"
+			"fa": "16;15;14;13",
+			"bg": "16;15;14;13"
 		},
 		"options_3": {
 			"en": "12;10;8;6",
@@ -297,7 +314,8 @@ app.i18nTexts = {
 			"ro-md": "12;10;8;6",
 			"fr": "12;10;8;6",
 			"nl": "12;10;8;6",
-			"fa": "12;10;8;6"
+			"fa": "12;10;8;6",
+			"bg": "12;10;8;6"
 		},
 		"options_4": {
 			"en": "3 - World",
@@ -314,7 +332,8 @@ app.i18nTexts = {
 			"ro-md": "3 - Toată lumea",
 			"fr": "3 - Vue mondiale",
 			"nl": "3 - Wereld",
-			"fa": "3 - جهان (دنیا)"
+			"fa": "3 - جهان (دنیا)",
+			"bg": "3 - Световна карта"
 		},
 		"cancel": {
 			"en": "Cancel setup",
@@ -326,12 +345,13 @@ app.i18nTexts = {
 			"de": "Setup abbrechen",
 			"chde": "Setup abbreche",
 			"es": "Cancelar configuración.",
-			"br": "cancelar a configuração",
+			"br": "Cancelar a configuração",
 			"it": "Cancella la configurazione",
 			"ro-md": "Anulează configurarea",
 			"fr": "Annuler la configuration",
 			"nl": "Opstelling annuleren",
-			"fa": "لغو راه اندازی"
+			"fa": "لغو راه اندازی",
+			"bg": "Отказ от настройките!"
 		},
 		"cancel_previous": {
 			"en": "You already have interval task. You can cancel this task and create new one",
@@ -348,7 +368,8 @@ app.i18nTexts = {
 			"ro-md": "La dumneavoastră deja este o sarcină activă. E nevoie de anulat sarcina precedentă, înainte de a crea o sarcină nouă. ",
 			"fr": "Vous avez déjà une requête périodique en cours. Vous pouvez l'annuler puis en créer une nouvelle.",
 			"nl": "U heeft al een interval taal. U kan deze taak annuleren en een nieuwe maken",
-			"fa": "شما در حال حاظر وظیفه به ربات داده اید .میتوانید آن را لغو و وظیفه( دستور) جدیدی اضافه کنید."
+			"fa": "شما در حال حاظر وظیفه به ربات داده اید .میتوانید آن را لغو و وظیفه( دستور) جدیدی اضافه کنید.",
+			"bg": "Вече има зададена интервална задача. Може да се откажето от задачата и да програмирате нова."
 		},
 		"cancel_previous_option": {
 			"en": "Cancel previous and create new",
@@ -365,7 +386,8 @@ app.i18nTexts = {
 			"ro-md": "Anulează sarcina și creați una nouă. ",
 			"fr": "Annuler l'ancienne requête et en créer une nouvelle.",
 			"nl": "Vorige annuleren en een nieuwe maken",
-			"fa": "دستور قبلی را لغو کنید و و دستور جدیدی دست کنید(اضافه کنید)"
+			"fa": "دستور قبلی را لغو کنید و و دستور جدیدی دست کنید(اضافه کنید)",
+			"bg": "Откажи предишната и създай нова"
 		},
 		"timeout_setup": {
 			"en": "How long do you need interval?",
@@ -382,7 +404,8 @@ app.i18nTexts = {
 			"ro-md": "Cît timp de creat screenshot-urile",
 			"fr": "Sur quelle période souhaitez-vous recevoir des screenshots ?",
 			"nl": "Hoelang heeft u een interval nodig?",
-			"fa": "تا چه مدت این سرویس را میخواهید؟"
+			"fa": "تا چه مدت این سرویس را میخواهید؟",
+			"bg": "Колко дълъг е необходимия интервал?"
 		},
 		"pause_setup": {
 			"en": "How often do you need screenshots?",
@@ -399,7 +422,8 @@ app.i18nTexts = {
 			"ro-md": "Cît de des a transmite screenshot-urile ?",
 			"fr": "A quelle fréquence souhaitez vous recevoir les screenshots ?",
 			"nl": "Hoe vaak wilt u schermafbeeldingen?",
-			"fa": "هر چه مدت یکبار به تصاویر نیاز دارید؟"
+			"fa": "هر چه مدت یکبار به تصاویر نیاز دارید؟",
+			"bg": "Колко често се нуждаете от скрийншоти?"
 		},
 		"location_setup": {
 			"en": "Send geolocation now",
@@ -416,7 +440,8 @@ app.i18nTexts = {
 			"ro-md": "Transmiteți geolocația zonei dorite",
 			"fr": "Envoyez votre localisation maintenant",
 			"nl": "Stuur nu uw geolocatie",
-			"fa": "منتطقه جغرافیایی خود را ارسال کنید(مکان خود)"
+			"fa": "منتطقه جغرافیایی خود را ارسال کنید(مکان خود)",
+			"bg": "Изпрати геолокация сега"
 		},
 		"zoom_setup": {
 			"en": "Select zoom level",
@@ -433,7 +458,8 @@ app.i18nTexts = {
 			"ro-md": "Selectați scara hărții.",
 			"fr": "Choisissez le niveau de zoom",
 			"nl": "Selecteer zoomniveau",
-			"fa": "میزان بزرگنمایی را انتخاب کنید"
+			"fa": "میزان بزرگنمایی را انتخاب کنید",
+			"bg": "Изберете ниво на височина"
 		},
 		"incorrect_input": {
 			"en": "Incorrect input",
@@ -450,7 +476,8 @@ app.i18nTexts = {
 			"ro-md": "Intrare Nevalidă. Selectați una din opțiuni",
 			"fr": "Entrée incorrecte.",
 			"nl": "Verkeerde input",
-			"fa": "ورودی نا معتبر(اشتباه)"
+			"fa": "ورودی نا معتبر(اشتباه)",
+			"bg": "Некоректни входни данни"
 		},
 		"task_saved": {
 			"en": "Task saved. You will start to receive screenshots soon",
@@ -467,7 +494,8 @@ app.i18nTexts = {
 			"ro-md": "Sarcina a fost salvată. Degrabă veți începe primi screenshot-urile.",
 			"fr": "Tâche enregistrée. Vous commencerez à recevoir les screenshots bientôt.",
 			"nl": "Taak opgeslagen. U zal binnenkort schermafbeeldingen ontvangen",
-			"fa": "دستور شما ذخیره شد به زودی شما اسکرین شات ها را دریافت خواهید کرد!"
+			"fa": "دستور شما ذخیره شد به زودی شما اسکرین شات ها را دریافت خواهید کرد!",
+			"bg": "Обработвам информацията. Благодаря!"
 		},
 		"interval_finished": {
 			"en": "Interval complete. You will receive last screenshot in few minutes",
@@ -484,7 +512,8 @@ app.i18nTexts = {
 			"ro-md": "Intervalul este finisat. În scurt timp veți primi ultimul screenshot.",
 			"fr": "Période terminée. Vous recevrez le dernier screenshot dans quelques minutes.",
 			"nl": "Interval compleet. U zal de laatste schermafbeelding ontvangen in een paar minuten.",
-			"fa": "شما تا چند دقیقه دیگر آخرین اسکرین شات را دریافت خواهید کرد :)"
+			"fa": "شما تا چند دقیقه دیگر آخرین اسکرین شات را دریافت خواهید کرد :)",
+			"bg": "Интервала приключен. Ще получите последното изображение след малко."
 		}
 	},
 	"lang": {
@@ -503,7 +532,8 @@ app.i18nTexts = {
 			"ro-md": "🇷🇺 Româna / Moldovenească",
 			"fr": "🇫🇷 Français",
 			"nl": "🇳🇱 Nederlands",
-			"fa": "🇮🇷 فارسی"
+			"fa": "🇮🇷 فارسی",
+			"bg": "🇧🇬 Български / Bulgarian"
 		},
 		"welcome": {
 			"en": "Please choose your language:",
@@ -520,7 +550,8 @@ app.i18nTexts = {
 			"ro-md": "Vă rugăm, selectați limba, care vă este mai comod de utilizat. ",
 			"fr": "Veuillez choisir la langue",
 			"nl": "Kies alstublieft uw taal",
-			"fa": "لطفا زبان مورد نظرتون رو انتخاب کنید"
+			"fa": "لطفا زبان مورد نظرتون رو انتخاب کنید",
+			"bg": "Моля изберете своя език:"
 		},
 		"incorrect_language": {
 			"en": "Incorrect input. Please select one of this options:",
@@ -537,7 +568,8 @@ app.i18nTexts = {
 			"ro-md": "Alegerea greșită. Vă rugăm sa selectați din opîiunile propuse .",
 			"fr": "Entrée incorrecte. Veuillez réessayer",
 			"nl": "Foute input. Probeert het opnieuw",
-			"fa": "ورودی اشتباست. لطفا دوباره تلاش کنی"
+			"fa": "ورودی اشتباست. لطفا دوباره تلاش کنی",
+			"bg": "Некоректни входни данни. Моля изберете една от следните възможности:"
 		},
 		"saved": {
 			"en": "Changes saved.",
@@ -554,13 +586,15 @@ app.i18nTexts = {
 			"ro-md": "Chimbprile au fost salvate.",
 			"fr": "Changements sauvegardés",
 			"nl": "Wijzigingen opgeslagen",
-			"fa": "تغییرات ذخیره شد!"
+			"fa": "تغییرات ذخیره شد!",
+			"bg": "Промените са съхранени."
 		},
 		"help_us": {
 			"en": "You can translate this bot to your language. Send an email to ingressbot@veikus.com if you want to participate.",
 			"ru": "Хотите помочь с переводом на другой язык? Напишите нам ingressbot@veikus.com",
 			"es": "Ayúdanos",
-			"br": "Você pode traduzir este bot para seu idioma. Envie um email para ingressbot@veikus.com se você quiser participar"
+			"br": "Você pode traduzir este bot para seu idioma. Envie um email para ingressbot@veikus.com se você quiser participar",
+			"bg": "Може да преведете този Bot на своя език. Изпратете ни е-мейл на ingressbot@veikus.com ако желаете да сътрудничите."
 		}
 	},
 	"main": {
@@ -579,7 +613,8 @@ app.i18nTexts = {
 			"ro-md": "Comanda necunoscută.",
 			"fr": "Commande inconnue",
 			"nl": "Onbekende opdracht",
-			"fa": "دستور نامعتبر است(شناسایی نشد)"
+			"fa": "دستور نامعتبر است(شناسایی نشد)",
+			"bg": "Непозната команда"
 		},
 		"cancelled": {
 			"en": "Ok, I cancelled the previous command",
@@ -596,7 +631,8 @@ app.i18nTexts = {
 			"ro-md": "Okey,am anulat comanda precedentă. ",
 			"fr": "Ok, j'ai supprimé la commande précédente.",
 			"nl": "Oké, vorige opdracht geannuleerd",
-			"fa": "دستور قبلی شما لغو شد!"
+			"fa": "دستور قبلی شما لغو شد!",
+			"bg": "Ок, прекратявам интервалното изпращане на изображения, приятен ден!"
 		},
 		"rate_us_1": {
 			"en": "⭐⭐⭐⭐⭐",
@@ -610,7 +646,8 @@ app.i18nTexts = {
 			"it": "⭐⭐⭐⭐⭐",
 			"ro-md": "⭐⭐⭐⭐⭐",
 			"nl": "⭐⭐⭐⭐⭐",
-			"fa": "⭐⭐⭐⭐⭐"
+			"fa": "⭐⭐⭐⭐⭐",
+			"bg": "⭐⭐⭐⭐⭐"
 		},
 		"rate_us_2": {
 			"en": "Please rate us in the storebot:",
@@ -625,7 +662,8 @@ app.i18nTexts = {
 			"ro-md": "Vă rugăm să ne evaluați în storebot.",
 			"fr": "Merci de nous évaluer dans le storebot",
 			"nl": "Beoordeel ons in de storebot",
-			"fa": "لطفا به ما در استور بات رای دهید! "
+			"fa": "لطفا به ما در استور بات رای دهید! ",
+			"bg": "Моля гласувайте за нас в сториборда:"
 		},
 		"rate_us_3": {
 			"en": "http://telegram.me/storebot?start=ingressmap_bot",
@@ -640,7 +678,8 @@ app.i18nTexts = {
 			"ro-md": "http://telegram.me/storebot?start=ingressmap_bot",
 			"fr": "http://telegram.me/storebot?start=ingressmap_bot",
 			"nl": "http://telegram.me/storebot?start=ingressmap_bot",
-			"fa": "http://telegram.me/storebot?start=ingressmap_bot"
+			"fa": "http://telegram.me/storebot?start=ingressmap_bot",
+			"bg": "http://telegram.me/storebot?start=ingressmap_bot"
 		}
 	},
 	"screenshot": {
@@ -659,7 +698,8 @@ app.i18nTexts = {
 			"ro-md": "Selectați scara hărții",
 			"fr": "Sélectionnez le niveau de zoom",
 			"nl": "Selecteer zoomniveau",
-			"fa": "میزان بزرگنمایی را انتخاب کنید"
+			"fa": "میزان بزرگنمایی را انتخاب کنید",
+			"bg": "Изберете ниво на увеличение:"
 		},
 		"incorrect_input": {
 			"en": "Incorrect input.",
@@ -676,7 +716,8 @@ app.i18nTexts = {
 			"ro-md": "Intrare Nevalidă. Selectați una din opțiuni",
 			"fr": "Entrée incorrecte. Veuillez réessayer",
 			"nl": "Foute input",
-			"fa": "ورودی نا معتبر(اشتباه)"
+			"fa": "ورودی نا معتبر(اشتباه)",
+			"bg": "Некоректни входни данни."
 		},
 		"task_saved": {
 			"en": "Task saved. Please wait for a few minutes.",
@@ -693,7 +734,8 @@ app.i18nTexts = {
 			"ro-md": "Sarcina este salvat. După câteva minute, vei primi un screenshot",
 			"fr": "Tâche enregistrée. Merci d'attendre quelques minutes.",
 			"nl": "Taak opgeslagen. Wacht alstublieft een paar minuten",
-			"fa": "دستور یا وظیفه ذخیره شد لطفا برای چند دقیقه صبر کنید..."
+			"fa": "دستور یا وظیفه ذخیره شد لطفا برای چند دقیقه صبر کنید...",
+			"bg": "Обработвам информацията. Благодаря !"
 		},
 		"location_required": {
 			"en": "Send geolocation now.",
@@ -710,7 +752,8 @@ app.i18nTexts = {
 			"ro-md": "Trimite geolocația zonei dorite",
 			"fr": "Envoyez votre localisation maintenant",
 			"nl": "Stuur nu uw geolocatie",
-			"fa": "منتطقه جغرافیایی خود را ارسال کنید(مکان خود)"
+			"fa": "منتطقه جغرافیایی خود را ارسال کنید(مکان خود)",
+			"bg": "Изпратете геолокация моля."
 		},
 		"options_1": {
 			"en": "17 - All portals",
@@ -726,7 +769,8 @@ app.i18nTexts = {
 			"it": "17 - Tutti i portali",
 			"ro-md": "17 - Toate portalurile",
 			"fr": "17 - Tous les portails",
-			"nl": "17 - Alle portalen"
+			"nl": "17 - Alle portalen",
+			"bg": "17 - Най ниско"
 		},
 		"options_2": {
 			"en": "16;15;14;13",
@@ -742,7 +786,8 @@ app.i18nTexts = {
 			"it": "16;15;14;13",
 			"ro-md": "16;15;14;13",
 			"fr": "16;15;14;13",
-			"nl": "16;15;14;13"
+			"nl": "16;15;14;13",
+			"bg": "16;15;14;13"
 		},
 		"options_3": {
 			"en": "12;10;8;6",
@@ -758,7 +803,8 @@ app.i18nTexts = {
 			"it": "12;10;8;6",
 			"ro-md": "12;10;8;6",
 			"fr": "12;10;8;6",
-			"nl": "12;10;8;6"
+			"nl": "12;10;8;6",
+			"bg": "12;10;8;6"
 		},
 		"options_4": {
 			"en": "3 - World",
@@ -774,13 +820,15 @@ app.i18nTexts = {
 			"it": "3 - Mondo",
 			"ro-md": "3 - Toată lumea",
 			"fr": "3 - Vue mondiale",
-			"nl": "3 - Wereld"
+			"nl": "3 - Wereld",
+			"bg": "3 - Световна карта"
 		},
 		"send_location": {
 			"en": "Send location",
 			"ru": "Поделиться геолокацией",
 			"es": "Enviar ubicación",
-			"br": "Enviar Localização"
+			"br": "Enviar Localização",
+			"bg": "Изпратете геолокация моля."
 		}
 	},
 	"tasks": {
@@ -799,7 +847,8 @@ app.i18nTexts = {
 			"ro-md": "Oh. Ceva n-a mers bine. Vă rugăm să încercați din nou în câteva minute",
 			"fr": "Je suis désolé. Quelque chose a l'air de s'être mal déroulé. Merci de réessayer dans quelques minutes.",
 			"nl": "Het spijt mij. Waarschijnlijk werkt er iets niet. Probeert u het alstublieft opnieuw over een paar minuten",
-			"fa": "من متاسفم به نظر میاد یک چیزی اشتباست لطفا چند دقیقه دیگر دوباره تلاش کنید "
+			"fa": "من متاسفم به نظر میاد یک چیزی اشتباست لطفا چند دقیقه دیگر دوباره تلاش کنید ",
+			"bg": "Съжалявам. Изглежда има проблем. Опитайте отново по късно."
 		}
 	},
 	"stats": {
@@ -816,7 +865,8 @@ app.i18nTexts = {
 			"ro-md": "Sarcini în așteptare:",
 			"fr": "Demandes en attente :",
 			"nl": "Taken in de rij:",
-			"fa": "وظایف در صف:"
+			"fa": "وظایف در صف:",
+			"bg": "На опашката има задачи:"
 		}
 	},
 	"common": {
@@ -830,7 +880,8 @@ app.i18nTexts = {
 			"es": "Califícanos",
 			"br": "Avalie nosso app",
 			"fr": "Evaluez nous",
-			"nl": "Beoordeel ons"
+			"nl": "Beoordeel ons",
+			"bg": "Моля гласувайте за нас"
 		},
 		"subscibe": {
 			"en": "Subscribe newsletter",
@@ -842,7 +893,8 @@ app.i18nTexts = {
 			"es": "Suscríbete a las noticias",
 			"br": "Subscrever para receber notícias",
 			"fr": "Abonnez vous à la newsletter",
-			"nl": "Abonneren op nieuwsbrief"
+			"nl": "Abonneren op nieuwsbrief",
+			"bg": "Запишете се за новини"
 		},
 		"unsubscribe": {
 			"en": "Unsubscribe newsletter",
@@ -854,7 +906,8 @@ app.i18nTexts = {
 			"es": "Desuscribirte de las noticias",
 			"br": "Cancelar Subscrição",
 			"fr": "Désabonnez vous de la newsletter",
-			"nl": "Uitschrijven van nieuwsbrief"
+			"nl": "Uitschrijven van nieuwsbrief",
+			"bg": "Отпишете се от новините"
 		},
 		"homepage": {
 			"en": "Back to actions list",
@@ -866,7 +919,8 @@ app.i18nTexts = {
 			"es": "Volver a la lista de acciones",
 			"br": "Voltar à lista de ações",
 			"fr": "Retour à la liste d'actions",
-			"nl": "Terug naar lijst met acties"
+			"nl": "Terug naar lijst met acties",
+			"bg": "Обратно в списъка с команди"
 		},
 		"make_screenshot": {
 			"en": "Make screenshot",
@@ -878,7 +932,8 @@ app.i18nTexts = {
 			"es": "Hacer screenshot",
 			"br": "Tirar Screenshot",
 			"fr": "Faire un screenshot",
-			"nl": "Schermafbeelding maken"
+			"nl": "Schermafbeelding maken",
+			"bg": "Изпрати screanshhot"
 		},
 		"location_help": {
 			"en": "💡 To send location press \"📎 > Location\".",
@@ -890,7 +945,8 @@ app.i18nTexts = {
 			"es": "💡 Para enviar ubicación presiona \"📎\" > \"Ubicación\"",
 			"br": "💡 Para enviar localização pressione \"📎\" > \"localização\"",
 			"fr": "💡 Pour envoyer votre localisation choisir \"📎 > Location\"",
-			"nl": "💡 Druk op \"📎 > Locatie\" om je locatie te sturen."
+			"nl": "💡 Druk op \"📎 > Locatie\" om je locatie te sturen.",
+			"bg": "💡 За изпращане на локация използвайте \"📎 бутона >след това Location\"."
 		},
 		"what_is_ingress_option": {
 			"en": "What is Ingress?",
@@ -902,7 +958,8 @@ app.i18nTexts = {
 			"es": "¿Qué es Ingress?",
 			"br": "O que é Ingress?",
 			"fr": "Ingress, qu'est-ce ?",
-			"nl": "Wat is Ingress?"
+			"nl": "Wat is Ingress?",
+			"bg": "Какво е Ingress?"
 		},
 		"what_is_ingress_resp_1": {
 			"en": "Ingress is a multiplayer online location-based game created by Niantic Labs. Download it on http://ingress.com",
@@ -914,7 +971,8 @@ app.i18nTexts = {
 			"es": "Ingress es un juego en línea multijugador que funciona con la ubicación GPS creado por Niantic Labs. Descárgalo en http://ingress.com",
 			"br": "Ingress é um jogo multiplayer online  baseado em localização, criado por Niantic Labs. Baixe-o em http://ingress.com",
 			"fr": "Ingress est un jeu multijoueur en ligne basé sur la localisation, créé par Niantic Labs. Télécharger sur http://ingress.com",
-			"nl": "Ingress is een multiplayer online locatiegebaseerd spel gemaakt door Niantic Labs. Download het op http://ingress.com"
+			"nl": "Ingress is een multiplayer online locatiegebaseerd spel gemaakt door Niantic Labs. Download het op http://ingress.com",
+			"bg": "Ingress е локационно базирана онлайн игра създадена от Niantic Labs. Налична е на адрес: http://ingress.com"
 		},
 		"what_is_ingress_resp_2": {
 			"en": "This bot is useless if you're not an ingress player.",
@@ -926,13 +984,15 @@ app.i18nTexts = {
 			"es": "Este bot no te sirve de nada si no eres un jugador de Ingress.",
 			"br": "Este bot é inútil se você não é um jogador de Ingress.",
 			"fr": "Ce bot ne sert à rien si vous n'êtes pas un joueur d'Ingress.",
-			"nl": "Deze bot is waardeloos als je geen Ingress-speler bent."
+			"nl": "Deze bot is waardeloos als je geen Ingress-speler bent.",
+			"bg": "Този Bot е безполезен ако не играете Ingress."
 		},
 		"welcome_message": {
 			"en": "Thank you for installing me. I will do best to help you.",
 			"ru": "Спасибо за то, что установили меня. Я сделаю все, что в моих силах, чтобы помогать вам.",
 			"es": "Gracias por instalarme. Espero ser de ayuda.",
-			"br": "Obrigado por instalar. Irei fazer o melhor para ajudar você."
+			"br": "Obrigado por instalar. Irei fazer o melhor para ajudar você.",
+			"bg": "Благодаря ви че ме инсталирахте. Ще дам най доброто от себеси за да ви бъда от помощ."
 		},
 		"device_poll": {
 			"en": "Poll: What`s your device?",
@@ -941,7 +1001,8 @@ app.i18nTexts = {
 			"fi": "Kysely: Mitä laitetta käytät?",
 			"es": "Encuesta: ¿Cuál es tu dispositivo?",
 			"br": "Enquete: Qual é seu dispositivo?",
-			"fr": "Sondage : Quel est votre appareil ?"
+			"fr": "Sondage : Quel est votre appareil ?",
+			"bg": "Анкета: Какво устройство ползвате?"
 		},
 		"device_poll_resp": {
 			"en": "Thank you for your vote",
@@ -950,7 +1011,8 @@ app.i18nTexts = {
 			"fi": "Kiitos, että asensit minut. Lähetä minulle sijainti saadaksesi Intel-kuvankaappauksia.",
 			"es": "Gracias por tu voto",
 			"br": "Obrigado pelo voto.",
-			"fr": "Merci pour votre vote"
+			"fr": "Merci pour votre vote",
+			"bg": "Благодарим Ви за гласа"
 		},
 		"language": {
 			"en": "Change language",
@@ -960,7 +1022,8 @@ app.i18nTexts = {
 			"es": "Cambiar idioma",
 			"br": "Mudar idioma",
 			"fr": "Changer de langue",
-			"nl": "Taal veranderen"
+			"nl": "Taal veranderen",
+			"bg": "Език(Language)"
 		},
 		"iitc_setup": {
 			"en": "Setup IITC",
@@ -970,7 +1033,8 @@ app.i18nTexts = {
 			"es": "Configuración IITC",
 			"br": "Configurações do IITC",
 			"fr": "Configurer IITC",
-			"nl": "IITC instellen"
+			"nl": "IITC instellen",
+			"bg": "Настройка на IITC"
 		},
 		"donate": {
 			"en": "Donate",
@@ -979,7 +1043,8 @@ app.i18nTexts = {
 			"fi": "Lahjoita",
 			"es": "Donar",
 			"br": "Doar",
-			"fr": "Donner"
+			"fr": "Donner",
+			"bg": "Дарете"
 		},
 		"donate_response": {
 			"en": "Hi. You can help the further development of the project by transferring us some money.",
@@ -988,7 +1053,8 @@ app.i18nTexts = {
 			"fi": "Voit auttaa botin kehittämistä lahjoittamalla.",
 			"es": "Hola. Tu puedes ayudar a que continuemos el desarrollo de este bot al hacer una donación.",
 			"br": "Oi. Você pode ajudar o desenvolvimento e aprimoramento do projeto fazendo uma doação. ",
-			"fr": "Bonjour, vous pouvez aider à des développements complémentaires du projet en nous transférant de l'argent."
+			"fr": "Bonjour, vous pouvez aider à des développements complémentaires du projet en nous transférant de l'argent.",
+			"bg": "Здравейте, може да подпомогнете бъдещото развитие на проекта чрез дарения ако желаете."
 		},
 		"donate_option_yandex": {
 			"en": "Yandex.Money",
@@ -996,7 +1062,8 @@ app.i18nTexts = {
 			"ua": "Яндекс.Гроші",
 			"fi": "Yandex.Money",
 			"es": "Yandex.Money",
-			"br": "Yandex.Money"
+			"br": "Yandex.Money",
+			"bg": "Yandex. Money"
 		},
 		"donate_option_card": {
 			"en": "VISA / Mastercard",
@@ -1004,7 +1071,8 @@ app.i18nTexts = {
 			"ua": "VISA / Mastercard",
 			"fi": "VISA / Mastercard",
 			"es": "VISA / Mastercard",
-			"br": "VISA / Mastercard"
+			"br": "VISA / Mastercard",
+			"bg": "VISA / Mastercard"
 		},
 		"donate_option_paypal": {
 			"en": "PayPal",
@@ -1012,7 +1080,8 @@ app.i18nTexts = {
 			"ua": "PayPal",
 			"fi": "PayPal",
 			"es": "PayPal",
-			"br": "PayPal"
+			"br": "PayPal",
+			"bg": "PayPal"
 		},
 		"donate_response_yandex": {
 			"en": "Follow this url: https://goo.gl/uRpdDo",
@@ -1020,7 +1089,8 @@ app.i18nTexts = {
 			"ua": "Для продовження перейдіть за посиланням: https://goo.gl/uRpdDo",
 			"fi": "Klikkaa tätä linkkiä: https://goo.gl/uRpdDo",
 			"es": "Gracias. Entra aqui para hacer tu donación: https://goo.gl/uRpdDo",
-			"br": "Obrigado. Faça sua doação no link: https://goo.gl/uRpdDo"
+			"br": "Obrigado. Faça sua doação no link: https://goo.gl/uRpdDo",
+			"bg": "Следвай този адрес: https://goo.gl/uRpdDo"
 		},
 		"donate_response_card": {
 			"en": "Follow this url: https://goo.gl/iRTsra",
@@ -1028,28 +1098,33 @@ app.i18nTexts = {
 			"ua": "Для продовження перейдіть за посиланням: https://goo.gl/iRTsra",
 			"fi": "Klikkaa tätä linkkiä: https://goo.gl/iRTsra",
 			"es": "Gracias. Entra aqui para hacer tu donación: https://goo.gl/iRTsra",
-			"br": "Obrigado. Faça sua doação no link: https://goo.gl/iRTsra"
+			"br": "Obrigado. Faça sua doação no link: https://goo.gl/iRTsra",
+			"bg": "Следвай този адрес: https://goo.gl/iRTsra"
 		},
 		"donate_response_paypal": {},
 		"home_screen_title": {
 			"en": "Please select action:",
 			"ru": "Пожалуйста, выберите действие:",
 			"es": "Por favor seleccione una acción",
-			"br": "Por favor selcione uma ação:"
+			"br": "Por favor selcione uma ação:",
+			"bg": "Моля изберете действие:"
 		},
 		"history": {
 			"en": "History",
 			"ru": "История",
 			"es": "Historial",
-			"br": "Histórico"
+			"br": "Histórico",
+			"bg": "История"
 		},
 		"compression": {
 			"en": "Compression settings",
-			"ru": "Настройка оптимизации"
+			"ru": "Настройка оптимизации",
+			"bg": "(png) Компресия"
 		},
 		"help": {
 			"en": "About bot",
-			"ru": "О боте"
+			"ru": "О боте",
+			"bg": "Относно Bot-а"
 		}
 	},
 	"history": {
@@ -1057,11 +1132,13 @@ app.i18nTexts = {
 			"en": "Your last %n request(s):",
 			"ru": "Последние %n запрос(ов):",
 			"es": "Sus últimas %n peticiones:",
-			"br": "Suas últimas %n requisições:"
+			"br": "Suas últimas %n requisições:",
+			"bg": "Вашето последно %n заявка(и):"
 		},
 		"no_data": {
 			"en": "You don`t have any records yet",
-			"ru": "В истории пока нет записей"
+			"ru": "В истории пока нет записей",
+			"bg": "Все още нямате записани заявки"
 		}
 	}
 };

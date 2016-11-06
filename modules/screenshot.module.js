@@ -101,13 +101,18 @@
     };
 
     Screenshot.prototype.getInitMarkup = function() {
+        var keyboard = [];
+
+        if (this.chat > 0) {
+            keyboard.push([{ text: app.i18n(this.lang, 'screenshot', 'send_location'), request_location: true }]);
+        }
+
+        keyboard.push([ app.i18n(this.lang, 'common', 'homepage') ]);
+
         return {
             one_time_keyboard: true,
             resize_keyboard: true,
-            keyboard: [
-                [{ text: app.i18n(this.lang, 'screenshot', 'send_location'), request_location: true }],
-                [app.i18n(this.lang, 'common', 'homepage')]
-            ]
+            keyboard: keyboard
         };
     };
 

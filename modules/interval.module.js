@@ -176,6 +176,12 @@
 
         switch (step) {
             case 'activeTask':
+                keyboard = [];
+                if (this.chat > 0) {
+                    keyboard.push([{ text: app.i18n(this.lang, 'screenshot', 'send_location'), request_location: true }]);
+                }
+                keyboard.push([ app.i18n(this.lang, 'common', 'homepage') ]);
+
                 resp = app.i18n(this.lang, 'interval', 'cancel_previous');
                 markup = {
                     one_time_keyboard: true,

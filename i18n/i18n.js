@@ -933,7 +933,7 @@ app.i18nTexts = {
 			"br": "Tirar Screenshot",
 			"fr": "Faire un screenshot",
 			"nl": "Schermafbeelding maken",
-			"bg": "Изпрати screanshhot"
+			"bg": "Изпрати screenshot"
 		},
 		"location_help": {
 			"en": "💡 To send location press \"📎 > Location\".",
@@ -1023,7 +1023,7 @@ app.i18nTexts = {
 			"br": "Mudar idioma",
 			"fr": "Changer de langue",
 			"nl": "Taal veranderen",
-			"bg": "Език(Language)"
+			"bg": "Език (Language)"
 		},
 		"iitc_setup": {
 			"en": "Setup IITC",

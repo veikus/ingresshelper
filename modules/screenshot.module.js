@@ -24,21 +24,7 @@
         }
     }
 
-    function getInitMarkupForUser(chat) {
-        let keyboard = [],
-            lang = app.settings.lang(chat);
-
-        keyboard.push([{ text: app.i18n(lang, 'screenshot', 'send_location'), request_location: true }]);
-        keyboard.push([ app.i18n(lang, 'common', 'homepage') ]);
-
-        return {
-            one_time_keyboard: true,
-            resize_keyboard: true,
-            keyboard: keyboard
-        };
-    }
-
-    function getInitMarkupForGroup(chat) {
+    function getInitMarkup(chat) {
         let keyboard = [],
             lang = app.settings.lang(chat);
 
@@ -117,13 +103,12 @@
             app.telegram.sendMessage(chat, app.i18n(lang, 'screenshot', 'zoom_setup'), getZoomMarkup(chat, id));
 
         } else {
-            let markup = chat < 0 ? getInitMarkupForGroup(chat) : getInitMarkupForUser(chat);
             let resp = [
                 app.i18n(lang, 'screenshot', 'location_required'),
                 app.i18n(lang, 'common', 'location_help')
             ].join('\n\n');
 
-            app.telegram.sendMessage(chat, resp, markup);
+            app.telegram.sendMessage(chat, resp, getInitMarkup(chat));
         }
 
         this.complete = true;
@@ -160,7 +145,7 @@
                     app.i18n(lang, 'common', 'location_help')
                 ].join('\n\n');
 
-                app.telegram.updateMessage(chat, messageId, resp, getInitMarkupForGroup(chat)); // TODO: Переделать эту строчку
+                app.telegram.updateMessage(chat, messageId, resp, getInitMarkup(chat));
                 break;
 
             case 'setZoom':

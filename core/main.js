@@ -147,7 +147,7 @@
         }
 
         // Hack for a new users
-        else if (text === '/start') {
+        else if (text.indexOf('/start') === 0) {
             app.telegram.sendMessage(chat, i18n(lang, 'common', 'welcome_message'));
             activeModule[chat] = new app.modules.lang(message);
         }

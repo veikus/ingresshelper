@@ -1,7 +1,7 @@
 /**
  * @file Settings getters/setters
  * @author Artem Veikus artem@veikus.com
- * @version 2.0
+ * @version 2.5.1
  */
 (function() {
     app.settings = {};
@@ -13,7 +13,7 @@
      * @returns {String|null} Current language code (or null if not defined)
      */
     app.settings.lang = function(id, lang) {
-        var settings = localStorage.getItem('settings__chat_' + id);
+        let settings = localStorage.getItem('settings__chat_' + id);
 
         if (settings) {
             settings = JSON.parse(settings);
@@ -36,7 +36,7 @@
      * @returns {Boolean} Value of compression setting
      */
     app.settings.compression = function(id, value) {
-        var settings = localStorage.getItem('settings__chat_' + id);
+        let settings = localStorage.getItem('settings__chat_' + id);
 
         if (settings) {
             settings = JSON.parse(settings);
@@ -59,7 +59,7 @@
      * @returns {Array} Enabled plugins list
      */
     app.settings.plugins = function(id, value) {
-        var settings = localStorage.getItem('settings__chat_' + id);
+        let settings = localStorage.getItem('settings__chat_' + id);
 
         if (settings) {
             settings = JSON.parse(settings);
@@ -84,7 +84,7 @@
      * @returns {Number} Requested screenshots
      */
     app.settings.getReceivedScreenshots = function(id) {
-        var settings = localStorage.getItem('settings__chat_' + id);
+        let settings = localStorage.getItem('settings__chat_' + id);
 
         if (settings) {
             settings = JSON.parse(settings);
@@ -100,7 +100,7 @@
      * @param id {Number} Chat id
      */
     app.settings.increaseReceivedScreenshots = function(id) {
-        var settings = localStorage.getItem('settings__chat_' + id);
+        let settings = localStorage.getItem('settings__chat_' + id);
 
         if (settings) {
             settings = JSON.parse(settings);
@@ -128,7 +128,7 @@
      * @params params.zoom {Number} Zoom value
      */
     app.settings.addToHistory = function(id, params) {
-        var history,
+        let history,
             settings = localStorage.getItem('settings__chat_' + id);
 
         if (settings) {
@@ -162,7 +162,7 @@
      * @params {Boolean} Is record exists
      */
     app.settings.moveUpHistoryRecord = function(chatId, recordId) {
-        var history, found,
+        let history, found,
             settings = localStorage.getItem('settings__chat_' + chatId);
 
         if (settings) {
@@ -197,7 +197,7 @@
      * @return {Array} History (see addToHistory method for details)
      */
     app.settings.getHistory = function(id) {
-        var settings = localStorage.getItem('settings__chat_' + id);
+        let settings = localStorage.getItem('settings__chat_' + id);
 
         if (settings) {
             settings = JSON.parse(settings);
@@ -205,5 +205,28 @@
         } else {
             return [];
         }
+    };
+
+    /**
+     * Is user got message that removes screen keyboard
+     * @param id {Number} Chat id
+     * @param value {Boolean=} New value
+     * @return {Boolean} Is keyboard removed
+     */
+    app.settings.isKeyboardHidden = function(id, value) {
+        let settings = localStorage.getItem('settings__chat_' + id);
+
+        if (settings) {
+            settings = JSON.parse(settings);
+        } else {
+            settings = {};
+        }
+
+        if (typeof (value) === 'boolean') {
+            settings.keyboardHidden = value;
+            localStorage.setItem('settings__chat_' + id, JSON.stringify(settings));
+        }
+
+        return settings && settings.hasOwnProperty('keyboardHidden') ? settings.keyboardHidden : false;
     };
 }());

@@ -1,11 +1,10 @@
 /**
  * @file Language setup module
  * @author Artem Veikus artem@veikus.com
- * @version 2.5.0
+ * @version 2.5.1
  */
 (function() {
-    var languages = app.i18nTexts.lang.title,
-        markup = generateMarkup();
+    let languages = app.i18nTexts.lang.title;
 
     app.modules = app.modules || {};
     app.modules.lang = Lang;
@@ -14,19 +13,25 @@
      * Generate default keyboard markup
      * @return {Object} Inline keyboard markup
      */
-    function generateMarkup() {
-        var result = {
+    function generateMarkup(chat) {
+        let lang = app.settings.lang(chat),
+            result = {
                 inline_keyboard: []
             };
 
         Object.keys(languages).forEach(function(key) {
-            var text = languages[key];
+            let text = languages[key];
 
             result.inline_keyboard.push([{
                 text: text,
                 callback_data: 'lang::set::' + key
             }]);
         });
+
+        result.inline_keyboard.push([{
+            text: app.i18n(lang, 'common', 'homepage'),
+            callback_data: 'homepage'
+        }]);
 
         return result;
     }
@@ -36,12 +41,12 @@
      * @constructor
      */
     function Lang(message) {
-        var resp,
+        let resp,
             chat = message.chat.id,
             lang = app.settings.lang(chat);
 
         resp = app.i18n(lang, 'lang', 'welcome');
-        app.telegram.sendMessage(chat, resp, markup);
+        app.telegram.sendMessage(chat, resp, generateMarkup(chat));
 
         this.complete = true;
     }
@@ -52,7 +57,7 @@
      * @returns {boolean}
      */
     Lang.initMessage = function(message) {
-        var chat = message.chat.id,
+        let chat = message.chat.id,
             lang = app.settings.lang(chat),
             text = message.text && message.text.toLowerCase();
 
@@ -64,27 +69,39 @@
      * @param cb {object} Telegram callback object
      */
     Lang.onCallback = function (cb) {
-        var resp, lang,
+        let resp, lang,
             chat = cb.message.chat.id,
             messageId = cb.message.message_id,
             data = cb.data && cb.data.split('::') || [];
 
-        if (data[1] === 'set') {
-            lang = data[2];
+        switch (data[1]) {
+            case 'start':
+                lang = app.settings.lang(chat);
+                app.telegram.updateMessage(chat, messageId, app.i18n(lang, 'lang', 'welcome'), generateMarkup(chat));
+                break;
 
-            if (!lang || !languages[lang]) {
-                app.telegram.updateMessage(chat, messageId, 'ERROR: Incorrect language value', 'clear_inline');
-            } else {
-                app.settings.lang(chat, lang);
-                resp = app.i18n(lang, 'lang', 'saved') + '\n\n';
-                resp += app.i18n(lang, 'lang', 'help_us');
+            case 'set':
+                lang = data[2];
 
-                app.telegram.updateMessage(chat, messageId, resp, 'clear_inline');
-            }
-        } else {
-            app.telegram.updateMessage(chat, messageId, 'ERROR: Incorrect action', 'clear_inline');
+                if (!lang || !languages[lang]) {
+                    app.telegram.updateMessage(chat, messageId, 'ERROR: Incorrect language value', 'clear_inline');
+                    app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
+
+                } else {
+                    app.settings.lang(chat, lang);
+                    resp = [
+                        app.i18n(lang, 'lang', 'saved'),
+                        app.i18n(lang, 'lang', 'help_us'),
+                        app.i18n(lang, 'common', 'home_screen_title')
+                    ].join('\n\n');
+
+                    app.telegram.updateMessage(chat, messageId, resp, app.getHomeMarkup(chat));
+                }
+                break;
+
+            default:
+                app.telegram.updateMessage(chat, messageId, 'ERROR: Incorrect action', 'clear_inline');
+                app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
         }
-
-        app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
     };
 }());

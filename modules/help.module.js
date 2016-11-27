@@ -1,7 +1,7 @@
 /**
  * @file Help module
  * @author Artem Veikus artem@veikus.com
- * @version 2.5.0
+ * @version 2.5.1
  */
 (function() {
     app.modules = app.modules || {};
@@ -21,7 +21,7 @@
      * @returns {boolean}
      */
     Help.initMessage = function(message) {
-        var chat = message.chat.id,
+        let chat = message.chat.id,
             lang = app.settings.lang(chat),
             text = message.text && message.text.toLowerCase();
 
@@ -29,10 +29,40 @@
     };
 
     /**
+     * @static
+     * @param cb {object} Telegram callback object
+     */
+    Help.onCallback = function (cb) {
+        let resp, markup,
+            chat = cb.message.chat.id,
+            lang = app.settings.lang(chat),
+            messageId = cb.message.message_id;
+
+        markup = {
+            inline_keyboard: [
+                [{
+                    text: app.i18n(lang, 'common', 'homepage'),
+                    callback_data: 'homepage'
+                }]
+            ]
+        };
+
+        resp = [
+            app.i18n(lang, 'help', 'line_1'),
+            app.i18n(lang, 'help', 'line_2'),
+            app.i18n(lang, 'help', 'line_3'),
+            app.i18n(lang, 'help', 'line_4'),
+        ].join('\n');
+
+
+        app.telegram.updateMessage(chat, messageId, resp, markup);
+    };
+
+    /**
      * @param message {object} Telegram message object
      */
     Help.prototype.onMessage = function (message) {
-        var chat = message.chat.id,
+        let chat = message.chat.id,
             lang = app.settings.lang(chat),
             resp = [];
 
@@ -44,5 +74,4 @@
         this.complete = true;
         app.telegram.sendMessage(chat, resp.join('\n'), app.getHomeMarkup(chat));
     };
-    
 }());

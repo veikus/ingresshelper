@@ -1,10 +1,10 @@
 /**
  * @file Primary bot file
  * @author Artem Veikus artem@veikus.com
- * @version 2.5.0
+ * @version 2.5.1
  */
-(function() {
-    var modulesArray = [],
+(function () {
+    let modulesArray = [],
         activeModule = {};
 
     if (app.config.telegramKey === 'YOUR_TOKEN_HERE') {
@@ -53,7 +53,7 @@
      * Get home screen markup
      */
     function getHomeMarkup(chat) {
-        var markup,
+        let markup,
             i18n = app.i18n,
             lang = app.settings.lang(chat),
             history = app.settings.getHistory(chat);
@@ -62,41 +62,55 @@
             console.error('getHomeMarkup(): Empty chat variable');
         }
 
-        // Do not display keyboard in groups
-        if (chat < 0) {
-            return null;
-        }
-
         markup = {
-            one_time_keyboard: true,
-            resize_keyboard: true,
-            keyboard: []
+            inline_keyboard: []
         };
 
-        markup.keyboard.push([
-            i18n(lang, 'common', 'make_screenshot')
+        markup.inline_keyboard.push([
+            {
+                text: i18n(lang, 'common', 'make_screenshot'),
+                callback_data: 'screenshot::start'
+            }
         ]);
 
         if (app.modules.rateUs) {
-            markup.keyboard.push([
-                i18n(lang, 'common', 'rate_us')
+            markup.inline_keyboard.push([
+                {
+                    text: i18n(lang, 'common', 'rate_us'),
+                    callback_data: 'rateUs::start'
+                }
             ]);
         }
 
         if (app.modules.history && history.length > 0) {
-            markup.keyboard.push([
-                i18n(lang, 'common', 'history')
+            markup.inline_keyboard.push([
+                {
+                    text: i18n(lang, 'common', 'history'),
+                    callback_data: 'history::start'
+                }
             ]);
         }
 
-        markup.keyboard.push([
-            i18n(lang, 'common', 'iitc_setup'),
-            i18n(lang, 'common', 'compression')
+        markup.inline_keyboard.push([
+            {
+                text: i18n(lang, 'common', 'iitc_setup'),
+                callback_data: 'iitc::start'
+            },
+            {
+                text: i18n(lang, 'common', 'compression'),
+                callback_data: 'compression::start'
+            }
         ]);
 
-        markup.keyboard.push([
-            i18n(lang, 'common', 'language'),
-            i18n(lang, 'common', 'help')
+        markup.inline_keyboard.push([
+            {
+                text: i18n(lang, 'common', 'language'),
+                callback_data: 'lang::start'
+            },
+            {
+                text: i18n(lang, 'common', 'help'),
+                callback_data: 'help::start'
+            }
         ]);
 
         return markup;
@@ -107,14 +121,14 @@
      * @param message {object} Message from getUpdates
      */
     function processMessage(message) {
-        var moduleFound,
+        let moduleFound,
             i18n = app.i18n,
             chat = parseInt(message.chat.id), // WebStorm was not sure about type of this variable. It help him a little
             lang = app.settings.lang(chat),
             text = message.text && message.text.toLowerCase();
 
         // If user asked for another module
-        modulesArray.forEach(function(module) {
+        modulesArray.forEach(function (module) {
             if (module.initMessage(message)) {
                 activeModule[chat] = new module(message);
                 moduleFound = true;
@@ -157,10 +171,16 @@
         if (activeModule[chat] && activeModule[chat].complete) {
             delete activeModule[chat];
         }
+
+        // Remove old style keyboard
+        if (!app.settings.isKeyboardHidden(chat)) {
+            app.telegram.sendMessage(chat, 'Welcome back', { remove_keyboard: true });
+            app.settings.isKeyboardHidden(chat, true);
+        }
     }
 
     function processCallback(cb) {
-        var chat = cb.message.chat.id,
+        let chat = cb.message.chat.id,
             messageId = cb.message.message_id,
             lang = app.settings.lang(chat),
             data = cb.data && cb.data.split('::'),
@@ -186,6 +206,12 @@
         } else {
             app.telegram.updateMessage(chat, messageId, 'ERROR: Module not found', 'clear_inline');
             app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
+        }
+
+        // Remove old style keyboard
+        if (!app.settings.isKeyboardHidden(chat)) {
+            app.telegram.sendMessage(chat, 'Welcome back!', { remove_keyboard: true });
+            app.settings.isKeyboardHidden(chat, true);
         }
     }
 }());

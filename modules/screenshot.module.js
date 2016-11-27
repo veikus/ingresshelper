@@ -44,7 +44,7 @@
 
         keyboard.push([{
             text: app.i18n(lang, 'common', 'homepage'),
-            callback_data: 'screenshot::cancel'
+            callback_data: 'homepage'
         }]);
 
         return {
@@ -63,7 +63,7 @@
                 parseLine(app.i18n(lang, 'interval', 'options_4'), id),
                 [{
                     text: app.i18n(lang, 'common', 'homepage'),
-                    callback_data: 'screenshot::cancel'
+                    callback_data: 'homepage'
                 }]
             ]
         };
@@ -147,14 +147,20 @@
      * @param cb {object} Telegram callback object
      */
     Screenshot.onCallback = function (cb) {
-        let chat = cb.message.chat.id,
+        let resp,
+            chat = cb.message.chat.id,
             messageId = cb.message.message_id,
             data = cb.data && cb.data.split('::') || [],
             lang = app.settings.lang(chat);
 
         switch (data[1]) {
-            case 'cancel':
-                app.telegram.updateMessage(chat, messageId, '👍', 'clear_inline'); // thumbs up
+            case 'start':
+                resp = [
+                    app.i18n(lang, 'screenshot', 'location_required'),
+                    app.i18n(lang, 'common', 'location_help')
+                ].join('\n\n');
+
+                app.telegram.updateMessage(chat, messageId, resp, getInitMarkupForGroup(chat)); // TODO: Переделать эту строчку
                 break;
 
             case 'setZoom':
@@ -163,12 +169,15 @@
 
                 if (!id || !requests[id]) {
                     app.telegram.updateMessage(chat, messageId, 'ERROR: Incorrect id', 'clear_inline');
+                    app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
 
                 } else if (requests[id].chat !== chat) {
                     app.telegram.updateMessage(chat, messageId, 'ERROR: Permission denied', 'clear_inline');
+                    app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
 
                 } else if (!zoom || zoom < 3 && zoom > 17) {
                     app.telegram.updateMessage(chat, messageId, 'ERROR: Incorrect zoom', 'clear_inline');
+                    app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
 
                 } else {
                     let request = requests[id];
@@ -176,8 +185,12 @@
                     request.messageId = messageId;
                     onRequestsChanged();
 
+                    resp = [
+                        app.i18n(lang, 'screenshot', 'task_saved'),
+                        app.i18n(lang, 'common', 'home_screen_title')
+                    ].join('\n\n');
                     app.taskManager.add(request);
-                    app.telegram.updateMessage(chat, messageId, app.i18n(lang, 'screenshot', 'task_saved'), 'clear_inline');
+                    app.telegram.updateMessage(chat, messageId, resp, app.getHomeMarkup(chat));
 
                     // Stats
                     if (app.modules.stats) {
@@ -203,8 +216,7 @@
 
             default:
                 app.telegram.updateMessage(chat, messageId, 'ERROR: Incorrect action', 'clear_inline');
+                app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
         }
-
-        app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
     };
 }());

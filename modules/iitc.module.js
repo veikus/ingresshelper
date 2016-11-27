@@ -65,7 +65,7 @@
 
         result.push([{
             text: app.i18n(lang, 'iitc', 'complete_setup'),
-            callback_data: 'iitc::complete'
+            callback_data: 'homepage'
         }]);
 
         return {
@@ -148,9 +148,8 @@
             lang = app.settings.lang(chat);
 
         switch (data[1]) {
-            case 'complete':
-                app.telegram.updateMessage(chat, messageId, '👍', 'clear_inline'); // thumbs up
-                app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
+            case 'start':
+                app.telegram.updateMessage(chat, messageId, app.i18n(lang, 'iitc', 'help'), buildMarkup(chat));
                 break;
 
             case 'switch':
@@ -159,6 +158,7 @@
                 if (!id || !IITC.validateId(id)) {
                     app.telegram.updateMessage(chat, messageId, 'ERROR: Incorrect id value', 'clear_inline');
                     app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
+
                 } else {
                     let enabled = app.settings.plugins(chat),
                         index = enabled.indexOf(id),

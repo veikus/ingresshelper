@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Ingress Intel Helper",
-    "version": "2.5.0",
+    "version": "2.5.1",
     "description": "Makes screenshots for intel map",
     "background": {
         "persistent": true,

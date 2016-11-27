@@ -1,7 +1,7 @@
 /**
  * @file Compression setup module
  * @author Artem Veikus artem@veikus.com
- * @version 2.5.0
+ * @version 2.5.1
  */
 (function() {
     app.modules = app.modules || {};
@@ -12,22 +12,27 @@
      * @constructor
      */
     function Compression(message) {
-        var resp, markup;
-
-        this.chat = message.chat.id;
-        this.lang = app.settings.lang(this.chat);
+        let resp, markup,
+            chat =  message.chat.id,
+            lang = app.settings.lang(chat);
 
         markup = {
-            one_time_keyboard: false,
-            resize_keyboard: true,
-            keyboard: [
-                [app.i18n(this.lang, 'compression', 'disable')],
-                [app.i18n(this.lang, 'compression', 'enable')]
+            inline_keyboard: [
+                [{
+                    text: app.i18n(lang, 'compression', 'disable'),
+                    callback_data: 'compression::set::0'
+                }],
+                [{
+                    text: app.i18n(lang, 'compression', 'enable'),
+                    callback_data: 'compression::set::1'
+                }]
             ]
         };
 
-        resp = app.i18n(this.lang, 'compression', 'welcome');
-        app.telegram.sendMessage(this.chat, resp, markup);
+        resp = app.i18n(lang, 'compression', 'welcome');
+        app.telegram.sendMessage(chat, resp, markup);
+
+        this.complete = true;
     }
 
     /**
@@ -36,7 +41,7 @@
      * @returns {boolean}
      */
     Compression.initMessage = function(message) {
-        var chat = message.chat.id,
+        let chat = message.chat.id,
             lang = app.settings.lang(chat),
             text = message.text && message.text.toLowerCase();
 
@@ -44,30 +49,25 @@
     };
 
     /**
-     * @param message {object} Telegram message object
+     * @static
+     * @param cb {object} Telegram callback object
      */
-    Compression.prototype.onMessage = function (message) {
-        var resp, offOption, onOption,
-            text = message.text;
+    Compression.onCallback = function (cb) {
+        let chat = cb.message.chat.id,
+            lang = app.settings.lang(chat),
+            messageId = cb.message.message_id,
+            data = cb.data && cb.data.split('::') || [];
 
-        offOption = app.i18n(this.lang, 'compression', 'disable');
-        onOption = app.i18n(this.lang, 'compression', 'enable');
+        if (data[1] === 'set') {
+            let isOn = !!parseInt(data[2]),
+                resp = app.i18n(lang, 'compression', 'saved');
 
-        if (text === offOption) {
-            app.settings.compression(this.chat, false);
-            this.complete = true;
-        } else if (text === onOption) {
-            app.settings.compression(this.chat, true);
-            this.complete = true;
-        }
-
-        if (this.complete) {
-            resp = app.i18n(this.lang, 'compression', 'saved');
-            app.telegram.sendMessage(this.chat, resp, app.getHomeMarkup(this.chat));
+            app.settings.compression(chat, isOn);
+            app.telegram.updateMessage(chat, messageId, resp, 'clear_inline');
         } else {
-            resp = app.i18n(this.lang, 'compression', 'wrong_input');
-            app.telegram.sendMessage(this.chat, resp);
+            app.telegram.updateMessage(chat, messageId, 'ERROR: Incorrect action', 'clear_inline');
         }
-    };
 
+        app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
+    };
 }());

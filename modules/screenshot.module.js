@@ -1,21 +1,132 @@
 /**
  * @file Screenshot task creation module
  * @author Artem Veikus artem@veikus.com
- * @version 2.5.0
+ * @version 2.5.1
  */
 (function() {
+    let requests;
+
     app.modules = app.modules || {};
     app.modules.screenshot = Screenshot;
+
+    init();
+
+    /**
+     * Module initialization
+     */
+    function init() {
+        requests = localStorage.getItem('screenshot__requests');
+
+        if (requests) {
+            requests = JSON.parse(requests);
+        } else {
+            requests = {};
+        }
+    }
+
+    function getInitMarkupForUser(chat) {
+        let keyboard = [],
+            lang = app.settings.lang(chat);
+
+        keyboard.push([{ text: app.i18n(lang, 'screenshot', 'send_location'), request_location: true }]);
+        keyboard.push([ app.i18n(lang, 'common', 'homepage') ]);
+
+        return {
+            one_time_keyboard: true,
+            resize_keyboard: true,
+            keyboard: keyboard
+        };
+    }
+
+    function getInitMarkupForGroup(chat) {
+        let keyboard = [],
+            lang = app.settings.lang(chat);
+
+        keyboard.push([{
+            text: app.i18n(lang, 'common', 'homepage'),
+            callback_data: 'screenshot::cancel'
+        }]);
+
+        return {
+            inline_keyboard: keyboard
+        };
+    }
+
+    function getZoomMarkup(chat, id) {
+        let lang = app.settings.lang(chat);
+
+        return {
+            inline_keyboard: [
+                parseLine(app.i18n(lang, 'interval', 'options_1'), id),
+                parseLine(app.i18n(lang, 'interval', 'options_2'), id),
+                parseLine(app.i18n(lang, 'interval', 'options_3'), id),
+                parseLine(app.i18n(lang, 'interval', 'options_4'), id),
+                [{
+                    text: app.i18n(lang, 'common', 'homepage'),
+                    callback_data: 'screenshot::cancel'
+                }]
+            ]
+        };
+    }
+
+    function parseLine(data, id) {
+        return data.split(';').map(function(option) {
+            return {
+                text: option,
+                callback_data: 'screenshot::setZoom::' + id + '::' + parseInt(option)
+            }
+        });
+    }
+
+    function createTask(message) {
+        let chat = message.chat.id,
+            location = message.location,
+            id = generateId();
+
+        requests[id] = {
+            chat: chat,
+            location: location
+        };
+        onRequestsChanged();
+
+        return id;
+    }
+
+    function generateId() {
+        let id = Math.random().toString(36).substring(7);
+
+        return requests[id] ? generateId() : id;
+    }
+
+    function onRequestsChanged() {
+        let text = JSON.stringify(requests);
+        localStorage.setItem('screenshot__requests', text);
+    }
 
     /**
      * @param message {object} Telegram message object
      * @constructor
      */
     function Screenshot(message) {
-        this.chat = message.chat.id;
-        this.lang = app.settings.lang(this.chat);
-        this.location = null;
-        this.onMessage(message);
+        let chat = message.chat.id,
+            lang = app.settings.lang(chat),
+            location = message.location;
+
+        if (location && location.latitude && location.longitude) {
+            let id = createTask(message);
+            app.telegram.sendMessage(chat, app.i18n(lang, 'screenshot', 'zoom_setup'), getZoomMarkup(chat, id));
+
+        } else {
+            let markup = chat < 0 ? getInitMarkupForGroup(chat) : getInitMarkupForUser(chat);
+            let resp = [
+                app.i18n(lang, 'screenshot', 'location_required'),
+                app.i18n(lang, 'common', 'location_help')
+            ].join('\n\n');
+
+            app.telegram.sendMessage(chat, resp, markup);
+        }
+
+        this.complete = true;
     }
 
     /**
@@ -32,102 +143,68 @@
     };
 
     /**
-     * @param message {object} Telegram message object
+     * @static
+     * @param cb {object} Telegram callback object
      */
-    Screenshot.prototype.onMessage = function (message) {
-        var resp, zoom,
-            that = this,
-            text = message.text,
-            location = message.location;
+    Screenshot.onCallback = function (cb) {
+        let chat = cb.message.chat.id,
+            messageId = cb.message.message_id,
+            data = cb.data && cb.data.split('::') || [],
+            lang = app.settings.lang(chat);
 
-        // Step 1
-        if (location && location.latitude && location.longitude) {
-            this.location = location;
-            resp = app.i18n(this.lang, 'screenshot', 'zoom_setup');
-            app.telegram.sendMessage(this.chat, resp, this.getZoomMarkup());
-            return;
-        } else if (!this.location) {
-            resp = [
-                app.i18n(this.lang, 'screenshot', 'location_required'),
-                app.i18n(this.lang, 'common', 'location_help')
-            ].join('\n\n');
+        switch (data[1]) {
+            case 'cancel':
+                app.telegram.updateMessage(chat, messageId, '👍', 'clear_inline'); // thumbs up
+                break;
 
-            app.telegram.sendMessage(this.chat, resp, this.getInitMarkup());
-            return;
-        }
+            case 'setZoom':
+                let id = data[2],
+                    zoom = parseInt(data[3]);
 
-        // Step 2
-        zoom = parseInt(text);
-        if (zoom && zoom >= 3 && zoom <= 17) {
-            this.complete = true;
+                if (!id || !requests[id]) {
+                    app.telegram.updateMessage(chat, messageId, 'ERROR: Incorrect id', 'clear_inline');
 
-            app.taskManager.add({
-                chat: this.chat,
-                location: this.location,
-                zoom: zoom
-            });
+                } else if (requests[id].chat !== chat) {
+                    app.telegram.updateMessage(chat, messageId, 'ERROR: Permission denied', 'clear_inline');
 
-            resp = app.i18n(this.lang, 'screenshot', 'task_saved');
-            app.telegram.sendMessage(this.chat, resp, app.getHomeMarkup(this.chat));
+                } else if (!zoom || zoom < 3 && zoom > 17) {
+                    app.telegram.updateMessage(chat, messageId, 'ERROR: Incorrect zoom', 'clear_inline');
 
-            // Stats
-            if (app.modules.stats) {
-                app.modules.stats.trackScreenshot({
-                    chat: this.chat,
-                    zoom: zoom,
-                    location: this.location
-                });
-            }
+                } else {
+                    let request = requests[id];
+                    request.zoom = zoom;
+                    request.messageId = messageId;
+                    onRequestsChanged();
 
-            // Get location name and save it to history
-            app.geocoder(this.lang, this.location, function(data) {
-                if (!data) {
-                    return;
+                    app.taskManager.add(request);
+                    app.telegram.updateMessage(chat, messageId, app.i18n(lang, 'screenshot', 'task_saved'), 'clear_inline');
+
+                    // Stats
+                    if (app.modules.stats) {
+                        app.modules.stats.trackScreenshot(request);
+                    }
+
+                    // Get location name and save it to history
+                    app.geocoder(lang, request.location, function(data) {
+                        if (!data) {
+                            return;
+                        }
+
+                        app.settings.addToHistory(chat, {
+                            location: request.location,
+                            name: data.name,
+                            city: data.city,
+                            countryCode: data.country,
+                            zoom: zoom
+                        });
+                    });
                 }
+                break;
 
-                app.settings.addToHistory(that.chat, {
-                    location: that.location,
-                    name: data.name,
-                    city: data.city,
-                    countryCode: data.country,
-                    zoom: zoom
-                });
-            });
-
-        } else {
-            resp = app.i18n(this.lang, 'screenshot', 'incorrect_input');
-            app.telegram.sendMessage(this.chat, resp);
-        }
-    };
-
-    Screenshot.prototype.getInitMarkup = function() {
-        var keyboard = [];
-
-        if (this.chat > 0) {
-            keyboard.push([{ text: app.i18n(this.lang, 'screenshot', 'send_location'), request_location: true }]);
+            default:
+                app.telegram.updateMessage(chat, messageId, 'ERROR: Incorrect action', 'clear_inline');
         }
 
-        keyboard.push([ app.i18n(this.lang, 'common', 'homepage') ]);
-
-        return {
-            one_time_keyboard: true,
-            resize_keyboard: true,
-            keyboard: keyboard
-        };
+        app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
     };
-
-    Screenshot.prototype.getZoomMarkup = function() {
-        return {
-            one_time_keyboard: true,
-            resize_keyboard: true,
-            keyboard: [
-                app.i18n(this.lang, 'interval', 'options_1').split(';'),
-                app.i18n(this.lang, 'interval', 'options_2').split(';'),
-                app.i18n(this.lang, 'interval', 'options_3').split(';'),
-                app.i18n(this.lang, 'interval', 'options_4').split(';'),
-                [ app.i18n(this.lang, 'common', 'homepage') ]
-            ]
-        };
-    };
-
 }());

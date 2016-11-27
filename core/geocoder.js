@@ -2,55 +2,81 @@
  * @file Geocoder
  * @author Artem Veikus artem@veikus.com
  * @version 2.5.0
- * @description https://tech.yandex.ru/maps/doc/geocoder/desc/concepts/input_params-docpage/
+ * @description https://developers.google.com/maps/documentation/geocoding/intro#ComponentFiltering
  */
 (function() {
     app.geocoder = function(lang, location, cb) {
         var params = {
-            format: 'json',
-            geocode: [location.longitude, location.latitude].join(','),
-            kind: 'street',
-            results: 1
+            latlng: [location.latitude, location.longitude,].join(',')
         };
 
         switch (lang) {
             case 'ru':
-                params.lang = 'ru_RU';
+                params.language = 'ru';
                 break;
 
             case 'ua':
-                params.lang = 'uk_UA';
+                params.language = 'uk';
+                break;
+
+            case 'fi':
+                params.language = 'fi';
+                break;
+
+            case 'de':
+            case 'chde':
+                params.language = 'de';
+                break;
+
+            case 'br':
+                params.language = 'pt';
+                break;
+
+            case 'it':
+                params.language = 'it';
+                break;
+
+            case 'ro-md':
+                params.language = 'ro';
+                break;
+
+            case 'fr':
+                params.language = 'fr';
+                break;
+
+            case 'bg':
+                params.language = 'bg';
+                break;
+
+            case 'se':
+                params.language = 'sv';
                 break;
 
             default:
-                params.lang = 'en_US';
+                params.language = 'en';
         }
 
-        request('https://geocode-maps.yandex.ru/1.x/', params, function(data) {
+        request('https://maps.googleapis.com/maps/api/geocode/json', params, function(data) {
             var name, city, country, result,
                 object = data
-                    && data.response
-                    && data.response.GeoObjectCollection
-                    && data.response.GeoObjectCollection.featureMember
-                    && data.response.GeoObjectCollection.featureMember[0]
-                    && data.response.GeoObjectCollection.featureMember[0].GeoObject
-                    && data.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty
-                    && data.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData;
+                    && data.results
+                    && data.results[0];
 
             if (!object) {
                 return cb && cb(null);
             }
 
-            name = object.text;
+            name = object.formatted_address;
 
-            city = object.AddressDetails
-                && object.AddressDetails.Country
-                && object.AddressDetails.Country.AdministrativeArea
-                && object.AddressDetails.Country.AdministrativeArea.AdministrativeAreaName;
+            object.address_components.forEach(function(item) {
+                if (item.types.indexOf('locality') !== -1) {
+                    city = item.long_name;
+                }
 
-            country = object.AddressDetails
-                && object.AddressDetails.Country
-                && object.AddressDetails.Country.CountryNameCode;
+                if (item.types.indexOf('country') !== -1) {
+                    country = item.short_name;
+                }
+            });
 
             if (name && city && country) {
                 result = {

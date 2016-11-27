@@ -72,24 +72,6 @@ app.i18nTexts = {
 			"nl": "Wijzigingen opgeslagen",
 			"fa": "تغییرات ذخیره شد!",
 			"bg": "Благидаря! Промените са съхранени"
-		},
-		"wrong_input": {
-			"en": "Incorrect input. Please try again",
-			"ru": "Неправильный выбор. Выберите из предложенных вариантов",
-			"ua": "Неправильний вибір. Виберіть із запропонованих варіантів",
-			"zh-cmn-Hans": "输入有误，请重试",
-			"zh-cmn-Hant": "輸入有誤，請重試",
-			"fi": "Virheellinen syöte. Yritä uudelleen.",
-			"de": "Fehlerhafte Eingabe. Bitte erneut versuchen.",
-			"chde": "Fählerhafti Iigab. Bitte no einisch probiere.",
-			"es": "Entrada incorrecta. Por favor, intenta de nuevo.",
-			"br": "Entrada incorreta. Por favor tente novamente",
-			"it": "Inserimento incorretto. Per favore, riprova.",
-			"ro-md": "Alegerea greșită. Vă rog incercati din nou",
-			"fr": "Entrée incorrecte. Veuillez réessayer",
-			"nl": "Verkeerde input. Probeert u het alstublieft opnieuw",
-			"fa": "ورودی نامعتبراست(اشتباست) لطفا دوباره امتحان کنید.",
-			"bg": "Некоректни входни данни. Моля опитайте отново!"
 		}
 	},
 	"help": {
@@ -188,60 +170,6 @@ app.i18nTexts = {
 			"nl": "Huidige status:",
 			"fa": "وضعیت فعلی:",
 			"bg": "Текущ статус:"
-		},
-		"enabled": {
-			"en": "Plugin enabled",
-			"ru": "Плагин включен",
-			"ua": "Плагін увімкнено",
-			"zh-cmn-Hans": "插件已启用",
-			"zh-cmn-Hant": "插件已啟用",
-			"fi": "Liitännäinen käytössä.",
-			"de": "Plugin aktiviert",
-			"chde": "Plugin aktiviert",
-			"es": "Plugin activado",
-			"br": "Plugin ativado",
-			"it": "Plugin abilitato",
-			"ro-md": "Plugin-ul este activat",
-			"fr": "Plug-in activé",
-			"nl": "Plug-in ingeschakeld",
-			"fa": "پلاگین فعال است :))\n",
-			"bg": "Приставката е включена"
-		},
-		"disabled": {
-			"en": "Plugin disabled",
-			"ru": "Плагин отключен",
-			"ua": "Плагін вимкнено",
-			"zh-cmn-Hans": "插件已停用",
-			"zh-cmn-Hant": "插件已停用",
-			"fi": "Liitännäinen poissa käytöstä.",
-			"de": "Plugin deaktiviert",
-			"chde": "Plugin deaktiviert",
-			"es": "Plugin desactivado",
-			"br": "Plugin desativado",
-			"it": "Plugin disabilitato",
-			"ro-md": "Plugin-ul este desactivat",
-			"fr": "Plug-in désactivé",
-			"nl": "Plug-in uitgeschakeld",
-			"fa": "پلاگین غیر فعال است :(",
-			"bg": "Приставката е изключена"
-		},
-		"plugin_not_found": {
-			"en": "Plugin not found",
-			"ru": "Плагин не найден",
-			"ua": "Плагін не знайдено",
-			"zh-cmn-Hans": "没有找到插件",
-			"zh-cmn-Hant": "沒有找到插件",
-			"fi": "Liitännäistä ei löytynyt.",
-			"de": "Plugin nicht gefunden",
-			"chde": "Plugin ned gfunde",
-			"es": "Plugin no encontrado.",
-			"br": "Plugin não encontrado",
-			"it": "Plugin non trovato",
-			"ro-md": "Plugin-ul nu a fost găsit",
-			"fr": "Plug-in introuvable",
-			"nl": "Plug-in niet gevonden",
-			"fa": "پلاگین یافت نشد! :(",
-			"bg": "Приставката не е открита"
 		},
 		"complete_setup": {
 			"en": "Complete setup",
@@ -701,24 +629,6 @@ app.i18nTexts = {
 			"fa": "میزان بزرگنمایی را انتخاب کنید",
 			"bg": "Изберете ниво на увеличение:"
 		},
-		"incorrect_input": {
-			"en": "Incorrect input.",
-			"ru": "Неверный ввод. Выберите из предложенных вариантов.",
-			"ua": "Неправильне значення. Оберіть із запропонованих варіантів.",
-			"zh-cmn-Hans": "输入有误",
-			"zh-cmn-Hant": "輸入有誤",
-			"fi": "Virheellinen syöte",
-			"de": "Fehlerhafte Eingabe",
-			"chde": "Fählerhafti Iigab",
-			"es": "Entrada incorrecta.",
-			"br": "Entrada incorreta",
-			"it": "Inserimento incorretto",
-			"ro-md": "Intrare Nevalidă. Selectați una din opțiuni",
-			"fr": "Entrée incorrecte. Veuillez réessayer",
-			"nl": "Foute input",
-			"fa": "ورودی نا معتبر(اشتباه)",
-			"bg": "Некоректни входни данни."
-		},
 		"task_saved": {
 			"en": "Task saved. Please wait for a few minutes.",
 			"ru": "Задача сохранена. Через несколько минут вы получите скриншот.",
@@ -824,7 +734,7 @@ app.i18nTexts = {
 			"bg": "3 - Световна карта"
 		},
 		"send_location": {
-			"en": "Send location",
+			"en": "Send current location",
 			"ru": "Поделиться геолокацией",
 			"es": "Enviar ubicación",
 			"br": "Enviar Localização",
@@ -1036,72 +946,6 @@ app.i18nTexts = {
 			"nl": "IITC instellen",
 			"bg": "Настройка на IITC"
 		},
-		"donate": {
-			"en": "Donate",
-			"ru": "Помочь проекту",
-			"ua": "Допомогти проекту",
-			"fi": "Lahjoita",
-			"es": "Donar",
-			"br": "Doar",
-			"fr": "Donner",
-			"bg": "Дарете"
-		},
-		"donate_response": {
-			"en": "Hi. You can help the further development of the project by transferring us some money.",
-			"ru": "Привет, вы можете помочь дальнейшему развитию проекта, перечислив нам немного денег.",
-			"ua": "Вітаємо, ви можете допомогти подальшому розвитку проекту, перерахувавши нам трохи грошей",
-			"fi": "Voit auttaa botin kehittämistä lahjoittamalla.",
-			"es": "Hola. Tu puedes ayudar a que continuemos el desarrollo de este bot al hacer una donación.",
-			"br": "Oi. Você pode ajudar o desenvolvimento e aprimoramento do projeto fazendo uma doação. ",
-			"fr": "Bonjour, vous pouvez aider à des développements complémentaires du projet en nous transférant de l'argent.",
-			"bg": "Здравейте, може да подпомогнете бъдещото развитие на проекта чрез дарения ако желаете."
-		},
-		"donate_option_yandex": {
-			"en": "Yandex.Money",
-			"ru": "Яндекс.Деньги",
-			"ua": "Яндекс.Гроші",
-			"fi": "Yandex.Money",
-			"es": "Yandex.Money",
-			"br": "Yandex.Money",
-			"bg": "Yandex. Money"
-		},
-		"donate_option_card": {
-			"en": "VISA / Mastercard",
-			"ru": "VISA / Mastercard",
-			"ua": "VISA / Mastercard",
-			"fi": "VISA / Mastercard",
-			"es": "VISA / Mastercard",
-			"br": "VISA / Mastercard",
-			"bg": "VISA / Mastercard"
-		},
-		"donate_option_paypal": {
-			"en": "PayPal",
-			"ru": "PayPal",
-			"ua": "PayPal",
-			"fi": "PayPal",
-			"es": "PayPal",
-			"br": "PayPal",
-			"bg": "PayPal"
-		},
-		"donate_response_yandex": {
-			"en": "Follow this url: https://goo.gl/uRpdDo",
-			"ru": "Для продолжения перейдите по ссылке: https://goo.gl/uRpdDo",
-			"ua": "Для продовження перейдіть за посиланням: https://goo.gl/uRpdDo",
-			"fi": "Klikkaa tätä linkkiä: https://goo.gl/uRpdDo",
-			"es": "Gracias. Entra aqui para hacer tu donación: https://goo.gl/uRpdDo",
-			"br": "Obrigado. Faça sua doação no link: https://goo.gl/uRpdDo",
-			"bg": "Следвай този адрес: https://goo.gl/uRpdDo"
-		},
-		"donate_response_card": {
-			"en": "Follow this url: https://goo.gl/iRTsra",
-			"ru": "Для продолжения перейдите по ссылке: https://goo.gl/iRTsra",
-			"ua": "Для продовження перейдіть за посиланням: https://goo.gl/iRTsra",
-			"fi": "Klikkaa tätä linkkiä: https://goo.gl/iRTsra",
-			"es": "Gracias. Entra aqui para hacer tu donación: https://goo.gl/iRTsra",
-			"br": "Obrigado. Faça sua doação no link: https://goo.gl/iRTsra",
-			"bg": "Следвай този адрес: https://goo.gl/iRTsra"
-		},
-		"donate_response_paypal": {},
 		"home_screen_title": {
 			"en": "Please select action:",
 			"ru": "Пожалуйста, выберите действие:",

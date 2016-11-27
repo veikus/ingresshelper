@@ -120,11 +120,9 @@
      * @returns {boolean}
      */
     Screenshot.initMessage = function(message) {
-        var chat = message.chat.id,
-            lang = app.settings.lang(chat),
-            text = message.text && message.text.toLowerCase();
+        let text = message.text && message.text.toLowerCase();
 
-        return text === '/screenshot' || text === app.i18n(lang, 'common', 'make_screenshot').toLowerCase();
+        return (text === '/screenshot@' + app.me.username.toLowerCase()) || (text === '/screenshot');
     };
 
     /**

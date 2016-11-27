@@ -33,7 +33,7 @@
     Stats.initMessage = function(message) {
         var text = message.text && message.text.toLowerCase();
 
-        return text && text === '/stats';
+        return (text === '/stats@' + app.me.username.toLowerCase()) || (text === '/stats');
     };
 
     /**

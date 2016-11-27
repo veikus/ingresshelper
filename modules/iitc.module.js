@@ -91,11 +91,9 @@
      * @returns {boolean}
      */
     IITC.initMessage = function(message) {
-        let chat = message.chat.id,
-            lang = app.settings.lang(chat),
-            text = message.text && message.text.toLowerCase();
+        let text = message.text && message.text.toLowerCase();
 
-        return text === '/iitc' || text === app.i18n(lang, 'common', 'iitc_setup').toLowerCase();
+        return (text === '/iitc@' + app.me.username.toLowerCase()) || (text === '/iitc');
     };
 
     /**

@@ -57,11 +57,9 @@
      * @returns {boolean}
      */
     Lang.initMessage = function(message) {
-        let chat = message.chat.id,
-            lang = app.settings.lang(chat),
-            text = message.text && message.text.toLowerCase();
+        let text = message.text && message.text.toLowerCase();
 
-        return text === '/language' || text === app.i18n(lang, 'common', 'language').toLowerCase();
+        return (text === '/language@' + app.me.username.toLowerCase()) || (text === '/language');
     };
 
     /**

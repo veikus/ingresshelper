@@ -23,11 +23,9 @@
      * @returns {boolean}
      */
     RateUs.initMessage = function(message) {
-        var chat = message.chat.id,
-            lang = app.settings.lang(chat),
-            text = message.text && message.text.toLowerCase();
+        var text = message.text && message.text.toLowerCase();
 
-        return text === '/like' || text === app.i18n(lang, 'common', 'rate_us').toLowerCase();
+        return (text === '/like@' + app.me.username.toLowerCase()) || (text === '/like');
     };
 
     /**

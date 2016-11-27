@@ -1,7 +1,7 @@
 /**
  * @file Interval setup and processing module
  * @author Artem Veikus artem@veikus.com
- * @version 2.5.0
+ * @version 2.5.1
  */
 (function() {
     var allowedTimeouts, allowedPauses, timeoutMarkup, pauseMarkup,
@@ -79,9 +79,9 @@
      * @returns {boolean}
      */
     Interval.initMessage = function(message) {
-        var text = message.text && message.text.toLowerCase();
+        let text = message.text && message.text.toLowerCase();
 
-        return text && text === '/interval';
+        return (text === '/interval@' + app.me.username.toLowerCase()) || (text === '/interval');
     };
 
     /**

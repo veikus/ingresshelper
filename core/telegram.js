@@ -85,6 +85,22 @@
         });
     };
 
+
+    /**
+     * Get bot details
+     * @param callback {Function} Callback function
+     */
+    app.telegram.getMe = function(callback) {
+        var url = API_URL + '/getMe',
+            params = {};
+
+        request('get', url, params, function(data) {
+            if (typeof callback === 'function') {
+                callback(data, data.error_code);
+            }
+        });
+    };
+
     /**
      * Get new messages from server
      * @param callback {Function} Callback function

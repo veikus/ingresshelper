@@ -57,11 +57,9 @@
      * @returns {boolean}
      */
     History.initMessage = function(message) {
-        let chat = message.chat.id,
-            lang = app.settings.lang(chat),
-            text = message.text && message.text.toLowerCase();
+        let text = message.text && message.text.toLowerCase();
 
-        return text === '/history' || text === app.i18n(lang, 'common', 'history').toLowerCase();
+        return (text === '/history@' + app.me.username.toLowerCase()) || (text === '/history');
     };
 
     /**

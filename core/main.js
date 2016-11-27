@@ -23,7 +23,14 @@
             modulesArray.push(app.modules[name]);
         });
 
-        getUpdates();
+        app.telegram.getMe(function(data, err) {
+            if (err || !data || !data.ok) {
+                alert('getMe() request failed!');
+            } else {
+                app.me = data.result;
+                getUpdates();
+            }
+        });
     }
 
     /**

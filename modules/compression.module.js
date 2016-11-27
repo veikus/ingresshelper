@@ -49,11 +49,9 @@
      * @returns {boolean}
      */
     Compression.initMessage = function(message) {
-        let chat = message.chat.id,
-            lang = app.settings.lang(chat),
-            text = message.text && message.text.toLowerCase();
+        let text = message.text && message.text.toLowerCase();
 
-        return text === '/compression' || text === app.i18n(lang, 'common', 'compression').toLowerCase();
+        return (text === '/compression@' + app.me.username.toLowerCase()) || (text === '/compression');
     };
 
     /**

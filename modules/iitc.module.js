@@ -1,10 +1,10 @@
 /**
  * @file IITC setup module
  * @author Artem Veikus artem@veikus.com
- * @version 2.5.0
+ * @version 2.5.1
  */
 (function() {
-    var plugins;
+    let plugins;
 
     app.modules = app.modules || {};
     app.modules.iitc = IITC;
@@ -45,25 +45,44 @@
     };
 
     /**
+     * Build keyboard with modules list
+     * @returns {Array} Array ready to use in markup
+     */
+    function buildMarkup(chat) {
+        let result = [],
+            enabled = app.settings.plugins(chat),
+            lang = app.settings.lang(chat);
+
+        Object.keys(plugins).forEach(function(name) {
+            let plugin = plugins[name],
+                isEnabled = enabled.indexOf(plugin.id) > -1;
+
+            result.push([{
+                text: (isEnabled ? '✅' : '❎') + name,
+                callback_data: 'iitc::switch::' + plugins[name].id
+            }]);
+        });
+
+        result.push([{
+            text: app.i18n(lang, 'iitc', 'complete_setup'),
+            callback_data: 'iitc::complete'
+        }]);
+
+        return {
+            inline_keyboard: result
+        };
+    }
+
+    /**
      * @param message {object} Telegram message object
      * @constructor
      */
     function IITC(message) {
-        var resp, markup;
+        let chat = message.chat.id,
+            lang = app.settings.lang(chat);
 
-        this.chat = message.chat.id;
-        this.lang = app.settings.lang(this.chat);
-
-        markup = {
-            resize_keyboard: true,
-            keyboard: this.buildKeyboard()
-        };
-
-        resp = app.i18n(this.lang, 'iitc', 'help');
-        resp += '\n';
-        resp += this.getCurrentStatus();
-
-        app.telegram.sendMessage(this.chat, resp, markup);
+        app.telegram.sendMessage(chat, app.i18n(lang, 'iitc', 'help'), buildMarkup(chat));
+        this.complete = true;
     }
 
     /**
@@ -72,7 +91,7 @@
      * @returns {boolean}
      */
     IITC.initMessage = function(message) {
-        var chat = message.chat.id,
+        let chat = message.chat.id,
             lang = app.settings.lang(chat),
             text = message.text && message.text.toLowerCase();
 
@@ -86,10 +105,10 @@
      * @returns {Array} Array of plugin urls
      */
     IITC.idToUrl = function(ids) {
-        var result = [];
+        let result = [];
 
         Object.keys(plugins).forEach(function(name) {
-            var plugin = plugins[name];
+            let plugin = plugins[name];
 
             if (ids.indexOf(plugin.id) > -1) {
                 result.push(plugin.url);
@@ -100,101 +119,73 @@
     };
 
     /**
-     * @param message {object} Telegram message object
+     * Validate plugin id
+     * @static
+     * @param id {String} Plugin id
      */
-    IITC.prototype.onMessage = function (message) {
-        var index, isEnabled, resp, selectedPlugin, markup,
-            text = message.text,
-            enabled = app.settings.plugins(this.chat),
-            completeMessage = app.i18n(this.lang, 'iitc', 'complete_setup');
-
-        if (completeMessage === text) {
-            this.complete = true;
-            app.telegram.sendMessage(this.chat, '👍', app.getHomeMarkup(this.chat)); // thumbs up
-        } else if (plugins[text]) {
-            selectedPlugin = plugins[text];
-            index = enabled.indexOf(selectedPlugin.id);
-            isEnabled = index > -1;
-
-            if (isEnabled) {
-                if (selectedPlugin.id === 'iitc') {
-                    enabled = [];
-                } else {
-                    enabled.splice(index, 1);
-                }
-            } else {
-                if (enabled.length === 0 && selectedPlugin !== plugins.IITC) {
-                    enabled.push(plugins.IITC.id);
-                }
-
-                enabled.push(selectedPlugin.id);
-            }
-
-            app.settings.plugins(this.chat, enabled);
-
-            resp = this.getCurrentStatus();
-            markup = {
-                resize_keyboard: true,
-                keyboard: this.buildKeyboard()
-            };
-            app.telegram.sendMessage(this.chat, resp, markup);
-
-        } else {
-            resp = app.i18n(this.lang, 'iitc', 'plugin_not_found');
-
-            markup = {
-                one_time_keyboard: true,
-                resize_keyboard: true,
-                keyboard: this.buildKeyboard()
-            };
-
-            app.telegram.sendMessage(this.chat, resp, markup);
-        }
-    };
-
-    /**
-     * Build message with current modules status
-     * @returns {String} String with modules names and their statuses
-     */
-    IITC.prototype.getCurrentStatus = function() {
-        var name, plugin, isEnabled,
-            result = [],
-            enabled = app.settings.plugins(this.chat);
-
-        result.push(app.i18n(this.lang, 'iitc', 'status'));
-
-        for (name in plugins) {
-            if (!plugins.hasOwnProperty(name)) {
-                continue;
-            }
-
-            plugin = plugins[name];
-            isEnabled = enabled.indexOf(plugin.id) > -1;
-
-            if (isEnabled) {
-                result.push('✅' + name);
-            } else {
-                result.push('❎' + name);
-            }
-        }
-
-        return result.join('\n');
-    };
-
-    /**
-     * Build keyboard with modules list
-     * @returns {Array} Array ready to use in markup
-     */
-    IITC.prototype.buildKeyboard = function() {
-        var result = [];
+    IITC.validateId = function(id) {
+        let isValid = false;
 
         Object.keys(plugins).forEach(function(name) {
-            result.push([name]);
+            let plugin = plugins[name];
+
+            if (plugin.id === id) {
+                isValid = true;
+            }
         });
 
-        result.push([app.i18n(this.lang, 'iitc', 'complete_setup')]);
-
-        return result;
+        return isValid;
     };
 
+    /**
+     * @static
+     * @param cb {object} Telegram callback object
+     */
+    IITC.onCallback = function (cb) {
+        let chat = cb.message.chat.id,
+            messageId = cb.message.message_id,
+            data = cb.data && cb.data.split('::') || [],
+            lang = app.settings.lang(chat);
+
+        switch (data[1]) {
+            case 'complete':
+                app.telegram.updateMessage(chat, messageId, '👍', 'clear_inline'); // thumbs up
+                app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
+                break;
+
+            case 'switch':
+                let id = data[2];
+
+                if (!id || !IITC.validateId(id)) {
+                    app.telegram.updateMessage(chat, messageId, 'ERROR: Incorrect id value', 'clear_inline');
+                    app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
+                } else {
+                    let enabled = app.settings.plugins(chat),
+                        index = enabled.indexOf(id),
+                        isEnabled = index > -1;
+
+                    if (isEnabled) {
+                        if (id === 'iitc') {
+                            enabled = [];
+                        } else {
+                            enabled.splice(index, 1);
+                        }
+                    } else {
+                        if (enabled.length === 0 && id !== plugins.IITC.id) {
+                            enabled.push(plugins.IITC.id);
+                        }
+
+                        enabled.push(id);
+                    }
+
+                    app.settings.plugins(chat, enabled);
+                    app.telegram.updateMessage(chat, messageId, app.i18n(lang, 'iitc', 'help'), buildMarkup(chat));
+                }
+                break;
+
+            default:
+                app.telegram.updateMessage(chat, messageId, 'ERROR: Incorrect action', 'clear_inline');
+                app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
+        }
+    };
 }());

@@ -57,8 +57,10 @@
      * @returns {boolean}
      */
     Lang.initMessage = function(message) {
-        let text = message.text && message.text.toLowerCase();
+        let text = message.text && message.text.toLowerCase(),
+            chat = message.chat.id;
 
+        app.analytics(chat, 'Language list');
         return (text === '/language@' + app.me.username.toLowerCase()) || (text === '/language');
     };
 
@@ -75,7 +77,9 @@
         switch (data[1]) {
             case 'start':
                 lang = app.settings.lang(chat);
+
                 app.telegram.updateMessage(chat, messageId, app.i18n(lang, 'lang', 'welcome'), generateMarkup(chat));
+                app.analytics(chat, 'Language list');
                 break;
 
             case 'set':
@@ -94,6 +98,8 @@
                     ].join('\n\n');
 
                     app.telegram.updateMessage(chat, messageId, resp, app.getHomeMarkup(chat));
+                    app.analytics(chat, 'Language set', { lang: lang });
+                    app.analytics.updateUser(chat, { lang: lang });
                 }
                 break;
 

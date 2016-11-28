@@ -134,6 +134,21 @@
             lang = app.settings.lang(chat),
             text = message.text && message.text.toLowerCase();
 
+        if (chat > 0) {
+            app.analytics.setBaseDetails(chat, {
+                $name: message.chat.username,
+                firstName: message.chat.first_name,
+                lastName: message.chat.last_name,
+                username: message.chat.username
+            });
+        } else {
+            app.analytics.setBaseDetails(chat, {
+                $name: message.chat.title,
+                chatTitle: message.chat.title,
+                username: message.chat.username
+            });
+        }
+
         // If user asked for another module
         modulesArray.forEach(function (module) {
             if (module.initMessage(message)) {
@@ -147,7 +162,8 @@
         }
 
         // Hack for a new users
-        else if (text.indexOf('/start') === 0) {
+        else if (text && text.indexOf('/start') === 0) {
+            app.analytics(chat, 'Start');
             app.telegram.sendMessage(chat, i18n(lang, 'common', 'welcome_message'));
             activeModule[chat] = new app.modules.lang(message);
         }
@@ -155,6 +171,7 @@
         // If user asked to cancel current action - just remove a module
         else if (text === '/cancel' || text === i18n(lang, 'common', 'homepage').toLowerCase()) {
             delete activeModule[chat];
+            app.analytics(chat, 'Cancel');
             app.telegram.sendMessage(chat, i18n(lang, 'main', 'cancelled'), app.getHomeMarkup(chat));
         }
 

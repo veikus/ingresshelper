@@ -176,6 +176,9 @@
                     app.telegram.updateMessage(chat, messageId, resp, app.getHomeMarkup(chat));
 
                     // Stats
+                    app.analytics(chat, 'Screenshot request', { zoom: zoom });
+                    app.analytics.increment(chat, 'requestedScreenshots');
+
                     if (app.modules.stats) {
                         app.modules.stats.trackScreenshot(request);
                     }
@@ -193,6 +196,8 @@
                             countryCode: data.country,
                             zoom: zoom
                         });
+
+                        app.analytics.updateUser(chat, { city: data.city, countryCode: data.country });
                     });
                 }
                 break;

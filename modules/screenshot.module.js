@@ -64,7 +64,7 @@
         });
     }
 
-    function createTask(message) {
+    function createRequest(message) {
         let chat = message.chat.id,
             location = message.location,
             id = generateId();
@@ -99,7 +99,7 @@
             location = message.location;
 
         if (location && location.latitude && location.longitude) {
-            let id = createTask(message);
+            let id = createRequest(message);
             app.telegram.sendMessage(chat, app.i18n(lang, 'screenshot', 'zoom_setup'), getZoomMarkup(chat, id));
 
         } else {

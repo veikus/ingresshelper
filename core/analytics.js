@@ -1,21 +1,23 @@
 /**
- * @file Mixpanel analytics
+ * @file Analytics
  * @author Artem Veikus artem@veikus.com
  * @version 2.5.1
  */
 (function() {
-    if (!window.mixpanel || !app.config.mixPanelToken) {
-        return;
+    let usersDetailsSent = [],
+        mixpanelEnabled =  window.mixpanel && app.config.mixPanelToken;
+
+    if (mixpanelEnabled) {
+        mixpanel.init(app.config.mixPanelToken, { api_host: "https://api.mixpanel.com" });
     }
-
-    let usersDetailsSent = [];
-
-    mixpanel.init(app.config.mixPanelToken, { api_host: "https://api.mixpanel.com" });
 
     app.analytics = function(chat, event, params) {
         params = params || {};
-        mixpanel.identify(chat);
-        mixpanel.track(event, params);
+
+        if (mixpanelEnabled) {
+            mixpanel.identify(chat);
+            mixpanel.track(event, params);
+        }
     };
 
     app.analytics.setBaseDetails = function(chat, data) {
@@ -26,12 +28,16 @@
     };
 
     app.analytics.updateUser = function(chat, data) {
-        mixpanel.identify(chat);
-        mixpanel.people.set(data);
+        if (mixpanelEnabled) {
+            mixpanel.identify(chat);
+            mixpanel.people.set(data);
+        }
     };
 
     app.analytics.increment = function(chat, prop, by) {
-        mixpanel.identify(chat);
-        mixpanel.people.increment(prop, by || 1);
+        if (mixpanelEnabled) {
+            mixpanel.identify(chat);
+            mixpanel.people.increment(prop, by || 1);
+        }
     };
 }());

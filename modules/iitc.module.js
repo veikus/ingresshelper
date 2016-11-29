@@ -82,6 +82,7 @@
             lang = app.settings.lang(chat);
 
         app.telegram.sendMessage(chat, app.i18n(lang, 'iitc', 'help'), buildMarkup(chat));
+        app.analytics(chat, 'IITC open');
         this.complete = true;
     }
 
@@ -148,6 +149,7 @@
         switch (data[1]) {
             case 'start':
                 app.telegram.updateMessage(chat, messageId, app.i18n(lang, 'iitc', 'help'), buildMarkup(chat));
+                app.analytics(chat, 'IITC open');
                 break;
 
             case 'switch':
@@ -178,6 +180,7 @@
 
                     app.settings.plugins(chat, enabled);
                     app.telegram.updateMessage(chat, messageId, app.i18n(lang, 'iitc', 'help'), buildMarkup(chat));
+                    app.analytics(chat, 'IITC set', { plugins: enabled.join(';') });
                 }
                 break;
 

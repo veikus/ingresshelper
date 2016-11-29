@@ -48,6 +48,7 @@
         } else {
             resp = app.i18n(lang, 'history', 'title').replace('%n', history.length);
             app.telegram.sendMessage(chat, resp, getMarkup(chat));
+            app.analytics(chat, 'History open', { count: history.length });
         }
     }
 
@@ -86,6 +87,7 @@
                 } else {
                     resp = app.i18n(lang, 'history', 'title').replace('%n', history.length);
                     app.telegram.sendMessage(chat, resp, getMarkup(chat));
+                    app.analytics(chat, 'History open', { count: history.length });
                 }
 
                 app.telegram.updateMessage(chat, messageId, resp, getMarkup(chat));
@@ -123,6 +125,7 @@
                     app.settings.moveUpHistoryRecord(chat, params.id);
                     app.telegram.updateMessage(chat, messageId, app.i18n(this.lang, 'screenshot', 'task_saved'), 'clear_inline');
                     app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
+                    app.analytics(chat, 'History go to', { count: history.length });
                 }
                 break;
         }

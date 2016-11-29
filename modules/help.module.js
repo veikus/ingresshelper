@@ -54,6 +54,7 @@
 
 
         app.telegram.updateMessage(chat, messageId, resp, markup);
+        app.analytics(chat, 'Help open');
     };
 
     /**
@@ -71,5 +72,6 @@
 
         this.complete = true;
         app.telegram.sendMessage(chat, resp.join('\n'), app.getHomeMarkup(chat));
+        app.analytics(chat, 'Help open');
     };
 }());

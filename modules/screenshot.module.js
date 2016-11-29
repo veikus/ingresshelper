@@ -109,6 +109,7 @@
             ].join('\n\n');
 
             app.telegram.sendMessage(chat, resp, getInitMarkup(chat));
+            app.analytics(chat, 'Screenshot open');
         }
 
         this.complete = true;
@@ -144,6 +145,7 @@
                 ].join('\n\n');
 
                 app.telegram.updateMessage(chat, messageId, resp, getInitMarkup(chat));
+                app.analytics(chat, 'Screenshot open');
                 break;
 
             case 'setZoom':

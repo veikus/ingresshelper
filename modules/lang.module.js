@@ -47,6 +47,7 @@
 
         resp = app.i18n(lang, 'lang', 'welcome');
         app.telegram.sendMessage(chat, resp, generateMarkup(chat));
+        app.analytics(chat, 'Language list');
 
         this.complete = true;
     }
@@ -60,7 +61,6 @@
         let text = message.text && message.text.toLowerCase(),
             chat = message.chat.id;
 
-        app.analytics(chat, 'Language list');
         return (text === '/language@' + app.me.username.toLowerCase()) || (text === '/language');
     };
 

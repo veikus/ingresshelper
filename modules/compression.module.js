@@ -40,6 +40,7 @@
             lang = app.settings.lang(chat);
 
         app.telegram.sendMessage(chat, app.i18n(lang, 'compression', 'welcome'), getMarkup(chat));
+        app.analytics(chat, 'Compression open');
         this.complete = true;
     }
 
@@ -68,6 +69,7 @@
         switch (data[1]) {
             case 'start':
                 app.telegram.updateMessage(chat, messageId, app.i18n(lang, 'compression', 'welcome'), getMarkup(chat));
+                app.analytics(chat, 'Compression open');
                 break;
 
             case 'set':
@@ -78,6 +80,7 @@
 
                 app.settings.compression(chat, isOn);
                 app.telegram.updateMessage(chat, messageId, resp, app.getHomeMarkup(chat));
+                app.analytics(chat, 'Compression set', { isOn: isOn });
                 break;
 
             default:

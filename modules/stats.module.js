@@ -48,6 +48,7 @@
         }
 
         app.telegram.sendMessage(this.chat, result.join('\r\n'), app.getHomeMarkup(this.chat));
+        app.analytics(this.chat, 'Stats open');
     };
 
     /**

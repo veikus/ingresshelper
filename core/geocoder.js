@@ -57,7 +57,7 @@
         }
 
         request('https://maps.googleapis.com/maps/api/geocode/json', params, function(data) {
-            var name, city, country, result,
+            var name, city, country, result, route,
                 object = data
                     && data.results
                     && data.results[0];
@@ -73,15 +73,19 @@
                     city = item.long_name;
                 }
 
+                if (item.types.indexOf('route') !== -1) {
+                    route = item.long_name;
+                }
+
                 if (item.types.indexOf('country') !== -1) {
                     country = item.short_name;
                 }
             });
 
-            if (name && city && country) {
+            if (name && (city || route) && country) {
                 result = {
                     name: name,
-                    city: city,
+                    city: city || route,
                     country: country
                 }
             } else {

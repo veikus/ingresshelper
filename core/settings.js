@@ -229,4 +229,50 @@
 
         return settings && settings.hasOwnProperty('keyboardHidden') ? settings.keyboardHidden : false;
     };
+
+    /**
+     * Get custom user property
+     * @param id {Number} Chat id
+     * @param name {String} Property name
+     */
+    app.settings.getCustomProperty = function(id, name) {
+        if (!name) {
+            console.error('getCustomProperty: No property name');
+            return null;
+        }
+
+        let settings = localStorage.getItem('settings__chat_' + id);
+
+        if (settings) {
+            settings = JSON.parse(settings);
+        } else {
+            settings = {};
+        }
+
+        return settings[name];
+    };
+
+    /**
+     * Set custom user property
+     * @param id {Number} Chat id
+     * @param name {String} Property name
+     * @param value * Property value
+     */
+    app.settings.setCustomProperty = function(id, name, value) {
+        if (!name) {
+            console.error('getCustomProperty: No property name');
+            return null;
+        }
+
+        let settings = localStorage.getItem('settings__chat_' + id);
+
+        if (settings) {
+            settings = JSON.parse(settings);
+        } else {
+            settings = {};
+        }
+
+        settings[name] = value;
+        localStorage.setItem('settings__chat_' + id, JSON.stringify(settings));
+    }
 }());

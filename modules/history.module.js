@@ -122,6 +122,7 @@
                         }
                     });
 
+                    app.settings.setCustomProperty(chat, 'lastActivity', new Date().getTime());
                     app.settings.moveUpHistoryRecord(chat, params.id);
                     app.telegram.updateMessage(chat, messageId, app.i18n(this.lang, 'screenshot', 'task_saved'), 'clear_inline');
                     app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));

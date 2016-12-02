@@ -174,6 +174,8 @@
                         app.i18n(lang, 'screenshot', 'task_saved'),
                         app.i18n(lang, 'common', 'home_screen_title')
                     ].join('\n\n');
+
+                    app.settings.setCustomProperty(chat, 'lastActivity', new Date().getTime());
                     app.taskManager.add(request);
                     app.telegram.updateMessage(chat, messageId, resp, app.getHomeMarkup(chat));
 

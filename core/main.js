@@ -80,7 +80,7 @@
             }
         ]);
 
-        if (app.modules.rateUs) {
+        if (app.modules.rateUs && app.settings.getReceivedScreenshots(chat) >= 3) {
             markup.inline_keyboard.push([
                 {
                     text: i18n(lang, 'common', 'rate_us'),

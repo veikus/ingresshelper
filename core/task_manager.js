@@ -142,8 +142,13 @@
                 app.settings.increaseReceivedScreenshots(task.chat);
 
                 // Rate us
-                if (app.modules.rateUs && app.settings.getReceivedScreenshots(task.chat) >= 3) {
+                if (
+                    app.modules.rateUs &&
+                    app.settings.getReceivedScreenshots(task.chat) >= 3 &&
+                    !app.settings.getCustomProperty(task.chat, 'offeredToRate')
+                ) {
                     app.modules.rateUs.reminder(task.chat);
+                    app.settings.setCustomProperty(task.chat, 'offeredToRate', true)
                 }
             }
 

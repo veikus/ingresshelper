@@ -208,29 +208,6 @@
     };
 
     /**
-     * Is user got message that removes screen keyboard
-     * @param id {Number} Chat id
-     * @param value {Boolean=} New value
-     * @return {Boolean} Is keyboard removed
-     */
-    app.settings.isKeyboardHidden = function(id, value) {
-        let settings = localStorage.getItem('settings__chat_' + id);
-
-        if (settings) {
-            settings = JSON.parse(settings);
-        } else {
-            settings = {};
-        }
-
-        if (typeof (value) === 'boolean') {
-            settings.keyboardHidden = value;
-            localStorage.setItem('settings__chat_' + id, JSON.stringify(settings));
-        }
-
-        return settings && settings.hasOwnProperty('keyboardHidden') ? settings.keyboardHidden : false;
-    };
-
-    /**
      * Get custom user property
      * @param id {Number} Chat id
      * @param name {String} Property name

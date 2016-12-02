@@ -185,21 +185,24 @@
             activeModule[chat] = new app.modules.screenshot(message);
         }
 
+        // Remove old style keyboard
+        else if (!app.settings.getCustomProperty(chat, 'keyboardHidden')) {
+            app.telegram.sendMessage(chat, 'Updating keyboard', { remove_keyboard: true });
+            app.settings.setCustomProperty(chat, 'keyboardHidden', true);
+
+            if (chat > -1) {
+                app.telegram.sendMessage(chat, i18n(lang, 'main', 'unknown_command'), app.getHomeMarkup(chat));
+            }
+        }
+
         // Or maybe user made a mistake (do not reply in groups)
         else if (chat > -1) {
-            lang = app.settings.lang(chat);
             app.telegram.sendMessage(chat, i18n(lang, 'main', 'unknown_command'), app.getHomeMarkup(chat));
         }
 
         // Cleanup complete modules
         if (activeModule[chat] && activeModule[chat].complete) {
             delete activeModule[chat];
-        }
-
-        // Remove old style keyboard
-        if (!app.settings.isKeyboardHidden(chat)) {
-            app.telegram.sendMessage(chat, 'Welcome back', { remove_keyboard: true });
-            app.settings.isKeyboardHidden(chat, true);
         }
     }
 
@@ -230,12 +233,6 @@
         } else {
             app.telegram.updateMessage(chat, messageId, 'ERROR: Module not found', 'clear_inline');
             app.telegram.sendMessage(chat, app.i18n(lang, 'common', 'home_screen_title'), app.getHomeMarkup(chat));
-        }
-
-        // Remove old style keyboard
-        if (!app.settings.isKeyboardHidden(chat)) {
-            app.telegram.sendMessage(chat, 'Welcome back!', { remove_keyboard: true });
-            app.settings.isKeyboardHidden(chat, true);
         }
     }
 }());

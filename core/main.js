@@ -38,6 +38,8 @@
      */
     function getUpdates() {
         app.telegram.getUpdates(function(data) {
+            app.watchdog();
+
             if (!data) {
                 setTimeout(getUpdates, 5000);
                 return;

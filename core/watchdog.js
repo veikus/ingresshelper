@@ -10,6 +10,10 @@
         var ts = new Date().getTime();
 
         if (ts - lastAction > 60 * 1000) {
+            if (app.activeWindow) {
+                chrome.windows.remove(app.activeWindow);
+            }
+
             window.location.reload();
         }
     }, 1000);

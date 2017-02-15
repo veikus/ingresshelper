@@ -101,6 +101,7 @@
         }
 
         chrome.windows.create({ url: url, type: 'popup' }, function(window) {
+            app.activeWindow = window.id;
             task.windowId = window.id;
             task.timeoutId = setTimeout(makeScreenshot, timeout);
 
@@ -153,6 +154,7 @@
             }
 
             chrome.windows.remove(window);
+            app.activeWindow = null;
             startNextTask();
         });
     }
